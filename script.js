@@ -890,19 +890,30 @@ if (document.readyState === 'loading') {
     }
   });
 
-  // Form submit
+  // Form submit — POST the lead to /api/book-call (Resend), then reveal confirmation
   const form = document.querySelector('form.book-form');
   if (form) {
-    form.addEventListener('submit', (e) => {
-      // Let Netlify handle it if data-netlify is set, but show success state immediately
-      if (!form.dataset.netlify) {
-        e.preventDefault();
-      }
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]') || form.querySelector('button');
       const success = document.querySelector('.form-success');
-      if (success) {
-        success.classList.add('show');
-        form.querySelector('button').textContent = 'Sent ✓';
-        form.querySelector('button').disabled = true;
+      const original = btn ? btn.innerHTML : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      try {
+        const data = Object.fromEntries(new FormData(form).entries());
+        const res = await fetch('/api/book-call', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error('send failed');
+        [...form.children].forEach((c) => {
+          if (!c.classList.contains('form-success')) c.style.display = 'none';
+        });
+        if (success) success.classList.add('show');
+      } catch (err) {
+        if (btn) { btn.disabled = false; btn.innerHTML = original; }
+        alert('Sorry — something went wrong sending your request. Please email hello@davnoot.com directly.');
       }
     });
   }

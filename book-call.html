@@ -157,19 +157,15 @@
     <!-- FORM -->
     <form
       class="book-form"
-      name="book-call"
       method="POST"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
-      action="/?success=true">
+      action="/api/book-call">
       <h3>Tell us <em>about you</em>.</h3>
       <p class="intro">We'll use this to prep before the call so we're not wasting your 30 minutes on intros.</p>
 
       <!-- Honeypot for spam -->
-      <p style="display:none">
-        <label>Don't fill this out: <input name="bot-field" /></label>
+      <p style="display:none" aria-hidden="true">
+        <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
       </p>
-      <input type="hidden" name="form-name" value="book-call" />
       <input type="hidden" name="time_slot" value="" />
 
       <div class="form-row-grid">
