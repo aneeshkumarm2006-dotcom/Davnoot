@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book a Call — Davnoot</title>
+<meta name="description" content="Book a 30-minute strategy call. We'll review your current setup, find the biggest leverage point, and tell you what we'd do first." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<!-- BUILD:SEO -->
+<link rel="canonical" href="https://davnoot.com/book-call.html" />
+<meta name="robots" content="index, follow" />
+<link rel="icon" type="image/png" href="images/Firefly.png" />
+<link rel="apple-touch-icon" href="images/Firefly.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Davnoot" />
+<meta property="og:title" content="Book a Call — Davnoot" />
+<meta property="og:description" content="Book a 30-minute strategy call. We'll review your current setup, find the biggest leverage point, and tell you what we'd do first." />
+<meta property="og:url" content="https://davnoot.com/book-call.html" />
+<meta property="og:image" content="https://davnoot.com/images/Firefly.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Book a Call — Davnoot" />
+<meta name="twitter:description" content="Book a 30-minute strategy call. We'll review your current setup, find the biggest leverage point, and tell you what we'd do first." />
+<meta name="twitter:image" content="https://davnoot.com/images/Firefly.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://davnoot.com/#organization",
+      "name": "Davnoot",
+      "url": "https://davnoot.com/",
+      "logo": "https://davnoot.com/images/Firefly.png",
+      "image": "https://davnoot.com/images/Firefly.png",
+      "description": "Davnoot is an independent growth agency. Six disciplines — SEO, paid social, email, AI search, ChatGPT ads, and custom software — engineered into one revenue engine.",
+      "email": "hello@davnoot.com",
+      "foundingDate": "2025",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Montreal",
+        "addressRegion": "QC",
+        "addressCountry": "CA"
+      },
+      "areaServed": "Worldwide"
+    }
+  ]
+}
+</script>
+<!-- /BUILD:SEO -->
+</head>
+<body>
+
+<canvas id="ambient"></canvas>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<!-- BUILD:NAV -->
+<nav>
+  <a href="index.html" class="logo" data-cursor>
+    <img src="images/Firefly.png" alt="Davnoot" class="logo-mark" />
+    <span class="wordmark">Davnoot Digital</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#services" data-cursor>Services</a></li>
+    <li><a href="index.html#process" data-cursor>Process</a></li>
+    <li><a href="index.html#results" data-cursor>Work</a></li>
+    <li><a href="index.html#contact" class="active" data-cursor>Contact</a></li>
+  </ul>
+  <a href="#form" class="nav-cta" data-cursor>Jump to form →</a>
+</nav>
+<!-- /BUILD:NAV -->
+
+<!-- HERO -->
+<header class="call-hero">
+  <div class="breadcrumb">
+    <a href="index.html" data-cursor>Davnoot</a>
+    <span class="crumb-sep">/</span>
+    <span class="crumb-current">Book a call</span>
+  </div>
+
+  <div class="call-hero-eyebrow">30 minutes · No sales pitch · No prep needed</div>
+  <h1 class="call-hero-title">Let's find the<br/><em>leverage</em> in your stack.</h1>
+  <p class="call-hero-sub">
+    Tell us what you're working on. We'll review your current setup, identify the three highest-impact opportunities, and tell you what we'd do first — whether you hire us or not.
+  </p>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="num">30 min</span><span class="lbl">No fluff. No slides.</span></div>
+    <div class="ticker-item"><span class="num">94%</span><span class="lbl">of calls find leverage in first 10 min</span></div>
+    <div class="ticker-item"><span class="num">$0</span><span class="lbl">Cost. No strings.</span></div>
+    <div class="ticker-item"><span class="num">48h</span><span class="lbl">From booking to call</span></div>
+    <div class="ticker-item"><span class="num">30 min</span><span class="lbl">No fluff. No slides.</span></div>
+    <div class="ticker-item"><span class="num">94%</span><span class="lbl">of calls find leverage in first 10 min</span></div>
+    <div class="ticker-item"><span class="num">$0</span><span class="lbl">Cost. No strings.</span></div>
+    <div class="ticker-item"><span class="num">48h</span><span class="lbl">From booking to call</span></div>
+  </div>
+</div>
+
+<!-- AGENDA SHOWCASE -->
+<div class="showcase">
+  <div class="showcase-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">What we'll cover</div>
+      <h2 class="section-title">30 minutes,<br/>structured for <em>leverage</em>.</h2>
+      <p class="section-sub">No one wants a sales call disguised as a "strategy session." Here's the actual agenda — same structure for everyone.</p>
+    </div>
+
+    <div class="showcase-frame reveal" data-showcase="email">
+      <div class="showcase-corner tl">Live agenda · Every call</div>
+      <div class="showcase-corner tr">30:00 total</div>
+
+      <div class="agenda-grid">
+        <div class="agenda-card">
+          <span class="agenda-num">01</span>
+          <span class="timestamp">00:00 — 05:00</span>
+          <div class="agenda-title">Where you are now</div>
+          <div class="agenda-desc">5 minutes on your current channels, what's working, what's stuck. We listen, you talk.</div>
+        </div>
+        <div class="agenda-card">
+          <span class="agenda-num">02</span>
+          <span class="timestamp">05:00 — 15:00</span>
+          <div class="agenda-title">Audit + diagnosis</div>
+          <div class="agenda-desc">We pull up your site, ad accounts, or analytics live on screen and walk through what we see — gaps, leaks, missed opportunities.</div>
+        </div>
+        <div class="agenda-card">
+          <span class="agenda-num">03</span>
+          <span class="timestamp">15:00 — 25:00</span>
+          <div class="agenda-title">Three highest-leverage moves</div>
+          <div class="agenda-desc">The 3 things we'd do first to move the needle. With ballpark impact and effort. Yours to keep, with or without us.</div>
+        </div>
+        <div class="agenda-card">
+          <span class="agenda-num">04</span>
+          <span class="timestamp">25:00 — 30:00</span>
+          <div class="agenda-title">Honest fit conversation</div>
+          <div class="agenda-desc">Whether we're the right team for it. If yes, next steps. If no, who else to talk to. No pressure either way.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING FORM + CALENDAR -->
+<section id="form">
+  <div class="reveal">
+    <div class="section-eyebrow">Book the call</div>
+    <h2 class="section-title">Pick a time<br/>that <em>works</em>.</h2>
+    <p class="section-sub">Fill the form, pick a slot, get an instant confirmation. No back-and-forth scheduling emails — that ends here.</p>
+  </div>
+
+  <div class="book-layout reveal">
+    <!-- FORM -->
+    <form
+      class="book-form"
+      name="book-call"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action="/?success=true">
+      <h3>Tell us <em>about you</em>.</h3>
+      <p class="intro">We'll use this to prep before the call so we're not wasting your 30 minutes on intros.</p>
+
+      <!-- Honeypot for spam -->
+      <p style="display:none">
+        <label>Don't fill this out: <input name="bot-field" /></label>
+      </p>
+      <input type="hidden" name="form-name" value="book-call" />
+      <input type="hidden" name="time_slot" value="" />
+
+      <div class="form-row-grid">
+        <div class="form-row">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required placeholder="First and last" />
+        </div>
+        <div class="form-row">
+          <label for="email">Work email</label>
+          <input type="email" id="email" name="email" required placeholder="you@company.com" />
+        </div>
+      </div>
+
+      <div class="form-row-grid">
+        <div class="form-row">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" required placeholder="Your brand or company" />
+        </div>
+        <div class="form-row">
+          <label for="role">Your role</label>
+          <input type="text" id="role" name="role" placeholder="Founder, CMO, etc." />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="service">What do you want to discuss?</label>
+        <select id="service" name="service">
+          <option value="">Choose one (or leave blank)</option>
+          <option value="seo">SEO</option>
+          <option value="meta">Meta Ads</option>
+          <option value="email">Email Marketing</option>
+          <option value="ai-seo">AI SEO</option>
+          <option value="chatgpt-ads">ChatGPT / AI Ads</option>
+          <option value="software">Custom Software</option>
+          <option value="multi">Multi-channel / Not sure yet</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="brief">What's the biggest challenge right now?</label>
+        <textarea id="brief" name="brief" placeholder="One or two sentences is fine. The more specific, the more useful the call." required></textarea>
+      </div>
+
+      <button type="submit">
+        Book the call
+        <span class="arrow">→</span>
+      </button>
+
+      <div class="form-success">
+        <strong>Got it.</strong> We'll email a confirmation with the calendar invite within the next 60 minutes. Talk soon.
+      </div>
+    </form>
+
+    <!-- CALENDAR WIDGET -->
+    <div class="cal-widget">
+      <h3>Pick a <em>slot</em></h3>
+      <p class="cal-sub">All times shown in your local timezone. We'll convert on our end.</p>
+
+      <div class="cal-days">
+        <div class="cal-day"><div class="dow">Mon</div><div class="dom">15</div><div class="mon">Jun</div></div>
+        <div class="cal-day active"><div class="dow">Tue</div><div class="dom">16</div><div class="mon">Jun</div></div>
+        <div class="cal-day"><div class="dow">Wed</div><div class="dom">17</div><div class="mon">Jun</div></div>
+      </div>
+
+      <div class="cal-slots-label">Available Tue, 16 Jun</div>
+      <div class="cal-slots">
+        <div class="cal-slot">10:00 AM</div>
+        <div class="cal-slot">11:30 AM</div>
+        <div class="cal-slot active">2:00 PM</div>
+        <div class="cal-slot">3:30 PM</div>
+        <div class="cal-slot">5:00 PM</div>
+        <div class="cal-slot">6:30 PM</div>
+      </div>
+
+      <div class="cal-tz">↳ Times in Eastern Time (ET, UTC−4). Confirmation will adjust to your timezone.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT HAPPENS NEXT -->
+<section>
+  <div class="reveal">
+    <div class="section-eyebrow">After you hit submit</div>
+    <h2 class="section-title">No <em>black box</em>.<br/>Here's exactly what happens.</h2>
+    <p class="section-sub">From the moment you book to the call itself — no mystery, no chasing.</p>
+  </div>
+
+  <div class="next-grid reveal">
+    <div class="next-card">
+      <div class="next-num">01</div>
+      <div class="next-title">Instant confirmation</div>
+      <div class="next-desc">You'll get a calendar invite within 60 minutes. Includes a Zoom link, a 3-question prep doc, and our team's LinkedIn so you know who's joining.</div>
+    </div>
+    <div class="next-card">
+      <div class="next-num">02</div>
+      <div class="next-title">We prep on our end</div>
+      <div class="next-desc">Before the call, we'll do 30+ minutes of homework on your business — site audit, channel review, competitor scan. So the call starts at insight, not at intros.</div>
+    </div>
+    <div class="next-card">
+      <div class="next-num">03</div>
+      <div class="next-title">The actual call</div>
+      <div class="next-desc">30 focused minutes following the agenda above. You walk away with three clear, prioritized recommendations — yours to act on, with or without us.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOST -->
+<section>
+  <div class="reveal">
+    <div class="section-eyebrow">Who you'll talk to</div>
+    <h2 class="section-title">A senior strategist.<br/><em>Not an SDR</em>.</h2>
+    <p class="section-sub">Every discovery call is led by someone who actually does the work, not someone reading a script written by someone who does.</p>
+  </div>
+
+  <div class="host-card reveal">
+    <div class="host-avatar">D</div>
+    <div class="host-info">
+      <h3>Davnoot <em>founding team</em></h3>
+      <p>One of three senior strategists will lead your call — depending on which discipline is most relevant. Each has 6+ years of in-house and agency experience across the channels we run. They make the calls, they ship the work, they answer to outcomes.</p>
+      <div class="host-bio-meta">
+        <span>· 6+ years senior experience</span>
+        <span>· Hands-on operator</span>
+        <span>· Decision-maker on our end</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="reveal">
+    <div class="section-eyebrow">FAQ</div>
+    <h2 class="section-title">Before you <em>book</em>.</h2>
+  </div>
+
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <div class="faq-q"><span>Is this really free? What's the catch?</span><span class="faq-toggle">+</span></div>
+      <div class="faq-a">Genuinely free. The catch (if you want to call it one): about 1 in 4 calls turn into engagements. The rest just walk away with three actionable recommendations. The conversion rate is high enough that we don't need to charge for this — and low enough that we keep the quality high.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>What if I'm not ready to hire anyone yet?</span><span class="faq-toggle">+</span></div>
+      <div class="faq-a">Most of the people we talk to aren't ready. That's fine. The call is useful even if you're 6 months from hiring — you'll have a clearer picture of where to focus and what good work looks like in your category. Take notes, hire later, or never.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>What do I need to prepare?</span><span class="faq-toggle">+</span></div>
+      <div class="faq-a">Almost nothing. After you book, we'll send a 3-question prep doc — takes about 5 minutes. We do the deeper homework before the call so you don't have to.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Will you actually look at my accounts during the call?</span><span class="faq-toggle">+</span></div>
+      <div class="faq-a">Yes — and we'll ask for read-only access (Google Analytics, Search Console, Meta Ads Manager, etc.) before the call so we've already had a look. Live audits on a call are dramatic but shallow. We prefer to come in prepared.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>What if we don't have a budget that justifies this size of agency?</span><span class="faq-toggle">+</span></div>
+      <div class="faq-a">We'll tell you on the call. We work with brands spending $15k+/month on whatever channel we're discussing. Below that, the math doesn't work — but we know good freelancers and smaller agencies and will point you their way without ego.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>None of these times work for me. Other options?</span><span class="faq-toggle">+</span></div>
+      <div class="faq-a">Email us at <a href="mailto:hello@davnoot.com" style="color:var(--accent);text-decoration:none;">hello@davnoot.com</a> with two or three windows that suit you. We'll work it out — Saturdays included if you're on the West Coast.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ALTERNATIVE -->
+<section id="cta" class="final-cta">
+  <div class="final-cta-eyebrow reveal">Not ready for a call?</div>
+  <h2 class="final-cta-title reveal">Just <em>email us</em><br/>instead.</h2>
+  <p class="final-cta-sub reveal">Sometimes a quick async question is more useful than 30 minutes on Zoom. We read every email and reply within one business day.</p>
+  <div class="reveal">
+    <a href="mailto:hello@davnoot.com" class="btn-primary" data-cursor>
+      hello@davnoot.com
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- BUILD:FOOTER -->
+<footer id="contact">
+  <div class="footer-top">
+    <div>
+      <a href="index.html" class="logo" data-cursor>
+        <img src="images/Firefly.png" alt="Davnoot" class="logo-mark footer-logo-mark" />
+        <span class="wordmark">Davnoot Digital</span>
+      </a>
+      <p class="footer-tagline">Independent growth agency. Built for <em>revenue</em>.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="seo.html" data-cursor>SEO</a></li>
+        <li><a href="meta-ads.html" data-cursor>Paid Ads</a></li>
+        <li><a href="email.html" data-cursor>Email</a></li>
+        <li><a href="ai-seo.html" data-cursor>AI SEO</a></li>
+        <li><a href="chatgpt-ads.html" data-cursor>ChatGPT Ads</a></li>
+        <li><a href="software.html" data-cursor>Custom Software</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="index.html#about" data-cursor>About</a></li>
+        <li><a href="index.html#results" data-cursor>Work</a></li>
+        <li><a href="index.html#process" data-cursor>Process</a></li>
+        <li><a href="#" data-cursor>Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@davnoot.com" data-cursor>hello@davnoot.com</a></li>
+        <li><a href="#" data-cursor>+1 [phone]</a></li>
+        <li><a href="#" data-cursor>LinkedIn ↗</a></li>
+        <li><a href="#" data-cursor>Instagram ↗</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-big">Davnoot<em>.</em></div>
+
+  <div class="footer-bottom">
+    <span>© 2025 Davnoot. All rights reserved.</span>
+    <span>Built with intent in Montreal</span>
+  </div>
+</footer>
+<!-- /BUILD:FOOTER -->
+
+
+<script src="script.js"></script>
+</body>
+</html>
