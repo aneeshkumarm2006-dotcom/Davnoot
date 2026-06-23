@@ -81,6 +81,23 @@ function buildEmail(d) {
 </html>`;
 }
 
+function buildText(d) {
+  const service = SERVICE_LABELS[d.service] || d.service || '';
+  return [
+    'New strategy call request — via davnoot.com',
+    '',
+    `Name:           ${d.name || ''}`,
+    `Email:          ${d.email || ''}`,
+    `Company:        ${d.company || ''}`,
+    `Role:           ${d.role || ''}`,
+    `Interested in:  ${service}`,
+    `Preferred slot: ${d.time_slot || ''}`,
+    `Challenge:      ${d.brief || ''}`,
+    '',
+    `Reply directly to ${d.email || ''}.`,
+  ].join('\n');
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -114,6 +131,7 @@ export default async function handler(req, res) {
         reply_to: d.email,
         subject: `New strategy call — ${d.name}${d.company ? ' · ' + d.company : ''}`,
         html: buildEmail(d),
+        text: buildText(d),
       }),
     });
 
