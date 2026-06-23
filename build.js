@@ -69,6 +69,7 @@ function navHtml(file) {
     <li><a href="${home}#contact"${act('contact')} data-cursor>Contact</a></li>
   </ul>
   <a href="${ctaHref}" class="nav-cta" data-cursor>${ctaText}</a>
+  <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>`;
 }
 

@@ -61,6 +61,23 @@ const introPending = !!document.querySelector('[data-intro]') &&
   !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 if (!introPending) startReveals();
 
+// === Mobile nav (hamburger) ===
+(function () {
+  const nav = document.querySelector('nav');
+  const toggle = nav && nav.querySelector('.nav-toggle');
+  if (!nav || !toggle) return;
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('.nav-links a').forEach((a) =>
+    a.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    })
+  );
+})();
+
 // === AMBIENT FLOATING DOTS ===
 const cvs = document.getElementById('ambient');
 if (cvs) {

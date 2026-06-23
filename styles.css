@@ -172,6 +172,8 @@ nav {
   transition: transform 0.2s, background 0.2s;
 }
 .nav-cta:hover { transform: translateY(-1px); background: #3a3a3a; }
+/* Hamburger — hidden on desktop, shown ≤1000px */
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; }
 
 /* === BUTTONS === */
 .btn-primary {
@@ -2040,7 +2042,30 @@ footer {
 /* === RESPONSIVE === */
 @media (max-width: 1000px) {
   nav { padding: 16px 20px; }
-  .nav-links { display: none; }
+  /* Hamburger menu */
+  .nav-toggle {
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    width: 42px; height: 42px; padding: 9px; margin-left: 12px; flex: none; order: 3;
+  }
+  .nav-toggle span { display: block; width: 100%; height: 2px; background: var(--text); border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.2s ease; }
+  nav.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  nav.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-cta { margin-left: auto; order: 2; }
+  .nav-links {
+    position: absolute; top: 100%; left: 0; right: 0; order: 4;
+    display: flex; flex-direction: column; gap: 0;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    padding: 6px 20px 16px;
+    box-shadow: 0 18px 32px rgba(0,0,0,0.07);
+    transform: translateY(-14px); opacity: 0; pointer-events: none;
+    transition: transform 0.32s ease, opacity 0.32s ease;
+  }
+  nav.nav-open .nav-links { transform: none; opacity: 1; pointer-events: auto; }
+  .nav-links li { width: 100%; }
+  .nav-links a { display: block; padding: 15px 2px; font-size: 17px; border-bottom: 1px solid var(--border); }
+  .nav-links a.active::after { display: none; }
   .hero { padding: 140px 20px 60px; }
   section { padding: 80px 20px; }
   .services-grid { grid-template-columns: 1fr; border-radius: 12px; }
@@ -2067,6 +2092,8 @@ footer {
 @media (max-width: 600px) {
   .hero-cta-row { flex-direction: column; align-items: stretch; }
   .btn-primary, .btn-secondary { justify-content: center; }
+  .form-row-grid { grid-template-columns: 1fr; }
+  .sc-meta-waterfall { grid-template-columns: 1fr; }
   .demo { height: 110px; }
   .approach-step-num { font-size: 64px; }
   .case-details { grid-template-columns: 1fr 1fr; }
