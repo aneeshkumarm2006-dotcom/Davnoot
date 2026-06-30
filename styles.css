@@ -3652,18 +3652,27 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
   margin-top: 16px;
 }
 .form-success.show { display: block; animation: fadeInPop 0.5s; }
-/* Calendar slot CTA — appears once a time is picked */
-.cal-cta { margin-top: 18px; padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-elev); display: none; }
-.cal-cta.show { display: block; animation: fadeInPop 0.4s; }
+/* Calendar date navigation */
+.cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.cal-nav-range { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--text-muted); }
+.cal-nav-btn { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-card);
+  color: var(--text); font-size: 18px; line-height: 1; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }
+.cal-nav-btn:hover:not(:disabled) { background: var(--bg-elev); border-color: var(--text-muted); }
+.cal-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* Single booking CTA — lives in the calendar, enables once a slot is chosen */
+.cal-cta { margin-top: 18px; padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-elev); }
 .cal-cta-text { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
 .cal-cta-text strong { color: var(--text); font-weight: 600; }
 .cal-cta-btn { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  background: var(--accent); color: var(--accent-text); border: none; border-radius: 100px; padding: 13px 22px;
+  background: var(--accent); color: var(--accent-text); border: none; border-radius: 100px; padding: 14px 22px;
   font-family: var(--font-sans); font-size: 15px; font-weight: 500; cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease; }
-.cal-cta-btn:hover { background: #3a3a3a; transform: translateY(-1px); }
+.cal-cta-btn:hover:not(:disabled) { background: #3a3a3a; transform: translateY(-1px); }
+.cal-cta-btn:disabled { background: var(--bg-elev-2); color: var(--text-dim); cursor: not-allowed; }
 .cal-cta-btn .arrow { transition: transform 0.2s ease; }
-.cal-cta-btn:hover .arrow { transform: translateX(3px); }
+.cal-cta-btn:hover:not(:disabled) .arrow { transform: translateX(3px); }
+.form-note { font-size: 14px; color: var(--text-muted); margin-top: 8px; }
 @keyframes fadeInPop {
   from { opacity: 0; transform: scale(0.96); }
   to { opacity: 1; transform: scale(1); }

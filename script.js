@@ -901,81 +901,87 @@ if (document.readyState === 'loading') {
 // ========================================================================
 
 (function() {
-  // Calendar — build upcoming weekdays + slots dynamically, sync selection, show CTA
+  // Calendar — paginated upcoming weekdays + hourly slots, single book CTA
   (function buildCalendar() {
     const daysEl = document.querySelector('.cal-days');
     const slotsEl = document.querySelector('.cal-slots');
     if (!daysEl || !slotsEl) return;
     const labelEl = document.querySelector('.cal-slots-label');
     const slotInput = document.querySelector('input[name="time_slot"]');
-    const ctaEl = document.querySelector('.cal-cta');
     const ctaText = document.querySelector('.cal-cta-text');
     const ctaBtn = document.querySelector('.cal-cta-btn');
+    const prevBtn = document.querySelector('.cal-prev');
+    const nextBtn = document.querySelector('.cal-next');
+    const rangeEl = document.querySelector('.cal-nav-range');
 
-    const SLOTS = ['10:00 AM', '11:30 AM', '1:00 PM', '2:30 PM', '4:00 PM', '5:30 PM'];
+    const SLOTS = ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'];
     const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const PAGE = 6;
     const fmt = (dt) => `${DOW[dt.getDay()]}, ${dt.getDate()} ${MON[dt.getMonth()]}`;
 
-    // next 6 weekdays starting tomorrow
-    const days = [];
-    const d = new Date(); d.setHours(0, 0, 0, 0);
-    while (days.length < 6) {
-      d.setDate(d.getDate() + 1);
-      if (d.getDay() === 0 || d.getDay() === 6) continue;
-      days.push(new Date(d));
+    // nth upcoming weekday (0 = first weekday after today)
+    function weekdayAt(n) {
+      const d = new Date(); d.setHours(0, 0, 0, 0);
+      let i = -1;
+      while (i < n) { d.setDate(d.getDate() + 1); if (d.getDay() !== 0 && d.getDay() !== 6) i++; }
+      return d;
     }
 
-    daysEl.innerHTML = days.map((dt, i) =>
-      `<div class="cal-day${i === 0 ? ' active' : ''}" data-label="${fmt(dt)}"><div class="dow">${DOW[dt.getDay()]}</div><div class="dom">${dt.getDate()}</div><div class="mon">${MON[dt.getMonth()]}</div></div>`
-    ).join('');
+    let offset = 0;
+    let selectedDay = null;
+    let selectedSlot = null;
+
     slotsEl.innerHTML = SLOTS.map(s => `<div class="cal-slot">${s}</div>`).join('');
 
-    let selectedDay = fmt(days[0]);
-    let selectedSlot = null;
-    if (labelEl) labelEl.textContent = 'Available ' + selectedDay;
-
-    const sync = () => { if (slotInput) slotInput.value = selectedSlot ? `${selectedDay} · ${selectedSlot}` : ''; };
-    const refreshCta = () => {
-      if (!ctaEl) return;
-      if (selectedSlot) {
-        if (ctaText) ctaText.innerHTML = `Your slot · <strong>${selectedDay}, ${selectedSlot}</strong>`;
-        ctaEl.classList.add('show');
-      } else {
-        ctaEl.classList.remove('show');
-      }
-    };
-
-    daysEl.addEventListener('click', (e) => {
-      const day = e.target.closest('.cal-day');
-      if (!day) return;
-      daysEl.querySelectorAll('.cal-day').forEach(x => x.classList.remove('active'));
-      day.classList.add('active');
-      selectedDay = day.dataset.label;
-      if (labelEl) labelEl.textContent = 'Available ' + selectedDay;
-      slotsEl.querySelectorAll('.cal-slot').forEach(x => x.classList.remove('active'));
-      selectedSlot = null;
-      sync(); refreshCta();
-    });
-
-    slotsEl.addEventListener('click', (e) => {
-      const slot = e.target.closest('.cal-slot');
-      if (!slot) return;
-      slotsEl.querySelectorAll('.cal-slot').forEach(x => x.classList.remove('active'));
-      slot.classList.add('active');
-      selectedSlot = slot.textContent.trim();
-      sync(); refreshCta();
-    });
-
-    if (ctaBtn) {
-      ctaBtn.addEventListener('click', () => {
-        const bf = document.querySelector('form.book-form');
-        if (!bf) return;
-        bf.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        if (typeof bf.requestSubmit === 'function') bf.requestSubmit();
-        else { const b = bf.querySelector('button[type="submit"]'); if (b) b.click(); }
-      });
+    function sync() { if (slotInput) slotInput.value = (selectedDay && selectedSlot) ? `${selectedDay} · ${selectedSlot}` : ''; }
+    function refreshCta() {
+      const ready = !!(selectedDay && selectedSlot);
+      if (ctaBtn) ctaBtn.disabled = !ready;
+      if (ctaText) ctaText.innerHTML = ready
+        ? `Your slot · <strong>${selectedDay}, ${selectedSlot}</strong>`
+        : 'Pick a day and time above to book.';
     }
+    function pickSlot(s) {
+      slotsEl.querySelectorAll('.cal-slot').forEach(x => x.classList.remove('active'));
+      if (s) { s.classList.add('active'); selectedSlot = s.textContent.trim(); } else { selectedSlot = null; }
+      sync(); refreshCta();
+    }
+    function pickDay(el) {
+      daysEl.querySelectorAll('.cal-day').forEach(x => x.classList.remove('active'));
+      el.classList.add('active');
+      selectedDay = el.dataset.label;
+      if (labelEl) labelEl.textContent = 'Available ' + selectedDay;
+      pickSlot(null); // reset the time whenever the day changes
+    }
+    function renderDays() {
+      const days = [];
+      for (let i = 0; i < PAGE; i++) days.push(weekdayAt(offset + i));
+      daysEl.innerHTML = days.map(dt =>
+        `<div class="cal-day" data-label="${fmt(dt)}"><div class="dow">${DOW[dt.getDay()]}</div><div class="dom">${dt.getDate()}</div><div class="mon">${MON[dt.getMonth()]}</div></div>`
+      ).join('');
+      daysEl.querySelectorAll('.cal-day').forEach(el => { if (el.dataset.label === selectedDay) el.classList.add('active'); });
+      if (rangeEl) rangeEl.textContent = `${days[0].getDate()} ${MON[days[0].getMonth()]} – ${days[PAGE - 1].getDate()} ${MON[days[PAGE - 1].getMonth()]}`;
+      if (prevBtn) prevBtn.disabled = offset === 0;
+    }
+
+    daysEl.addEventListener('click', (e) => { const d = e.target.closest('.cal-day'); if (d) pickDay(d); });
+    slotsEl.addEventListener('click', (e) => { const s = e.target.closest('.cal-slot'); if (s && selectedDay) pickSlot(s); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { offset = Math.max(0, offset - PAGE); renderDays(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { offset += PAGE; renderDays(); });
+    if (ctaBtn) ctaBtn.addEventListener('click', () => {
+      if (ctaBtn.disabled) return;
+      const bf = document.querySelector('form.book-form');
+      if (!bf) return;
+      bf.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (typeof bf.requestSubmit === 'function') bf.requestSubmit();
+      else { const b = bf.querySelector('button[type="submit"]'); if (b) b.click(); }
+    });
+
+    renderDays();
+    const firstDay = daysEl.querySelector('.cal-day');
+    if (firstDay) pickDay(firstDay);
+    refreshCta();
   })();
 
   // Form submit — POST the lead to /api/book-call (Resend), then reveal confirmation
@@ -983,7 +989,7 @@ if (document.readyState === 'loading') {
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]') || form.querySelector('button');
+      const btn = document.querySelector('.cal-cta-btn') || form.querySelector('button[type="submit"]') || form.querySelector('button');
       const success = document.querySelector('.form-success');
       const original = btn ? btn.innerHTML : '';
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
@@ -999,6 +1005,7 @@ if (document.readyState === 'loading') {
           if (!c.classList.contains('form-success')) c.style.display = 'none';
         });
         if (success) success.classList.add('show');
+        if (btn) { btn.innerHTML = 'Booked ✓'; btn.disabled = true; }
       } catch (err) {
         if (btn) { btn.disabled = false; btn.innerHTML = original; }
         alert('Sorry — something went wrong sending your request. Please email hello@davnoot.com directly.');

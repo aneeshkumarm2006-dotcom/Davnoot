@@ -210,10 +210,7 @@
         <textarea id="brief" name="brief" placeholder="One or two sentences is fine. The more specific, the more useful the call." required></textarea>
       </div>
 
-      <button type="submit">
-        Book the call
-        <span class="arrow">→</span>
-      </button>
+      <p class="form-note">Fill this in, then pick a slot on the right to book →</p>
 
       <div class="form-success">
         <strong>Got it.</strong> We'll email a confirmation with the calendar invite within the next 60 minutes. Talk soon.
@@ -225,14 +222,19 @@
       <h3>Pick a <em>slot</em></h3>
       <p class="cal-sub">All times shown in your local timezone. We'll convert on our end.</p>
 
+      <div class="cal-nav">
+        <button type="button" class="cal-nav-btn cal-prev" aria-label="Earlier dates">‹</button>
+        <span class="cal-nav-range"></span>
+        <button type="button" class="cal-nav-btn cal-next" aria-label="Later dates">›</button>
+      </div>
       <div class="cal-days"></div>
 
       <div class="cal-slots-label">Pick a day</div>
       <div class="cal-slots"></div>
 
       <div class="cal-cta">
-        <div class="cal-cta-text">Pick a time above to continue.</div>
-        <button type="button" class="cal-cta-btn">Confirm &amp; book the call <span class="arrow">→</span></button>
+        <div class="cal-cta-text">Pick a day and time above to book.</div>
+        <button type="button" class="cal-cta-btn" disabled>Confirm &amp; book the call <span class="arrow">→</span></button>
       </div>
 
       <div class="cal-tz">↳ Times in Eastern Time (ET, UTC−4). Confirmation will adjust to your timezone.</div>
