@@ -56,6 +56,10 @@ const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
 function startReveals() { document.querySelectorAll('.reveal').forEach(el => io.observe(el)); }
+// Scroll-triggered showcase animations are also gated behind the intro so they
+// don't fire invisibly while the intro overlay covers the page.
+let _startShowcaseObserving = null;
+function startShowcases() { if (_startShowcaseObserving) _startShowcaseObserving(); }
 // Hold the page's text animations until the AI-SEO intro finishes; otherwise reveal now.
 const introPending = !!document.querySelector('[data-intro]') &&
   !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -595,6 +599,8 @@ async function runIntro() {
       overlay.remove();
       document.documentElement.classList.remove('intro-lock');
       startReveals();                        // intro is gone — NOW the hero/text animations play (and are seen)
+      startShowcases();                      // ...and scroll-triggered showcases can arm now
+
     }, 1050);
   };
   overlay.addEventListener('click', end);
@@ -705,8 +711,7 @@ function initShowcases() {
   }, { threshold: 0.25 });
 
   showcases.forEach(s => {
-    obs.observe(s);
-    // Click to replay
+    // Click to replay (always available)
     s.addEventListener('click', () => {
       delete s.dataset.played;
       const type = s.dataset.showcase;
@@ -714,6 +719,12 @@ function initShowcases() {
       if (fn) fn(s);
     });
   });
+
+  // Defer the scroll observer until the intro finishes; otherwise it can fire
+  // while the section is hidden behind the intro overlay (plays invisibly + marks
+  // itself "played"), so the in-page animation never shows.
+  _startShowcaseObserving = () => showcases.forEach(s => obs.observe(s));
+  if (!introPending) _startShowcaseObserving();
 }
 
 if (document.readyState === 'loading') {
@@ -890,22 +901,82 @@ if (document.readyState === 'loading') {
 // ========================================================================
 
 (function() {
-  // Calendar day selection
-  document.addEventListener('click', (e) => {
-    const day = e.target.closest('.cal-day');
-    if (day) {
-      document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('active'));
+  // Calendar — build upcoming weekdays + slots dynamically, sync selection, show CTA
+  (function buildCalendar() {
+    const daysEl = document.querySelector('.cal-days');
+    const slotsEl = document.querySelector('.cal-slots');
+    if (!daysEl || !slotsEl) return;
+    const labelEl = document.querySelector('.cal-slots-label');
+    const slotInput = document.querySelector('input[name="time_slot"]');
+    const ctaEl = document.querySelector('.cal-cta');
+    const ctaText = document.querySelector('.cal-cta-text');
+    const ctaBtn = document.querySelector('.cal-cta-btn');
+
+    const SLOTS = ['10:00 AM', '11:30 AM', '1:00 PM', '2:30 PM', '4:00 PM', '5:30 PM'];
+    const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const fmt = (dt) => `${DOW[dt.getDay()]}, ${dt.getDate()} ${MON[dt.getMonth()]}`;
+
+    // next 6 weekdays starting tomorrow
+    const days = [];
+    const d = new Date(); d.setHours(0, 0, 0, 0);
+    while (days.length < 6) {
+      d.setDate(d.getDate() + 1);
+      if (d.getDay() === 0 || d.getDay() === 6) continue;
+      days.push(new Date(d));
+    }
+
+    daysEl.innerHTML = days.map((dt, i) =>
+      `<div class="cal-day${i === 0 ? ' active' : ''}" data-label="${fmt(dt)}"><div class="dow">${DOW[dt.getDay()]}</div><div class="dom">${dt.getDate()}</div><div class="mon">${MON[dt.getMonth()]}</div></div>`
+    ).join('');
+    slotsEl.innerHTML = SLOTS.map(s => `<div class="cal-slot">${s}</div>`).join('');
+
+    let selectedDay = fmt(days[0]);
+    let selectedSlot = null;
+    if (labelEl) labelEl.textContent = 'Available ' + selectedDay;
+
+    const sync = () => { if (slotInput) slotInput.value = selectedSlot ? `${selectedDay} · ${selectedSlot}` : ''; };
+    const refreshCta = () => {
+      if (!ctaEl) return;
+      if (selectedSlot) {
+        if (ctaText) ctaText.innerHTML = `Your slot · <strong>${selectedDay}, ${selectedSlot}</strong>`;
+        ctaEl.classList.add('show');
+      } else {
+        ctaEl.classList.remove('show');
+      }
+    };
+
+    daysEl.addEventListener('click', (e) => {
+      const day = e.target.closest('.cal-day');
+      if (!day) return;
+      daysEl.querySelectorAll('.cal-day').forEach(x => x.classList.remove('active'));
       day.classList.add('active');
-    }
-    const slot = e.target.closest('.cal-slot');
-    if (slot) {
-      document.querySelectorAll('.cal-slot').forEach(s => s.classList.remove('active'));
+      selectedDay = day.dataset.label;
+      if (labelEl) labelEl.textContent = 'Available ' + selectedDay;
+      slotsEl.querySelectorAll('.cal-slot').forEach(x => x.classList.remove('active'));
+      selectedSlot = null;
+      sync(); refreshCta();
+    });
+
+    slotsEl.addEventListener('click', (e) => {
+      const slot = e.target.closest('.cal-slot');
+      if (!slot) return;
+      slotsEl.querySelectorAll('.cal-slot').forEach(x => x.classList.remove('active'));
       slot.classList.add('active');
-      // Sync to form hidden input
-      const slotInput = document.querySelector('input[name="time_slot"]');
-      if (slotInput) slotInput.value = slot.textContent.trim();
+      selectedSlot = slot.textContent.trim();
+      sync(); refreshCta();
+    });
+
+    if (ctaBtn) {
+      ctaBtn.addEventListener('click', () => {
+        const bf = document.querySelector('form.book-form');
+        if (!bf) return;
+        bf.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (typeof bf.requestSubmit === 'function') bf.requestSubmit();
+        else { const b = bf.querySelector('button[type="submit"]'); if (b) b.click(); }
+      });
     }
-  });
+  })();
 
   // Form submit — POST the lead to /api/book-call (Resend), then reveal confirmation
   const form = document.querySelector('form.book-form');

@@ -3652,6 +3652,18 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
   margin-top: 16px;
 }
 .form-success.show { display: block; animation: fadeInPop 0.5s; }
+/* Calendar slot CTA — appears once a time is picked */
+.cal-cta { margin-top: 18px; padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-elev); display: none; }
+.cal-cta.show { display: block; animation: fadeInPop 0.4s; }
+.cal-cta-text { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+.cal-cta-text strong { color: var(--text); font-weight: 600; }
+.cal-cta-btn { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--accent); color: var(--accent-text); border: none; border-radius: 100px; padding: 13px 22px;
+  font-family: var(--font-sans); font-size: 15px; font-weight: 500; cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease; }
+.cal-cta-btn:hover { background: #3a3a3a; transform: translateY(-1px); }
+.cal-cta-btn .arrow { transition: transform 0.2s ease; }
+.cal-cta-btn:hover .arrow { transform: translateX(3px); }
 @keyframes fadeInPop {
   from { opacity: 0; transform: scale(0.96); }
   to { opacity: 1; transform: scale(1); }
