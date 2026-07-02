@@ -107,7 +107,7 @@ function footerHtml(file) {
     <div class="footer-col">
       <h4>Contact</h4>
       <ul>
-        <li><a href="mailto:hello@davnoot.com" data-cursor>hello@davnoot.com</a></li>
+        <li><a href="mailto:info@davnoot.com" data-cursor>info@davnoot.com</a></li>
         <li><a href="tel:+14382237131" data-cursor>+1 (438) 223-7131</a></li>
         <li><a href="#" data-cursor>LinkedIn ↗</a></li>
         <li><a href="#" data-cursor>Instagram ↗</a></li>
@@ -133,7 +133,7 @@ function jsonLd(file, title, desc) {
     logo: OG_IMAGE,
     image: OG_IMAGE,
     description: ORG_DESC,
-    email: 'hello@davnoot.com',
+    email: 'info@davnoot.com',
     foundingDate: '2025',
     address: { '@type': 'PostalAddress', addressLocality: 'Montreal', addressRegion: 'QC', addressCountry: 'CA' },
     areaServed: 'Worldwide',

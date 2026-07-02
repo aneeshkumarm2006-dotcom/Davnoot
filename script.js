@@ -737,7 +737,7 @@ if (document.readyState === 'loading') {
 //  TEXT + BOX REVEAL ANIMATIONS — wired across every page
 // ========================================================================
 
-(function() {
+(function () {
   // Selectors for headings that should split into word-spans
   const HEADING_SELECTORS = [
     '.service-hero-title',
@@ -900,7 +900,7 @@ if (document.readyState === 'loading') {
 //  BOOK A CALL — calendar + form interactions
 // ========================================================================
 
-(function() {
+(function () {
   // Calendar — paginated upcoming weekdays + hourly slots, single book CTA
   (function buildCalendar() {
     const daysEl = document.querySelector('.cal-days');
@@ -1008,7 +1008,7 @@ if (document.readyState === 'loading') {
         if (btn) { btn.innerHTML = 'Booked ✓'; btn.disabled = true; }
       } catch (err) {
         if (btn) { btn.disabled = false; btn.innerHTML = original; }
-        alert('Sorry — something went wrong sending your request. Please email hello@davnoot.com directly.');
+        alert('Sorry — something went wrong sending your request. Please email info@davnoot.com directly.');
       }
     });
   }

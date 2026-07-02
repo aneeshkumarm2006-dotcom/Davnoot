@@ -4,9 +4,9 @@
 // Required env var (set in Vercel → Settings → Environment Variables):
 //   RESEND_API_KEY   your Resend API key (re_...)
 // Optional:
-//   RESEND_FROM      e.g. "Davnoot Digital <hello@davnoot.com>"  (needs a verified
+//   RESEND_FROM      e.g. "Davnoot Digital <info@davnoot.com>"  (needs a verified
 //                    domain in Resend; defaults to Resend's test sender)
-//   LEAD_TO          where leads are delivered (defaults to hello@davnoot.com)
+//   LEAD_TO          where leads are delivered (defaults to info@davnoot.com)
 
 const FROM = process.env.RESEND_FROM || 'Davnoot Digital <onboarding@resend.dev>';
 const TO = (process.env.LEAD_TO || 'info@davnoot.com').split(',').map((s) => s.trim());
