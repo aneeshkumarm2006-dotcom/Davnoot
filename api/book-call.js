@@ -9,7 +9,7 @@
 //   LEAD_TO          where leads are delivered (defaults to hello@davnoot.com)
 
 const FROM = process.env.RESEND_FROM || 'Davnoot Digital <onboarding@resend.dev>';
-const TO = (process.env.LEAD_TO || 'hello@davnoot.com').split(',').map((s) => s.trim());
+const TO = (process.env.LEAD_TO || 'info@davnoot.com').split(',').map((s) => s.trim());
 
 const SERVICE_LABELS = {
   seo: 'SEO',
