@@ -15,7 +15,7 @@ const fs = require('fs');
 const path = require('path');
 
 // ---- Site config -----------------------------------------------------------
-const SITE_URL = 'https://davnoot.com';            // <-- change here if the domain differs
+const SITE_URL = 'https://www.davnoot.com';        // <-- canonical host (www; matches GSC + Vercel apex→www 308)
 const LOGO = 'images/Firefly.png';
 const OG_IMAGE = SITE_URL + '/' + LOGO;
 const ORG_DESC = 'Davnoot is an independent growth agency. Six disciplines — SEO, paid social, email, AI search, ChatGPT ads, and custom software — engineered into one revenue engine.';
@@ -30,10 +30,90 @@ const SERVICE_TYPE = {
   'software.html': 'Custom Software Development',
 };
 
+// Per-page meta keywords. Modern search engines largely ignore this tag for
+// ranking, but it's still a low-cost, self-documenting signal (and some AI
+// crawlers / internal search read it). Keep each list tight and page-specific —
+// 6–10 terms that mirror the title, H1, and body. Pages with no entry get none.
+const KEYWORDS = {
+  'index.html': [
+    'growth marketing agency', 'digital marketing agency Montreal', 'SEO agency',
+    'paid social advertising', 'email marketing', 'AI search optimization',
+    'ChatGPT ads', 'custom software development', 'revenue marketing',
+  ],
+  'seo.html': [
+    'SEO agency Montreal', 'technical SEO services', 'SEO audit',
+    'keyword strategy', 'on-page optimization', 'link building',
+    'organic search growth', 'search engine optimization',
+  ],
+  'meta-ads.html': [
+    'Google Ads management', 'Meta Ads management', 'paid search',
+    'paid social advertising', 'PPC agency', 'Facebook ads',
+    'Instagram ads', 'performance marketing',
+  ],
+  'email.html': [
+    'email marketing agency', 'email marketing automation', 'lifecycle marketing',
+    'email flows', 'list segmentation', 'lead nurturing',
+    'retention marketing', 'Klaviyo agency',
+  ],
+  'ai-seo.html': [
+    'AI SEO services', 'generative engine optimization', 'GEO agency',
+    'ChatGPT SEO', 'Perplexity optimization', 'Google AI Overviews',
+    'AI search visibility', 'answer engine optimization',
+  ],
+  'chatgpt-ads.html': [
+    'ChatGPT ads', 'ChatGPT ads manager', 'AI platform advertising',
+    'AI search advertising', 'generative AI ads', 'OpenAI advertising',
+  ],
+  'software.html': [
+    'custom software development', 'CRM development services', 'custom CRM',
+    'business dashboards', 'software integration', 'marketing automation software',
+    'internal tools development',
+  ],
+  'book-call.html': [
+    'book a strategy call', 'marketing consultation', 'growth strategy call',
+    'free marketing audit', 'Davnoot contact',
+  ],
+};
+
+// Business contact / local-SEO details (used for LocalBusiness + Organization schema).
+const PHONE = '+1-438-223-7131';
+
 // ---- Helpers ---------------------------------------------------------------
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const fmtDate = (d) => d.toISOString().slice(0, 10);         // -> YYYY-MM-DD
 const TODAY = fmtDate(new Date());
+
+// Turn an HTML fragment into clean plain text (for JSON-LD answer bodies):
+// strip inline tags, decode the handful of entities we actually use, collapse whitespace.
+const toPlainText = (s) => String(s)
+  .replace(/<[^>]+>/g, '')
+  .replace(/&nbsp;/g, ' ')
+  .replace(/&amp;/g, '&')
+  .replace(/&lt;/g, '<')
+  .replace(/&gt;/g, '>')
+  .replace(/&quot;/g, '"')
+  .replace(/&#0?39;|&apos;|&#x27;/gi, "'")
+  .replace(/\s+/g, ' ')
+  .trim();
+
+// Extract the on-page FAQ accordion (.faq-item → .faq-q / .faq-a) so we can emit
+// FAQPage JSON-LD that stays in sync with the visible copy. The question is the
+// first <span> inside .faq-q (the second span is the "+" toggle).
+function extractFaq(html) {
+  const questions = [];
+  const answers = [];
+  let m;
+  const qre = /<div class="faq-q">\s*<span>([\s\S]*?)<\/span>/g;
+  while ((m = qre.exec(html))) questions.push(toPlainText(m[1]));
+  const are = /<div class="faq-a">([\s\S]*?)<\/div>/g;
+  while ((m = are.exec(html))) answers.push(toPlainText(m[1]));
+  const n = Math.min(questions.length, answers.length);
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    if (questions[i] && answers[i]) out.push({ q: questions[i], a: answers[i] });
+  }
+  return out;
+}
 
 // Per-page sitemap weighting. Home ranks highest; the booking page slightly lower
 // than the service pages. Anything new defaults to a sensible service-tier weight.
@@ -50,7 +130,10 @@ function fill(html, region, body) {
     console.warn(`  ! no BUILD:${region} markers found — skipped`);
     return html;
   }
-  return html.replace(re, replacement);
+  // Use a function replacer so `$` sequences in the body (e.g. "$$" priceRange,
+  // "$5" in a FAQ answer) are inserted literally rather than treated as
+  // String.replace() special patterns.
+  return html.replace(re, () => replacement);
 }
 
 function canonicalFor(file) {
@@ -134,7 +217,7 @@ function footerHtml(file) {
 </footer>`;
 }
 
-function jsonLd(file, title, desc) {
+function jsonLd(file, title, desc, faqs) {
   const org = {
     '@type': 'Organization',
     '@id': SITE_URL + '/#organization',
@@ -144,6 +227,7 @@ function jsonLd(file, title, desc) {
     image: OG_IMAGE,
     description: ORG_DESC,
     email: 'info@davnoot.com',
+    telephone: PHONE,
     foundingDate: '2025',
     address: { '@type': 'PostalAddress', addressLocality: 'Montreal', addressRegion: 'QC', addressCountry: 'CA' },
     areaServed: 'Worldwide',
@@ -158,11 +242,26 @@ function jsonLd(file, title, desc) {
       description: ORG_DESC,
       publisher: { '@id': SITE_URL + '/#organization' },
     });
+    // LocalBusiness node — supports the Montreal / local-SEO keyword cluster.
+    graph.push({
+      '@type': 'ProfessionalService',
+      '@id': SITE_URL + '/#localbusiness',
+      name: 'Davnoot',
+      image: OG_IMAGE,
+      url: SITE_URL + '/',
+      telephone: PHONE,
+      email: 'info@davnoot.com',
+      description: ORG_DESC,
+      priceRange: '$$',
+      address: { '@type': 'PostalAddress', addressLocality: 'Montreal', addressRegion: 'QC', addressCountry: 'CA' },
+      areaServed: ['Montreal', 'Canada', 'Worldwide'],
+      parentOrganization: { '@id': SITE_URL + '/#organization' },
+    });
   }
   if (SERVICE_PAGES.includes(file)) {
     graph.push({
       '@type': 'Service',
-      name: title.replace(/\s*—\s*Davnoot\s*$/, ''),
+      name: title.replace(/\s*[—|]\s*Davnoot\s*$/, ''),
       serviceType: SERVICE_TYPE[file],
       description: desc,
       url: canonicalFor(file),
@@ -170,14 +269,27 @@ function jsonLd(file, title, desc) {
       areaServed: 'Worldwide',
     });
   }
+  if (faqs && faqs.length) {
+    graph.push({
+      '@type': 'FAQPage',
+      '@id': canonicalFor(file) + '#faq',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    });
+  }
   return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 2);
 }
 
-function seoHtml(file, title, desc) {
+function seoHtml(file, title, desc, faqs) {
   const canonical = canonicalFor(file);
+  const kw = KEYWORDS[file];
   return [
     `<link rel="canonical" href="${canonical}" />`,
     `<meta name="robots" content="index, follow" />`,
+    ...(kw && kw.length ? [`<meta name="keywords" content="${esc(kw.join(', '))}" />`] : []),
     `<link rel="icon" type="image/png" href="${LOGO}" />`,
     `<link rel="apple-touch-icon" href="${LOGO}" />`,
     `<meta property="og:type" content="website" />`,
@@ -190,7 +302,7 @@ function seoHtml(file, title, desc) {
     `<meta name="twitter:title" content="${esc(title)}" />`,
     `<meta name="twitter:description" content="${esc(desc)}" />`,
     `<meta name="twitter:image" content="${OG_IMAGE}" />`,
-    `<script type="application/ld+json">\n${jsonLd(file, title, desc)}\n</script>`,
+    `<script type="application/ld+json">\n${jsonLd(file, title, desc, faqs)}\n</script>`,
   ].join('\n');
 }
 
@@ -232,8 +344,9 @@ for (const file of files) {
   const title = (original.match(/<title>([\s\S]*?)<\/title>/) || [, file])[1].trim();
   const descM = original.match(/<meta\s+name="description"\s+content="([\s\S]*?)"\s*\/?>/i);
   const desc = descM ? descM[1].trim() : ORG_DESC;
+  const faqs = extractFaq(original);
 
-  let html = fill(original, 'SEO', seoHtml(file, title, desc));
+  let html = fill(original, 'SEO', seoHtml(file, title, desc, faqs));
   html = fill(html, 'NAV', navHtml(file));
   html = fill(html, 'FOOTER', footerHtml(file));
 

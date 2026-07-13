@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/service/seo", "destination": "/seo.html", "permanent": true },
+    { "source": "/service/paid-media", "destination": "/meta-ads.html", "permanent": true },
+    { "source": "/service/social-media-management", "destination": "/meta-ads.html", "permanent": true },
+    { "source": "/service/ai-and-machine-learning", "destination": "/ai-seo.html", "permanent": true },
+    { "source": "/service/creative-web-design-development", "destination": "/software.html", "permanent": true },
+    { "source": "/contact", "destination": "/book-call.html", "permanent": true },
+    { "source": "/blog", "destination": "/", "permanent": true },
+    { "source": "/blog/:path*", "destination": "/", "permanent": true }
+  ]
+}
