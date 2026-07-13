@@ -220,7 +220,10 @@ ${urls}
 }
 
 // ---- Run -------------------------------------------------------------------
-const files = fs.readdirSync(__dirname).filter((f) => f.endsWith('.html'));
+// Google Search Console verification files (googleXXXX.html) are served as-is —
+// they carry no BUILD markers and must stay out of the sitemap.
+const isVerificationFile = (f) => /^google[0-9a-f]+\.html$/i.test(f);
+const files = fs.readdirSync(__dirname).filter((f) => f.endsWith('.html') && !isVerificationFile(f));
 const lastmod = {};   // file -> YYYY-MM-DD, collected for the sitemap
 let built = 0;
 for (const file of files) {
