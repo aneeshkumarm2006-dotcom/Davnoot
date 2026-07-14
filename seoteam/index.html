@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Writer dashboard — Davnoot</title>
+
+<!-- Belt and braces. The Edge middleware already sends X-Robots-Tag: noindex on
+     every /seoteam response; this meta tag survives even if that config drifts. -->
+<meta name="robots" content="noindex, nofollow, noarchive" />
+
+<link rel="icon" type="image/png" href="/images/Firefly.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/seoteam/app.css" />
+</head>
+<body>
+  <header class="dash-bar">
+    <a href="/seoteam" class="dash-logo">
+      <img src="/images/Firefly.png" alt="" />
+      <span>Davnoot <em>Writer</em></span>
+    </a>
+    <nav class="dash-nav">
+      <a href="/seoteam">Posts</a>
+      <a href="/seoteam/gallery">Media</a>
+      <a href="/blog" target="_blank" rel="noopener">View blog ↗</a>
+      <button type="button" id="logout">Sign out</button>
+    </nav>
+  </header>
+
+  <main id="app"><div class="loading">Loading…</div></main>
+
+  <script src="/seoteam/app.js"></script>
+</body>
+</html>

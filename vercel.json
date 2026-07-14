@@ -1,13 +1,39 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+
+  "//redirects": [
+    "The two /blog -> / redirects that used to live here have been REMOVED — they",
+    "are what made the blog unreachable. They were `permanent: true` (301), which",
+    "browsers and Google cache aggressively, so after deploying:",
+    "  1. Request indexing for /blog and a post URL in Search Console.",
+    "  2. Test in a private window — your own browser has the old 301 cached.",
+    "Do not re-add them."
+  ],
   "redirects": [
     { "source": "/service/seo", "destination": "/seo.html", "permanent": true },
     { "source": "/service/paid-media", "destination": "/meta-ads.html", "permanent": true },
     { "source": "/service/social-media-management", "destination": "/meta-ads.html", "permanent": true },
     { "source": "/service/ai-and-machine-learning", "destination": "/ai-seo.html", "permanent": true },
     { "source": "/service/creative-web-design-development", "destination": "/software.html", "permanent": true },
-    { "source": "/contact", "destination": "/book-call.html", "permanent": true },
-    { "source": "/blog", "destination": "/", "permanent": true },
-    { "source": "/blog/:path*", "destination": "/", "permanent": true }
+    { "source": "/contact", "destination": "/book-call.html", "permanent": true }
+  ],
+
+  "//rewrites": [
+    "Rewrites only fire when NO static file matches the path — that is why there is",
+    "no sitemap.xml on disk (build.js writes lib/sitemap-static.json instead), and",
+    "why /seoteam/app.js resolves to the real bundle rather than the SPA fallback.",
+    "ORDER MATTERS: the first match wins, so /seoteam/preview/:id must precede the",
+    "/seoteam/:path* catch-all."
+  ],
+  "rewrites": [
+    { "source": "/blog", "destination": "/api/blog/index" },
+    { "source": "/blog/:slug", "destination": "/api/blog/post?slug=:slug" },
+
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+
+    { "source": "/seoteam/login", "destination": "/seoteam/login.html" },
+    { "source": "/seoteam/preview/:id", "destination": "/api/seoteam/preview?id=:id" },
+    { "source": "/seoteam", "destination": "/seoteam/index.html" },
+    { "source": "/seoteam/:path*", "destination": "/seoteam/index.html" }
   ]
 }
