@@ -22,17 +22,14 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PORT = process.env.PORT || 3000;
 
-/* ---- .env.local ---------------------------------------------------------- */
-const envFile = path.join(ROOT, '.env.local');
-if (fs.existsSync(envFile)) {
-  for (const line of fs.readFileSync(envFile, 'utf8').split('\n')) {
-    const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/i);
-    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
-  }
-  console.log('· loaded .env.local');
-} else {
-  console.warn('! no .env.local — the blog and dashboard will fail until MONGODB_URI is set.');
+/* ---- env + the local DNS workaround (see scripts/_env.js) ----------------- */
+import { loadEnv, ensureSrvDns } from './_env.js';
+
+loadEnv();
+if (!process.env.MONGODB_URI) {
+  console.warn('! MONGODB_URI is not set — the blog and dashboard will 500 until it is.');
 }
+await ensureSrvDns();
 
 const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
 

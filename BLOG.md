@@ -39,7 +39,18 @@ npm run watch     # rebuild the dashboard on save
 `npm run live-smoke` equivalent: `PORT=3456 node scripts/live-smoke.js` boots an
 in-memory Mongo with a seeded post — useful for a demo with no Atlas account.
 
-### Two things that will bite you
+### Three things that will bite you
+
+- **`vercel.json` takes no comments.** Vercel validates it against a *strict*
+  schema and rejects any unknown top-level key — including the `"//note"` keys
+  people add to JSON files that have no comment syntax. The deploy then fails at
+  config validation, **before** the build, so there are no build logs and the
+  error looks like a code problem:
+
+  > `The vercel.json schema validation failed: should NOT have additional property //redirects`
+
+  Put explanatory notes here in BLOG.md instead. `scripts/vercel-config.test.js`
+  now guards this.
 
 - **There is deliberately no `build` script.** Adding one flips Vercel from
   "serve these static files" to "run a build", changing output-directory
