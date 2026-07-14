@@ -8,6 +8,8 @@
 //                    domain in Resend; defaults to Resend's test sender)
 //   LEAD_TO          where leads are delivered (defaults to info@davnoot.com)
 
+import { leads } from '../lib/db.js';
+
 const FROM = process.env.RESEND_FROM || 'Davnoot Digital <onboarding@resend.dev>';
 const TO = (process.env.LEAD_TO || 'info@davnoot.com').split(',').map((s) => s.trim());
 
@@ -98,6 +100,21 @@ function buildText(d) {
   ].join('\n');
 }
 
+// Keep only the fields we recognise, coerced to strings and length-capped so a
+// crafted body can't store unbounded junk in the leads collection.
+function cleanLead(d) {
+  const str = (v, max) => (v == null ? '' : String(v)).slice(0, max);
+  return {
+    name: str(d.name, 200),
+    email: str(d.email, 320),
+    company: str(d.company, 200),
+    role: str(d.role, 200),
+    service: str(d.service, 60),
+    timeSlot: str(d.time_slot, 120),
+    brief: str(d.brief, 4000),
+  };
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -107,17 +124,45 @@ export default async function handler(req, res) {
   // Vercel parses JSON and urlencoded bodies into req.body.
   const d = (typeof req.body === 'string' ? safeJson(req.body) : req.body) || {};
 
-  // Honeypot — silently accept bots without sending.
+  // Honeypot — silently accept bots without sending or persisting.
   if (d['bot-field']) return res.status(200).json({ ok: true });
 
   if (!d.name || !d.email) {
     return res.status(400).json({ error: 'Name and email are required.' });
   }
 
-  if (!process.env.RESEND_API_KEY) {
-    return res.status(500).json({ error: 'Email is not configured (missing RESEND_API_KEY).' });
+  // ── PERSIST FIRST ────────────────────────────────────────────────────────
+  // The lead is the thing we must never lose. Write it to Mongo BEFORE emailing,
+  // so a Resend outage (or a missing API key) can't drop a paying prospect on the
+  // floor. Best-effort: if Mongo itself is down, we do NOT fail the form — a lead
+  // that emails but isn't stored still beats a booking form that returns an error.
+  let leadId = null;
+  try {
+    const col = await leads();
+    const lead = cleanLead(d);
+    const { insertedId } = await col.insertOne({
+      ...lead,
+      status: 'new',
+      notes: '',
+      emailSent: false,
+      emailError: null,
+      createdAt: new Date(),
+    });
+    leadId = insertedId;
+  } catch (err) {
+    console.error('Lead persist error (continuing to email):', err);
   }
 
+  // ── THEN EMAIL ───────────────────────────────────────────────────────────
+  if (!process.env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not set — lead captured but no email sent.');
+    // The lead is safe in Mongo if it persisted; only report failure if it didn't.
+    return leadId
+      ? res.status(200).json({ ok: true })
+      : res.status(500).json({ error: 'Email is not configured (missing RESEND_API_KEY).' });
+  }
+
+  let emailError = null;
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -135,16 +180,32 @@ export default async function handler(req, res) {
       }),
     });
 
-    if (!r.ok) {
-      const detail = await r.text();
-      console.error('Resend error:', r.status, detail);
-      return res.status(502).json({ error: 'Could not send the email.' });
-    }
-    return res.status(200).json({ ok: true });
+    if (!r.ok) emailError = `Resend ${r.status}: ${await r.text()}`;
   } catch (err) {
-    console.error('Handler error:', err);
-    return res.status(500).json({ error: 'Unexpected error.' });
+    emailError = String(err?.message || err);
   }
+
+  if (!emailError) {
+    if (leadId) markEmail(leadId, true, null); // fire-and-forget flag update
+    return res.status(200).json({ ok: true });
+  }
+
+  // Email failed. If we captured the lead, this is our vendor's problem, not the
+  // prospect's — return success; the admin retries the send from the leads inbox.
+  console.error('Resend error:', emailError);
+  if (leadId) {
+    markEmail(leadId, false, emailError);
+    return res.status(200).json({ ok: true });
+  }
+  // Neither stored nor sent — the lead is genuinely lost, so surface it.
+  return res.status(502).json({ error: 'Could not send the email.' });
+}
+
+/** Best-effort update of the lead's email status. Never throws into the response. */
+function markEmail(id, sent, error) {
+  leads()
+    .then((col) => col.updateOne({ _id: id }, { $set: { emailSent: sent, emailError: error } }))
+    .catch((err) => console.error('Lead email-flag update failed:', err));
 }
 
 function safeJson(s) {

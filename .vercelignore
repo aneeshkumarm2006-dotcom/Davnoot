@@ -1,0 +1,14 @@
+# Kept out of the Vercel deployment upload.
+#
+# `pages/` is the ANNOTATED design source for the marketing pages. It is compiled
+# into lib/compiled-pages.gen.js (which IS uploaded and bundled). If pages/ were
+# uploaded, /pages/seo.html would be a live, crawlable, fully-rendered duplicate
+# of a revenue page. The redirect in vercel.json is a second layer of defence.
+#
+# NOTE: `lib/` is NOT here on purpose — Vercel's file tracer resolves api/*.js
+# imports out of the uploaded files, so ignoring lib/ would break every function
+# with MODULE_NOT_FOUND. Source under lib/ is hidden with a redirect instead.
+pages/
+src/
+scripts/
+build.js

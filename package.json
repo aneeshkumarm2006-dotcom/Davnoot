@@ -18,7 +18,7 @@
   },
   "scripts": {
     "dev": "node scripts/dev.js",
-    "site": "node build.js",
+    "site": "node build.js && node scripts/compile-pages.js",
     "bundle": "node scripts/bundle.js",
     "watch": "node scripts/bundle.js --watch",
     "test": "node --test \"scripts/*.test.js\"",
@@ -43,6 +43,7 @@
     "@tiptap/pm": "^2.10.3",
     "@tiptap/starter-kit": "^2.10.3",
     "esbuild": "^0.24.0",
-    "mongodb-memory-server": "^11.2.0"
+    "mongodb-memory-server": "^11.2.0",
+    "parse5": "^8.0.1"
   }
 }

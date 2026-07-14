@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Website manager — Davnoot</title>
+
+<!-- Belt and braces. The Edge middleware already sends X-Robots-Tag: noindex on
+     every /admin response; this meta survives even if that config drifts. -->
+<meta name="robots" content="noindex, nofollow, noarchive" />
+
+<link rel="icon" type="image/png" href="/images/Firefly.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/seoteam/app.css" />
+<link rel="stylesheet" href="/admin/app.css" />
+</head>
+<body class="admin-body">
+  <header class="dash-bar">
+    <a href="/admin" class="dash-logo">
+      <img src="/images/Firefly.png" alt="" />
+      <span>Davnoot <em>Manager</em></span>
+    </a>
+    <nav class="dash-nav">
+      <a href="/seoteam" target="_blank" rel="noopener">Blog dashboard ↗</a>
+      <a href="/" target="_blank" rel="noopener">View site ↗</a>
+      <button type="button" id="logout">Sign out</button>
+    </nav>
+  </header>
+
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <nav class="admin-nav">
+        <a href="/admin" data-view="overview">Overview</a>
+        <a href="/admin/pages" data-view="pages">Pages</a>
+        <a href="/admin/seo" data-view="seo">SEO</a>
+        <a href="/admin/leads" data-view="leads">Leads</a>
+        <a href="/admin/redirects" data-view="redirects">Redirects</a>
+        <a href="/admin/settings" data-view="settings">Settings</a>
+      </nav>
+    </aside>
+
+    <main id="app"><div class="loading">Loading…</div></main>
+  </div>
+
+  <script src="/admin/app.js"></script>
+</body>
+</html>

@@ -39,7 +39,16 @@ if (cursor && ring) {
   const rotEl = document.getElementById('rotator');
   if (!rotEl) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const words = ['revenue', 'ROAS', 'growth', 'demand', 'pipeline', 'advantage'];
+  // Content, not code: read from data-words so the CMS can edit it. Falls back to
+  // the original list if the attribute is missing or malformed.
+  const DEFAULT_WORDS = ['revenue', 'ROAS', 'growth', 'demand', 'pipeline', 'advantage'];
+  let words = DEFAULT_WORDS;
+  if (rotEl.dataset.words) {
+    try {
+      const parsed = JSON.parse(rotEl.dataset.words);
+      if (Array.isArray(parsed) && parsed.length) words = parsed;
+    } catch { /* keep defaults */ }
+  }
   let i = 0;
   setInterval(() => {
     rotEl.classList.add('out');
@@ -605,12 +614,21 @@ async function runIntro() {
   };
   overlay.addEventListener('click', end);
 
-  await ShowcaseAnim.delay(60);
-  overlay.classList.add('show');
-  await ShowcaseAnim.delay(420);
-  await runner(clone);
-  await ShowcaseAnim.delay(1000);
-  end();
+  // The page starts hidden: styles.css sets `.reveal { opacity: 0 }`, and ONLY
+  // end() -> startReveals() makes it visible. So end() MUST be reached no matter
+  // what the showcase runner does. A runner that throws (or hangs) used to leave
+  // .intro-lock on <html> forever and every .reveal at opacity:0 — a blank page.
+  try {
+    await ShowcaseAnim.delay(60);
+    overlay.classList.add('show');
+    await ShowcaseAnim.delay(420);
+    await Promise.race([runner(clone), ShowcaseAnim.delay(6000)]); // watchdog: never hang the page
+    await ShowcaseAnim.delay(1000);
+  } catch (err) {
+    console.error('[intro] showcase runner failed', err);
+  } finally {
+    end();
+  }
 }
 
 if (document.readyState === 'loading') {
@@ -914,7 +932,16 @@ if (document.readyState === 'loading') {
     const nextBtn = document.querySelector('.cal-next');
     const rangeEl = document.querySelector('.cal-nav-range');
 
-    const SLOTS = ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'];
+    // Content, not code: read from data-slots so the CMS can edit it. Falls back
+    // to the original list if the attribute is missing or malformed.
+    const DEFAULT_SLOTS = ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'];
+    let SLOTS = DEFAULT_SLOTS;
+    if (slotsEl.dataset.slots) {
+      try {
+        const parsed = JSON.parse(slotsEl.dataset.slots);
+        if (Array.isArray(parsed) && parsed.length) SLOTS = parsed;
+      } catch { /* keep defaults */ }
+    }
     const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const PAGE = 6;

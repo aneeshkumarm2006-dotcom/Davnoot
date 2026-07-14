@@ -19,8 +19,21 @@ import { verifySessionToken } from './lib/session.js';
 import { readSessionCookie } from './lib/cookies.js';
 
 export const config = {
-  matcher: ['/seoteam', '/seoteam/:path*', '/api/seoteam/:path*'],
+  matcher: [
+    '/seoteam',
+    '/seoteam/:path*',
+    '/api/seoteam/:path*',
+    '/admin',
+    '/admin/:path*',
+    '/api/admin/:path*',
+  ],
 };
+
+// Roles allowed into the website manager. A `writer` (the pre-existing shared
+// SEOTEAM_PASSWORD, and any legacy cookie with no role claim) is confined to
+// /seoteam. This Edge check is a CONVENIENCE — every /api/admin/* handler
+// re-checks the role via requireRole() in lib/auth.js. Do not treat it as the boundary.
+const ADMIN_ROLES = new Set(['admin', 'editor']);
 
 /* The dashboard must never appear in a search index. This header goes on EVERY
  * response from these paths — including the login page and the API — because
@@ -79,6 +92,21 @@ export default async function middleware(request) {
     if (target && target !== '/seoteam') login.searchParams.set('next', target);
 
     return Response.redirect(login.toString(), 302);
+  }
+
+  // Signed in — but is the ROLE allowed here? The token payload carries `role`
+  // (undefined for legacy cookies -> treated as the lowest privilege). Only
+  // admin/editor may reach /admin and /api/admin. Fail closed.
+  if ((path === '/admin' || path.startsWith('/admin/') || path.startsWith('/api/admin')) &&
+      !ADMIN_ROLES.has(session.role)) {
+    if (path.startsWith('/api/')) {
+      return new Response(JSON.stringify({ error: 'You do not have access to that.' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json', 'X-Robots-Tag': NOINDEX, 'Cache-Control': 'no-store' },
+      });
+    }
+    // A signed-in writer who wandered to /admin goes back to the surface they can use.
+    return Response.redirect(new URL('/seoteam', url.origin).toString(), 302);
   }
 
   return next({ headers: { 'X-Robots-Tag': NOINDEX } });

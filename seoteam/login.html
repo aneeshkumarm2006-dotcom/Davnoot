@@ -85,9 +85,13 @@
 
             // Return the author to wherever they were headed before the redirect.
             // Only ever a same-site path — never trust `next` as an absolute URL,
-            // or the login page becomes an open redirect.
+            // or the login page becomes an open redirect. Must start with a single
+            // "/" followed by an alphanumeric: a bare "//host" or "/\host" both
+            // normalize to a protocol-relative URL in the browser and would redirect
+            // off-site. Reject backslashes, control chars, and any "://" too.
             var next = new URLSearchParams(location.search).get('next');
-            var safe = next && next.charAt(0) === '/' && next.charAt(1) !== '/' ? next : '/seoteam';
+            var safe = next && /^\/[A-Za-z0-9]/.test(next) && next.indexOf('\\') === -1 &&
+              next.indexOf('://') === -1 && !/[\x00-\x1f]/.test(next) ? next : '/seoteam';
             location.href = safe;
           })
           .catch(function () {

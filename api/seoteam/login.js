@@ -16,10 +16,35 @@ import { readJson, withErrors, methods, ApiError } from '../../lib/api.js';
 const MAX_ATTEMPTS = 5;
 const WINDOW_MS = 15 * 60 * 1000;
 
+// Prefer the platform-set client IP. `x-forwarded-for` can be SPOOFED — a client
+// prepends its own value and Vercel appends the real one, so the leftmost entry is
+// attacker-controlled and keying a rate-limit on it lets an attacker rotate past
+// the throttle. `x-vercel-forwarded-for` / `x-real-ip` are set by Vercel and reflect
+// the actual connecting address. Fall back to the socket for local dev.
 function clientIp(req) {
-  const fwd = req.headers['x-forwarded-for'];
+  const h = req.headers;
+  const vercel = h['x-vercel-forwarded-for'] || h['x-real-ip'];
+  if (typeof vercel === 'string' && vercel) return vercel.split(',')[0].trim();
+  const fwd = h['x-forwarded-for'];
   if (typeof fwd === 'string' && fwd) return fwd.split(',')[0].trim();
-  return req.headers['x-real-ip'] || req.socket?.remoteAddress || 'unknown';
+  return req.socket?.remoteAddress || 'unknown';
+}
+
+// The role is decided SERVER-SIDE from the credential presented — never read from
+// the request body. All three comparisons run (constant-time each) so the response
+// time doesn't reveal which password was tried. An unset env var can never match
+// (passwordMatches returns false for an undefined expected secret), so a deployment
+// that sets only SEOTEAM_PASSWORD simply never mints an admin/editor session.
+async function resolveRole(password) {
+  const [isAdmin, isEditor, isWriter] = await Promise.all([
+    passwordMatches(password, process.env.ADMIN_PASSWORD),
+    passwordMatches(password, process.env.EDITOR_PASSWORD),
+    passwordMatches(password, process.env.SEOTEAM_PASSWORD),
+  ]);
+  if (isAdmin) return 'admin';
+  if (isEditor) return 'editor';
+  if (isWriter) return 'writer';
+  return null;
 }
 
 async function login(req, res) {
@@ -33,17 +58,12 @@ async function login(req, res) {
   }
 
   const body = await readJson(req);
+  const role = await resolveRole(body?.password);
 
-  // passwordMatches() hashes BOTH sides to a fixed 32 bytes before a constant-time
-  // compare — so it can't throw on a length mismatch, can't leak the secret's
-  // length through timing, and takes the same time even when SEOTEAM_PASSWORD is
-  // unset. See lib/session.js.
-  const ok = await passwordMatches(body?.password, process.env.SEOTEAM_PASSWORD);
-
-  if (!ok) {
+  if (!role) {
     await attempts.insertOne({ ip, at: new Date() });
     // Deliberately vague: never reveal whether the password was wrong vs. the
-    // server misconfigured (SEOTEAM_PASSWORD unset). Both are "no".
+    // server misconfigured (a password env var unset). Both are "no".
     throw new ApiError(401, 'Incorrect password.');
   }
 
@@ -56,9 +76,9 @@ async function login(req, res) {
   // Successful login clears the throttle for this IP.
   await attempts.deleteMany({ ip });
 
-  const token = await createSessionToken(secret);
+  const token = await createSessionToken(secret, undefined, { role, v: 1 });
   res.setHeader('Set-Cookie', sessionCookie(token, { secure: isSecureRequest(req) }));
-  return res.status(200).json({ ok: true });
+  return res.status(200).json({ ok: true, role });
 }
 
 export default withErrors(methods({ POST: login }));

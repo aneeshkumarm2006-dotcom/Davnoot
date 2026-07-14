@@ -23,23 +23,36 @@ import { fileURLToPath } from 'node:url';
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const watch = process.argv.includes('--watch');
 
-const options = {
-  entryPoints: [path.join(root, 'src', 'dashboard', 'main.js')],
+// Two SPAs, two committed bundles: the /seoteam writer dashboard and the /admin
+// website manager. They share src/dashboard/dom.js and media-picker.js; the admin
+// bundle deliberately does NOT pull in Tiptap (its content fields are constrained
+// contenteditable), so there is no second 450 kB editor blob in git.
+const makeOptions = (entry, outfile) => ({
+  entryPoints: [path.join(root, ...entry)],
   bundle: true,
   format: 'iife',
   target: ['es2020'],
-  outfile: path.join(root, 'seoteam', 'app.js'),
+  outfile: path.join(root, ...outfile),
   minify: !watch,
   sourcemap: watch ? 'inline' : false,
   logLevel: 'info',
-};
+});
+
+const BUNDLES = [
+  { entry: ['src', 'dashboard', 'main.js'], outfile: ['seoteam', 'app.js'], label: 'seoteam/app.js' },
+  { entry: ['src', 'admin', 'main.js'], outfile: ['admin', 'app.js'], label: 'admin/app.js' },
+];
 
 if (watch) {
-  const ctx = await esbuild.context(options);
-  await ctx.watch();
-  console.log('watching src/dashboard …');
+  for (const b of BUNDLES) {
+    const ctx = await esbuild.context(makeOptions(b.entry, b.outfile));
+    await ctx.watch();
+  }
+  console.log('watching src/dashboard and src/admin …');
 } else {
-  const result = await esbuild.build({ ...options, metafile: true });
-  const out = Object.values(result.metafile.outputs)[0];
-  console.log(`✓ seoteam/app.js — ${(out.bytes / 1024).toFixed(1)} kB`);
+  for (const b of BUNDLES) {
+    const result = await esbuild.build({ ...makeOptions(b.entry, b.outfile), metafile: true });
+    const out = Object.values(result.metafile.outputs)[0];
+    console.log(`✓ ${b.label} — ${(out.bytes / 1024).toFixed(1)} kB`);
+  }
 }

@@ -67,6 +67,17 @@ function compile(source) {
 const REDIRECTS = (config.redirects || []).map((r) => ({ ...r, ...compile(r.source) }));
 const REWRITES = (config.rewrites || []).map((r) => ({ ...r, ...compile(r.source) }));
 
+/* The middleware auth gate. Read the matcher from middleware.js (compiled with the
+ * same :path* -> (.*) rules as the rewrites) so dev and prod gate exactly the same
+ * paths. Loaded lazily on first request to avoid a top-level await race. */
+let MW_MATCHERS = null;
+async function loadMatchers() {
+  if (MW_MATCHERS) return MW_MATCHERS;
+  const { config: mw } = await import(pathToFileURL(path.join(ROOT, 'middleware.js')).href);
+  MW_MATCHERS = (mw?.matcher || []).map((m) => compile(m).re);
+  return MW_MATCHERS;
+}
+
 function applyRule(rules, pathname) {
   for (const rule of rules) {
     const m = pathname.match(rule.re);
@@ -199,8 +210,12 @@ const server = http.createServer(async (req, res) => {
       return res.end();
     }
 
-    // 2. Edge middleware (the /seoteam gate)
-    if (/^\/(seoteam|api\/seoteam)(\/|$)/.test(pathname)) {
+    // 2. Edge middleware (the auth gate). Read the matcher from middleware.js
+    //    itself — DO NOT hardcode the gated paths here, or a route added under the
+    //    matcher (e.g. /admin) is gated in production but wide open in dev, and
+    //    nobody notices because everything appears to work.
+    const matchers = await loadMatchers();
+    if (matchers.some((re) => re.test(pathname))) {
       const { default: middleware } = await import(pathToFileURL(path.join(ROOT, 'middleware.js')).href);
 
       const request = new Request(url.toString(), {

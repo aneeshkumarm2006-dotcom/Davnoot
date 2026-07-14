@@ -6,7 +6,11 @@
     { "source": "/service/social-media-management", "destination": "/meta-ads.html", "permanent": true },
     { "source": "/service/ai-and-machine-learning", "destination": "/ai-seo.html", "permanent": true },
     { "source": "/service/creative-web-design-development", "destination": "/software.html", "permanent": true },
-    { "source": "/contact", "destination": "/book-call.html", "permanent": true }
+    { "source": "/contact", "destination": "/book-call.html", "permanent": true },
+    { "source": "/lib/:path*", "destination": "/", "permanent": false },
+    { "source": "/src/:path*", "destination": "/", "permanent": false },
+    { "source": "/scripts/:path*", "destination": "/", "permanent": false },
+    { "source": "/pages/:path*", "destination": "/", "permanent": false }
   ],
   "rewrites": [
     { "source": "/blog", "destination": "/api/blog/index" },
@@ -15,6 +19,19 @@
     { "source": "/seoteam/login", "destination": "/seoteam/login.html" },
     { "source": "/seoteam/preview/:id", "destination": "/api/seoteam/preview?id=:id" },
     { "source": "/seoteam", "destination": "/seoteam/index.html" },
-    { "source": "/seoteam/:path*", "destination": "/seoteam/index.html" }
+    { "source": "/seoteam/:path*", "destination": "/seoteam/index.html" },
+    { "source": "/admin/preview/:id", "destination": "/api/admin/preview?id=:id" },
+    { "source": "/admin", "destination": "/admin/index.html" },
+    { "source": "/admin/:path*", "destination": "/admin/index.html" },
+    { "source": "/book-call.html", "destination": "/api/page?p=book-call.html" },
+    { "source": "/software.html", "destination": "/api/page?p=software.html" },
+    { "source": "/email.html", "destination": "/api/page?p=email.html" },
+    { "source": "/ai-seo.html", "destination": "/api/page?p=ai-seo.html" },
+    { "source": "/chatgpt-ads.html", "destination": "/api/page?p=chatgpt-ads.html" },
+    { "source": "/meta-ads.html", "destination": "/api/page?p=meta-ads.html" },
+    { "source": "/seo.html", "destination": "/api/page?p=seo.html" },
+    { "source": "/index.html", "destination": "/api/page?p=index.html" },
+    { "source": "/", "destination": "/api/page?p=index.html" },
+    { "source": "/:slug", "destination": "/api/page?p=:slug" }
   ]
 }
