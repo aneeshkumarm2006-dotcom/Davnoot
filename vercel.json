@@ -31,6 +31,7 @@
     { "source": "/seoteam/preview/:id", "destination": "/api/seoteam/preview?id=:id" },
     { "source": "/seoteam", "destination": "/seoteam/index.html" },
     { "source": "/seoteam/:path*", "destination": "/seoteam/index.html" },
+    { "source": "/api/admin/pages", "destination": "/api/admin/pages/index" },
     { "source": "/admin/preview/:id", "destination": "/api/admin/preview?id=:id" },
     { "source": "/admin", "destination": "/admin/index.html" },
     { "source": "/admin/:path*", "destination": "/admin/index.html" },

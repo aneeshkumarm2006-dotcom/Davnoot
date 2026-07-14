@@ -129,6 +129,42 @@ describe('vercel.json', () => {
     }
   });
 
+  test('a dynamic file+directory collision has an explicit index rewrite', () => {
+    // Shipped as a 404 once. api/admin/pages/ holds BOTH `[id].js` AND an `[id]/`
+    // directory (publish.js, revisions.js). Vercel builds every lambda correctly,
+    // but that collision makes it drop the IMPLICIT `/api/admin/pages` ->
+    // `.../pages/index` route, so listing pages 404s in production while
+    // /api/admin/seo (index.js alone) and /api/seoteam/posts ([id].js, no [id]/ dir)
+    // both work. scripts/dev.js routes by its own rules and never reproduces it, so
+    // the whole suite passed green. The fix is an explicit rewrite naming the index
+    // lambda — the same shape as /blog -> /api/blog/index.
+    const sources = new Set((config.rewrites || []).map((r) => r.source));
+    const apiRoot = path.join(ROOT, 'api');
+
+    const collisions = [];
+    (function walk(dir) {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      const dirs = new Set(entries.filter((e) => e.isDirectory()).map((e) => e.name));
+      const files = new Set(entries.filter((e) => e.isFile()).map((e) => e.name));
+
+      // A dynamic segment present as BOTH `[x].js` and `[x]/`, in a directory that
+      // also has an index.js to reach — that index route is the one Vercel drops.
+      const collides = [...dirs].some((d) => files.has(`${d}.js`));
+      if (collides && files.has('index.js')) {
+        collisions.push('/' + path.relative(ROOT, dir).replace(/\\/g, '/'));
+      }
+      for (const d of dirs) walk(path.join(dir, d));
+    })(apiRoot);
+
+    for (const route of collisions) {
+      assert.ok(
+        sources.has(route),
+        `${route} has a [param].js file AND a [param]/ dir, so Vercel will NOT route ${route} to its index ` +
+          `lambda — production 404s. Add: { "source": "${route}", "destination": "${route}/index" }`,
+      );
+    }
+  });
+
   test('.vercelignore hides source dirs but never lib/', () => {
     const ignore = fs.readFileSync(path.join(ROOT, '.vercelignore'), 'utf8');
     for (const dir of ['pages/', 'src/', 'scripts/']) {
