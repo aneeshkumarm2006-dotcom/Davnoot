@@ -147,3 +147,30 @@
   .editor-split { grid-template-columns: 1fr; }
   .editor-preview { position: static; }
 }
+
+/* Preview-environment warning banner (VERCEL_ENV=preview). Loud on purpose. */
+.preview-banner {
+  background: #b91c1c;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.preview-banner strong { font-weight: 700; }
+
+/* Composed-page section editor */
+.section-palette { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border, #e5e7eb); }
+.btn-add-section { font-size: 12px; padding: 4px 10px; }
+.section-card { border: 1px solid var(--border, #e5e7eb); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+.section-card.is-hidden { opacity: 0.55; }
+.section-card-head { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: var(--surface-2, #f8fafc); }
+.section-card-actions { display: flex; gap: 4px; }
+.section-card-body { padding: 12px; }
+.btn-icon { border: 1px solid var(--border, #e5e7eb); background: #fff; border-radius: 6px; width: 26px; height: 26px; cursor: pointer; font-size: 13px; line-height: 1; }
+.btn-icon:hover { background: var(--surface-2, #f1f5f9); }
+.section-items { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border, #e5e7eb); }
+.section-item { border: 1px solid var(--border, #e5e7eb); border-radius: 8px; padding: 10px; margin-bottom: 8px; }
+.section-item-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.field-inline { display: flex; align-items: center; gap: 8px; margin: 8px 0; font-size: 13px; }

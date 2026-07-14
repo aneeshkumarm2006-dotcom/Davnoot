@@ -20,4 +20,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://davnoot.com/sitemap.xml
+Sitemap: https://www.davnoot.com/sitemap.xml

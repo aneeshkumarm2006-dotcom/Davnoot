@@ -1,5 +1,16 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'sha256-GRcH7aC7G/RZDvsbUJh59GY7c6ug+gKAjWYS3NVJfXY=' 'sha256-zVR1ArE+UDhRBEnukcttfKJh/Yqnr2LEsFqdNpPEWJc='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self'; frame-src 'self' https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'" }
+      ]
+    }
+  ],
   "redirects": [
     { "source": "/service/seo", "destination": "/seo.html", "permanent": true },
     { "source": "/service/paid-media", "destination": "/meta-ads.html", "permanent": true },

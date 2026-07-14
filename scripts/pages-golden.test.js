@@ -18,6 +18,34 @@ const ROOT = path.join(import.meta.dirname, '..');
 const fixture = (file) =>
   fs.readFileSync(path.join(ROOT, 'scripts', 'fixtures', 'pages', file.replace('.html', '.expected.html')), 'utf8');
 
+/* ===========================================================================
+ * THE CUTOVER-IS-A-NO-OP PROOF.
+ *
+ * Today the 8 marketing pages exist twice: the ROOT .html file (what Vercel
+ * actually serves — a static file shadows its own rewrite) and pages/<file>
+ * (the annotated source, compiled into COMPILED_PAGES). Cutting a page over is
+ * `git rm`-ing the root file so the /api/page rewrite finally fires. That is
+ * only safe if the renderer emits the EXACT bytes the root file serves today.
+ *
+ * build.js's own comments claimed "pages-golden.test.js pins root === fixture"
+ * — but nothing did. This closes that gap: the drift would otherwise ship green
+ * and only surface as a byte diff on a live revenue page at cutover.
+ * =========================================================================== */
+describe('the cutover is a byte-level no-op (root .html === fixture === renderPage)', () => {
+  for (const file of PAGE_FILES) {
+    test(`${file}: the live root file, the fixture, and the renderer all agree`, () => {
+      const rootPath = path.join(ROOT, file);
+      assert.ok(fs.existsSync(rootPath), `${file} is not at the repo root — has it been cut over? Then remove it from this loop.`);
+      const root = fs.readFileSync(rootPath, 'utf8');
+      const fx = fixture(file);
+      // 1. The file Vercel serves today IS the frozen fixture.
+      assert.equal(root, fx, `${file}: the root file drifted from its fixture — re-freeze the fixture or revert the edit`);
+      // 2. The renderer with no document reproduces it exactly.
+      assert.equal(renderPage(COMPILED_PAGES[file], null), root, `${file}: rewrite would serve different bytes than the shadowing static file`);
+    });
+  }
+});
+
 describe('renderPage(tpl, null) is byte-identical to the frozen fixture', () => {
   for (const file of PAGE_FILES) {
     test(file, () => {
@@ -62,6 +90,18 @@ describe('the committed compiled module is current (did you run `npm run site`?)
     for (const file of PAGE_FILES) {
       assert.equal(fresh[file].demoted.length, 0, `${file}: ${JSON.stringify(fresh[file].demoted)}`);
     }
+  });
+
+  test('PAGE_FILES matches the pages/ directory exactly (no silent desync)', () => {
+    // The compiler's PAGE_FILES is hardcoded; build.js enumerates pages/ dynamically.
+    // If a 9th file is added to pages/ but not to PAGE_FILES, it is baked with chrome
+    // by build.js but never compiled into COMPILED_PAGES — so it 404s through
+    // api/page.js and drops out of the CMS-sourced sitemap, silently. Pin them equal.
+    const onDisk = fs
+      .readdirSync(path.join(ROOT, 'pages'))
+      .filter((f) => f.endsWith('.html'))
+      .sort();
+    assert.deepEqual([...PAGE_FILES].sort(), onDisk, 'compile-pages.js PAGE_FILES is out of sync with the pages/ directory');
   });
 });
 

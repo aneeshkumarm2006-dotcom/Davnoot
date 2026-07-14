@@ -4,9 +4,11 @@
  * uses, so preview can never drift from production. Always no-store + noindex.
  */
 import { getSession } from '../../lib/auth.js';
-import { pages } from '../../lib/db.js';
+import { pages, settings as siteSettings } from '../../lib/db.js';
 import { COMPILED_PAGES } from '../../lib/compiled-pages.gen.js';
 import { renderPage } from '../../lib/page-render.js';
+import { renderComposedPage } from '../../lib/composed-render.js';
+import { mergeSettings } from '../../lib/site-defaults.js';
 
 const ADMIN_ROLES = new Set(['admin', 'editor']);
 
@@ -39,5 +41,20 @@ export default async function handler(req, res) {
 
   // Preview shows the DRAFT (doc.draft); the public route shows doc.live.
   const content = doc?.draft || null;
+
+  // A composed page (base:null) is assembled from the section library, exactly as the
+  // public route does — so preview can't drift from production here either.
+  if (!tpl && doc && doc.base === null) {
+    let merged = mergeSettings({});
+    try {
+      const stored = await (await siteSettings()).findOne({ _id: 'site' });
+      const { _id, ...diff } = stored || {};
+      merged = mergeSettings(diff);
+    } catch { /* settings unavailable — defaults */ }
+    return res.status(200).send(
+      renderComposedPage({ content, path: doc.path, slug: doc.slug, locale: doc.locale }, { preview: true, settings: merged }),
+    );
+  }
+
   return res.status(200).send(renderPage(tpl, content ? { content } : null, { preview: true }));
 }

@@ -18,6 +18,7 @@ export class Overview {
 
   render(d) {
     this.root.innerHTML = `
+      ${d.previewEnv ? `<div class="preview-banner" role="alert">⚠ PREVIEW deployment — you are editing the <strong>preview</strong> database. Publishing here does <strong>not</strong> change the live site.</div>` : ''}
       <header class="page-head">
         <div><h1>Overview</h1><p class="muted">Signed in as <strong>${esc(d.role)}</strong>.</p></div>
         <div class="page-actions"><a class="btn btn-dark" href="/admin/new">New page</a></div>

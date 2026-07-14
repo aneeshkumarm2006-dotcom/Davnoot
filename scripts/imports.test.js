@@ -13,6 +13,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { computeSrcHash, bannerFor } from './src-hash.js';
 
 const ROOT = path.join(import.meta.dirname, '..');
 
@@ -114,5 +115,43 @@ describe('the signed-out login page has no gated dependencies', () => {
       false,
       'the login script is inlined precisely so it has no gated dependencies',
     );
+  });
+});
+
+describe('the committed SPA bundles are current (did you run `npm run bundle`?)', () => {
+  // The repo's worst silent failure: edit src/, forget to rebundle, and the dashboard
+  // ships stale — no build error, because there is no build step. bundle.js stamps a
+  // /*srchash:…*/ banner over src/**/*.js; we recompute it and demand a match.
+  const BUNDLES = ['seoteam/app.js', 'admin/app.js'];
+
+  for (const rel of BUNDLES) {
+    test(`${rel} carries the current srchash banner`, () => {
+      const bundle = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+      const m = bundle.match(/\/\*srchash:([0-9a-f]{64})\*\//);
+      assert.ok(m, `${rel} has no /*srchash:…*/ banner — run \`npm run bundle\` and commit it`);
+      assert.equal(
+        bundle.slice(0, 200).includes(bannerFor(computeSrcHash())),
+        true,
+        `${rel} is STALE — src/ changed since the last \`npm run bundle\`. Rebundle and commit.`,
+      );
+    });
+  }
+});
+
+describe('dev.js gates from the middleware matcher, not a hardcoded regex', () => {
+  // scripts/dev.js used to hardcode /^\/(seoteam|api\/seoteam)(\/|$)/, so adding a
+  // gated route (e.g. /admin) to middleware.js left it wide open in dev — a dev/prod
+  // auth divergence nobody notices because everything "works" locally. It must read
+  // config.matcher from middleware.js.
+  const dev = fs.readFileSync(path.join(ROOT, 'scripts', 'dev.js'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|\s)\/\/.*$/gm, '$1');
+
+  test('dev.js loads the matcher from middleware.js', () => {
+    assert.match(dev, /matcher/, 'dev.js must read the middleware matcher');
+    assert.match(dev, /middleware\.js/, 'dev.js must import middleware.js to read its matcher');
+  });
+
+  test('dev.js contains no hardcoded seoteam gate regex', () => {
+    assert.doesNotMatch(dev, /\/\^\\\/\(seoteam/, 'dev.js still hardcodes a gate regex — read config.matcher instead');
+    assert.doesNotMatch(dev, /seoteam\|api\\?\/seoteam/, 'dev.js still hardcodes the seoteam gate — read config.matcher instead');
   });
 });

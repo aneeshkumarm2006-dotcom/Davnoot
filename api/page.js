@@ -11,8 +11,10 @@
  */
 import { COMPILED_PAGES } from '../lib/compiled-pages.gen.js';
 import { renderPage } from '../lib/page-render.js';
-import { pages, redirects } from '../lib/db.js';
-import { livePageFilter } from '../lib/page-model.js';
+import { renderComposedPage } from '../lib/composed-render.js';
+import { pages, redirects, settings as siteSettings } from '../lib/db.js';
+import { isPageLive } from '../lib/page-model.js';
+import { mergeSettings } from '../lib/site-defaults.js';
 
 // Kick the Mongo connect at MODULE scope so it overlaps the (synchronous) template
 // lookup instead of serializing after it. Warm invocations reuse the cached promise.
@@ -43,10 +45,13 @@ export default async function handler(req, res) {
 
   // ---- Read the page document, bounded. The connect is INSIDE the race, so a
   // cold/broken Atlas can't block the driver's 30s serverSelectionTimeoutMS. ----
+  // We fetch by path WITHOUT the live filter so we can tell 'archived' (→ 410) apart
+  // from 'draft'/'scheduled' (→ base template). A filter that hid both would make
+  // an intentionally-retired URL indistinguishable from an as-yet-unpublished one.
   let doc = null;
   let degraded = false;
   try {
-    const read = (async () => (await pages()).findOne({ path, ...livePageFilter() }))();
+    const read = (async () => (await pages()).findOne({ path }))();
     doc = await Promise.race([read, rejectAfter(2000)]);
     read.catch(() => {}); // swallow a late rejection after the race settled
   } catch (err) {
@@ -54,9 +59,22 @@ export default async function handler(req, res) {
     console.error('[page] mongo unavailable, serving base template:', err?.message || err);
   }
 
+  // ---- A retired page returns 410 Gone (de-indexes ~2× faster than 404, stops
+  // crawl retries) — but only if a replacement redirect isn't configured. This
+  // applies to overlay AND composed pages. ----
+  if (doc?.status === 'archived') {
+    try {
+      const rd = await (await redirects()).findOne({ source: path });
+      if (rd) return sendRedirect(res, rd);
+    } catch { /* redirects unavailable — fall through to 410 */ }
+    return gone(res);
+  }
+
+  const live = isPageLive(doc) ? doc : null; // draft/scheduled overlay ⇒ base template
+
   // ---- Overlay page (one of the 8): render the compiled template. ----
   if (tpl) {
-    const source = doc ? 'db' : degraded ? 'base-degraded' : 'base';
+    const source = live ? 'db' : degraded ? 'base-degraded' : 'base';
     res.setHeader('X-Cms-Source', source);
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     // A degraded render (Mongo down) must NEVER enter the CDN, or a routine cold
@@ -69,8 +87,8 @@ export default async function handler(req, res) {
           ? 'public, s-maxage=30, stale-while-revalidate=300'
           : 'no-store',
     );
-    // Render the LIVE content (doc.live). doc is null -> renderPage emits defaults.
-    return res.status(200).send(renderPage(tpl, doc ? { content: doc.live } : null));
+    // Render the LIVE content (doc.live). A non-live doc -> renderPage emits defaults.
+    return res.status(200).send(renderPage(tpl, live ? { content: live.live } : null));
   }
 
   // ---- Composed page (created in /admin) or unknown slug. ----
@@ -78,27 +96,40 @@ export default async function handler(req, res) {
   // not spend a Mongo round trip on /favicon.ico or bot probes.
   if (/\.[a-z0-9]+$/i.test(p)) return notFound(res);
 
-  if (doc && doc.base === null) {
-    // Composed pages are rendered by the section library (Phase 5). Until that
-    // ships, a composed page returns a minimal valid shell rather than a 500.
-    res.setHeader('X-Cms-Source', doc ? 'db' : 'base');
+  if (live && live.base === null) {
+    // Composed pages are assembled from the section library into a full marketing
+    // shell (Phase 5). Settings drive the chrome; a Mongo hiccup on the settings read
+    // just falls back to defaults (the sections still render), never a 500.
+    let merged;
+    try {
+      const read = (async () => (await siteSettings()).findOne({ _id: 'site' }))();
+      const stored = await Promise.race([read, rejectAfter(1500)]);
+      read.catch(() => {});
+      const { _id, ...diff } = stored || {};
+      merged = mergeSettings(diff);
+    } catch { merged = mergeSettings({}); }
+    res.setHeader('X-Cms-Source', 'db');
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=86400');
-    return res.status(200).send(renderComposedFallback(doc));
+    return res.status(200).send(
+      renderComposedPage({ content: live.live, path: live.path, slug: live.slug, locale: live.locale }, { settings: merged }),
+    );
   }
 
-  // No page — check for a redirect before 404ing.
+  // No live page — check for a redirect before 404ing.
   try {
     const rd = await (await redirects()).findOne({ source: path });
-    if (rd) {
-      res.setHeader('Cache-Control', 'public, s-maxage=300');
-      res.statusCode = rd.status || 308;
-      res.setHeader('Location', rd.destination);
-      return res.end();
-    }
+    if (rd) return sendRedirect(res, rd);
   } catch { /* redirects unavailable — fall through to 404 */ }
 
   return notFound(res);
+}
+
+function sendRedirect(res, rd) {
+  res.setHeader('Cache-Control', 'public, s-maxage=300');
+  res.statusCode = rd.status || 308;
+  res.setHeader('Location', rd.destination);
+  return res.end();
 }
 
 function notFound(res) {
@@ -108,10 +139,16 @@ function notFound(res) {
   return res.status(404).send('<!doctype html><meta charset="utf-8"><title>Not found</title><h1>404 — Not found</h1>');
 }
 
-// Minimal placeholder for a composed page until the Phase-5 section renderer lands.
-function renderComposedFallback(doc) {
-  const c = doc.live || {};
-  const esc = (s) => String(s || '').replace(/[<>&]/g, (ch) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[ch]));
-  return `<!doctype html><html lang="${esc(doc.locale || 'en')}"><head><meta charset="utf-8">` +
-    `<title>${esc(c.title || doc.slug)}</title></head><body><h1>${esc(c.title || doc.slug)}</h1></body></html>`;
+/* 410 Gone — an intentionally retired URL. Google de-indexes a 410 roughly twice as
+ * fast as a 404 and stops re-crawling it, which is the point of "archive" vs a page
+ * that merely 404s by accident. noindex belt-and-braces; cached briefly so bot
+ * retries hit the CDN, not a lambda. */
+function gone(res) {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600');
+  res.setHeader('X-Robots-Tag', 'noindex');
+  return res.status(410).send('<!doctype html><meta charset="utf-8"><title>Gone</title><h1>410 — This page has been retired</h1>');
 }
+
+// The composed-page renderer now lives in lib/composed-render.js (renderComposedPage),
+// which assembles the full marketing shell from the section library.

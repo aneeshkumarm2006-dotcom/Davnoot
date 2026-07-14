@@ -19,9 +19,15 @@
 import esbuild from 'esbuild';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { computeSrcHash, bannerFor } from './src-hash.js';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const watch = process.argv.includes('--watch');
+
+// Stamp the source-tree hash into every bundle. imports.test.js recomputes it, so
+// a committed bundle that is stale relative to src/ fails `npm test` instead of
+// shipping silently. Skipped in --watch (sourcemaps + rapid rebuilds; not committed).
+const SRC_HASH = watch ? null : computeSrcHash();
 
 // Two SPAs, two committed bundles: the /seoteam writer dashboard and the /admin
 // website manager. They share src/dashboard/dom.js and media-picker.js; the admin
@@ -36,6 +42,7 @@ const makeOptions = (entry, outfile) => ({
   minify: !watch,
   sourcemap: watch ? 'inline' : false,
   logLevel: 'info',
+  ...(SRC_HASH ? { banner: { js: bannerFor(SRC_HASH) } } : {}),
 });
 
 const BUNDLES = [

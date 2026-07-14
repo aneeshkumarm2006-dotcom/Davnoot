@@ -1,7 +1,7 @@
 /* GET /api/admin/overview — the dashboard home: counts, drafts, unread leads, feed. */
 import { withErrors, methods } from '../../lib/api.js';
 import { requireRole } from '../../lib/auth.js';
-import { pages, posts, leads, media, auditLog } from '../../lib/db.js';
+import { pages, posts, leads, media, auditLog, IS_PREVIEW_ENV } from '../../lib/db.js';
 import { COMPILED_PAGES } from '../../lib/compiled-pages.gen.js';
 
 async function overview(req, res) {
@@ -23,6 +23,10 @@ async function overview(req, res) {
 
   res.status(200).json({
     role: session.role,
+    // Surfaced so the admin shell can show a loud "editing the PREVIEW database"
+    // banner. On a preview deploy, lib/db.js has already isolated the DB, but the
+    // human still needs to know their publishes won't reach production.
+    previewEnv: IS_PREVIEW_ENV,
     pages: { total: overlayCount + composed.length, marketing: overlayCount, composed: composed.length, unpublishedDrafts: drafts },
     posts: { published: postsByStatus.published || 0, draft: postsByStatus.draft || 0 },
     leads: { unread: unreadLeads },

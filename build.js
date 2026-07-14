@@ -30,13 +30,27 @@ const TODAY = fmtDate(new Date());
 // Extract the on-page FAQ accordion (.faq-item → .faq-q / .faq-a) so we can emit
 // FAQPage JSON-LD that stays in sync with the visible copy. The question is the
 // first <span> inside .faq-q (the second span is the "+" toggle).
+//
+// ATTRIBUTE TOLERANCE IS LOAD-BEARING. The CMS annotates the FAQ copy with
+// data-cms attributes in pages/*.html, so the tags arrive here as
+// `<div class="faq-a" data-cms="faq.0.a" …>` and `<span data-cms="faq.0.q" …>`.
+// The original regexes required a LITERAL `<span>` and a literal `<div class="faq-a">`,
+// so the moment a page was annotated they matched nothing, extractFaq() returned [],
+// and the FAQPage JSON-LD silently VANISHED from that page's BUILD:SEO region —
+// losing its FAQ rich result with no error anywhere. `[^>]*` fixes that.
+//
+// The non-greedy `</div>` / `</span>` semantics are deliberately UNCHANGED: the
+// compiled seoRegion (and therefore every frozen fixture) is a byte-for-byte
+// function of this output, so "improving" the parsing here would rewrite the
+// JSON-LD on 8 live pages. Any change to what this RETURNS must be a conscious,
+// fixture-updating act. See scripts/pages-golden.test.js.
 function extractFaq(html) {
   const questions = [];
   const answers = [];
   let m;
-  const qre = /<div class="faq-q">\s*<span>([\s\S]*?)<\/span>/g;
+  const qre = /<div class="faq-q"[^>]*>\s*<span[^>]*>([\s\S]*?)<\/span>/g;
   while ((m = qre.exec(html))) questions.push(toPlainText(m[1]));
-  const are = /<div class="faq-a">([\s\S]*?)<\/div>/g;
+  const are = /<div class="faq-a"[^>]*>([\s\S]*?)<\/div>/g;
   while ((m = are.exec(html))) answers.push(toPlainText(m[1]));
   const n = Math.min(questions.length, answers.length);
   const out = [];
@@ -78,8 +92,20 @@ function fill(html, region, body) {
  * would never appear in the sitemap. Hence: a manifest the function imports,
  * not an XML file the CDN would serve instead.
  *
- * Ordering (home, then service pages, then the rest) is preserved here so the
- * final XML still mirrors site priority.
+ * WHAT IS *NOT* IN HERE ANY MORE
+ * ------------------------------
+ * The 8 CMS-managed marketing pages (the ones that exist under pages/) are NO
+ * LONGER listed here. api/sitemap.js now sources them from COMPILED_PAGES — a
+ * plain ESM import that cannot fail — overlaid with each page's Mongo `sitemap`
+ * settings. Listing them in both places would emit every marketing URL TWICE.
+ *
+ * This manifest is therefore exactly "the static pages that are NOT CMS-managed"
+ * — today: ai-seo-agency.html and ai-seo-montreal.html. They are ordinary root
+ * .html files with no pages/ counterpart, and if we simply pointed this script at
+ * pages/ they would have dropped out of the sitemap silently.
+ *
+ * Ordering (home, then service pages, then the rest) is preserved so the final XML
+ * still mirrors site priority.
  */
 function buildStaticManifest(files, lastmod) {
   const order = ['index.html', ...SERVICE_PAGES];
@@ -97,17 +123,48 @@ function buildStaticManifest(files, lastmod) {
 // Google Search Console verification files (googleXXXX.html) are served as-is —
 // they carry no BUILD markers and must stay out of the sitemap.
 const isVerificationFile = (f) => /^google[0-9a-f]+\.html$/i.test(f);
-const files = fs.readdirSync(__dirname).filter((f) => f.endsWith('.html') && !isVerificationFile(f));
+const htmlIn = (dir) =>
+  fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith('.html') && !isVerificationFile(f)) : [];
+
+const PAGES_DIR = path.join(__dirname, 'pages');
+
+/* The CMS-managed pages: the annotated design source under pages/. These are the
+ * source of truth for the 8 marketing pages and are compiled into
+ * lib/compiled-pages.gen.js by scripts/compile-pages.js (which runs right after
+ * this script — `npm run site` is `node build.js && node scripts/compile-pages.js`). */
+const cmsFiles = htmlIn(PAGES_DIR);
+
+/* The root .html files. PRE-CUTOVER, the 8 marketing pages exist in BOTH places:
+ * the root copy is what Vercel actually serves today (a static file shadows its own
+ * rewrite), and the pages/ copy is the annotated source. We must bake the chrome
+ * into BOTH, or they drift — and the drift would only surface at cutover, as a
+ * diff on a live revenue page. scripts/pages-golden.test.js pins root === fixture
+ * precisely so this can never rot silently.
+ *
+ * POST-CUTOVER the root copies are gone, this list shrinks to the non-CMS pages,
+ * and nothing else here changes. */
+const rootFiles = htmlIn(__dirname);
+const rootOnly = rootFiles.filter((f) => !cmsFiles.includes(f)); // the sitemap manifest's job
+
+// Build every target: the CMS source AND (while they still exist) the root copies.
+const targets = [
+  ...cmsFiles.map((file) => ({ file, dir: PAGES_DIR, label: `pages/${file}` })),
+  ...rootFiles.map((file) => ({ file, dir: __dirname, label: file })),
+];
+
 const lastmod = {}; // file -> YYYY-MM-DD, collected for the sitemap
 let built = 0;
-for (const file of files) {
-  const p = path.join(__dirname, file);
+for (const { file, dir, label } of targets) {
+  const p = path.join(dir, file);
   const original = fs.readFileSync(p, 'utf8');
   const title = (original.match(/<title>([\s\S]*?)<\/title>/) || [, file])[1].trim();
   const descM = original.match(/<meta\s+name="description"\s+content="([\s\S]*?)"\s*\/?>/i);
   const desc = descM ? descM[1].trim() : ORG_DESC;
   const faqs = extractFaq(original);
 
+  // Every template keys off the BASENAME (canonicalFor, KEYWORDS, SERVICE_PAGES),
+  // so pages/seo.html and ./seo.html bake byte-identical chrome. That identity is
+  // what makes the cutover a no-op.
   let html = fill(original, 'SEO', seoHtml(file, title, desc, faqs));
   html = fill(html, 'NAV', navHtml(file));
   html = fill(html, 'FOOTER', footerHtml(file));
@@ -115,11 +172,14 @@ for (const file of files) {
   if (html !== original) {
     fs.writeFileSync(p, html);
     lastmod[file] = TODAY; // content changed on this build
-    console.log(`  ✓ ${file}`);
+    console.log(`  ✓ ${label}`);
     built++;
   } else {
-    lastmod[file] = fmtDate(fs.statSync(p).mtime); // unchanged — keep its real edit date
-    console.log(`  · ${file} (unchanged)`);
+    // Unchanged — keep its real edit date. When a page exists in both places, the
+    // pages/ copy is authoritative and is visited first, so the root copy's mtime
+    // never overwrites it with a later date.
+    if (lastmod[file] === undefined) lastmod[file] = fmtDate(fs.statSync(p).mtime);
+    console.log(`  · ${label} (unchanged)`);
   }
 }
 
@@ -129,15 +189,20 @@ for (const file of files) {
 // import attributes (`with { type: 'json' }`) and on the tracer following them.
 // A sitemap that 500s in production because a JSON file wasn't bundled is a very
 // annoying way to find that out.
-const manifest = buildStaticManifest(files, lastmod);
+const manifest = buildStaticManifest(rootOnly, lastmod);
 fs.writeFileSync(
   path.join(__dirname, 'lib', 'sitemap-static.js'),
   `/* AUTO-GENERATED by build.js — do not edit by hand.\n` +
-    ` * The static half of /sitemap.xml. api/sitemap.js merges this with the\n` +
-    ` * published blog posts from MongoDB at request time.\n */\n` +
+    ` * The NON-CMS static pages of /sitemap.xml — i.e. root .html files that have no\n` +
+    ` * counterpart under pages/ and are therefore not in COMPILED_PAGES.\n` +
+    ` *\n` +
+    ` * api/sitemap.js merges three sources: the CMS marketing pages (from\n` +
+    ` * COMPILED_PAGES + their Mongo sitemap settings), THESE static pages, and the\n` +
+    ` * published blog posts from MongoDB. A page listed here AND in COMPILED_PAGES\n` +
+    ` * would appear in the sitemap twice, so build.js excludes the CMS pages.\n */\n` +
     `export const STATIC_URLS = ${JSON.stringify(manifest, null, 2)};\n`,
 );
-console.log(`  ✓ lib/sitemap-static.js (${manifest.length} static URLs)`);
+console.log(`  ✓ lib/sitemap-static.js (${manifest.length} non-CMS static URL(s); the ${cmsFiles.length} CMS pages come from COMPILED_PAGES)`);
 
 // The old on-disk sitemap.xml would SHADOW the /sitemap.xml rewrite (Vercel only
 // rewrites when no static file matches), so the blog would silently never make it

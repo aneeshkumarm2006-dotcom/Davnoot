@@ -174,3 +174,91 @@ describe('a composed page created in /admin', () => {
     assert.equal(stale.statusCode, 409);
   });
 });
+
+describe('Phase 6 — retire (410) and preview-DB isolation', () => {
+  test('an archived overlay page returns 410 Gone, not a 200 base render', async () => {
+    const { pages } = await import('../lib/db.js');
+    const { default: page } = await import('../api/page.js');
+    const col = await pages();
+    await col.updateOne(
+      { path: '/software.html' },
+      { $set: { path: '/software.html', base: 'software.html', status: 'archived' } },
+      { upsert: true },
+    );
+    const res = await call(page, mockReq({ query: { p: 'software.html' } }));
+    assert.equal(res.statusCode, 410, 'a retired page must 410, not serve the base template 200/indexable');
+    assert.match(res.getHeader('x-robots-tag') || '', /noindex/);
+    await col.deleteOne({ path: '/software.html' });
+  });
+
+  test('an archived page with a configured redirect 301s instead of 410', async () => {
+    const { pages, redirects } = await import('../lib/db.js');
+    const { default: page } = await import('../api/page.js');
+    await (await pages()).updateOne(
+      { path: '/email.html' },
+      { $set: { path: '/email.html', base: 'email.html', status: 'archived' } },
+      { upsert: true },
+    );
+    await (await redirects()).updateOne(
+      { source: '/email.html' },
+      { $set: { source: '/email.html', destination: '/seo.html', status: 308 } },
+      { upsert: true },
+    );
+    const res = await call(page, mockReq({ query: { p: 'email.html' } }));
+    assert.equal(res.statusCode, 308, 'a retired page with a replacement must redirect, not 410');
+    assert.equal(res.getHeader('location'), '/seo.html');
+    await (await pages()).deleteOne({ path: '/email.html' });
+    await (await redirects()).deleteOne({ source: '/email.html' });
+  });
+
+  test('resolveDbName fails closed: a preview deploy never points at the prod DB', async () => {
+    const { resolveDbName } = await import('../lib/db.js');
+    // Preview inherits prod MONGODB_DB — must be overridden to an isolated DB.
+    assert.equal(resolveDbName({ VERCEL_ENV: 'preview', MONGODB_DB: 'davnoot' }), 'davnoot_preview');
+    // Production honours the configured name.
+    assert.equal(resolveDbName({ VERCEL_ENV: 'production', MONGODB_DB: 'davnoot' }), 'davnoot');
+    // Local dev / tests (no VERCEL_ENV) honour the configured name so real content shows.
+    assert.equal(resolveDbName({ MONGODB_DB: 'davnoot' }), 'davnoot');
+    // An explicit preview DB wins on a preview deploy.
+    assert.equal(resolveDbName({ VERCEL_ENV: 'preview', MONGODB_DB: 'davnoot', MONGODB_DB_PREVIEW: 'stage' }), 'stage');
+  });
+});
+
+describe('Phase 5 — a composed page renders its library sections end to end', () => {
+  test('save sections -> publish -> api/page.js emits the real section classes + FAQPage schema', async () => {
+    const { default: pagesIndex } = await import('../api/admin/pages/index.js');
+    const { default: pagesApi } = await import('../api/admin/pages/[id].js');
+    const { default: publishApi } = await import('../api/admin/pages/[id]/publish.js');
+    const { default: page } = await import('../api/page.js');
+
+    await call(pagesIndex, await adminReq({ method: 'POST', body: { slug: 'services-x', title: 'Services', kind: 'landing' } }));
+
+    // Build a page from library sections: a hero, a capabilities grid, an FAQ.
+    const body = {
+      title: 'Services',
+      sections: [
+        { type: 'hero', source: 'library', fields: { badge: 'New', title: 'Build <em>fast</em>', sub: 'Ship it.', ctaHref: 'book-call.html', ctaLabel: 'Talk' } },
+        { type: 'capabilities', source: 'library', fields: { eyebrow: 'What', title: 'Everything' }, items: [{ num: '01', title: 'Audit', desc: 'Deep' }, { num: '02', title: 'Build', desc: 'Ship' }] },
+        { type: 'faq', source: 'library', fields: { eyebrow: 'FAQ', title: 'Questions' }, items: [{ q: 'How long?', a: 'Six weeks.' }] },
+      ],
+    };
+    const saved = await call(pagesApi, await adminReq({ method: 'PUT', query: { id: 'services-x' }, body }));
+    assert.equal(saved.statusCode, 200, JSON.stringify(saved.body));
+    await call(publishApi, await adminReq({ method: 'POST', query: { id: 'services-x' }, body: {} }));
+
+    const live = await call(page, mockReq({ query: { p: 'services-x' } }));
+    assert.equal(live.statusCode, 200);
+    // The real marketing classes are present -> styles.css/script.js apply.
+    for (const cls of ['service-hero', 'cap-grid', 'cap-card', 'faq-list', 'faq-item']) {
+      assert.ok(live.body.includes(cls), `composed page is missing .${cls}`);
+    }
+    // The shared shell + a single, valid, FAQ-bearing JSON-LD graph.
+    assert.match(live.body, /<script src="\/script\.js">/);
+    assert.equal((live.body.match(/rel="canonical"/g) || []).length, 1);
+    const m = live.body.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    const graph = JSON.parse(m[1].replace(/\u003c/g, '<'));
+    assert.ok(graph['@graph'].some((n) => n['@type'] === 'FAQPage'), 'a visible FAQ section should yield FAQPage schema');
+    // The inline <em> the author typed survives (sanitized-inline, not escaped).
+    assert.match(live.body, /Build <em>fast<\/em>/);
+  });
+});
