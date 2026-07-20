@@ -54,7 +54,9 @@ const render = async () => {
   return res;
 };
 const locs = (xml) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-const marketingUrls = () => Object.values(COMPILED_PAGES).map((t) => SITE_URL + t.path);
+// The sitemap advertises the EXTENSIONLESS public URL (canonicalFor), not the DB
+// overlay key t.path (which is still /seo.html — an internal join key).
+const marketingUrls = () => Object.values(COMPILED_PAGES).map((t) => canonicalFor(t.file));
 
 describe('sitemap.xml — the migration safety net', () => {
   test('every marketing URL appears exactly once, with Mongo EMPTY', async () => {
@@ -128,7 +130,7 @@ describe('sitemap.xml — overlay document effects', () => {
       { upsert: true },
     );
     const res = await render();
-    assert.ok(!locs(res.body).includes(SITE_URL + '/email.html'), 'archived page must not be advertised');
+    assert.ok(!locs(res.body).includes(canonicalFor('email.html')), 'archived page must not be advertised');
     await col.deleteMany({});
   });
 
@@ -141,8 +143,8 @@ describe('sitemap.xml — overlay document effects', () => {
     ]);
     const res = await render();
     const all = locs(res.body);
-    assert.ok(!all.includes(SITE_URL + '/seo.html'), 'noindex page must be excluded');
-    assert.ok(!all.includes(SITE_URL + '/software.html'), 'sitemap-excluded page must be excluded');
+    assert.ok(!all.includes(canonicalFor('seo.html')), 'noindex page must be excluded');
+    assert.ok(!all.includes(canonicalFor('software.html')), 'sitemap-excluded page must be excluded');
     await col.deleteMany({});
   });
 
@@ -157,8 +159,8 @@ describe('sitemap.xml — overlay document effects', () => {
       live: {}, draft: { seo: { metaTitle: 'unpublished' } },
     });
     const res = await render();
-    const block = res.body.split('<url>').find((u) => u.includes('/ai-seo.html'));
-    assert.ok(block, 'ai-seo.html should be present');
+    const block = res.body.split('<url>').find((u) => u.includes(`<loc>${canonicalFor('ai-seo.html')}</loc>`));
+    assert.ok(block, 'ai-seo should be present');
     assert.match(block, /<lastmod>2026-01-01<\/lastmod>/, 'lastmod must be the publish date, not the draft-edit date');
     await col.deleteMany({});
   });

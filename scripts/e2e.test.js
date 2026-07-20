@@ -264,7 +264,7 @@ describe('the full author journey', () => {
     const { default: sitemap } = await import('../api/sitemap.js');
     const res = await call(sitemap, mockReq());
     assert.match(res.body, /https:\/\/www\.davnoot\.com\/blog\/how-to-choose-an-seo-agency/);
-    assert.match(res.body, /www\.davnoot\.com\/seo\.html/, 'the 8 static pages must still be there');
+    assert.match(res.body, /www\.davnoot\.com\/seo<\/loc>/, 'the 8 static pages must still be there (clean URL)');
   });
 
   test('the view counter increments (server-managed)', async () => {

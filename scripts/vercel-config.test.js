@@ -108,24 +108,44 @@ describe('vercel.json', () => {
     assert.equal(sources[sources.length - 1], '/:slug', 'the composed-page catch-all must be the final rewrite');
   });
 
-  test('every marketing rewrite reflects an EXPLICIT cutover state (shadowed XOR live)', () => {
-    // A rewrite /<name>.html -> /api/page fires only when NO static file shadows it.
-    // PRE-cutover the root <name>.html exists (and shadows — safe, prod unchanged).
-    // POST-cutover it is gone (the rewrite fires). Either is fine; what must never
-    // happen is a state nobody chose. We assert each page rewrite has a matching
-    // pages/ source (so it is a real, compiled page) and record its shadow state so
-    // a stray root file for a page with no rewrite would surface here.
-    const rewriteFiles = (config.rewrites || [])
-      .map((r) => r.source.match(/^\/([a-z0-9-]+\.html)$/)?.[1])
-      .filter(Boolean);
-    const pagesDir = new Set(fs.readdirSync(path.join(ROOT, 'pages')).filter((f) => f.endsWith('.html')));
-    for (const file of rewriteFiles) {
-      assert.ok(pagesDir.has(file), `vercel.json rewrites /${file} but pages/${file} does not exist — a rewrite to a page the compiler never sees`);
+  test('every marketing page is served at its CLEAN URL and its .html 301s to it', () => {
+    // Public URLs are extensionless. For each root marketing page <name>.html:
+    //   redirect  /<name>.html -> /<name>   (301 — the one canonical URL)
+    //   rewrite   /<name>      -> /<name>.html   (serve the static file cleanly)
+    // The home page is the special case: /index.html -> / (and / serves the root
+    // index.html statically, so it needs no rewrite). A .html link left un-redirected
+    // would give Google two URLs for one page; a clean path with no rewrite would 404.
+    const redirect = (src) => (config.redirects || []).find((r) => r.source === src);
+    const rewrite = (src) => (config.rewrites || []).find((r) => r.source === src);
+
+    const isVerification = (f) => /^google[0-9a-f]+\.html$/i.test(f);
+    const rootHtml = fs
+      .readdirSync(ROOT)
+      .filter((f) => f.endsWith('.html') && !isVerification(f));
+
+    for (const file of rootHtml) {
+      const name = file.replace(/\.html$/, '');
+      if (file === 'index.html') {
+        const rd = redirect('/index.html');
+        assert.ok(rd && rd.destination === '/' && rd.permanent, '/index.html must 301 to /');
+        continue;
+      }
+      const rd = redirect(`/${file}`);
+      assert.ok(rd && rd.destination === `/${name}` && rd.permanent, `/${file} must 301 to /${name}`);
+      const rw = rewrite(`/${name}`);
+      assert.ok(rw && rw.destination === `/${file}`, `/${name} must rewrite to /${file} (serve the static page cleanly)`);
     }
-    // The inverse: every compiled page must have exactly one rewrite so that, once
-    // its root file is removed, api/page.js actually receives the request.
+
+    // Inverse guard: no leftover /<name>.html REWRITE (those became redirects). A
+    // stray one would fire post-cutover and mask the redirect.
+    const htmlRewrite = (config.rewrites || []).find((r) => /^\/[a-z0-9-]+\.html$/.test(r.source));
+    assert.equal(htmlRewrite, undefined, `stale .html rewrite source: ${htmlRewrite?.source}`);
+
+    // Every compiled (pages/) page must have a matching root file above, so it is
+    // reachable — the compiler and the router agree on the page set.
+    const pagesDir = fs.readdirSync(path.join(ROOT, 'pages')).filter((f) => f.endsWith('.html'));
     for (const file of pagesDir) {
-      assert.equal(rewriteFiles.filter((f) => f === file).length, 1, `pages/${file} has no (or duplicate) /${file} rewrite`);
+      assert.ok(rootHtml.includes(file), `pages/${file} has no root ${file} to serve at its clean URL`);
     }
   });
 

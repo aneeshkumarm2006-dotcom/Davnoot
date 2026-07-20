@@ -31,7 +31,7 @@
  */
 import { posts, pages } from '../lib/db.js';
 import { publishedFilter } from '../lib/blog-query.js';
-import { SITE_URL } from '../lib/templates.js';
+import { SITE_URL, canonicalFor } from '../lib/templates.js';
 import { STATIC_URLS } from '../lib/sitemap-static.js';
 import { COMPILED_PAGES } from '../lib/compiled-pages.gen.js';
 import { isPageLive } from '../lib/page-model.js';
@@ -106,7 +106,9 @@ function marketingEntries(byPath, now) {
 
     const def = defaultMeta(tpl.file);
     out.push({
-      loc: SITE_URL + tpl.path,
+      // Advertise the EXTENSIONLESS public URL (/seo), not the DB overlay key
+      // (tpl.path is still /seo.html — an internal join key, never a public URL).
+      loc: canonicalFor(tpl.file),
       // lastmod is a PUBLISH-time signal, never a draft-edit one. buildDraftUpdate()
       // bumps doc.updatedAt on every 900ms autosave keystroke, so keying lastmod off
       // updatedAt would churn the live page's lastmod while a draft nobody has
