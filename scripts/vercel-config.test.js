@@ -20,6 +20,7 @@ import crypto from 'node:crypto';
 
 import { COMPILED_PAGES } from '../lib/compiled-pages.gen.js';
 import { renderPage } from '../lib/page-render.js';
+import { SERVICE_PAGES } from '../lib/templates.js';
 
 const ROOT = path.join(import.meta.dirname, '..');
 const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
@@ -109,9 +110,14 @@ describe('vercel.json', () => {
   });
 
   test('every marketing page is served at its CLEAN URL and its .html 301s to it', () => {
-    // Public URLs are extensionless. For each root marketing page <name>.html:
+    // Public URLs are extensionless. For a NON-service root marketing page <name>.html:
     //   redirect  /<name>.html -> /<name>   (301 — the one canonical URL)
     //   rewrite   /<name>      -> /<name>.html   (serve the static file cleanly)
+    // The 7-service pages (SERVICE_PAGES) live one level down at /services/<name>, so
+    // BOTH the .html path AND the old top-level clean path 301 to the new canonical:
+    //   redirect  /<name>.html    -> /services/<name>   (301)
+    //   redirect  /<name>         -> /services/<name>   (301 — retire the old flat URL)
+    //   rewrite   /services/<name> -> /<name>.html      (still served from the root file)
     // The home page is the special case: /index.html -> / (and / serves the root
     // index.html statically, so it needs no rewrite). A .html link left un-redirected
     // would give Google two URLs for one page; a clean path with no rewrite would 404.
@@ -128,6 +134,16 @@ describe('vercel.json', () => {
       if (file === 'index.html') {
         const rd = redirect('/index.html');
         assert.ok(rd && rd.destination === '/' && rd.permanent, '/index.html must 301 to /');
+        continue;
+      }
+      if (SERVICE_PAGES.includes(file)) {
+        const clean = `/services/${name}`;
+        const rdHtml = redirect(`/${file}`);
+        assert.ok(rdHtml && rdHtml.destination === clean && rdHtml.permanent, `/${file} must 301 to ${clean}`);
+        const rdFlat = redirect(`/${name}`);
+        assert.ok(rdFlat && rdFlat.destination === clean && rdFlat.permanent, `/${name} must 301 to ${clean} (retire the old flat URL)`);
+        const rw = rewrite(clean);
+        assert.ok(rw && rw.destination === `/${file}`, `${clean} must rewrite to /${file} (serve the static page cleanly)`);
         continue;
       }
       const rd = redirect(`/${file}`);
