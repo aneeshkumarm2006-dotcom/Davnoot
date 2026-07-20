@@ -28,6 +28,7 @@
     { "source": "/book-call.html", "destination": "/book-call", "permanent": true },
     { "source": "/ai-seo-agency.html", "destination": "/ai-seo-agency", "permanent": true },
     { "source": "/ai-seo-montreal.html", "destination": "/ai-seo-montreal", "permanent": true },
+    { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
     { "source": "/lib/:path*", "destination": "/", "permanent": false },
     { "source": "/src/:path*", "destination": "/", "permanent": false },
     { "source": "/scripts/:path*", "destination": "/", "permanent": false },
@@ -54,6 +55,7 @@
     { "source": "/book-call", "destination": "/book-call.html" },
     { "source": "/ai-seo-agency", "destination": "/ai-seo-agency.html" },
     { "source": "/ai-seo-montreal", "destination": "/ai-seo-montreal.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/:slug", "destination": "/api/page?p=:slug" }
   ]
