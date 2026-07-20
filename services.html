@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | Growth Marketing and Engineering | Davnoot</title>
+  <meta name="description"
+    content="Seven services, one revenue engine. SEO, paid ads, email, AI search and ChatGPT ads, plus custom software and Shopify development — from an independent growth agency in Montreal." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- BUILD:SEO -->
+<link rel="canonical" href="https://www.davnoot.com/services" />
+<meta name="robots" content="index, follow" />
+<link rel="icon" type="image/png" href="images/davnoot-logo.png" />
+<link rel="apple-touch-icon" href="images/davnoot-logo.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Davnoot" />
+<meta property="og:title" content="Services | Growth Marketing and Engineering | Davnoot" />
+<meta property="og:description" content="Seven services, one revenue engine. SEO, paid ads, email, AI search and ChatGPT ads, plus custom software and Shopify development — from an independent growth agency in Montreal." />
+<meta property="og:url" content="https://www.davnoot.com/services" />
+<meta property="og:image" content="https://www.davnoot.com/images/davnoot-logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Services | Growth Marketing and Engineering | Davnoot" />
+<meta name="twitter:description" content="Seven services, one revenue engine. SEO, paid ads, email, AI search and ChatGPT ads, plus custom software and Shopify development — from an independent growth agency in Montreal." />
+<meta name="twitter:image" content="https://www.davnoot.com/images/davnoot-logo.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.davnoot.com/#organization",
+      "name": "Davnoot",
+      "url": "https://www.davnoot.com/",
+      "logo": "https://www.davnoot.com/images/davnoot-logo.png",
+      "image": "https://www.davnoot.com/images/davnoot-logo.png",
+      "description": "Davnoot is an independent growth agency. Six disciplines — SEO, paid social, email, AI search, ChatGPT ads, and custom software — engineered into one revenue engine.",
+      "email": "info@davnoot.com",
+      "telephone": "+1-438-223-7131",
+      "foundingDate": "2025",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Montreal",
+        "addressRegion": "QC",
+        "addressCountry": "CA"
+      },
+      "areaServed": "Worldwide"
+    }
+  ]
+}
+</script>
+<!-- /BUILD:SEO -->
+
+  <!-- ========================================================================
+       OPTION B2 — Static Editorial Index. New component CSS only, namespaced
+       .dir-* for the layout. The per-service mini-visuals + bullet list reuse
+       Option B's .svc-* classes VERBATIM. Everything else reuses styles.css
+       tokens, so nothing collides with the shared design system.
+       ======================================================================== -->
+  <style>
+    /* === HERO INDEX (the index panel, right column of the hero) === */
+    .svc-index { padding: 22px 22px 24px; }
+    .svc-index-list { display: flex; flex-direction: column; gap: 2px; margin-top: 8px; }
+    .svc-idx-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: background 0.28s ease, color 0.28s ease;
+    }
+    .svc-idx-item .n {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      transition: color 0.28s;
+    }
+    .svc-idx-item .nm {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .svc-idx-item .go {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent);
+      justify-self: end;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+    .svc-idx-item:hover, .svc-idx-item.is-active { background: var(--bg-elev-2); color: var(--text); }
+    .svc-idx-item:hover .n, .svc-idx-item.is-active .n { color: var(--accent); }
+    .svc-idx-item:hover .go, .svc-idx-item.is-active .go { opacity: 1; transform: translateX(0); }
+    .svc-idx-new {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 6px;
+      border-radius: 100px;
+      background: var(--accent);
+      color: var(--accent-text);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* === EDITORIAL INDEX === */
+    .dir-index { padding-top: clamp(70px, 11vh, 140px); }
+    .dir { border-top: 1px solid var(--border); margin-top: 8px; }
+
+    /* static group subhead */
+    .dir-group {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: clamp(44px, 6vh, 72px) 4px 0;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+    .dir-group::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--accent);
+      align-self: center;
+      flex: none;
+    }
+    .dir-group span { color: var(--text-dim); letter-spacing: 0.1em; }
+
+    /* one service = one full-width row, always open, split into two columns */
+    .dir-row {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.82fr) 1.18fr;
+      gap: clamp(28px, 5vw, 84px);
+      align-items: start;
+      padding: clamp(38px, 5.5vh, 68px) 4px;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      transition: background 0.4s ease, padding-left 0.4s ease;
+    }
+    .dir-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 12%; bottom: 12%;
+      width: 3px; border-radius: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: center;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .dir-row:hover { background: var(--bg-elev); padding-left: 22px; }
+    .dir-row:hover::before { transform: scaleY(1); }
+
+    /* LEFT column: big serif italic number + name + tagline + go */
+    .dir-left { position: relative; }
+    .dir-numline { display: flex; align-items: flex-start; gap: 12px; }
+    .dir-num {
+      display: block;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 500;
+      font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+      font-size: clamp(54px, 7.5vw, 100px);
+      line-height: 0.8;
+      letter-spacing: -0.04em;
+      color: var(--text-dim);
+      transition: color 0.4s ease;
+    }
+    .dir-row:hover .dir-num { color: var(--accent); }
+    .dir-name {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: clamp(25px, 3vw, 40px);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1.02;
+      margin-top: 16px;
+      color: var(--text);
+    }
+    .dir-name em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--accent);
+      font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    }
+    .dir-tag {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: clamp(14px, 1.4vw, 17px);
+      color: var(--text-muted);
+      letter-spacing: -0.01em;
+      line-height: 1.45;
+      margin-top: 14px;
+      max-width: 32ch;
+    }
+    .dir-go {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+    .dir-row:hover .dir-go { color: var(--accent); }
+    .dir-go .ar { transition: transform 0.3s ease; }
+    .dir-row:hover .dir-go .ar { transform: translateX(5px); }
+    .dir-new {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 100px;
+      background: var(--accent);
+      color: var(--accent-text);
+      white-space: nowrap;
+      margin-top: 6px;
+    }
+
+    /* RIGHT column: what's included + mini-visual, stacked, with a column rule */
+    .dir-right {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding-left: clamp(28px, 4vw, 64px);
+      border-left: 1px solid var(--border);
+    }
+    .dir-incl-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: -8px;
+    }
+
+    /* --- bullet list: REUSED VERBATIM from Option B (.svc-incl) --- */
+    .svc-incl { list-style: none; }
+    .svc-incl li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 13px 0;
+      border-top: 1px solid var(--border);
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+    .svc-incl li::before {
+      content: '';
+      flex: none;
+      width: 19px; height: 19px;
+      margin-top: 1px;
+      border-radius: 6px;
+      border: 1px solid var(--border-hover);
+      background: var(--bg-elev-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.6 6.2 5 8.5 9.4 3.6' fill='none' stroke='%230a0a0a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 11px no-repeat;
+    }
+
+    /* === MINI VISUALS — REUSED VERBATIM from Option B (shared frame + per-service) === */
+    .svc-viz {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      min-height: 208px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+      overflow: hidden;
+    }
+    .svc-viz-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .svc-viz-label::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* 01 · SEO rank climb */
+    .svc-rankrows { display: flex; flex-direction: column; gap: 6px; }
+    .svc-rankrow {
+      display: grid;
+      grid-template-columns: 26px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: 9px;
+      background: var(--bg-elev-2);
+      font-size: 13px;
+    }
+    .svc-rankrow .r { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
+    .svc-rankrow .d { color: var(--text-muted); }
+    .svc-rankrow.is-top { background: var(--accent); color: var(--accent-text); }
+    .svc-rankrow.is-top .r, .svc-rankrow.is-top .d { color: var(--accent-text); }
+    .svc-rankrow .up {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #7fe0a8;
+    }
+
+    /* 02 · Paid Ads A/B */
+    .svc-ads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .svc-ad {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: var(--bg-elev);
+      transition: opacity 0.3s;
+    }
+    .svc-ad-thumb { height: 34px; border-radius: 6px; background: linear-gradient(135deg, var(--bg-elev-2), var(--border-hover)); }
+    .svc-ad-lbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+    .svc-ad-m { font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+    .svc-ad.is-win { border-color: var(--accent); background: var(--bg-card); box-shadow: 0 8px 24px rgba(10, 10, 10, 0.08); }
+    .svc-ad:not(.is-win) { opacity: 0.55; }
+    .svc-ad-badge {
+      position: absolute;
+      top: -9px; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--accent-text);
+      padding: 3px 8px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    /* 03 · Email flows */
+    .svc-flows { display: flex; flex-direction: column; gap: 8px; }
+    .svc-flow {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 14px;
+      border-radius: 9px;
+      background: var(--bg-elev-2);
+      font-size: 14px;
+    }
+    .svc-flow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+    .svc-flow-name { color: var(--text); letter-spacing: -0.01em; }
+    .svc-flow-lift { font-family: var(--font-serif); font-style: italic; font-weight: 600; color: var(--accent); font-variation-settings: "opsz" 144; }
+
+    /* 04 · AI Overview */
+    .svc-ai-answer {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--text);
+      background: var(--bg-elev-2);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .svc-cite { color: var(--accent); font-family: var(--font-serif); font-style: italic; font-weight: 600; font-variation-settings: "opsz" 144; }
+    .svc-ai-src { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+    .svc-cite-chip { padding: 4px 10px; border: 1px solid var(--accent); border-radius: 100px; color: var(--accent); }
+
+    /* 05 · ChatGPT Ads bubble */
+    .svc-gpt-bubble {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-hover);
+      border-radius: 14px 14px 14px 4px;
+      padding: 18px 18px 16px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--text);
+      box-shadow: 0 10px 30px rgba(10, 10, 10, 0.07);
+    }
+    .svc-gpt-bubble strong { color: var(--accent); }
+    .svc-gpt-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 3px 9px;
+      margin-bottom: 12px;
+    }
+
+    /* 06 · Software terminal */
+    .svc-term-wrap { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg-elev); }
+    .svc-term-bar { display: flex; gap: 6px; padding: 11px 14px; border-bottom: 1px solid var(--border); }
+    .svc-term-bar span { width: 9px; height: 9px; border-radius: 50%; background: var(--border-hover); }
+    .svc-term {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.7;
+      padding: 16px 16px 18px;
+      color: var(--text-muted);
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .svc-term .k { color: var(--accent); font-weight: 500; }
+    .svc-term .s { color: #2f8f5b; }
+    .svc-term .c { color: var(--text-dim); font-style: italic; }
+    .svc-term .p { color: var(--accent); }
+
+    /* 07 · Shopify store */
+    .svc-shop-card {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-elev);
+    }
+    .svc-shop-img { width: 52px; height: 52px; border-radius: 8px; background: linear-gradient(135deg, var(--bg-elev-2), var(--border-hover)); }
+    .svc-shop-name { display: block; font-size: 15px; font-weight: 500; letter-spacing: -0.02em; }
+    .svc-shop-price { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+    .svc-shop-cart {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--accent-text);
+      padding: 9px 12px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .svc-shop-cvr { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
+    .svc-cvr-val { font-family: var(--font-serif); font-style: italic; font-weight: 600; font-size: 22px; color: var(--accent); font-variation-settings: "opsz" 144; }
+    .svc-cvr-val s { text-decoration-color: var(--text-dim); color: var(--text-dim); font-size: 16px; }
+
+    /* === PROOF BAND (dedicated proof element) === */
+    .dir-proof {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--bg-card);
+      margin-top: 44px;
+    }
+    .dir-proof-cell {
+      padding: clamp(28px, 4vw, 46px) clamp(24px, 3vw, 40px);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    /* remove the trailing edges of the 3×2 grid */
+    .dir-proof-cell:nth-child(3n) { border-right: none; }
+    .dir-proof-cell:nth-child(n+4) { border-bottom: none; }
+    .dir-proof-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 600;
+      font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+      font-size: clamp(38px, 4.6vw, 58px);
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+    }
+    .dir-proof-lbl {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 14px;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1000px) {
+      .dir-row {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        padding: clamp(34px, 5vh, 52px) 4px;
+      }
+      .dir-row:hover { padding-left: 14px; }
+      .dir-right {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-top: 26px;
+      }
+      .dir-tag { max-width: none; }
+      .dir-proof { grid-template-columns: repeat(2, 1fr); }
+      .dir-proof-cell:nth-child(3n) { border-right: 1px solid var(--border); }
+      .dir-proof-cell:nth-child(2n) { border-right: none; }
+      .dir-proof-cell:nth-child(n+4) { border-bottom: 1px solid var(--border); }
+      .dir-proof-cell:nth-child(n+5) { border-bottom: none; }
+    }
+    @media (max-width: 600px) {
+      .svc-index { padding: 16px 18px 18px; }
+      .svc-idx-item .nm { font-size: 13px; }
+      .dir-num { font-size: clamp(46px, 15vw, 68px); }
+      .svc-viz { padding: 18px; min-height: 0; }
+      .dir-proof { grid-template-columns: 1fr; }
+      .dir-proof-cell {
+        border-right: none !important;
+        border-bottom: 1px solid var(--border) !important;
+      }
+      .dir-proof-cell:last-child { border-bottom: none !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .dir-row, .dir-row::before, .svc-idx-item, .dir-num, .dir-go .ar { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ============ DAVNOOT /services — OPTION B2: The Static Editorial Index ============ -->
+
+  <canvas id="ambient"></canvas>
+  <div class="cursor"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- NAV -->
+  <!-- BUILD:NAV -->
+<nav>
+  <a href="/" class="logo" data-cursor>
+    <img src="images/davnoot-logo.png" alt="Davnoot" class="logo-mark" />
+    <span class="wordmark">Davnoot Digital</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/services" class="active" data-cursor>Services</a></li>
+    <li><a href="/#process" data-cursor>Process</a></li>
+    <li><a href="/#results" data-cursor>Work</a></li>
+    <li><a href="/blog" data-cursor>Blog</a></li>
+    <li><a href="/book-call" data-cursor>Contact</a></li>
+  </ul>
+  <a href="/book-call" class="nav-cta" data-cursor>Book a call →</a>
+  <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<!-- /BUILD:NAV -->
+
+  <!-- HERO -->
+  <header class="service-hero">
+    <div class="breadcrumb">
+      <a href="/" data-cursor>Davnoot</a>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-current">Services</span>
+    </div>
+
+    <div class="service-hero-grid">
+      <div class="reveal">
+        <div class="service-num-badge">The full stack · 7 services</div>
+        <h1 class="service-hero-title">Seven ways we<br />move <em>revenue</em>.</h1>
+        <p class="service-hero-sub">
+          Six disciplines we're known for, one we just added. Growth marketing that fills the pipeline, engineering
+          that builds what you run on. Open any service to see exactly what ships.
+        </p>
+        <a href="/book-call" class="btn-primary" data-cursor>
+          Book a strategy call
+          <span class="arrow">→</span>
+        </a>
+        <div class="hero-stats-row">
+          <div class="hero-stat">
+            <div class="num">$24M+</div>
+            <div class="lbl">Revenue moved</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">50+</div>
+            <div class="lbl">Brands scaled</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">+384%</div>
+            <div class="lbl">Blended ROAS</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-demo svc-index" aria-hidden="false">
+        <div class="hero-demo-label">The index · 01–07</div>
+        <nav class="svc-index-list" aria-label="Jump to a service">
+          <a class="svc-idx-item is-active" href="#svc-01" data-cursor><span class="n">01</span><span class="nm">Search Engine Optimization</span><span class="go">→</span></a>
+          <a class="svc-idx-item" href="#svc-02" data-cursor><span class="n">02</span><span class="nm">Google &amp; Meta Ads</span><span class="go">→</span></a>
+          <a class="svc-idx-item" href="#svc-03" data-cursor><span class="n">03</span><span class="nm">Email &amp; Automation</span><span class="go">→</span></a>
+          <a class="svc-idx-item" href="#svc-04" data-cursor><span class="n">04</span><span class="nm">AI Search Optimization</span><span class="go">→</span></a>
+          <a class="svc-idx-item" href="#svc-05" data-cursor><span class="n">05</span><span class="nm">AI Platform Advertising</span><span class="go">→</span></a>
+          <a class="svc-idx-item" href="#svc-06" data-cursor><span class="n">06</span><span class="nm">Custom Software</span><span class="go">→</span></a>
+          <a class="svc-idx-item" href="#svc-07" data-cursor><span class="n">07</span><span class="nm">Shopify Development<span class="svc-idx-new">New</span></span><span class="go">→</span></a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROOF TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <div class="ticker-item"><span class="num">$24M+</span><span class="lbl">revenue moved · to date</span></div>
+      <div class="ticker-item"><span class="num">+384%</span><span class="lbl">blended ROAS · DTC</span></div>
+      <div class="ticker-item"><span class="num">+612%</span><span class="lbl">organic traffic · E-comm</span></div>
+      <div class="ticker-item"><span class="num">73%</span><span class="lbl">lower CAC · SaaS</span></div>
+      <div class="ticker-item"><span class="num">+18×</span><span class="lbl">email revenue · Retail</span></div>
+      <div class="ticker-item"><span class="num">50+</span><span class="lbl">brands scaled · &amp; counting</span></div>
+      <div class="ticker-item"><span class="num">$24M+</span><span class="lbl">revenue moved · to date</span></div>
+      <div class="ticker-item"><span class="num">+384%</span><span class="lbl">blended ROAS · DTC</span></div>
+      <div class="ticker-item"><span class="num">+612%</span><span class="lbl">organic traffic · E-comm</span></div>
+      <div class="ticker-item"><span class="num">73%</span><span class="lbl">lower CAC · SaaS</span></div>
+      <div class="ticker-item"><span class="num">+18×</span><span class="lbl">email revenue · Retail</span></div>
+      <div class="ticker-item"><span class="num">50+</span><span class="lbl">brands scaled · &amp; counting</span></div>
+    </div>
+  </div>
+
+  <!-- EDITORIAL INDEX -->
+  <section class="dir-index" id="directory">
+    <div class="reveal">
+      <div class="section-eyebrow">The index</div>
+      <h2 class="section-title">Everything we do,<br />in <em>full</em>.</h2>
+      <p class="section-sub">Seven services across two disciplines, laid out like a magazine index — every detail
+        visible at once. Read the whole thing top to bottom, no clicking required.</p>
+    </div>
+
+    <div class="dir">
+
+      <!-- GROUP: GROWTH MARKETING -->
+      <div class="dir-group reveal">Growth Marketing <span>· 01–05 · demand, traffic, revenue</span></div>
+
+      <!-- 01 SEO -->
+      <a class="dir-row reveal" href="/seo" id="svc-01" data-cursor>
+        <div class="dir-left">
+          <div class="dir-numline"><span class="dir-num">01</span></div>
+          <span class="dir-name">Search Engine <em>Optimization</em></span>
+          <span class="dir-tag">Dominate search. Drive organic growth.</span>
+          <span class="dir-go">Explore SEO <span class="ar">→</span></span>
+        </div>
+        <div class="dir-right">
+          <div>
+            <div class="dir-incl-label">What's included</div>
+            <ul class="svc-incl">
+              <li>200-point technical audits: crawlability, indexation, Core Web Vitals.</li>
+              <li>Keyword strategy mapped to real commercial intent, not vanity volume.</li>
+              <li>On-page and cornerstone content engineered to rank and convert.</li>
+              <li>Editorial link building and digital PR. No PBNs, no spam.</li>
+              <li>Revenue-attributed reporting, tied to your actual sales.</li>
+            </ul>
+          </div>
+          <div class="svc-viz">
+            <div class="svc-viz-label">Rank tracker · "growth agency montreal"</div>
+            <div class="svc-rankrows">
+              <div class="svc-rankrow is-top"><span class="r">01</span><span class="d">davnoot.com</span><span class="up">↑ 37</span></div>
+              <div class="svc-rankrow"><span class="r">02</span><span class="d">competitor-one.com</span><span></span></div>
+              <div class="svc-rankrow"><span class="r">03</span><span class="d">competitor-two.io</span><span></span></div>
+              <div class="svc-rankrow"><span class="r">04</span><span class="d">agencyfour.co</span><span></span></div>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 02 PAID ADS -->
+      <a class="dir-row reveal" href="/meta-ads" id="svc-02" data-cursor>
+        <div class="dir-left">
+          <div class="dir-numline"><span class="dir-num">02</span></div>
+          <span class="dir-name">Google Ads &amp; <em>Meta Ads</em></span>
+          <span class="dir-tag">Capture intent on Google. Scale on Meta.</span>
+          <span class="dir-go">Explore paid ads <span class="ar">→</span></span>
+        </div>
+        <div class="dir-right">
+          <div>
+            <div class="dir-incl-label">What's included</div>
+            <ul class="svc-incl">
+              <li>Google Search, Shopping and Performance Max, built around buyer intent.</li>
+              <li>Meta prospecting and retargeting engineered to scale profitably.</li>
+              <li>A creative testing engine that ships new variants every week.</li>
+              <li>Landing pages designed to convert the clicks you pay for.</li>
+              <li>ROAS-tied budget reallocation. Spend follows the winners.</li>
+            </ul>
+          </div>
+          <div class="svc-viz">
+            <div class="svc-viz-label">Creative test · Meta</div>
+            <div class="svc-ads">
+              <div class="svc-ad"><div class="svc-ad-thumb"></div><span class="svc-ad-lbl">Variant A</span><span class="svc-ad-m">1.9×</span></div>
+              <div class="svc-ad is-win"><span class="svc-ad-badge">Winner</span><div class="svc-ad-thumb"></div><span class="svc-ad-lbl">Variant B</span><span class="svc-ad-m">4.7×</span></div>
+              <div class="svc-ad"><div class="svc-ad-thumb"></div><span class="svc-ad-lbl">Variant C</span><span class="svc-ad-m">2.2×</span></div>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 03 EMAIL -->
+      <a class="dir-row reveal" href="/email" id="svc-03" data-cursor>
+        <div class="dir-left">
+          <div class="dir-numline"><span class="dir-num">03</span></div>
+          <span class="dir-name">Email Marketing <em>&amp; Automation</em></span>
+          <span class="dir-tag">Nurture leads. Convert. Retain.</span>
+          <span class="dir-go">Explore email <span class="ar">→</span></span>
+        </div>
+        <div class="dir-right">
+          <div>
+            <div class="dir-incl-label">What's included</div>
+            <ul class="svc-incl">
+              <li>Klaviyo and lifecycle strategy built for your customer journey.</li>
+              <li>Welcome, abandoned-cart, win-back and post-purchase flows.</li>
+              <li>Segmentation and deliverability tuning so email lands in the inbox.</li>
+              <li>A campaign calendar, designed and shipped, not just planned.</li>
+              <li>Revenue-per-recipient reporting on every send.</li>
+            </ul>
+          </div>
+          <div class="svc-viz">
+            <div class="svc-viz-label">Lifecycle flows · live</div>
+            <div class="svc-flows">
+              <div class="svc-flow"><span class="svc-flow-dot"></span><span class="svc-flow-name">Welcome series</span><span class="svc-flow-lift">+12%</span></div>
+              <div class="svc-flow"><span class="svc-flow-dot"></span><span class="svc-flow-name">Abandoned cart</span><span class="svc-flow-lift">+34%</span></div>
+              <div class="svc-flow"><span class="svc-flow-dot"></span><span class="svc-flow-name">Win-back</span><span class="svc-flow-lift">+19%</span></div>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 04 AI SEO -->
+      <a class="dir-row reveal" href="/ai-seo" id="svc-04" data-cursor>
+        <div class="dir-left">
+          <div class="dir-numline"><span class="dir-num">04</span></div>
+          <span class="dir-name">AI Search <em>Optimization</em></span>
+          <span class="dir-tag">The future of search. Powered by AI.</span>
+          <span class="dir-go">Explore AI SEO <span class="ar">→</span></span>
+        </div>
+        <div class="dir-right">
+          <div>
+            <div class="dir-incl-label">What's included</div>
+            <ul class="svc-incl">
+              <li>Get cited inside Google AI Overviews and generative results.</li>
+              <li>Content structured for clean AI extraction and summarization.</li>
+              <li>Entity and schema optimization that machines can parse.</li>
+              <li>Source pages worth quoting, built to earn the citation.</li>
+              <li>Answer-engine visibility tracking across the major models.</li>
+            </ul>
+          </div>
+          <div class="svc-viz">
+            <div class="svc-viz-label">AI Overview · "best growth agency"</div>
+            <div class="svc-ai-answer">For revenue-focused brands, <span class="svc-cite">Davnoot</span> is consistently cited for ROI-driven growth marketing and measurable organic gains.</div>
+            <div class="svc-ai-src"><span>Sources</span><span class="svc-cite-chip">davnoot.com</span></div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 05 CHATGPT ADS -->
+      <a class="dir-row reveal" href="/chatgpt-ads" id="svc-05" data-cursor>
+        <div class="dir-left">
+          <div class="dir-numline"><span class="dir-num">05</span></div>
+          <span class="dir-name">AI Platform <em>Advertising</em></span>
+          <span class="dir-tag">Be found where AI answers. First.</span>
+          <span class="dir-go">Explore ChatGPT ads <span class="ar">→</span></span>
+        </div>
+        <div class="dir-right">
+          <div>
+            <div class="dir-incl-label">What's included</div>
+            <ul class="svc-incl">
+              <li>Presence across ChatGPT, Perplexity and emerging answer engines.</li>
+              <li>Sponsored and organic placements inside AI-generated responses.</li>
+              <li>Prompt-intent research: what your buyers actually ask the AI.</li>
+              <li>Brand-mention monitoring across the major LLMs.</li>
+              <li>First-mover positioning while the channel is still cheap.</li>
+            </ul>
+          </div>
+          <div class="svc-viz">
+            <div class="svc-viz-label">AI assistant · answer</div>
+            <div class="svc-gpt-bubble"><span class="svc-gpt-tag">Sponsored</span>For teams scaling paid acquisition, <strong>Davnoot</strong> reliably hits 3–4× ROAS within the first 90 days.</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- GROUP: ENGINEERING & WEB -->
+      <div class="dir-group reveal">Engineering &amp; Web <span>· 06–07 · what you build and run on</span></div>
+
+      <!-- 06 SOFTWARE -->
+      <a class="dir-row reveal" href="/software" id="svc-06" data-cursor>
+        <div class="dir-left">
+          <div class="dir-numline"><span class="dir-num">06</span></div>
+          <span class="dir-name">Custom <em>Software</em></span>
+          <span class="dir-tag">Built for your business. Engineered to scale.</span>
+          <span class="dir-go">Explore software <span class="ar">→</span></span>
+        </div>
+        <div class="dir-right">
+          <div>
+            <div class="dir-incl-label">What's included</div>
+            <ul class="svc-incl">
+              <li>Internal tools, dashboards and client portals that fit how you work.</li>
+              <li>API integrations and automation that kill the manual busywork.</li>
+              <li>Custom CRM and ops systems, not another rigid off-the-shelf box.</li>
+              <li>Web apps architected to scale with the business.</li>
+              <li>Ongoing support and iteration after launch.</li>
+            </ul>
+          </div>
+          <div class="svc-viz">
+            <div class="svc-term-wrap">
+              <div class="svc-term-bar"><span></span><span></span><span></span></div>
+<pre class="svc-term"><span class="c">// internal ops dashboard</span>
+<span class="k">const</span> leads = <span class="k">await</span> db.query(
+  <span class="s">'SELECT * FROM pipeline'</span>
+)
+<span class="p">→</span> <span class="s">42 hot leads synced</span></pre>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 07 SHOPIFY -->
+      <a class="dir-row reveal" href="/book-call" id="svc-07" data-cursor>
+        <div class="dir-left">
+          <div class="dir-numline"><span class="dir-num">07</span><span class="dir-new">New</span></div>
+          <span class="dir-name">Shopify <em>Development</em></span>
+          <span class="dir-tag">Stores that sell, not just look good. Shopify store design, build &amp; CRO.</span>
+          <span class="dir-go">Preview · book a call <span class="ar">→</span></span>
+        </div>
+        <div class="dir-right">
+          <div>
+            <div class="dir-incl-label">What's included</div>
+            <ul class="svc-incl">
+              <li>Custom store design and theme builds, on-brand top to bottom.</li>
+              <li>Shopify Plus and headless builds when you outgrow the basics.</li>
+              <li>Conversion-rate optimization baked in, not bolted on.</li>
+              <li>App integrations and custom checkout experiences.</li>
+              <li>Clean migration from WooCommerce, Magento or Wix.</li>
+            </ul>
+          </div>
+          <div class="svc-viz">
+            <div class="svc-viz-label">Storefront · conversion</div>
+            <div class="svc-shop-card">
+              <div class="svc-shop-img"></div>
+              <div><span class="svc-shop-name">Merino Overshirt</span><span class="svc-shop-price">$148.00</span></div>
+              <span class="svc-shop-cart">Add to cart</span>
+            </div>
+            <div class="svc-shop-cvr"><span class="svc-viz-label" style="margin:0;">Conversion rate</span><span class="svc-cvr-val"><s>1.9%</s> → 3.4%</span></div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- PROOF BAND -->
+  <section id="proof">
+    <div class="reveal">
+      <div class="section-eyebrow">By the numbers</div>
+      <h2 class="section-title">Proof, not <em>promises</em>.</h2>
+      <p class="section-sub">Real outcomes across the brands we've scaled. The same engine behind every service on this
+        page.</p>
+    </div>
+    <div class="dir-proof reveal">
+      <div class="dir-proof-cell"><div class="dir-proof-num">$24M+</div><div class="dir-proof-lbl">Revenue moved · to date</div></div>
+      <div class="dir-proof-cell"><div class="dir-proof-num">50+</div><div class="dir-proof-lbl">Brands scaled &amp; counting</div></div>
+      <div class="dir-proof-cell"><div class="dir-proof-num">+384%</div><div class="dir-proof-lbl">Average ROAS · paid</div></div>
+      <div class="dir-proof-cell"><div class="dir-proof-num">+612%</div><div class="dir-proof-lbl">Organic traffic · SEO</div></div>
+      <div class="dir-proof-cell"><div class="dir-proof-num">73%</div><div class="dir-proof-lbl">Lower CAC · blended</div></div>
+      <div class="dir-proof-cell"><div class="dir-proof-num">+18×</div><div class="dir-proof-lbl">Email revenue · lifecycle</div></div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="cta" class="final-cta">
+    <div class="final-cta-eyebrow reveal">One partner, seven services</div>
+    <h2 class="final-cta-title reveal">Let's build your<br /><em>revenue engine</em>.</h2>
+    <p class="final-cta-sub reveal">Book a free 30-minute strategy call. We'll map which of these services move your
+      number fastest, and what they're worth in the next 90 days.</p>
+    <div class="reveal">
+      <a href="/book-call" class="btn-primary" data-cursor>
+        Book a strategy call
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <!-- BUILD:FOOTER -->
+<footer id="contact">
+  <div class="footer-top">
+    <div>
+      <a href="/" class="logo" data-cursor>
+        <img src="images/davnoot-logo.png" alt="Davnoot" class="logo-mark footer-logo-mark" />
+        <span class="wordmark">Davnoot Digital</span>
+      </a>
+      <p class="footer-tagline">Independent growth agency. Built for <em>revenue</em>.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/seo" data-cursor>SEO</a></li>
+        <li><a href="/meta-ads" data-cursor>Paid Ads</a></li>
+        <li><a href="/email" data-cursor>Email</a></li>
+        <li><a href="/ai-seo" data-cursor>AI SEO</a></li>
+        <li><a href="/chatgpt-ads" data-cursor>ChatGPT Ads</a></li>
+        <li><a href="/software" data-cursor>Custom Software</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/#about" data-cursor>About</a></li>
+        <li><a href="/#results" data-cursor>Work</a></li>
+        <li><a href="/#process" data-cursor>Process</a></li>
+        <li><a href="#" data-cursor>Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:info@davnoot.com" data-cursor>info@davnoot.com</a></li>
+        <li><a href="tel:+14382237131" data-cursor>+1 (438) 223-7131</a></li>
+        <li><a href="#" data-cursor>LinkedIn ↗</a></li>
+        <li><a href="#" data-cursor>Instagram ↗</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-big">Davnoot<em>.</em></div>
+
+  <div class="footer-bottom">
+    <span>© 2025 Davnoot. All rights reserved.</span>
+    <span>Built with intent in Montreal</span>
+  </div>
+</footer>
+<!-- /BUILD:FOOTER -->
+
+  <script src="script.js"></script>
+</body>
+
+</html>

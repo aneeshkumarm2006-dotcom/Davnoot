@@ -1077,3 +1077,48 @@ if (document.readyState === 'loading') {
     start();
   }
 })();
+
+// === SERVICES PAGE — Contents scrollspy + smooth-scroll ===
+// Lives here (not inline on services.html) so it runs under the site CSP
+// (script-src 'self'; no 'unsafe-inline'). Guards on .svc-idx-item, so it is a
+// no-op on every other page. Vanilla, defensive, prefers-reduced-motion aware.
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var navPad = 100;
+
+  var tocRows = Array.prototype.slice.call(document.querySelectorAll('.svc-idx-item'));
+  if (!tocRows.length) return;
+
+  // Map each contents link to its target row (#svc-0x).
+  var pairs = [];
+  tocRows.forEach(function (link) {
+    var href = link.getAttribute('href') || '';
+    if (href.charAt(0) !== '#') return;
+    var target = document.getElementById(href.slice(1));
+    if (target) pairs.push({ link: link, target: target });
+  });
+
+  // 1) Smooth-scroll with a nav offset (native anchor jump would sit under the fixed nav).
+  pairs.forEach(function (p) {
+    p.link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var y = p.target.getBoundingClientRect().top + window.pageYOffset - navPad;
+      window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  });
+
+  // 2) Scrollspy — highlight the contents row for whichever service is in view.
+  if ('IntersectionObserver' in window) {
+    var setActive = function (id) {
+      pairs.forEach(function (p) {
+        p.link.classList.toggle('is-active', p.target.id === id);
+      });
+    };
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    pairs.forEach(function (p) { io.observe(p.target); });
+  }
+})();
