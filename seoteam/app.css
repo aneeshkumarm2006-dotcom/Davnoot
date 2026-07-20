@@ -497,8 +497,12 @@ select.input { cursor: pointer; }
 .rt-spacer { flex: 1; }
 .rt-html { font-family: var(--font-mono); }
 
+.rt-surface {
+  height: 520px;
+  overflow-y: auto;
+}
 .rt-surface .ProseMirror {
-  min-height: 440px;
+  min-height: 100%;
   padding: 24px;
   outline: none;
   font-size: 17px;
@@ -532,7 +536,8 @@ select.input { cursor: pointer; }
 
 .rt-html-area {
   width: 100%;
-  min-height: 480px;
+  height: 520px;
+  overflow-y: auto;
   border: 0;
   padding: 20px;
   font-family: var(--font-mono);
