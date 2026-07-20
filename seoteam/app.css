@@ -562,6 +562,19 @@ select.input { cursor: pointer; }
 .inline-preview img { max-width: 100%; border-radius: 10px; }
 .inline-preview iframe { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 10px; }
 
+/* Full-page embedded preview: drop the card chrome so the real page fills the
+   panel, and let the iframe scroll the whole article internally. */
+.inline-preview.is-frame { padding: 0; background: transparent; border: 0; }
+.inline-preview.is-frame .preview-frame {
+  display: block;
+  width: 100%;
+  height: 80vh;
+  aspect-ratio: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
 /* --- SEO panel -------------------------------------------------------- */
 
 .seo-ready {

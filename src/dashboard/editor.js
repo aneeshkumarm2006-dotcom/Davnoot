@@ -544,10 +544,33 @@ export class Editor {
     if (tab === 'preview') this.renderInlinePreview();
   }
 
-  /* The inline Preview tab is a quick look. The REAL check is "Open full preview",
-   * which renders through the same server-side component as the live page. */
+  /* The inline Preview tab shows the EXACT public page — nav, cover image, footer
+   * and all — by embedding the /seoteam/preview/<id> route, which renders through
+   * renderArticlePage(), the very same server component the live page uses. One
+   * renderer, zero drift. We save first so the embedded render reflects the latest
+   * edits, and fall back to the body-only quick look while a brand-new post has not
+   * been created yet (nothing to point an iframe at). */
   renderInlinePreview() {
-    $('#f-preview', this.root).innerHTML = this.rt.getHTML() || '<p class="muted">Nothing to preview yet.</p>';
+    const host = $('#f-preview', this.root);
+    host.classList.remove('is-frame');
+    host.innerHTML = '<p class="muted">Loading preview…</p>';
+
+    this.autosave
+      .flush()
+      .catch(() => {})
+      .finally(() => {
+        if (this.activeTab !== 'preview') return; // switched away while saving
+
+        if (!this.id) {
+          host.innerHTML = this.rt.getHTML() || '<p class="muted">Nothing to preview yet.</p>';
+          return;
+        }
+
+        // Cache-bust so switching back to this tab re-fetches the freshest render.
+        const nonce = (this._previewNonce = (this._previewNonce || 0) + 1);
+        host.classList.add('is-frame');
+        host.innerHTML = `<iframe class="preview-frame" src="/seoteam/preview/${esc(this.id)}?_=${nonce}" title="Full page preview"></iframe>`;
+      });
   }
 
   syncSlug() {
