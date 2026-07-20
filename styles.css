@@ -108,7 +108,11 @@ body::before {
 }
 
 /* === NAV === */
-nav {
+/* Scoped to body > nav: the site header is always a direct child of <body>.
+   A bare `nav` selector would also capture nested <nav> landmarks (the blog's
+   .post-breadcrumb and .blog-pagination), turning them into fixed bars that
+   cover this header. */
+body > nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
@@ -2041,7 +2045,7 @@ footer {
 
 /* === RESPONSIVE === */
 @media (max-width: 1000px) {
-  nav { padding: 16px 20px; }
+  body > nav { padding: 16px 20px; }
   /* Hamburger menu */
   .nav-toggle {
     display: flex; flex-direction: column; justify-content: center; gap: 5px;
