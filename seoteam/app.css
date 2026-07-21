@@ -187,6 +187,10 @@ main { max-width: 1240px; margin: 0 auto; padding: 32px 28px 100px; }
 }
 .password-toggle:hover { color: var(--text); }
 .password-toggle:focus-visible { outline: 2px solid var(--text); outline-offset: -2px; }
+.password-toggle svg { display: block; }
+.password-toggle .icon-eye-off { display: none; }
+.password-toggle[aria-pressed="true"] .icon-eye { display: none; }
+.password-toggle[aria-pressed="true"] .icon-eye-off { display: block; }
 .input-sm { padding: 7px 10px; font-size: 13px; width: auto; }
 .input-xl { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; padding: 14px; }
 textarea.input { resize: vertical; line-height: 1.5; }
