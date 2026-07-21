@@ -3187,6 +3187,41 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
 .t-card-meta { display: flex; flex-direction: column; gap: 2px; }
 .t-card-name { font-size: 14px; font-weight: 500; }
 .t-card-role { font-size: 12px; color: var(--text-muted); }
+.t-card-quote strong { font-weight: 600; color: var(--text); }
+
+/* === TESTIMONIAL MARQUEE (auto-scrolling client quotes) ===
+   Reuses @keyframes ticker (translateX 0 -> -50%), so the track must hold the
+   card set TWICE and its two halves must be exactly equal in width. */
+.t-marquee {
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  margin-top: 56px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.t-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 60s linear infinite;
+}
+/* margin-right, NOT the track's `gap`. With `gap` the two halves differ by one
+   gap width (n cards have n-1 gaps), so translateX(-50%) lands mid-gap and the
+   loop visibly jumps. A per-card right margin makes each half exactly 50%. */
+.t-marquee-track .t-card {
+  width: min(430px, 82vw);
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+.t-marquee:hover .t-marquee-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .t-marquee-track { animation: none; }
+  .t-marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
 
 /* === v2: TOOLS GRID === */
 .tools-grid {
