@@ -3196,7 +3196,12 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
   overflow: hidden;
   position: relative;
   z-index: 2;
-  margin-top: 56px;
+  /* overflow:hidden clips at the PADDING box, so this vertical padding is what
+     stops .t-card:hover — translateY(-4px) plus a 0 12px 40px shadow — from
+     being sliced off at the top and bottom edges. The negative margins cancel
+     the padding again so the section's spacing is visually unchanged. */
+  padding: 40px 0 52px;
+  margin: 16px 0 -52px;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
