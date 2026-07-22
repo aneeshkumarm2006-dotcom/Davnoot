@@ -7,7 +7,7 @@
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'sha256-GRcH7aC7G/RZDvsbUJh59GY7c6ug+gKAjWYS3NVJfXY=' 'sha256-zVR1ArE+UDhRBEnukcttfKJh/Yqnr2LEsFqdNpPEWJc='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self'; frame-src 'self' https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'" }
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'sha256-AyGSOThL3mtHbARnfXZatfXLSyUbNe+xm7JuEZNW8I0=' 'sha256-zVR1ArE+UDhRBEnukcttfKJh/Yqnr2LEsFqdNpPEWJc='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self'; frame-src 'self' https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'" }
       ]
     }
   ],
