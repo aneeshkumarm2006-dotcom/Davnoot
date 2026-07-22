@@ -565,6 +565,143 @@ async function animChatShowcase(frame) {
   await Promise.all(chats.map((c, i) => streamOne(c, i * 520)));
 }
 
+// === ETF LAUNCH → INFLOWS ===
+// A fund-launch console builds itself: the ticker types in, the advisor audiences
+// populate with reach counting up, compliance scans then clears, and the AUM line
+// draws while the net-inflows numbers count up.
+async function animEtfShowcase(frame) {
+  const queryEl = frame.querySelector('.etf-sc-query');
+  const segs = [...frame.querySelectorAll('.etf-sc-seg')];
+  const reaches = [...frame.querySelectorAll('.etf-sc-seg-reach')];
+  const comp = frame.querySelector('.etf-sc-compliance');
+  const compStatus = frame.querySelector('.etf-sc-comp-status');
+  const aumVal = frame.querySelector('.etf-sc-aum-val');
+  const line = frame.querySelector('.etf-sc-line');
+  const flowVals = [...frame.querySelectorAll('.etf-sc-flow-v')];
+
+  // Reset for a clean (re)play
+  const fund = queryEl ? (queryEl.dataset.q || queryEl.textContent) : '';
+  if (queryEl) { queryEl.dataset.q = fund; queryEl.textContent = ''; }
+  segs.forEach(s => s.classList.add('anim-hidden'));
+  reaches.forEach(r => { r.dataset.target = r.dataset.target || r.textContent.trim(); r.textContent = '0'; });
+  if (comp) comp.classList.remove('anim-scan', 'cleared');
+  if (compStatus) compStatus.textContent = 'Reviewing';
+  if (aumVal) { aumVal.dataset.target = aumVal.dataset.target || aumVal.textContent.trim(); aumVal.textContent = '$0'; }
+  flowVals.forEach(v => { v.dataset.target = v.dataset.target || v.textContent.trim(); v.textContent = '0'; });
+  if (line) {
+    const len = line.getTotalLength();
+    line.style.transition = 'none';
+    line.style.strokeDasharray = len;
+    line.style.strokeDashoffset = len;
+    line.getBoundingClientRect();       // force reflow so the reset "sticks" before we animate
+    line.style.transition = '';
+  }
+
+  await ShowcaseAnim.delay(250);
+
+  // 1) The fund name types into the console
+  if (queryEl) {
+    for (let i = 0; i <= fund.length; i++) { queryEl.textContent = fund.slice(0, i); await ShowcaseAnim.delay(34); }
+  }
+  await ShowcaseAnim.delay(300);
+
+  // 2) Advisor audiences populate, then their reach counts up
+  segs.forEach((s, i) => setTimeout(() => s.classList.remove('anim-hidden'), i * 180));
+  await ShowcaseAnim.delay(segs.length * 180 + 150);
+  reaches.forEach((r, i) => setTimeout(() => {
+    const p = scParse(r.dataset.target);
+    if (p) ShowcaseAnim.countUp(r, 0, p.value, 900, x => scFormat(p, x));
+    else r.textContent = r.dataset.target;
+  }, i * 120));
+  await ShowcaseAnim.delay(1150);
+
+  // 3) Compliance scans the campaign, then clears it
+  if (comp) comp.classList.add('anim-scan');
+  await ShowcaseAnim.delay(900);
+  if (comp) { comp.classList.remove('anim-scan'); comp.classList.add('cleared'); }
+  if (compStatus) compStatus.textContent = 'Cleared';
+  await ShowcaseAnim.delay(450);
+
+  // 4) The AUM line draws as the inflows numbers count up
+  if (line) line.style.strokeDashoffset = '0';
+  if (aumVal) {
+    const p = scParse(aumVal.dataset.target);
+    if (p) ShowcaseAnim.countUp(aumVal, 0, p.value, 1500, x => scFormat(p, x));
+  }
+  flowVals.forEach((v, i) => setTimeout(() => {
+    const p = scParse(v.dataset.target);
+    if (p) ShowcaseAnim.countUp(v, 0, p.value, 1200, x => scFormat(p, x));
+    else v.textContent = v.dataset.target;
+  }, 300 + i * 150));
+  await ShowcaseAnim.delay(1600);
+}
+
+// === SHOPIFY REBUILD ===
+// A slow storefront rebuilds itself section by section, the build console checks
+// off each phase, the metrics climb from their "before" values to "after", then
+// the store makes its first sale and the launch verdict locks in.
+async function animShopifyShowcase(frame) {
+  const q = frame.querySelector('.sc-shop-q');
+  const secs = [...frame.querySelectorAll('.sc-shop-sec')];
+  const steps = [...frame.querySelectorAll('.sc-shop-step')];
+  const metrics = [...frame.querySelectorAll('.sc-shop-metric b')];
+  const load = frame.querySelector('.sc-shop-load');
+  const cart = frame.querySelector('.sc-shop-cart');
+  const toast = frame.querySelector('.sc-shop-toast');
+  const verdict = frame.querySelector('.sc-shop-verdict');
+
+  // Reset — the HTML holds the "after" values so no-JS / reduced-motion sees the
+  // real result; we stash those, then rewind each field to its "before" state.
+  const url = q ? (q.dataset.q || q.textContent) : '';
+  if (q) { q.dataset.q = url; q.textContent = ''; }
+  secs.forEach(s => { s.classList.add('anim-hidden'); s.classList.remove('anim-build'); });
+  steps.forEach(s => s.classList.remove('done'));
+  metrics.forEach(m => { m.dataset.to = m.dataset.to || m.textContent.trim(); m.textContent = m.dataset.from || m.dataset.to; });
+  if (load) { load.dataset.to = load.dataset.to || load.textContent.trim(); load.textContent = '5.0s'; load.classList.remove('fast'); }
+  if (cart) cart.classList.remove('anim-tap');
+  if (toast) toast.classList.remove('show');
+  if (verdict) verdict.classList.remove('show');
+
+  await ShowcaseAnim.delay(250);
+
+  // 1) The store URL types into the address bar
+  if (q) { for (let i = 0; i <= url.length; i++) { q.textContent = url.slice(0, i); await ShowcaseAnim.delay(28); } }
+  await ShowcaseAnim.delay(220);
+
+  // 2) The storefront builds itself top to bottom, each section sweeping in
+  for (let i = 0; i < secs.length; i++) {
+    secs[i].classList.remove('anim-hidden');
+    secs[i].classList.add('anim-build');
+    await ShowcaseAnim.delay(320);
+  }
+  await ShowcaseAnim.delay(180);
+
+  // 3) Each build phase checks off, and its paired metric climbs before → after
+  for (let i = 0; i < steps.length; i++) {
+    steps[i].classList.add('done');
+    const m = metrics[i];
+    if (m) {
+      const from = scParse(m.dataset.from), to = scParse(m.dataset.to);
+      if (from && to) ShowcaseAnim.countUp(m, from.value, to.value, 700, x => scFormat(to, x));
+      else m.textContent = m.dataset.to;
+    }
+    if (i === 2 && load) { // "Speed" phase: the page-load badge drops and turns green
+      const to = scParse(load.dataset.to);
+      if (to) ShowcaseAnim.countUp(load, 5.0, to.value, 700, x => scFormat(to, x));
+      load.classList.add('fast');
+    }
+    await ShowcaseAnim.delay(400);
+  }
+  await ShowcaseAnim.delay(200);
+
+  // 4) The store makes its first sale — cart taps, the order toast lands, verdict locks in
+  if (cart) cart.classList.add('anim-tap');
+  await ShowcaseAnim.delay(420);
+  if (toast) toast.classList.add('show');
+  await ShowcaseAnim.delay(480);
+  if (verdict) verdict.classList.add('show');
+}
+
 // === AI SEO intro: full-screen takeover on load, then fades into the page ===
 const SHOWCASE_RUNNERS = {
   seo: animSeoShowcase,
@@ -574,6 +711,8 @@ const SHOWCASE_RUNNERS = {
   ai: animChatShowcase,
   'chatgpt-ads': animChatShowcase,
   software: animSoftwareShowcase,
+  shopify: animShopifyShowcase,
+  etf: animEtfShowcase,
 };
 
 // Full-screen intro takeover for any page whose showcase has [data-intro]:
