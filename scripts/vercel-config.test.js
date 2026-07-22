@@ -20,7 +20,7 @@ import crypto from 'node:crypto';
 
 import { COMPILED_PAGES } from '../lib/compiled-pages.gen.js';
 import { renderPage } from '../lib/page-render.js';
-import { SERVICE_PAGES } from '../lib/templates.js';
+import { SERVICE_PAGES, ADS_PAGES } from '../lib/templates.js';
 
 const ROOT = path.join(import.meta.dirname, '..');
 const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
@@ -138,6 +138,19 @@ describe('vercel.json', () => {
       }
       if (SERVICE_PAGES.includes(file)) {
         const clean = `/services/${name}`;
+        const rdHtml = redirect(`/${file}`);
+        assert.ok(rdHtml && rdHtml.destination === clean && rdHtml.permanent, `/${file} must 301 to ${clean}`);
+        const rdFlat = redirect(`/${name}`);
+        assert.ok(rdFlat && rdFlat.destination === clean && rdFlat.permanent, `/${name} must 301 to ${clean} (retire the old flat URL)`);
+        const rw = rewrite(clean);
+        assert.ok(rw && rw.destination === `/${file}`, `${clean} must rewrite to /${file} (serve the static page cleanly)`);
+        continue;
+      }
+      if (ADS_PAGES.includes(file)) {
+        // The /ads/* namespace (e.g. /ads/reddit-ads) — same routing shape as a
+        // service page, one level down under /ads instead of /services. The /ads
+        // overview (ads.html) is NOT in ADS_PAGES; it is a flat page handled below.
+        const clean = `/ads/${name}`;
         const rdHtml = redirect(`/${file}`);
         assert.ok(rdHtml && rdHtml.destination === clean && rdHtml.permanent, `/${file} must 301 to ${clean}`);
         const rdFlat = redirect(`/${name}`);
