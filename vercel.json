@@ -73,6 +73,7 @@
   ],
   "rewrites": [
     { "source": "/blog", "destination": "/api/blog/index" },
+    { "source": "/blog/category/:slug", "destination": "/api/blog/index?category=:slug" },
     { "source": "/blog/:slug", "destination": "/api/blog/post?slug=:slug" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
     { "source": "/seoteam/login", "destination": "/seoteam/login.html" },

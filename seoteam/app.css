@@ -991,3 +991,38 @@ select.input { cursor: pointer; }
   font-size: 11px;
   line-height: 1.5;
 }
+
+/* --- Categories manager + editor picker ------------------------------- */
+
+.cat-create {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.cat-create .input { flex: 1; }
+
+.cat-table td { vertical-align: middle; }
+.cat-table .cell-title strong { font-weight: 600; }
+.cat-table a.muted { text-decoration: none; }
+.cat-table a.muted:hover { text-decoration: underline; color: var(--text); }
+.cat-rename-input { max-width: 260px; }
+
+/* The checkbox list inside the editor's Categories card. */
+.cat-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.cat-check {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 6px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.cat-check:hover { background: var(--bg-elev); }
+.cat-check input { width: 15px; height: 15px; accent-color: var(--accent); }

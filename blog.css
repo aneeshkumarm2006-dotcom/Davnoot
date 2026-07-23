@@ -14,6 +14,7 @@
 /* --- Shared shell ----------------------------------------------------- */
 
 .blog-hero,
+.blog-filter,
 .blog-index,
 .post,
 .post-related,
@@ -68,6 +69,41 @@
   max-width: 60ch;
   font-size: 18px;
   color: var(--text-muted);
+}
+
+/* --- Category filter -------------------------------------------------- */
+
+.blog-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 4px;
+  padding-bottom: 40px;
+}
+.cat-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 8px 16px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.25s, color 0.25s, background 0.25s, transform 0.25s;
+}
+.cat-pill:hover {
+  color: var(--text);
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+.cat-pill.is-active {
+  color: var(--accent-text, #fff);
+  background: var(--accent, #111);
+  border-color: var(--accent, #111);
 }
 
 /* --- Card grid -------------------------------------------------------- */
@@ -487,11 +523,21 @@
 
 @media (max-width: 720px) {
   .blog-hero,
+  .blog-filter,
   .blog-index,
   .post,
   .post-related,
   .post-cta,
   .blog-empty { padding-left: 20px; padding-right: 20px; }
+
+  /* Let the pills scroll sideways instead of stacking into a tall block. */
+  .blog-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 28px;
+  }
+  .blog-filter::-webkit-scrollbar { display: none; }
 
   .blog-hero { padding-top: 110px; }
   .post { padding-top: 110px; }

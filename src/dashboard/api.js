@@ -52,6 +52,11 @@ export const api = {
   patchPost: (id, body) => request('PATCH', `/api/seoteam/posts/${id}`, body),
   deletePost: (id) => request('DELETE', `/api/seoteam/posts/${id}`),
 
+  listCategories: () => request('GET', '/api/seoteam/categories'),
+  createCategory: (body) => request('POST', '/api/seoteam/categories', body),
+  renameCategory: (id, body) => request('PATCH', `/api/seoteam/categories/${id}`, body),
+  deleteCategory: (id) => request('DELETE', `/api/seoteam/categories/${id}`),
+
   listMedia: (params = {}) => {
     const qs = new URLSearchParams(Object.entries(params).filter(([, v]) => v !== '' && v != null));
     return request('GET', `/api/seoteam/media?${qs}`);

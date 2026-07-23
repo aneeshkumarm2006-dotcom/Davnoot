@@ -39,6 +39,15 @@ export class Editor {
     this.overrides = this.post.seoOverrides || [];
     this.backlinks = [...(this.post.keywords || []), blankRow()];
 
+    // The managed taxonomy, offered as checkboxes below. A failure here must not
+    // block editing a post — fall back to an empty list and the "no categories yet"
+    // hint rather than throwing the whole editor away.
+    try {
+      this.allCategories = (await api.listCategories()).categories || [];
+    } catch {
+      this.allCategories = [];
+    }
+
     this.render();
     this.wire();
 
@@ -87,6 +96,7 @@ export class Editor {
       coverImageAlt: v('#f-cover-alt'),
       author: v('#f-author'),
       tags: splitList(v('#f-tags')),
+      categories: this.collectCategories(),
       status: status === 'published' || status === 'scheduled' ? 'published' : 'draft',
 
       // "Scheduled" is not a stored status — it is `published` with a future date.
@@ -266,6 +276,11 @@ export class Editor {
           </section>
 
           <section class="card">
+            <h3>Categories</h3>
+            ${this.categoryPicker()}
+          </section>
+
+          <section class="card">
             <h3>SEO</h3>
             <div id="f-seo-panel"></div>
           </section>
@@ -390,6 +405,35 @@ export class Editor {
     this.renderBacklinks();
     this.updateSaveLabel();
     this.updateDateHint();
+  }
+
+  /* Checkboxes for the managed taxonomy. The FIRST checked category is the post's
+   * primary (the label shown on its card), so we preserve the stored order. When no
+   * categories exist yet, we point the writer at the manager instead of a dead box. */
+  categoryPicker() {
+    const cats = this.allCategories || [];
+    if (!cats.length) {
+      return `<p class="hint">No categories yet. <a href="/seoteam/categories">Create some</a> to group posts and power the blog filter.</p>`;
+    }
+    const selected = new Set(this.post.categories || []);
+    return `
+      <p class="hint">The first one ticked is the post's primary category — it shows on the card.</p>
+      <div class="cat-checks">
+        ${cats
+          .map(
+            (c) => `
+          <label class="cat-check">
+            <input type="checkbox" class="cat-box" value="${esc(c.slug)}" ${selected.has(c.slug) ? 'checked' : ''} />
+            <span>${esc(c.name)}</span>
+          </label>`,
+          )
+          .join('')}
+      </div>`;
+  }
+
+  /** Checked category slugs, in DOM order (which is the categories' display order). */
+  collectCategories() {
+    return [...this.root.querySelectorAll('.cat-box')].filter((b) => b.checked).map((b) => b.value);
   }
 
   templatePicker() {

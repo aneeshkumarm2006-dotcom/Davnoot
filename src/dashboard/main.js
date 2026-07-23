@@ -8,6 +8,7 @@
 import { Home } from './home.js';
 import { Editor } from './editor.js';
 import { Gallery } from './gallery.js';
+import { Categories } from './categories.js';
 import { api } from './api.js';
 import { $, confirmDialog } from './dom.js';
 
@@ -18,6 +19,7 @@ function parse() {
   const parts = location.pathname.replace(/^\/seoteam\/?/, '').split('/').filter(Boolean);
   if (!parts.length) return { view: 'home' };
   if (parts[0] === 'gallery') return { view: 'gallery' };
+  if (parts[0] === 'categories') return { view: 'categories' };
   if (parts[0] === 'new') return { view: 'editor', id: 'new' };
   return { view: 'editor', id: parts[0] };
 }
@@ -29,6 +31,9 @@ async function render() {
   switch (route.view) {
     case 'gallery':
       current = new Gallery(root);
+      break;
+    case 'categories':
+      current = new Categories(root);
       break;
     case 'editor':
       current = new Editor(root, { id: route.id });

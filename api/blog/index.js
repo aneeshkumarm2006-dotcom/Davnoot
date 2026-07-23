@@ -17,7 +17,9 @@
  * fetch somewhere; it would be a no-op on this platform.
  */
 import { listPublished } from '../../lib/blog-query.js';
+import { listAllCategories, findCategoryBySlug } from '../../lib/category-query.js';
 import { renderIndexPage } from '../../lib/blog-render.js';
+import { render404 } from '../../lib/blog-404.js';
 
 const PER_PAGE = 12;
 
@@ -27,11 +29,34 @@ export default async function handler(req, res) {
     return res.status(405).send('Method not allowed');
   }
 
+  // Set on /blog/category/:slug by the vercel.json rewrite. Empty on the plain /blog.
+  const categorySlug = String(req.query?.category || '').trim();
+
   try {
     const page = Math.max(1, parseInt(req.query?.page, 10) || 1);
-    const { posts, totalPages } = await listPublished({ page, perPage: PER_PAGE });
 
-    const html = renderIndexPage({ posts, page, totalPages });
+    // The full list drives the filter pills on every variant of the page; the active
+    // category (if any) both scopes the query and titles/canonicalises the archive.
+    const [categories, activeCategory] = await Promise.all([
+      listAllCategories(),
+      categorySlug ? findCategoryBySlug(categorySlug) : Promise.resolve(null),
+    ]);
+
+    // A category URL that doesn't resolve is a real 404 — never a thin, indexable
+    // "0 results" archive that Google would treat as a soft 404.
+    if (categorySlug && !activeCategory) {
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=120');
+      return res.status(404).send(render404({ title: 'No such category' }));
+    }
+
+    const { posts, totalPages } = await listPublished({
+      page,
+      perPage: PER_PAGE,
+      category: activeCategory?.slug,
+    });
+
+    const html = renderIndexPage({ posts, page, totalPages, categories, activeCategory });
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=600');
