@@ -14,7 +14,6 @@
 /* --- Shared shell ----------------------------------------------------- */
 
 .blog-hero,
-.blog-filter,
 .blog-index,
 .post,
 .post-related,
@@ -523,7 +522,6 @@
 
 @media (max-width: 720px) {
   .blog-hero,
-  .blog-filter,
   .blog-index,
   .post,
   .post-related,
