@@ -44,6 +44,9 @@ const MIME = {
   '.svg': 'image/svg+xml',
   '.webp': 'image/webp',
   '.ico': 'image/x-icon',
+  // Chrome drops a manifest served as octet-stream, and the site-wide nosniff
+  // header means it cannot recover by sniffing. vercel.json pins this in prod.
+  '.webmanifest': 'application/manifest+json',
   '.xml': 'application/xml',
   '.txt': 'text/plain; charset=utf-8',
 };

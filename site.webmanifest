@@ -1,0 +1,15 @@
+{
+  "name": "Davnoot",
+  "short_name": "Davnoot",
+  "description": "Davnoot is an independent growth agency. SEO, paid social, email, AI search, ChatGPT ads, and custom software.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#e8eee9",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    { "src": "/images/favicon-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/favicon-512x512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/images/favicon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

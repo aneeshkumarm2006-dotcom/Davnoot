@@ -20,6 +20,7 @@
     "dev": "node scripts/dev.js",
     "site": "node build.js && node scripts/compile-pages.js",
     "bundle": "node scripts/bundle.js",
+    "favicon": "node scripts/gen-favicon.js",
     "watch": "node scripts/bundle.js --watch",
     "test": "node --test \"scripts/*.test.js\"",
     "db:indexes": "node scripts/ensure-indexes.js",

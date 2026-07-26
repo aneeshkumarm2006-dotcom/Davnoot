@@ -9,6 +9,10 @@
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'sha256-AyGSOThL3mtHbARnfXZatfXLSyUbNe+xm7JuEZNW8I0=' 'sha256-zVR1ArE+UDhRBEnukcttfKJh/Yqnr2LEsFqdNpPEWJc='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self'; frame-src 'self' https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'" }
       ]
+    },
+    {
+      "source": "/site.webmanifest",
+      "headers": [{ "key": "Content-Type", "value": "application/manifest+json" }]
     }
   ],
   "redirects": [
@@ -55,10 +59,12 @@
     { "source": "/pinterest-ads-montreal.html", "destination": "/pinterest-ads-montreal", "permanent": true },
     { "source": "/pinterest-ads-ottawa.html", "destination": "/pinterest-ads-ottawa", "permanent": true },
     { "source": "/pinterest-ads-toronto.html", "destination": "/pinterest-ads-toronto", "permanent": true },
-    { "source": "/amazon-ads-montreal.html", "destination": "/amazon-ads-montreal", "permanent": true },
+    { "source": "/amazon-ads-montreal.html", "destination": "/ads/amazon-ads", "permanent": true },
+    { "source": "/amazon-ads-montreal", "destination": "/ads/amazon-ads", "permanent": true },
     { "source": "/amazon-ads-ottawa.html", "destination": "/amazon-ads-ottawa", "permanent": true },
     { "source": "/amazon-ads-toronto.html", "destination": "/amazon-ads-toronto", "permanent": true },
-    { "source": "/spotify-ads-montreal.html", "destination": "/spotify-ads-montreal", "permanent": true },
+    { "source": "/spotify-ads-montreal.html", "destination": "/ads/spotify-ads", "permanent": true },
+    { "source": "/spotify-ads-montreal", "destination": "/ads/spotify-ads", "permanent": true },
     { "source": "/spotify-ads-ottawa.html", "destination": "/spotify-ads-ottawa", "permanent": true },
     { "source": "/spotify-ads-toronto.html", "destination": "/spotify-ads-toronto", "permanent": true },
     { "source": "/meta-ads-montreal.html", "destination": "/meta-ads-montreal", "permanent": true },
@@ -110,10 +116,8 @@
     { "source": "/pinterest-ads-montreal", "destination": "/pinterest-ads-montreal.html" },
     { "source": "/pinterest-ads-ottawa", "destination": "/pinterest-ads-ottawa.html" },
     { "source": "/pinterest-ads-toronto", "destination": "/pinterest-ads-toronto.html" },
-    { "source": "/amazon-ads-montreal", "destination": "/amazon-ads-montreal.html" },
     { "source": "/amazon-ads-ottawa", "destination": "/amazon-ads-ottawa.html" },
     { "source": "/amazon-ads-toronto", "destination": "/amazon-ads-toronto.html" },
-    { "source": "/spotify-ads-montreal", "destination": "/spotify-ads-montreal.html" },
     { "source": "/spotify-ads-ottawa", "destination": "/spotify-ads-ottawa.html" },
     { "source": "/spotify-ads-toronto", "destination": "/spotify-ads-toronto.html" },
     { "source": "/meta-ads-montreal", "destination": "/meta-ads-montreal.html" },

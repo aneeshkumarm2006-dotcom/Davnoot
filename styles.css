@@ -3169,6 +3169,16 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
   color: var(--text-muted);
   line-height: 1.5;
 }
+/* A flat two-column checklist — a long service-scope list where every line is a
+   deliverable name, with no description or frequency column. */
+.deliv-list.deliv-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.deliv-list.deliv-cols .deliv-item { grid-template-columns: 32px 1fr; }
+@media (max-width: 700px) {
+  .deliv-list.deliv-cols { grid-template-columns: 1fr; }
+}
 .deliv-freq {
   font-family: var(--font-mono);
   font-size: 10px;
