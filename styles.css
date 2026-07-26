@@ -554,6 +554,24 @@ body > nav {
   margin-bottom: 40px;
   max-width: 540px;
 }
+/* Supporting headline: sits between the H1 and the body sub. */
+.service-hero-lede {
+  font-family: var(--font-sans);
+  font-size: clamp(21px, 2.2vw, 30px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: var(--text);
+  max-width: 560px;
+  margin-bottom: 24px;
+}
+.service-hero-lede em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
 .service-num-badge {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -698,6 +716,10 @@ section {
   margin-bottom: 80px;
   line-height: 1.5;
 }
+/* A body paragraph followed by ANOTHER paragraph rather than by the section's
+   content — restores normal paragraph rhythm inside a stacked lede. Declared
+   after .service-hero-sub and .section-sub so it wins on source order. */
+.sub-tight { margin-bottom: 18px; }
 
 /* === SERVICES GRID (HOMEPAGE) === */
 .services-grid {
