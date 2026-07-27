@@ -16,6 +16,10 @@ export class Categories {
     this.root = root;
     this.items = [];
     this.editingId = null;
+
+    // Listeners on the shared #app root are registered with this signal and
+    // detached in destroy() — see Home for why.
+    this.ac = new AbortController();
   }
 
   async mount() {
@@ -27,9 +31,11 @@ export class Categories {
   async load() {
     try {
       const { categories } = await api.listCategories();
+      if (this.ac.signal.aborted) return; // navigated away mid-fetch — not our DOM anymore
       this.items = categories || [];
       this.render();
     } catch (err) {
+      if (this.ac.signal.aborted) return;
       this.root.innerHTML = `<div class="empty"><h2>Couldn't load categories</h2><p>${esc(err.message)}</p></div>`;
     }
   }
@@ -101,11 +107,13 @@ export class Categories {
   }
 
   wire() {
+    const { signal } = this.ac;
+
     this.root.addEventListener('submit', async (e) => {
       if (e.target.id !== 'cat-create') return;
       e.preventDefault();
       await this.create();
-    });
+    }, { signal });
 
     this.root.addEventListener('click', async (e) => {
       const rename = e.target.closest('[data-rename]');
@@ -133,7 +141,7 @@ export class Categories {
         await this.remove(del.dataset.delete, Number(del.dataset.count) || 0, del.dataset.name);
         return;
       }
-    });
+    }, { signal });
 
     // Enter/Escape while inline-renaming.
     this.root.addEventListener('keydown', (e) => {
@@ -146,7 +154,11 @@ export class Categories {
         this.editingId = null;
         this.render();
       }
-    });
+    }, { signal });
+  }
+
+  destroy() {
+    this.ac.abort();
   }
 
   async create() {

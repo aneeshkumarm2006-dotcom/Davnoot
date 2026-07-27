@@ -77,8 +77,21 @@ export class Autosave {
     this.onStatus(status, detail);
   }
 
+  /**
+   * The editor unmounted. A debounce or retry timer that fired after this point
+   * would collect() from whatever view now owns the DOM and save THAT under our
+   * id — the cross-post overwrite bug. Cancelled is permanent: this instance
+   * dies with its editor.
+   */
+  cancel() {
+    this.cancelled = true;
+    clearTimeout(this.timer);
+    clearTimeout(this.retryTimer);
+  }
+
   /** Call on every edit. Cheap — it only serializes and compares. */
   touch() {
+    if (this.cancelled) return;
     // Compare the payload we WOULD send. Whitespace-only edits and the trailing
     // empty keyword row serialize identically, so they never mark us dirty and
     // never trigger a save.
@@ -94,6 +107,8 @@ export class Autosave {
 
   /** Force a save now (the explicit Save button, or before navigating away). */
   async flush() {
+    if (this.cancelled) return;
+
     clearTimeout(this.timer);
     clearTimeout(this.retryTimer);
 

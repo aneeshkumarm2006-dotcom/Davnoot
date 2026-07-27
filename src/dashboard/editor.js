@@ -19,6 +19,14 @@ export class Editor {
     this.post = null;
     this.overrides = [];
     this.backlinks = [];
+
+    // Every listener this editor attaches to a surface that OUTLIVES it — the
+    // shared #app root, document, window — is registered with this signal, and
+    // destroy() aborts it. Without that, each post opened in the SPA session
+    // leaves a ghost editor whose handlers keep firing against the live DOM and
+    // autosave the CURRENT form under THEIR post id: edit one post, overwrite
+    // every post opened before it.
+    this.ac = new AbortController();
   }
 
   async mount() {
@@ -47,6 +55,10 @@ export class Editor {
     } catch {
       this.allCategories = [];
     }
+
+    // The author navigated away while we were fetching — the DOM belongs to the
+    // next view now. Painting over it would resurrect this editor as a ghost.
+    if (this.ac.signal.aborted) return;
 
     this.render();
     this.wire();
@@ -478,20 +490,21 @@ export class Editor {
 
   wire() {
     const root = this.root;
+    const { signal } = this.ac;
 
     root.addEventListener('input', (e) => {
       if (e.target.id === 'f-title') this.syncSlug();
       if (e.target.id === 'f-cover') this.syncCoverThumb();
       if (e.target.id === 'f-canonical') this.checkCanonical();
       this.onChange();
-    });
+    }, { signal });
 
     root.addEventListener('change', (e) => {
       if (e.target.id === 'f-status') {
         this.onStatusChange();
       }
       this.onChange();
-    });
+    }, { signal });
 
     root.addEventListener('click', async (e) => {
       const t = e.target;
@@ -547,7 +560,7 @@ export class Editor {
 
       if (t.id === 'f-save') return this.save();
       if (t.id === 'f-delete') return this.remove();
-    });
+    }, { signal });
 
     // Ctrl/Cmd+S — writers expect it, and it costs one listener.
     document.addEventListener('keydown', (e) => {
@@ -555,7 +568,7 @@ export class Editor {
         e.preventDefault();
         this.save();
       }
-    });
+    }, { signal });
   }
 
   onChange() {
@@ -757,10 +770,12 @@ export class Editor {
         e.preventDefault();
         e.returnValue = '';
       }
-    });
+    }, { signal: this.ac.signal });
   }
 
   destroy() {
+    this.ac.abort();
+    this.autosave?.cancel();
     this.rt?.destroy();
   }
 }

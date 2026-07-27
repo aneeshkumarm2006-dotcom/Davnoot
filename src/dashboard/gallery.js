@@ -15,6 +15,11 @@ export class Gallery {
     this.view = 'grid';
     this.filter = { q: '', folder: '', tag: '', usage: '' };
     this.data = null;
+
+    // Listeners on the shared #app root are registered with this signal and
+    // detached in destroy() — see Home for why. (The dropzone listeners live on
+    // elements inside root, which re-render blows away, so they need no signal.)
+    this.ac = new AbortController();
   }
 
   async mount() {
@@ -26,8 +31,10 @@ export class Gallery {
   async load() {
     try {
       this.data = await api.listMedia(this.filter);
+      if (this.ac.signal.aborted) return; // navigated away mid-fetch — not our DOM anymore
       this.render();
     } catch (err) {
+      if (this.ac.signal.aborted) return;
       this.root.innerHTML = `<div class="empty"><h2>Couldn't load the library</h2><p>${esc(err.message)}</p></div>`;
     }
   }
@@ -125,16 +132,16 @@ export class Gallery {
 
   wire() {
     const root = this.root;
-    let timer;
+    const { signal } = this.ac;
 
     root.addEventListener('input', (e) => {
       if (e.target.id !== 'm-q') return;
-      clearTimeout(timer);
-      timer = setTimeout(() => {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
         this.filter.q = e.target.value.trim();
         this.load();
       }, 250);
-    });
+    }, { signal });
 
     root.addEventListener('change', async (e) => {
       if (['m-folder', 'm-tag', 'm-usage'].includes(e.target.id)) {
@@ -144,7 +151,7 @@ export class Gallery {
       if (e.target.id === 'm-file') {
         await this.upload([...e.target.files]);
       }
-    });
+    }, { signal });
 
     root.addEventListener('click', async (e) => {
       const view = e.target.closest('[data-view]');
@@ -163,7 +170,7 @@ export class Gallery {
         const item = this.data.media.find((m) => String(m._id) === String(id));
         if (item) this.openDetail(item);
       }
-    });
+    }, { signal });
 
     const drop = $('#m-drop', root);
     if (drop) {
@@ -184,6 +191,11 @@ export class Gallery {
         if (files.length) this.upload(files);
       });
     }
+  }
+
+  destroy() {
+    this.ac.abort();
+    clearTimeout(this.timer); // a pending search debounce would repaint #app over the next view
   }
 
   /** Bulk upload = loop single uploads, so one bad file doesn't sink the batch. */

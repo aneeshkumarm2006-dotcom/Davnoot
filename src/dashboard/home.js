@@ -6,6 +6,11 @@ export class Home {
   constructor(root) {
     this.root = root;
     this.filter = { status: '', q: '' };
+
+    // Listeners on the shared #app root are registered with this signal and
+    // detached in destroy(). Without it, every visit to this screen stacks
+    // another set of handlers that keeps firing on later views.
+    this.ac = new AbortController();
   }
 
   async mount() {
@@ -17,8 +22,10 @@ export class Home {
   async load() {
     try {
       const data = await api.listPosts(this.filter);
+      if (this.ac.signal.aborted) return; // navigated away mid-fetch — not our DOM anymore
       this.render(data);
     } catch (err) {
+      if (this.ac.signal.aborted) return;
       this.root.innerHTML = `<div class="empty"><h2>Couldn't load posts</h2><p>${esc(err.message)}</p></div>`;
     }
   }
@@ -117,21 +124,22 @@ export class Home {
   }
 
   wire() {
-    let timer;
+    const { signal } = this.ac;
+
     this.root.addEventListener('input', (e) => {
       if (e.target.id !== 'q') return;
-      clearTimeout(timer);
-      timer = setTimeout(() => {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
         this.filter.q = e.target.value.trim();
         this.load();
       }, 300);
-    });
+    }, { signal });
 
     this.root.addEventListener('change', (e) => {
       if (e.target.id !== 'status') return;
       this.filter.status = e.target.value;
       this.load();
-    });
+    }, { signal });
 
     this.root.addEventListener('click', async (e) => {
       const toggle = e.target.closest('[data-toggle]');
@@ -163,7 +171,12 @@ export class Home {
         toast('Deleted.');
         await this.load();
       }
-    });
+    }, { signal });
+  }
+
+  destroy() {
+    this.ac.abort();
+    clearTimeout(this.timer); // a pending search debounce would repaint #app over the next view
   }
 }
 
