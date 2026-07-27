@@ -12,6 +12,7 @@
 import { COMPILED_PAGES } from '../lib/compiled-pages.gen.js';
 import { renderPage } from '../lib/page-render.js';
 import { renderComposedPage } from '../lib/composed-render.js';
+import { renderNotFound } from '../lib/not-found.js';
 import { pages, redirects, settings as siteSettings } from '../lib/db.js';
 import { isPageLive } from '../lib/page-model.js';
 import { mergeSettings } from '../lib/site-defaults.js';
@@ -132,11 +133,15 @@ function sendRedirect(res, rd) {
   return res.end();
 }
 
+/* The branded 404 — same chrome as the rest of the site, so a dead link still
+ * lands the visitor somewhere they can navigate out of. Shares its renderer with
+ * the static site/404.html Vercel serves for a no-route-matched miss, so the two
+ * halves of "page not found" can never drift apart. */
 function notFound(res) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=120');
   res.setHeader('X-Robots-Tag', 'noindex');
-  return res.status(404).send('<!doctype html><meta charset="utf-8"><title>Not found</title><h1>404 — Not found</h1>');
+  return res.status(404).send(renderNotFound({ status: 404 }));
 }
 
 /* 410 Gone — an intentionally retired URL. Google de-indexes a 410 roughly twice as
@@ -147,7 +152,7 @@ function gone(res) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600');
   res.setHeader('X-Robots-Tag', 'noindex');
-  return res.status(410).send('<!doctype html><meta charset="utf-8"><title>Gone</title><h1>410 — This page has been retired</h1>');
+  return res.status(410).send(renderNotFound({ status: 410 }));
 }
 
 // The composed-page renderer now lives in lib/composed-render.js (renderComposedPage),

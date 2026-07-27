@@ -20,6 +20,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ORG_DESC, SERVICE_PAGES, canonicalFor, navHtml, footerHtml, seoHtml, toPlainText } from './lib/templates.js';
+import { renderNotFound } from './lib/not-found.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -122,9 +123,19 @@ function buildStaticManifest(files, lastmod) {
 // ---- Run -------------------------------------------------------------------
 // Google Search Console verification files (googleXXXX.html) are served as-is —
 // they carry no BUILD markers and must stay out of the sitemap.
+//
+// 404.html is excluded for the same "not a page" reason but is GENERATED, not
+// hand-written: it is written whole from lib/not-found.js at the end of this
+// script. It must never be sitemapped (it is noindex), never get a clean-URL
+// redirect/rewrite pair in vercel.json, and never be looked for in pages/ — it
+// exists solely so Vercel has a custom body to serve when NOTHING matches.
 const isVerificationFile = (f) => /^google[0-9a-f]+\.html$/i.test(f);
+const NOT_FOUND_FILE = '404.html';
+const isGenerated = (f) => f === NOT_FOUND_FILE;
 const htmlIn = (dir) =>
-  fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith('.html') && !isVerificationFile(f)) : [];
+  fs.existsSync(dir)
+    ? fs.readdirSync(dir).filter((f) => f.endsWith('.html') && !isVerificationFile(f) && !isGenerated(f))
+    : [];
 
 const PAGES_DIR = path.join(__dirname, 'pages');
 
@@ -181,6 +192,24 @@ for (const { file, dir, label } of targets) {
     if (lastmod[file] === undefined) lastmod[file] = fmtDate(fs.statSync(p).mtime);
     console.log(`  · ${label} (unchanged)`);
   }
+}
+
+// ---- 404.html --------------------------------------------------------------
+// Vercel serves this file for any request that matches no route at all. That is
+// the ONLY thing that covers a multi-segment miss like /services/ch, which never
+// reaches the single-segment /:slug catch-all rewrite and therefore never reaches
+// api/page.js — before this file existed, such a URL got Vercel's grey
+// "404: NOT_FOUND" panel with no nav, no footer, and no way back into the site.
+// Written from lib/not-found.js so it can never drift from the copy api/page.js
+// serves for a single-segment miss.
+const notFoundPath = path.join(__dirname, NOT_FOUND_FILE);
+const notFoundHtml = renderNotFound();
+const notFoundChanged = !fs.existsSync(notFoundPath) || fs.readFileSync(notFoundPath, 'utf8') !== notFoundHtml;
+if (notFoundChanged) {
+  fs.writeFileSync(notFoundPath, notFoundHtml);
+  console.log(`  ✓ ${NOT_FOUND_FILE} (generated from lib/not-found.js)`);
+} else {
+  console.log(`  · ${NOT_FOUND_FILE} (unchanged)`);
 }
 
 // ---- Sitemap manifest (merged with the blog posts by api/sitemap.js) --------

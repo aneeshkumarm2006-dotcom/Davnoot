@@ -277,8 +277,13 @@ const server = http.createServer(async (req, res) => {
       return await mod.default(req, res);
     }
 
-    res.writeHead(404, { 'Content-Type': 'text/html' });
-    res.end('<h1>404</h1>');
+    // 6. nothing matched — serve 404.html, exactly as Vercel does for a static
+    //    deployment. This is the branch a multi-segment miss like /services/ch
+    //    lands in (the /:slug catch-all is single-segment), so if you are testing
+    //    the not-found page locally, this is the code path you are testing.
+    const notFound = path.join(ROOT, '404.html');
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(fs.existsSync(notFound) ? fs.readFileSync(notFound) : '<h1>404</h1>');
   } catch (err) {
     console.error(`✖ ${req.method} ${pathname}`, err);
     if (!res.headersSent) res.writeHead(500, { 'Content-Type': 'application/json' });

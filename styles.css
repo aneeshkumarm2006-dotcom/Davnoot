@@ -4192,3 +4192,167 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
   .host-bio-meta { justify-content: center; }
   .book-form { padding: 32px; }
 }
+
+/* =========================================================
+   404 / 410 — the not-found page (site/404.html + api/page.js)
+
+   Deliberately animated with CSS keyframes only. The rest of the site fades
+   content in with .reveal, which starts at opacity:0 and waits for script.js —
+   fine on a marketing page, fatal on the one page that must render even when
+   everything else has gone wrong.
+   ========================================================= */
+.nf {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 180px 40px 0;
+  position: relative;
+  z-index: 2;
+}
+.nf-code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.1s forwards;
+}
+.nf-code::before {
+  content: '';
+  width: 7px; height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 16px var(--accent);
+  animation: pulse 2s infinite;
+}
+.nf-code .sep { width: 1px; height: 12px; background: var(--text-dim); }
+.nf-title {
+  font-family: var(--font-sans);
+  font-size: clamp(48px, 8.5vw, 128px);
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+  max-width: 1100px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.25s forwards;
+}
+.nf-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+.nf-sub {
+  font-size: 19px;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.5;
+  margin-bottom: 44px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+.nf-cta-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.55s forwards;
+}
+.nf-links {
+  padding-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.7s forwards;
+}
+.nf-links-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-top: 96px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+/* The destination cards are visually a .related-card but deliberately do NOT
+   reuse that class: script.js adds .box-reveal (opacity:0) to every
+   .related-card and only clears it for cards inside a <section>/<footer> the
+   IntersectionObserver watches. On this page they would stay invisible AND
+   unclickable (.box-reveal:not(.in) { pointer-events: none }) forever. Own
+   class names keep the not-found page working with no JS at all. */
+.nf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+.nf-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 160px;
+  transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.45s ease;
+}
+.nf-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-elev);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(10, 10, 10, 0.07);
+}
+.nf-card-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+.nf-card:hover .nf-card-num { color: var(--accent); }
+.nf-card-title {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-top: auto;
+}
+.nf-card-title em { font-family: var(--font-serif); font-style: italic; color: var(--accent); }
+.nf-card-arrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.3s, transform 0.3s;
+}
+.nf-card:hover .nf-card-arrow { color: var(--accent); transform: translateX(4px); }
+
+@media (max-width: 1000px) {
+  .nf { padding: 140px 20px 0; }
+  .nf-links-label { margin-top: 64px; }
+  .nf-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  /* matches .hero-cta-row — stacked, full-bleed buttons rather than two ragged pills */
+  .nf-cta-row { flex-direction: column; align-items: stretch; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nf-code, .nf-title, .nf-sub, .nf-cta-row, .nf-links { opacity: 1; animation: none; }
+  .nf-code::before { animation: none; }
+}
