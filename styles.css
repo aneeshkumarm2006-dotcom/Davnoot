@@ -1572,6 +1572,10 @@ section {
   gap: 16px;
   margin-top: 48px;
 }
+/* 4-up cross-sell band (e.g. /services/klaviyo pairs with four services). Laid out
+   2×2 rather than 4-across so the cards keep the generous width of the 3-up default
+   instead of squeezing their titles onto four lines. */
+.related-grid.related-grid-4 { grid-template-columns: repeat(2, 1fr); }
 .related-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -2121,7 +2125,7 @@ footer {
   .big-quote { display: none; }
   .cap-grid { grid-template-columns: 1fr; border-radius: 12px; }
   .cap-card { padding: 28px; min-height: auto; }
-  .related-grid { grid-template-columns: 1fr; }
+  .related-grid, .related-grid.related-grid-4 { grid-template-columns: 1fr; }
   .service-hero { padding: 130px 20px 60px; }
   .meta-hero-demo .ads-grid-big { grid-template-columns: 1fr; }
 }
