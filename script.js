@@ -702,6 +702,104 @@ async function animShopifyShowcase(frame) {
   if (verdict) verdict.classList.add('show');
 }
 
+// === KLAVIYO FLOW BUILDER ===
+// A Klaviyo flow assembles itself the way it would in the builder: the trigger
+// fires, the email sends and lands in the customer's inbox, then the conditional
+// split decides — bought already? exit. Still hasn't? switch channel and text
+// them. The SMS lands, the order converts, and the attributed revenue counts up.
+//
+// The split is the beat the whole page is arguing for, so it gets its own pause:
+// the branch NOT taken visibly drops away before the SMS node appears.
+//
+// As with the Shopify runner, the HTML holds the FINISHED state (real metrics,
+// both messages, the taken branch) so no-JS and reduced-motion visitors still see
+// the result; this function rewinds it and plays it forward.
+async function animKlaviyoShowcase(frame) {
+  const nameEl = frame.querySelector('.sc-kl-name');
+  const live = frame.querySelector('.sc-kl-live');
+  const trigger = frame.querySelector('.sc-kl-node.trigger');
+  const emailNode = frame.querySelector('.sc-kl-node.email');
+  const smsNode = frame.querySelector('.sc-kl-node.sms');
+  const convert = frame.querySelector('.sc-kl-node.convert');
+  const split = frame.querySelector('.sc-kl-split');
+  const conns = [...frame.querySelectorAll('.sc-kl-conn')];
+  const branchYes = frame.querySelector('.sc-kl-branch.yes');
+  const branchNo = frame.querySelector('.sc-kl-branch.no');
+  const metrics = [...frame.querySelectorAll('.sc-kl-m')];
+  const mail = frame.querySelector('.sc-kl-mail');
+  const sms = frame.querySelector('.sc-kl-sms');
+  const revNum = frame.querySelector('.sc-kl-rev-num');
+
+  // Reset — rewind every finished value back to its starting state
+  const flowName = nameEl ? (nameEl.dataset.q || nameEl.textContent) : '';
+  if (nameEl) { nameEl.dataset.q = flowName; nameEl.textContent = ''; }
+  if (live) live.classList.add('off');
+  [trigger, emailNode, smsNode, convert, split, ...conns].forEach(el => el && el.classList.add('anim-hidden'));
+  if (convert) convert.classList.remove('anim-glow');
+  if (split) split.classList.remove('anim-scan');
+  [branchYes, branchNo].forEach(b => b && b.classList.remove('taken', 'dropped'));
+  [mail, sms].forEach(el => el && el.classList.add('anim-hidden'));
+  metrics.forEach(m => { m.dataset.target = m.dataset.target || m.textContent.trim(); m.textContent = '—'; });
+  if (revNum) { revNum.dataset.to = revNum.dataset.to || revNum.textContent.replace(/\D/g, ''); revNum.textContent = '0'; }
+
+  // Beat timings are tuned to land the whole sequence at ~5.3s: the intro
+  // takeover races this runner against a 6s watchdog, so anything longer gets
+  // its verdict cut off. The other service showcases run ~4.5s.
+  await ShowcaseAnim.delay(200);
+
+  // 1) The flow opens in the builder
+  if (nameEl) {
+    for (let i = 0; i <= flowName.length; i++) { nameEl.textContent = flowName.slice(0, i); await ShowcaseAnim.delay(22); }
+  }
+  if (live) live.classList.remove('off');
+  await ShowcaseAnim.delay(180);
+
+  // 2) Trigger fires, the wait runs, the email sends
+  const land = async (el, ms = 260) => { if (el) el.classList.remove('anim-hidden'); await ShowcaseAnim.delay(ms); };
+  await land(trigger, 280);
+  await land(conns[0], 200);
+  await land(emailNode, 260);
+
+  // 3) ...and arrives in the customer's inbox
+  if (mail) mail.classList.remove('anim-hidden');
+  await ShowcaseAnim.delay(340);
+
+  // 4) The conditional split evaluates: no order yet, so the Yes branch falls away
+  await land(conns[1], 190);
+  await land(split, 220);
+  if (split) split.classList.add('anim-scan');
+  await ShowcaseAnim.delay(500);
+  if (split) split.classList.remove('anim-scan');
+  if (branchYes) branchYes.classList.add('dropped');
+  if (branchNo) branchNo.classList.add('taken');
+  await ShowcaseAnim.delay(330);
+
+  // 5) Channel switch — the SMS sends and lands under the email
+  await land(conns[2], 180);
+  if (smsNode) smsNode.classList.remove('anim-hidden');
+  if (sms) sms.classList.remove('anim-hidden');
+  await ShowcaseAnim.delay(380);
+
+  // 6) The order converts
+  await land(conns[3], 170);
+  await land(convert, 240);
+
+  // 7) Every metric and the attributed revenue count up together
+  metrics.forEach((m, i) => setTimeout(() => {
+    const p = scParse(m.dataset.target);
+    if (p) ShowcaseAnim.countUp(m, 0, p.value, 900, x => scFormat(p, x));
+    else m.textContent = m.dataset.target;
+  }, i * 110));
+  if (revNum) {
+    // Counted by hand rather than through scParse: "47,308" would be read as 47.308.
+    const to = parseInt(revNum.dataset.to, 10);
+    if (to) ShowcaseAnim.countUp(revNum, 0, to, 1200, x => Math.round(x).toLocaleString('en-US'));
+  }
+  await ShowcaseAnim.delay(950);
+
+  if (convert) convert.classList.add('anim-glow');
+}
+
 // === AI SEO intro: full-screen takeover on load, then fades into the page ===
 const SHOWCASE_RUNNERS = {
   seo: animSeoShowcase,
@@ -713,6 +811,7 @@ const SHOWCASE_RUNNERS = {
   software: animSoftwareShowcase,
   shopify: animShopifyShowcase,
   etf: animEtfShowcase,
+  klaviyo: animKlaviyoShowcase,
 };
 
 // Full-screen intro takeover for any page whose showcase has [data-intro]:

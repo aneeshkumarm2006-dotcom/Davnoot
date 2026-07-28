@@ -2666,6 +2666,171 @@ footer {
 @media (max-width: 900px) { .sc-rank-panel { width: 100%; } }
 
 /* Email showcase — automation flow builder + phone preview */
+/* ========================================================================
+   KLAVIYO showcase — a recreation of the Klaviyo flow builder (/services/klaviyo)
+   ------------------------------------------------------------------------
+   --kl-navy is Klaviyo's primary brand colour (#1F3A5F; their palette is navy +
+   black + white, and the logo is a lowercase geometric wordmark with NO
+   standalone icon — so .sc-kl-wordmark is set as text, not a copied mark).
+   Same convention as the Google SERP mock (#4285F4) and the ChatGPT panel
+   (#10a37f): the platform's own colour inside the platform's own chrome.
+   ======================================================================== */
+.sc-kl-layout { --kl-navy: #1F3A5F; display: flex; gap: 28px; align-items: stretch; margin-top: 32px; }
+.sc-kl-app {
+  flex: 1.25; min-width: 0;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.sc-kl-top {
+  display: flex; align-items: center; gap: 14px;
+  padding: 11px 16px; background: var(--kl-navy); color: #fff;
+}
+/* Klaviyo's wordmark is lowercase and tightly set; rendered as type, not artwork. */
+.sc-kl-wordmark {
+  font-family: var(--font-sans); font-size: 15px; font-weight: 600;
+  letter-spacing: -0.045em; color: #fff; flex: none;
+}
+.sc-kl-crumb { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: rgba(255,255,255,0.62); min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.sc-kl-crumb i { font-style: normal; opacity: 0.5; margin: 0 3px; }
+.sc-kl-crumb b { font-weight: 500; color: #fff; }
+.sc-kl-live {
+  margin-left: auto; flex: none; display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: #fff; background: rgba(255,255,255,0.14); border-radius: 100px; padding: 4px 10px;
+  transition: opacity 0.5s ease;
+}
+/* Visible by DEFAULT and hidden by .off, not the reverse: the runner only ever
+   adds .off while rewinding, so a no-JS or reduced-motion visitor still sees the
+   flow in its finished, live state. */
+.sc-kl-live::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #6ee7a8; animation: pulse 2s infinite; }
+.sc-kl-live.off { opacity: 0; }
+.sc-kl-canvas {
+  flex: 1; padding: 18px 18px 20px;
+  background: var(--bg-elev);
+  background-image: radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
+  background-size: 16px 16px;
+}
+.sc-kl-node {
+  position: relative; display: flex; align-items: center; gap: 11px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 11px 13px;
+  transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.45s ease, border-color 0.45s ease;
+}
+.sc-kl-ico {
+  width: 30px; height: 30px; border-radius: 8px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-elev-2); color: var(--text-muted);
+}
+.sc-kl-node.trigger .sc-kl-ico { background: var(--kl-navy); color: #fff; }
+.sc-kl-node.email .sc-kl-ico { background: rgba(31,58,95,0.10); color: var(--kl-navy); }
+.sc-kl-node.sms .sc-kl-ico { background: rgba(31,58,95,0.10); color: var(--kl-navy); }
+.sc-kl-node.convert .sc-kl-ico { background: var(--accent); color: var(--accent-text); }
+.sc-kl-body { flex: 1; min-width: 0; }
+.sc-kl-t { font-size: 13.5px; font-weight: 500; color: var(--text); letter-spacing: -0.01em; }
+.sc-kl-s { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--text-muted); margin-top: 3px; }
+.sc-kl-pill {
+  flex: none; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #fff; background: var(--kl-navy); border-radius: 5px; padding: 4px 8px;
+}
+.sc-kl-stats { flex: none; font-family: var(--font-mono); font-size: 10.5px; color: var(--text-muted); }
+.sc-kl-stats b { font-weight: 600; color: var(--text); }
+.sc-kl-stats i { font-style: normal; opacity: 0.45; margin: 0 3px; }
+.sc-kl-node.convert { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.sc-kl-node.convert .sc-kl-stats b { color: var(--accent); }
+
+/* connector between nodes — the left-anchored vertical spine of the builder, with
+   the delay chip sitting on the rail (rather than centred) so it reads like the
+   real product rather than a generic stepper. 2px, or the dotted canvas eats it. */
+.sc-kl-conn { position: relative; height: 26px; display: flex; align-items: center;
+  transition: opacity 0.45s ease; }
+.sc-kl-conn::before { content: ''; position: absolute; top: -1px; bottom: -1px; left: 27px; width: 2px; border-radius: 2px; background: var(--border-hover); }
+.sc-kl-wait {
+  position: relative; margin-left: 44px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-muted); background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: 100px; padding: 2px 9px;
+}
+
+/* conditional split — the beat that sells the page: bought? stop. didn't? switch channel. */
+.sc-kl-split {
+  background: var(--bg-card); border: 1px dashed var(--border-hover); border-radius: 10px; padding: 11px 13px;
+  transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1),
+              border-color 0.45s ease, box-shadow 0.45s ease;
+}
+.sc-kl-split.anim-scan { border-style: solid; border-color: var(--kl-navy); box-shadow: 0 0 0 1px var(--kl-navy); }
+.sc-kl-split-q { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: var(--text-muted); display: flex; align-items: center; gap: 7px; }
+.sc-kl-split-q i { font-style: normal; opacity: 0.45; }
+.sc-kl-split-ico { color: var(--kl-navy); font-size: 12px; }
+.sc-kl-branches { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.sc-kl-branch {
+  display: flex; align-items: center; gap: 8px; min-width: 0;
+  border: 1px solid var(--border); border-radius: 8px; padding: 7px 9px;
+  background: var(--bg-elev); transition: opacity 0.45s ease, filter 0.45s ease, border-color 0.45s ease, background 0.45s ease;
+}
+.sc-kl-blabel {
+  flex: none; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-muted); background: var(--bg-elev-2); border-radius: 4px; padding: 2px 7px;
+}
+.sc-kl-btext { font-size: 11.5px; line-height: 1.35; color: var(--text-muted); min-width: 0; }
+.sc-kl-branch.taken { border-color: var(--kl-navy); background: rgba(31,58,95,0.07); }
+.sc-kl-branch.taken .sc-kl-blabel { background: var(--kl-navy); color: #fff; }
+.sc-kl-branch.taken .sc-kl-btext { color: var(--text); }
+.sc-kl-branch.dropped { opacity: 0.34; filter: saturate(0.3); }
+
+/* right rail — what the customer actually receives */
+.sc-kl-side { flex: 0.85; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.sc-kl-phone {
+  flex: 1; background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+  box-shadow: 0 12px 34px rgba(0,0,0,0.09);
+}
+.sc-kl-phone-bar { display: flex; gap: 5px; padding: 10px 14px; background: #f0f2f5; }
+.sc-kl-phone-bar span { width: 8px; height: 8px; border-radius: 50%; background: #d3d7dd; }
+.sc-kl-screen { padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+.sc-kl-mail { border: 1px solid #e9ecef; border-radius: 10px; overflow: hidden;
+  transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1); }
+.sc-kl-mail-head { display: flex; align-items: center; gap: 9px; padding: 10px 11px; }
+.sc-kl-avatar { width: 26px; height: 26px; border-radius: 50%; flex: none; background: linear-gradient(135deg, var(--kl-navy), #3d6693); }
+.sc-kl-mail-meta { flex: 1; min-width: 0; }
+.sc-kl-from { font-size: 12px; font-weight: 600; color: #111; }
+.sc-kl-subj { font-size: 11.5px; color: #5c6470; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sc-kl-time { font-family: var(--font-mono); font-size: 9px; color: #9aa1ab; flex: none; }
+.sc-kl-mail-img { height: 86px; overflow: hidden; background: #eef1f4; }
+.sc-kl-mail-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sc-kl-mail-body { padding: 11px; }
+.sc-kl-mail-h { font-family: var(--font-serif); font-size: 15px; font-weight: 500; color: #111; letter-spacing: -0.01em; }
+.sc-kl-mail-body p { font-size: 11.5px; line-height: 1.5; color: #5c6470; margin: 5px 0 9px; }
+.sc-kl-mail-cta { display: inline-block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--kl-navy); color: #fff; border-radius: 6px; padding: 7px 13px; }
+.sc-kl-sms { transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1); }
+.sc-kl-sms-head { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa1ab; margin-bottom: 6px; }
+.sc-kl-bubble {
+  position: relative; font-size: 12px; line-height: 1.45; color: #fff;
+  background: var(--kl-navy); border-radius: 14px 14px 14px 4px; padding: 10px 13px;
+}
+.sc-kl-rev { flex: none; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 15px 17px; }
+.sc-kl-rev-lbl { font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+.sc-kl-rev-val { font-family: var(--font-serif); font-size: 36px; font-weight: 500; line-height: 1; color: var(--accent); margin-top: 6px; letter-spacing: -0.02em; }
+.sc-kl-rev-trend { font-size: 11.5px; color: var(--text-muted); margin-top: 6px; }
+
+@media (max-width: 980px) {
+  .sc-kl-layout { flex-direction: column; }
+  .sc-kl-side { width: 100%; }
+  .sc-kl-branches { grid-template-columns: 1fr; }
+  .sc-kl-stats { font-size: 9.5px; }
+}
+@media (max-width: 700px) {
+  /* Narrow enough that the stats block starves the title and it wraps one word
+     per line. Drop the stats (and the trigger pill) onto their own row, indented
+     to sit under the node title. */
+  .sc-kl-node { flex-wrap: wrap; row-gap: 7px; }
+  .sc-kl-stats { width: 100%; margin-left: 41px; }
+  /* The pill is redundant here — the node's own subtitle already reads
+     "TRIGGER · SHOPIFY" — and dropping it gives the title the full line. */
+  .sc-kl-pill { display: none; }
+  .sc-kl-split-q { display: block; }
+  .sc-kl-split-ico { margin-right: 6px; }
+}
+
 .sc-email-layout { display: flex; gap: 28px; align-items: flex-start; margin-top: 32px; }
 .sc-flow { flex: 1.2; min-width: 0; }
 .flow-node {
@@ -2876,7 +3041,7 @@ footer {
 .ai-intro-panel .showcase-frame { border: none; background: transparent; box-shadow: none; padding: 0; }
 .ai-intro-panel .showcase-frame::before { display: none; }
 .ai-intro-panel .showcase-corner { display: none; }
-.ai-intro-panel .sc-ai-engines, .ai-intro-panel .sc-email-layout { margin-top: 0; }
+.ai-intro-panel .sc-ai-engines, .ai-intro-panel .sc-email-layout, .ai-intro-panel .sc-kl-layout { margin-top: 0; }
 .ai-intro-eyebrow { text-align: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 26px; }
 .ai-intro-skip { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: none; border: 1px solid var(--border); color: var(--text-muted);
   font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; padding: 8px 16px; border-radius: 100px; cursor: pointer; }
