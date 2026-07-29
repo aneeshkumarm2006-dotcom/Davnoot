@@ -21,6 +21,7 @@
     { "source": "/service/social-media-management", "destination": "/services/meta-ads", "permanent": true },
     { "source": "/service/ai-and-machine-learning", "destination": "/services/ai-seo", "permanent": true },
     { "source": "/service/creative-web-design-development", "destination": "/services/software", "permanent": true },
+    { "source": "/service/enterprise-software-development", "destination": "/services/software", "permanent": true },
     { "source": "/contact", "destination": "/book-call", "permanent": true },
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/seo.html", "destination": "/services/seo", "permanent": true },
