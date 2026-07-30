@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
@@ -22,6 +23,13 @@
     { "source": "/service/ai-and-machine-learning", "destination": "/services/ai-seo", "permanent": true },
     { "source": "/service/creative-web-design-development", "destination": "/services/software", "permanent": true },
     { "source": "/service/enterprise-software-development", "destination": "/services/software", "permanent": true },
+    { "source": "/service/high-authority-backlinks-guest-posting-solutions", "destination": "/services/seo", "permanent": true },
+    { "source": "/service/crm-erp", "destination": "/services/software", "permanent": true },
+    { "source": "/service/:slug*", "destination": "/services", "permanent": true },
+    { "source": "/blog-category/seo", "destination": "/blog/category/seo", "permanent": true },
+    { "source": "/blog-category/:slug*", "destination": "/blog", "permanent": true },
+    { "source": "/blog/how-topical-authority-helps-businesses-earn-more-online-visibility-2", "destination": "/blog/how-topical-authority-helps-businesses-earn-more-online-visibility", "permanent": true },
+    { "source": "/about", "destination": "/#about", "permanent": true },
     { "source": "/contact", "destination": "/book-call", "permanent": true },
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/seo.html", "destination": "/services/seo", "permanent": true },
@@ -76,7 +84,8 @@
     { "source": "/meta-ads-montreal", "destination": "/services/meta-ads", "permanent": true },
     { "source": "/meta-ads-ottawa.html", "destination": "/meta-ads-ottawa", "permanent": true },
     { "source": "/meta-ads-toronto.html", "destination": "/meta-ads-toronto", "permanent": true },
-    { "source": "/chatgpt-ads-montreal.html", "destination": "/chatgpt-ads-montreal", "permanent": true },
+    { "source": "/chatgpt-ads-montreal.html", "destination": "/services/chatgpt-ads", "permanent": true },
+    { "source": "/chatgpt-ads-montreal", "destination": "/services/chatgpt-ads", "permanent": true },
     { "source": "/chatgpt-ads-ottawa.html", "destination": "/chatgpt-ads-ottawa", "permanent": true },
     { "source": "/chatgpt-ads-toronto.html", "destination": "/chatgpt-ads-toronto", "permanent": true },
     { "source": "/lib/:path*", "destination": "/", "permanent": false },
@@ -85,6 +94,10 @@
     { "source": "/pages/:path*", "destination": "/", "permanent": false }
   ],
   "rewrites": [
+    { "source": "/project/:slug*", "destination": "/api/gone" },
+    { "source": "/legal/:slug*", "destination": "/api/gone" },
+    { "source": "/blog/achieve-excellence-with-operational-success-solutions-83a12", "destination": "/api/gone" },
+    { "source": "/blog/custom-web-development-design-82508", "destination": "/api/gone" },
     { "source": "/blog", "destination": "/api/blog/index" },
     { "source": "/blog/category/:slug", "destination": "/api/blog/index?category=:slug" },
     { "source": "/blog/:slug", "destination": "/api/blog/post?slug=:slug" },
@@ -130,7 +143,6 @@
     { "source": "/spotify-ads-toronto", "destination": "/spotify-ads-toronto.html" },
     { "source": "/meta-ads-ottawa", "destination": "/meta-ads-ottawa.html" },
     { "source": "/meta-ads-toronto", "destination": "/meta-ads-toronto.html" },
-    { "source": "/chatgpt-ads-montreal", "destination": "/chatgpt-ads-montreal.html" },
     { "source": "/chatgpt-ads-ottawa", "destination": "/chatgpt-ads-ottawa.html" },
     { "source": "/chatgpt-ads-toronto", "destination": "/chatgpt-ads-toronto.html" },
     { "source": "/", "destination": "/index.html" },

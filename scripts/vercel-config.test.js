@@ -70,9 +70,115 @@ describe('vercel.json', () => {
     }
   });
 
-  test('the /blog -> / redirects are GONE (they made the blog unreachable)', () => {
-    const blogRedirect = (config.redirects || []).find((r) => r.source.startsWith('/blog'));
-    assert.equal(blogRedirect, undefined, 'a /blog redirect would shadow the entire blog');
+  test('no redirect can shadow the blog (a /blog -> / rule made it unreachable once)', () => {
+    // Redirects run BEFORE rewrites, so a rule on /blog itself — or on any PATTERN
+    // under /blog/ — swallows the whole blog before /api/blog/* is ever reached.
+    // That shipped once and took the blog offline.
+    //
+    // A LITERAL slug is a different thing entirely and must stay allowed: it is how
+    // a deleted duplicate post gets consolidated onto its canonical URL
+    // (…-online-visibility-2 -> …-online-visibility). So this asserts on the
+    // dangerous SHAPES, not on the /blog prefix.
+    const bad = (config.redirects || []).filter(
+      (r) => r.source === '/blog' || /^\/blog\/.*[:*(]/.test(r.source),
+    );
+    assert.deepEqual(bad.map((r) => r.source), [], 'these would shadow the entire blog');
+  });
+
+  test('every rewrite to an .html file points at a file that exists', () => {
+    // /chatgpt-ads-montreal served a hard 404 to every visitor and crawler for
+    // months: it had a full redirect+rewrite pair in here, but
+    // chatgpt-ads-montreal.html was never on disk — and ads.html plus both other
+    // ChatGPT city pages linked straight to it. The pair-shape test below walks the
+    // files that EXIST and asks "does each have routing?", so it is structurally
+    // blind to routing that points at nothing. This asks the question the other way.
+    for (const rule of config.rewrites || []) {
+      const m = /^\/([\w./-]+\.html)$/.exec(rule.destination);
+      if (!m) continue;
+      assert.ok(
+        fs.existsSync(path.join(ROOT, m[1])),
+        `rewrite ${rule.source} -> ${rule.destination} points at a file that does not exist — ` +
+          'either add the file or retire the route with a 301 to its replacement',
+      );
+    }
+  });
+
+  test('no page links to a path that nothing routes (dead internal links)', () => {
+    // A dead internal link is worse than a dead external one — we are the ones
+    // feeding it to the crawler. This catches an href with NO routing at all; the
+    // rewrite-destination test above is what catches routing that resolves to
+    // nothing (the two together are what /chatgpt-ads-montreal needed).
+    const isVerification = (f) => /^google[0-9a-f]+\.html$/i.test(f);
+    const files = fs
+      .readdirSync(ROOT)
+      .filter((f) => f.endsWith('.html') && !isVerification(f) && f !== NOT_FOUND_FILE);
+
+    const redirectSources = new Set((config.redirects || []).map((r) => r.source));
+    const rewriteSources = new Set((config.rewrites || []).map((r) => r.source));
+    // Patterns (:param / :path*) are matched by prefix rather than exact string.
+    const patternPrefixes = [...redirectSources, ...rewriteSources]
+      .filter((s) => s.includes(':'))
+      .map((s) => s.slice(0, s.indexOf(':')));
+
+    const routed = (href) =>
+      rewriteSources.has(href) ||
+      redirectSources.has(href) ||
+      fs.existsSync(path.join(ROOT, href.replace(/^\//, ''))) ||
+      patternPrefixes.some((p) => href.startsWith(p) && href.length > p.length);
+
+    const dead = [];
+    for (const file of files) {
+      const html = fs.readFileSync(path.join(ROOT, file), 'utf8');
+      for (const m of html.matchAll(/href="(\/[^"#?]*)"/g)) {
+        if (!routed(m[1])) dead.push(`${file} -> ${m[1]}`);
+      }
+    }
+    assert.deepEqual(dead, [], 'these hrefs resolve to nothing');
+  });
+
+  test('the retired URL namespaces of the old site 410 rather than 404', () => {
+    // Google re-crawls a 404 indefinitely ("maybe it comes back") but drops a 410
+    // roughly twice as fast. /project/*, /legal/* and two deleted posts have no
+    // modern equivalent to 301 to, so they get the honest status instead.
+    const rewrite = (src) => (config.rewrites || []).find((r) => r.source === src);
+    for (const src of ['/project/:slug*', '/legal/:slug*']) {
+      assert.equal(rewrite(src)?.destination, '/api/gone', `${src} must rewrite to the 410 handler`);
+    }
+    assert.ok(fs.existsSync(path.join(ROOT, 'api', 'gone.js')), 'api/gone.js is what serves the 410');
+
+    // The two dead /blog/* posts must be matched BEFORE the /blog/:slug catch-all,
+    // or the post handler answers first and they go back to being 404s.
+    const sources = (config.rewrites || []).map((r) => r.source);
+    const catchAll = sources.indexOf('/blog/:slug');
+    for (const src of sources.filter((s) => s.startsWith('/blog/') && s !== '/blog/:slug' && s !== '/blog/category/:slug')) {
+      assert.ok(sources.indexOf(src) < catchAll, `${src} must come before /blog/:slug — first match wins`);
+    }
+  });
+
+  test('the legacy URLs Search Console reports as 404s are 301d to a real page', () => {
+    // Every one of these was a real URL on the pre-2026 site and is still crawled.
+    // The catch-alls (/service/:slug*, /blog-category/:slug*) cover the long tail
+    // that has no specific destination, so nothing in those namespaces 404s again.
+    const expected = {
+      '/about': '/#about',
+      '/service/crm-erp': '/services/software',
+      '/service/high-authority-backlinks-guest-posting-solutions': '/services/seo',
+      '/service/:slug*': '/services',
+      '/blog-category/seo': '/blog/category/seo',
+      '/blog-category/:slug*': '/blog',
+    };
+    const redirects = config.redirects || [];
+    for (const [source, destination] of Object.entries(expected)) {
+      const rd = redirects.find((r) => r.source === source);
+      assert.ok(rd, `missing redirect for ${source}`);
+      assert.equal(rd.destination, destination, `${source} should 301 to ${destination}`);
+      assert.equal(rd.permanent, true, `${source} must be a 301, not a 307`);
+    }
+
+    // Order: a catch-all placed above a specific rule silently eats it.
+    const at = (s) => redirects.findIndex((r) => r.source === s);
+    assert.ok(at('/service/seo') < at('/service/:slug*'), '/service/:slug* must be last in its namespace');
+    assert.ok(at('/blog-category/seo') < at('/blog-category/:slug*'), '/blog-category/:slug* must be last in its namespace');
   });
 
   test('/blog, /blog/:slug and /sitemap.xml are rewritten to their handlers', () => {
