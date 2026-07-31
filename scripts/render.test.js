@@ -6,7 +6,7 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { renderArticlePage, robotsMeta, safeCanonical, renderIndexPage } from '../lib/blog-render.js';
+import { renderArticlePage, robotsMeta, safeCanonical, renderIndexPage, postCard } from '../lib/blog-render.js';
 
 const POST = {
   _id: '507f1f77bcf86cd799439011',
@@ -218,5 +218,75 @@ describe('Index page', () => {
     const html = renderIndexPage({ posts: [POST], page: 2, totalPages: 3 });
     assert.ok(html.includes('rel="prev"'));
     assert.ok(html.includes('<link rel="canonical" href="https://www.davnoot.com/blog?page=2" />'));
+  });
+});
+
+/* ==========================================================================
+ * An EMPTY category archive is a soft 404.
+ *
+ * api/blog/index.js already 404s a category that does not exist. A category that
+ * DOES exist but holds no published posts still returned 200 + "index, follow" with
+ * no content — and /blog links a pill to every category, so Google crawls all of
+ * them. That is the soft-404 the handler's own comment says it avoids.
+ */
+describe('Empty category archives are not indexable', () => {
+  const CAT = { name: 'AI & Search', slug: 'ai-search' };
+
+  test('a category archive with no posts is noindex, follow', () => {
+    const html = renderIndexPage({ posts: [], categories: [CAT], activeCategory: CAT });
+    assert.ok(html.includes('<meta name="robots" content="noindex, follow" />'));
+    assert.equal(html.includes('content="index, follow"'), false);
+  });
+
+  test('the same archive flips back to index once a post is filed under it', () => {
+    const html = renderIndexPage({ posts: [POST], categories: [CAT], activeCategory: CAT });
+    assert.ok(html.includes('<meta name="robots" content="index, follow" />'));
+  });
+
+  test('an empty /blog is NOT de-indexed — that is a launch state, not a soft 404', () => {
+    const html = renderIndexPage({ posts: [], page: 1, totalPages: 1 });
+    assert.ok(html.includes('<meta name="robots" content="index, follow" />'));
+  });
+});
+
+/* ==========================================================================
+ * The "more from the blog" rail.
+ *
+ * This existed as a live 500 on EVERY post: renderRelated did `related.map(postCard)`,
+ * and Array.map hands the INDEX to the callback's second parameter — postCard's
+ * `catNames` slot. A related post carrying a category then evaluated
+ * `catNames.get(slug)` against the number 0 and threw, so api/blog/post.js fell into
+ * its catch and served "Something went wrong". Posts whose related rail happened to
+ * hold only uncategorised posts still worked, which is why it looked intermittent.
+ */
+describe('Related rail', () => {
+  const CATEGORISED = { ...POST, _id: 'b', slug: 'other-post', categories: ['seo'], tags: ['SEO'] };
+
+  test('a categorised related post does not throw (regression: .map(postCard))', () => {
+    const html = renderArticlePage(POST, { related: [CATEGORISED] });
+    assert.ok(html.includes('More from the blog'));
+    assert.ok(html.includes('href="/blog/other-post"'));
+  });
+
+  test('every related card renders, not just the first', () => {
+    const related = [CATEGORISED, { ...CATEGORISED, _id: 'c', slug: 'third-post' }];
+    const html = renderArticlePage(POST, { related });
+    assert.ok(html.includes('href="/blog/other-post"'));
+    assert.ok(html.includes('href="/blog/third-post"'));
+  });
+
+  test('postCard survives a non-Map second argument instead of throwing', () => {
+    assert.doesNotThrow(() => postCard(CATEGORISED, 0));
+    // …and degrades to the free-text tag chip, which is the documented fallback.
+    assert.ok(postCard(CATEGORISED, 0).includes('>SEO</span>'));
+  });
+
+  test('a real Map still resolves the category display name', () => {
+    const names = new Map([['seo', 'SEO & Search']]);
+    assert.ok(postCard(CATEGORISED, names).includes('>SEO &amp; Search</span>'));
+  });
+
+  test('no related posts renders no rail at all', () => {
+    assert.equal(renderArticlePage(POST, { related: [] }).includes('More from the blog'), false);
   });
 });

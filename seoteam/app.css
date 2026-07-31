@@ -37,6 +37,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* The `hidden` attribute must actually hide.
+ *
+ * The UA rule is `[hidden] { display: none }` — a plain attribute selector that ANY
+ * class setting `display` outranks. `.btn { display: inline-flex }` did exactly that,
+ * so the editor's "Open full preview" link stayed visible on an unsaved post despite
+ * carrying `hidden`, and pointed at /seoteam/preview/ with no id — which drops the
+ * author on "Couldn't open that post". Every toggle in the dashboard drives `.hidden`,
+ * so this needs to win globally rather than be patched per component. */
+[hidden] { display: none !important; }
+
 a { color: inherit; }
 .muted { color: var(--text-muted); }
 .small { font-size: 12px; }
