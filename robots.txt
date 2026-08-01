@@ -21,3 +21,8 @@ User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://www.davnoot.com/sitemap.xml
+
+# llms.txt — the curated markdown index for answer engines (llmstxt.org).
+# There is no standardised robots.txt directive for it, so this is a comment by
+# design: the file is discovered at its well-known path, not from here.
+# https://www.davnoot.com/llms.txt

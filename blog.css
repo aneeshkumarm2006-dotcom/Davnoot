@@ -220,6 +220,85 @@
   text-transform: uppercase;
   color: var(--text-dim);
 }
+/* Numbered pages. `.page-step` keeps the prev/next arrows the same width whether or
+   not they're links, so the number strip stays optically centred on page 1 and on
+   the last page instead of sliding left and right as you paginate. */
+.page-nums {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.page-step { min-width: 74px; }
+.page-step.is-off { visibility: hidden; }
+.blog-pagination .page-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: var(--text-dim);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+.blog-pagination a.page-num:hover {
+  color: var(--text);
+  border-color: var(--border);
+  text-decoration: none;
+}
+.blog-pagination .page-num.is-current { color: var(--text); border-color: var(--border); }
+.page-gap { color: var(--text-dim); padding: 0 2px; }
+
+/* --- Category archive: intro copy + the "where next" rail -------------- */
+
+/* Both of these exist because a category archive used to be a heading and a card
+   grid — under 200 words of unique text, six near-identical pages. See
+   renderArchiveIntro / renderArchiveFooter in lib/blog-render.js. */
+.archive-intro {
+  max-width: 62ch;
+  margin-top: 24px;
+}
+.archive-intro p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.archive-intro p + p { margin-top: 14px; }
+
+.archive-more {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 48px;
+  margin-top: 72px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.archive-more h2 {
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+.archive-more p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+.archive-more ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-top: 16px;
+}
+.archive-more a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+.archive-more a:hover { color: var(--accent); border-bottom-color: currentColor; }
+.archive-more ul + p { margin-top: 18px; }
 
 /* --- Empty / 404 ------------------------------------------------------ */
 
@@ -543,6 +622,10 @@
   .post-body { font-size: 17px; }
   .post-grid { grid-template-columns: 1fr; }
   .blog-pagination { flex-direction: column; gap: 12px; }
+  /* Stacked, the hidden prev/next placeholders would add two blank rows. */
+  .page-step { min-width: 0; }
+  .page-step.is-off { display: none; }
+  .archive-more { grid-template-columns: 1fr; gap: 36px; }
 }
 
 /* ========================================================================

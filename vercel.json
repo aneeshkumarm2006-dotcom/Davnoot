@@ -103,6 +103,7 @@
     { "source": "/blog/category/:slug", "destination": "/api/blog/index?category=:slug" },
     { "source": "/blog/:slug", "destination": "/api/blog/post?slug=:slug" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+    { "source": "/llms.txt", "destination": "/api/llms" },
     { "source": "/seoteam/login", "destination": "/seoteam/login.html" },
     { "source": "/seoteam/preview/:id", "destination": "/api/seoteam/preview?id=:id" },
     { "source": "/seoteam", "destination": "/seoteam/index.html" },

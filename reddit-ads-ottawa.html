@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.min.css" />
   <!-- BUILD:SEO -->
 <link rel="canonical" href="https://www.davnoot.com/reddit-ads-ottawa" />
 <meta name="robots" content="index, follow" />
@@ -137,6 +137,7 @@
 </nav>
 <!-- /BUILD:NAV -->
 
+  <main id="main">
   <!-- HERO -->
   <header class="service-hero">
     <div class="breadcrumb">
@@ -389,45 +390,45 @@
     </div>
 
     <div class="faq-list reveal">
-      <div class="faq-item">
+      <article class="faq-item">
         <div class="faq-q"><span>Does Reddit advertising work for Ottawa's public-sector and B2B market?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">It can work well, because Ottawa's professional buyers research carefully before they commit
           and Reddit reaches them mid-research. The key is treating it as a considered-purchase channel: measured
           creative, precise community targeting, and retargeting that stays present through a longer evaluation or
           procurement cycle rather than chasing an instant click.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>Which subreddits matter for an Ottawa campaign?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">r/ottawa is the main local hub, but for B2B and GovTech the industry, career, and tech
           subreddits where capital-region professionals actually spend time often matter more than the city subreddit
           alone. We build the community map in the audit, weighting it toward where your specific buyer reads rather than
           raw local reach.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>Do you run Ottawa Reddit ads in both English and French?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Yes. Ottawa is officially bilingual and a meaningful share of the capital audience reads and
           buys in French, so we write native creative in both languages and test which performs better by community. We
           don't just translate one ad into the other, since a machine-translated post reads as exactly that.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>How do you track conversions for an Ottawa Reddit campaign?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">We install the Reddit Pixel and the Conversions API for cookie-resilient, server-side
           tracking, then report against cost per acquisition and return on ad spend. For longer capital-region B2B
           cycles we also track assisted conversions and pipeline influence, so Reddit gets credit for the qualified leads
           it warms up, not only the ones that close the same week.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>What budget do I need to start Reddit ads in Ottawa?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Reddit's lower CPMs let you gather signal on a modest budget, but you need enough to test a few
           communities and angles before optimizing. Ottawa is a smaller, more specialized market than Toronto, so
           audiences are tighter and we recommend a specific starting budget in the audit based on your category, target
           communities, and the value of a converted buyer.</div>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -476,7 +477,8 @@
     </div>
   </section>
 
-  <!-- BUILD:FOOTER -->
+    </main>
+<!-- BUILD:FOOTER -->
 <footer id="contact">
   <div class="footer-top">
     <div>
@@ -508,6 +510,14 @@
         <li><a href="/#about" data-cursor>About</a></li>
         <li><a href="/#results" data-cursor>Work</a></li>
         <li><a href="/#process" data-cursor>Process</a></li>
+        <li><a href="/blog" data-cursor>Blog</a></li>
+      </ul>
+      
+      <h4>Specialties</h4>
+      <ul>
+        <li><a href="/ai-seo-agency" data-cursor>AI SEO Agency</a></li>
+        <li><a href="/ai-seo-montreal" data-cursor>AI SEO Montreal</a></li>
+        <li><a href="/etf-marketing" data-cursor>ETF Marketing</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -525,13 +535,14 @@
 
   <div class="footer-bottom">
     <span>© 2025 Davnoot. All rights reserved.</span>
+    <a href="/privacy" data-cursor>Privacy Policy</a>
     <span>Built with intent in Montreal</span>
   </div>
 </footer>
 <!-- /BUILD:FOOTER -->
 
 
-  <script src="/script.js"></script>
+  <script src="/script.min.js"></script>
 </body>
 
 </html>

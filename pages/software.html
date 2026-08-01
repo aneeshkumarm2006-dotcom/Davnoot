@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.min.css" />
   <!-- BUILD:SEO -->
 <link rel="canonical" href="https://www.davnoot.com/services/software" />
 <meta name="robots" content="index, follow" />
@@ -148,6 +148,7 @@
 </nav>
 <!-- /BUILD:NAV -->
 
+  <main id="main">
   <header class="service-hero" data-cms-section="hero" data-cms-label="Hero">
     <div class="breadcrumb">
       <a href="/" data-cursor>Davnoot</a>
@@ -735,37 +736,37 @@
     </div>
 
     <div class="faq-list reveal">
-      <div class="faq-item">
+      <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.0.q">Do I own the code you write?</span><span class="faq-toggle">+</span></div>
         <div class="faq-a" data-cms="faq.0.a">Completely. Your GitHub, your repos, your IP from sprint one. We work in your environment,
           not behind a curtain. If you want to take the code elsewhere at any point, nothing stops you.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.1.q">How do you handle scope creep?</span><span class="faq-toggle">+</span></div>
         <div class="faq-a" data-cms="faq.1.a">Scope is locked after the 2-week discovery sprint. New requests get explicit change orders
           with revised timeline and cost. You decide whether they're worth it. No hidden creep, no surprise invoices.
         </div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.2.q">What's the smallest project you'll take on?</span><span class="faq-toggle">+</span>
         </div>
         <div class="faq-a" data-cms="faq.2.a">Practical floor is about $40k. Below that, the discovery overhead eats too much of the
           project. Most builds are $60k–$300k for a first deliverable, then optional ongoing support.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.3.q">Will the code be maintainable after handoff?</span><span class="faq-toggle">+</span>
         </div>
         <div class="faq-a" data-cms="faq.3.a">That's the whole point. Modern stack, conventional architecture, real documentation, test
           coverage, and CI/CD. Any competent engineer should be able to pick it up. We routinely hand off to in-house
           teams who continue building on top of what we shipped.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.4.q">Do you offer ongoing support after launch?</span><span class="faq-toggle">+</span>
         </div>
         <div class="faq-a" data-cms="faq.4.a">Optional. Monthly retainer for maintenance, new features, and on-call. About 70% of clients
           renew because we already know the system. It's never required, and you can take support in-house any
           time.</div>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -808,7 +809,8 @@
     </div>
   </section>
 
-  <!-- BUILD:FOOTER -->
+    </main>
+<!-- BUILD:FOOTER -->
 <footer id="contact">
   <div class="footer-top">
     <div>
@@ -840,6 +842,14 @@
         <li><a href="/#about" data-cursor>About</a></li>
         <li><a href="/#results" data-cursor>Work</a></li>
         <li><a href="/#process" data-cursor>Process</a></li>
+        <li><a href="/blog" data-cursor>Blog</a></li>
+      </ul>
+      
+      <h4>Specialties</h4>
+      <ul>
+        <li><a href="/ai-seo-agency" data-cursor>AI SEO Agency</a></li>
+        <li><a href="/ai-seo-montreal" data-cursor>AI SEO Montreal</a></li>
+        <li><a href="/etf-marketing" data-cursor>ETF Marketing</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -857,13 +867,14 @@
 
   <div class="footer-bottom">
     <span>© 2025 Davnoot. All rights reserved.</span>
+    <a href="/privacy" data-cursor>Privacy Policy</a>
     <span>Built with intent in Montreal</span>
   </div>
 </footer>
 <!-- /BUILD:FOOTER -->
 
 
-  <script src="/script.js"></script>
+  <script src="/script.min.js"></script>
 </body>
 
 </html>

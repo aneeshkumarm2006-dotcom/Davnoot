@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.min.css" />
   <!-- BUILD:SEO -->
 <link rel="canonical" href="https://www.davnoot.com/ads/spotify-ads" />
 <meta name="robots" content="index, follow" />
@@ -156,6 +156,7 @@
 </nav>
 <!-- /BUILD:NAV -->
 
+  <main id="main">
   <!-- HERO -->
   <header class="service-hero">
     <div class="breadcrumb">
@@ -615,14 +616,14 @@
     </div>
 
     <div class="faq-list reveal">
-      <div class="faq-item">
+      <article class="faq-item">
         <div class="faq-q"><span>Who actually hears Spotify audio ads?</span><span class="faq-toggle">+</span></div>
         <div class="faq-a">Audio and video ads serve to Spotify's free, ad-supported listeners, since Premium is
           ad-free. That's still a large, highly engaged audience, and it skews toward younger, cord-cutting buyers who
           are hard to reach on broadcast. Podcasts are the exception: their host-read and dynamically inserted ads reach
           both free and Premium listeners, so a podcast sponsorship covers the whole base.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>What's the difference between audio ads and podcast ads?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Audio ads are your own produced spot, bought through Ad Studio and inserted between tracks on
@@ -630,38 +631,38 @@
           creator voices your message, or dynamically inserted, where your spot is placed programmatically across
           episodes. Host-read borrows the host's credibility. Audio ads give you more control over targeting and
           creative. Most brands run both.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>How is Spotify targeting different from Meta or Google?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Spotify targets the moment, not just the person. Alongside age, gender, and location, you can
           reach listeners by genre, playlist, device, and real-time activity: working out, commuting, studying,
           cooking, or winding down. That context is unique to audio. It lets you match the message to what someone is
           doing, which is why a focus-session ad and a party-playlist ad should never be the same spot.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>Do Spotify ads drive conversions or just awareness?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Both, if you set them up to. Audio's core strength is reach and recall, so it fills the top of
           the funnel better than almost anything. But with the Spotify Pixel, promo codes, and a retargeting layer on
           paid social, you can connect that reach to action. We treat Spotify as demand generation that warms audiences
           your other channels then convert, and we measure it that way.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>What's the minimum budget to run Spotify ads?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Spotify Ad Studio is self-serve with a low entry point, so you can start a test campaign for a
           few hundred dollars. Meaningful reach and a readable brand-lift signal take more, and premium formats like
           Video Takeover, Marquee, and larger podcast sponsorships carry higher minimums. We scope the budget to the
           goal in the audit rather than pushing you to a package.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>Can you produce the audio creative in French?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Yes. We write, cast, and mix in both English and French, which matters for the Montreal
           market and any bilingual audience. Audio creative is written for the ear from scratch, not translated from a
           display ad, so each language reads naturally rather than sounding dubbed.</div>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -740,7 +741,8 @@
     </div>
   </section>
 
-  <!-- BUILD:FOOTER -->
+    </main>
+<!-- BUILD:FOOTER -->
 <footer id="contact">
   <div class="footer-top">
     <div>
@@ -772,6 +774,14 @@
         <li><a href="/#about" data-cursor>About</a></li>
         <li><a href="/#results" data-cursor>Work</a></li>
         <li><a href="/#process" data-cursor>Process</a></li>
+        <li><a href="/blog" data-cursor>Blog</a></li>
+      </ul>
+      
+      <h4>Specialties</h4>
+      <ul>
+        <li><a href="/ai-seo-agency" data-cursor>AI SEO Agency</a></li>
+        <li><a href="/ai-seo-montreal" data-cursor>AI SEO Montreal</a></li>
+        <li><a href="/etf-marketing" data-cursor>ETF Marketing</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -789,13 +799,14 @@
 
   <div class="footer-bottom">
     <span>© 2025 Davnoot. All rights reserved.</span>
+    <a href="/privacy" data-cursor>Privacy Policy</a>
     <span>Built with intent in Montreal</span>
   </div>
 </footer>
 <!-- /BUILD:FOOTER -->
 
 
-  <script src="/script.js"></script>
+  <script src="/script.min.js"></script>
 </body>
 
 </html>

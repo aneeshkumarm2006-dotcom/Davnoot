@@ -248,12 +248,16 @@ describe('Phase 5 — a composed page renders its library sections end to end', 
 
     const live = await call(page, mockReq({ query: { p: 'services-x' } }));
     assert.equal(live.statusCode, 200);
-    // The real marketing classes are present -> styles.css/script.js apply.
+    // The real marketing classes are present -> styles.min.css/script.min.js apply.
     for (const cls of ['service-hero', 'cap-grid', 'cap-card', 'faq-list', 'faq-item']) {
       assert.ok(live.body.includes(cls), `composed page is missing .${cls}`);
     }
     // The shared shell + a single, valid, FAQ-bearing JSON-LD graph.
-    assert.match(live.body, /<script src="\/script\.js">/);
+    // .min is the point, not an incidental rename: a composed page that loaded the
+    // 154 kB unminified source would silently undo the asset work for /admin pages
+    // only, which is exactly the kind of gap nobody notices until the next audit.
+    assert.match(live.body, /<script src="\/script\.min\.js">/);
+    assert.match(live.body, /<main id="main">/, 'a composed page needs the same content landmark as every other page');
     assert.equal((live.body.match(/rel="canonical"/g) || []).length, 1);
     const m = live.body.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
     const graph = JSON.parse(m[1].replace(/\u003c/g, '<'));

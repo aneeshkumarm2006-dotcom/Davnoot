@@ -29,7 +29,7 @@
  * lastmod is NEVER `new Date()`. A sitemap whose lastmod churns on every fetch
  * teaches Google to ignore the field entirely.
  */
-import { posts, pages } from '../lib/db.js';
+import { posts, pages, categories } from '../lib/db.js';
 import { publishedFilter } from '../lib/blog-query.js';
 import { SITE_URL, canonicalFor } from '../lib/templates.js';
 import { STATIC_URLS } from '../lib/sitemap-static.js';
@@ -170,6 +170,7 @@ export default async function handler(req, res) {
 
   // ---- 3b. The blog. ----
   let blogCount = 0;
+  let categoryCount = 0;
   try {
     const docs = await bounded(
       (async () =>
@@ -203,8 +204,50 @@ export default async function handler(req, res) {
     console.error('[sitemap] could not read posts, serving pages only:', err);
   }
 
+  /* ---- 3c. Category archives. -------------------------------------------
+   * /blog links a pill to every one of these and they render "index, follow" the
+   * moment they hold a post, yet none of them was ever submitted — indexable,
+   * linked, and absent from the sitemap.
+   *
+   * The post-count filter is not optional. lib/blog-render.js sets an EMPTY archive
+   * to "noindex, follow" on purpose (an empty archive is a soft 404 with a real URL),
+   * and advertising a noindexed URL is the exact contradiction this file already
+   * refuses to commit for pages — Search Console reports it as an error. So an
+   * archive enters the sitemap when, and only when, it has at least one published
+   * post, and leaves again by itself if it ever empties out. */
+  try {
+    const [cats, counts] = await bounded(
+      (async () => {
+        const [c, p] = [await categories(), await posts()];
+        return Promise.all([
+          c.find({}, { projection: { slug: 1, _id: 0 } }).limit(500).toArray(),
+          p.aggregate([
+            { $match: publishedFilter() },
+            { $unwind: '$categories' },
+            { $group: { _id: '$categories', n: { $sum: 1 }, last: { $max: '$publishedAt' } } },
+          ]).toArray(),
+        ]);
+      })(),
+    );
+
+    const stats = new Map(counts.map((c) => [c._id, c]));
+    for (const cat of cats) {
+      const s = stats.get(cat.slug);
+      if (!s?.n) continue; // empty archive -> noindex -> must not be advertised
+      entries.push({
+        loc: `${BLOG_INDEX}/category/${cat.slug}`,
+        lastmod: day(s.last),
+        changefreq: 'weekly',
+        priority: '0.5',
+      });
+      categoryCount++;
+    }
+  } catch (err) {
+    console.error('[sitemap] could not read categories, skipping archives:', err?.message || err);
+  }
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<!-- ${Object.keys(COMPILED_PAGES).length} CMS page(s) from COMPILED_PAGES${pagesDegraded ? ' (Mongo unavailable — compiled defaults)' : ''} + ${STATIC_URLS.length} static + ${blogCount} published post(s). -->
+<!-- ${Object.keys(COMPILED_PAGES).length} CMS page(s) from COMPILED_PAGES${pagesDegraded ? ' (Mongo unavailable — compiled defaults)' : ''} + ${STATIC_URLS.length} static + ${blogCount} published post(s) + ${categoryCount} non-empty category archive(s). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${entries.map(urlEntry).join('\n')}
 </urlset>

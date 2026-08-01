@@ -1011,11 +1011,27 @@ select.input { cursor: pointer; }
 }
 .cat-create .input { flex: 1; }
 
-.cat-table td { vertical-align: middle; }
+.cat-table td { vertical-align: top; padding-top: 14px; }
 .cat-table .cell-title strong { font-weight: 600; }
 .cat-table a.muted { text-decoration: none; }
 .cat-table a.muted:hover { text-decoration: underline; color: var(--text); }
-.cat-rename-input { max-width: 260px; }
+.cat-rename-input { max-width: 360px; }
+
+/* The archive-page description. Empty is called out rather than left blank: a
+   category with no description renders a thin archive, which is what the
+   2026-08-01 audit flagged on all six of them. */
+.cat-table .cell-title { max-width: 460px; }
+.cat-desc { margin-top: 6px; line-height: 1.5; }
+.cat-desc-missing { margin-top: 6px; color: var(--warn, #b4780a); }
+.cat-desc-input {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  margin-top: 8px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.cat-desc-input + .small { display: block; margin-top: 6px; }
 
 /* The checkbox list inside the editor's Categories card. */
 .cat-checks {

@@ -60,7 +60,7 @@ async function create(req, res) {
   const slug = await resolveUniqueSlug(col, parsed.data.slug || parsed.data.name);
 
   const now = new Date();
-  const doc = { name: parsed.data.name, slug, createdAt: now, updatedAt: now };
+  const doc = { name: parsed.data.name, slug, description: parsed.data.description || '', createdAt: now, updatedAt: now };
   const result = await col.insertOne(doc);
 
   return res.status(201).json({ category: { _id: result.insertedId, ...doc } });

@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.min.css" />
   <!-- BUILD:SEO -->
 <link rel="canonical" href="https://www.davnoot.com/reddit-ads-montreal" />
 <meta name="robots" content="index, follow" />
@@ -137,6 +137,7 @@
 </nav>
 <!-- /BUILD:NAV -->
 
+  <main id="main">
   <!-- HERO -->
   <header class="service-hero">
     <div class="breadcrumb">
@@ -389,45 +390,45 @@
     </div>
 
     <div class="faq-list reveal">
-      <div class="faq-item">
+      <article class="faq-item">
         <div class="faq-q"><span>Which subreddits should a Montreal business target?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">It depends on your category, but the usual starting points are r/montreal and r/quebec for
           broad local reach, plus the neighbourhood, interest, and industry subreddits where your specific buyers
           gather. We build the community map in the audit, then narrow to the handful of threads that actually convert
           rather than spraying budget across everything with "Montreal" in the name.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>Do you run Reddit ads in French for the Quebec market?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Yes. We write native creative in both English and French rather than translating one into the
           other, because Montreal redditors switch languages constantly and can spot a machine translation instantly. We
           also test which language performs better in each community, since it varies more than people expect between
           r/montreal and r/quebec.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>Are you actually based in Montreal?</span><span class="faq-toggle">+</span></div>
         <div class="faq-a">We are. Davnoot is a Montreal agency, which is why we can write Reddit creative that reads
           like it came from someone who lives here instead of a template with the city name dropped in. It also means we
           understand the local norms about what the community tolerates from advertisers and what gets downvoted into
           oblivion.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>How do you track conversions for a Montreal Reddit campaign?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">We install the Reddit Pixel and the Conversions API for cookie-resilient, server-side
           tracking, then report against cost per acquisition and return on ad spend, not upvotes. For Montreal clients
           running EN and FR at once, we break out performance by language so you can see which side of the market is
           driving the cheaper conversions.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>What budget do I need to start Reddit ads in Montreal?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Reddit's lower CPMs mean you can gather real signal on a modest budget, but you need enough to
           test a few communities and creative angles, in both languages, before optimizing. Because Montreal is a
           mid-sized market, audiences are tighter than a national campaign, so we recommend a specific starting budget in
           the audit based on your category and target subreddits.</div>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -481,7 +482,8 @@
     </div>
   </section>
 
-  <!-- BUILD:FOOTER -->
+    </main>
+<!-- BUILD:FOOTER -->
 <footer id="contact">
   <div class="footer-top">
     <div>
@@ -513,6 +515,14 @@
         <li><a href="/#about" data-cursor>About</a></li>
         <li><a href="/#results" data-cursor>Work</a></li>
         <li><a href="/#process" data-cursor>Process</a></li>
+        <li><a href="/blog" data-cursor>Blog</a></li>
+      </ul>
+      
+      <h4>Specialties</h4>
+      <ul>
+        <li><a href="/ai-seo-agency" data-cursor>AI SEO Agency</a></li>
+        <li><a href="/ai-seo-montreal" data-cursor>AI SEO Montreal</a></li>
+        <li><a href="/etf-marketing" data-cursor>ETF Marketing</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -530,13 +540,14 @@
 
   <div class="footer-bottom">
     <span>© 2025 Davnoot. All rights reserved.</span>
+    <a href="/privacy" data-cursor>Privacy Policy</a>
     <span>Built with intent in Montreal</span>
   </div>
 </footer>
 <!-- /BUILD:FOOTER -->
 
 
-  <script src="/script.js"></script>
+  <script src="/script.min.js"></script>
 </body>
 
 </html>

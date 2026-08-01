@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.min.css" />
   <!-- BUILD:SEO -->
 <link rel="canonical" href="https://www.davnoot.com/services/google-ads" />
 <meta name="robots" content="index, follow" />
@@ -148,6 +148,7 @@
 </nav>
 <!-- /BUILD:NAV -->
 
+  <main id="main">
   <header class="service-hero">
     <div class="breadcrumb">
       <a href="/" data-cursor>Davnoot</a>
@@ -860,32 +861,32 @@
     </div>
 
     <div class="faq-list reveal">
-      <div class="faq-item">
+      <article class="faq-item">
         <div class="faq-q"><span>Why hire a Google Ads agency in Montreal?</span><span class="faq-toggle">+</span></div>
         <div class="faq-a">Working with a local Google Ads agency gives you access to PPC specialists who understand
           your market, competitors, and customer behavior. We build campaigns focused on measurable business growth
           rather than simply increasing clicks.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>What Google Ads campaigns do you manage?</span><span class="faq-toggle">+</span></div>
         <div class="faq-a">We manage Search, Performance Max, Shopping, Display, YouTube, Remarketing, Local, and Lead
           Generation campaigns.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>Are you Google Ads certified?</span><span class="faq-toggle">+</span></div>
         <div class="faq-a">Yes. Our specialists follow Google Ads best practices and continuously optimize campaigns
           using the latest bidding strategies, conversion tracking, and performance insights.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>How quickly will I see results?</span><span class="faq-toggle">+</span></div>
         <div class="faq-a">Unlike SEO, Google Ads can begin generating traffic and leads almost immediately after
           campaigns launch. Performance improves over time as campaigns collect data and optimizations are made.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>How do you measure campaign success?</span><span class="faq-toggle">+</span></div>
         <div class="faq-a">We focus on business metrics including conversions, qualified leads, return on ad spend
           (ROAS), cost per acquisition (CPA), revenue, and overall ROI rather than clicks alone.</div>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -944,7 +945,8 @@
     </div>
   </section>
 
-  <!-- BUILD:FOOTER -->
+    </main>
+<!-- BUILD:FOOTER -->
 <footer id="contact">
   <div class="footer-top">
     <div>
@@ -976,6 +978,14 @@
         <li><a href="/#about" data-cursor>About</a></li>
         <li><a href="/#results" data-cursor>Work</a></li>
         <li><a href="/#process" data-cursor>Process</a></li>
+        <li><a href="/blog" data-cursor>Blog</a></li>
+      </ul>
+      
+      <h4>Specialties</h4>
+      <ul>
+        <li><a href="/ai-seo-agency" data-cursor>AI SEO Agency</a></li>
+        <li><a href="/ai-seo-montreal" data-cursor>AI SEO Montreal</a></li>
+        <li><a href="/etf-marketing" data-cursor>ETF Marketing</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -993,13 +1003,14 @@
 
   <div class="footer-bottom">
     <span>© 2025 Davnoot. All rights reserved.</span>
+    <a href="/privacy" data-cursor>Privacy Policy</a>
     <span>Built with intent in Montreal</span>
   </div>
 </footer>
 <!-- /BUILD:FOOTER -->
 
 
-  <script src="/script.js"></script>
+  <script src="/script.min.js"></script>
 </body>
 
 </html>

@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.min.css" />
   <!-- BUILD:SEO -->
 <link rel="canonical" href="https://www.davnoot.com/" />
 <meta name="robots" content="index, follow" />
@@ -127,6 +127,7 @@
 </nav>
 <!-- /BUILD:NAV -->
 
+  <main id="main">
   <!-- HERO -->
   <header class="hero">
     <div class="hero-grid">
@@ -432,33 +433,33 @@
     </div>
 
     <div class="results-grid reveal">
-      <div class="result-card" data-cursor>
+      <article class="result-card" data-cursor>
         <div class="result-tag">Meta Ads · SEO</div>
         <div class="result-metric">+384%</div>
         <p class="result-desc">Return on ad spend in 6 months for a DTC skincare brand entering a saturated category.
         </p>
         <div class="result-client">Confidential · Skincare</div>
-      </div>
+      </article>
 
-      <div class="result-card" data-cursor>
+      <article class="result-card" data-cursor>
         <div class="result-tag">SEO · AI SEO</div>
         <div class="result-metric">+612%</div>
         <p class="result-desc">Organic traffic growth year-over-year with featured snippets across 40+ keywords.</p>
         <div class="result-client">Confidential · E-comm</div>
-      </div>
+      </article>
 
-      <div class="result-card" data-cursor>
+      <article class="result-card" data-cursor>
         <div class="result-tag">Email · Software</div>
         <div class="result-metric">+18×</div>
         <p class="result-desc">Email-attributed revenue after rebuilding flows, segments, and a custom analytics
           dashboard.</p>
         <div class="result-client">Confidential · Lifestyle</div>
-      </div>
+      </article>
     </div>
   </section>
 
   <!-- LOGOS -->
-  <div class="logos-section">
+  <section class="logos-section">
     <div class="logos-label">Trusted by ambitious brands</div>
     <div class="logos-track">
       <div class="logo-item">Jasztex</div>
@@ -535,7 +536,7 @@
       <div class="logo-item sans">Fondly Gifts</div>
       <div class="logo-item mono">The Kebab Shop</div>
     </div>
-  </div>
+  </section>
 
   <!-- TESTIMONIAL -->
   <section id="about" data-cms-section="section3" data-cms-label="Section 3">
@@ -632,7 +633,8 @@
         <span class="arrow">→</span>
       </a>
     </div>
-  </section>
+  </section>  </main>
+
 
   <!-- FOOTER -->
   <!-- BUILD:FOOTER -->
@@ -667,6 +669,14 @@
         <li><a href="#about" data-cursor>About</a></li>
         <li><a href="#results" data-cursor>Work</a></li>
         <li><a href="#process" data-cursor>Process</a></li>
+        <li><a href="/blog" data-cursor>Blog</a></li>
+      </ul>
+      
+      <h4>Specialties</h4>
+      <ul>
+        <li><a href="/ai-seo-agency" data-cursor>AI SEO Agency</a></li>
+        <li><a href="/ai-seo-montreal" data-cursor>AI SEO Montreal</a></li>
+        <li><a href="/etf-marketing" data-cursor>ETF Marketing</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -684,13 +694,14 @@
 
   <div class="footer-bottom">
     <span>© 2025 Davnoot. All rights reserved.</span>
+    <a href="/privacy" data-cursor>Privacy Policy</a>
     <span>Built with intent in Montreal</span>
   </div>
 </footer>
 <!-- /BUILD:FOOTER -->
 
 
-  <script src="/script.js"></script>
+  <script src="/script.min.js"></script>
 </body>
 
 </html>

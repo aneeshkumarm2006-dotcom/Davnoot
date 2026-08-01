@@ -13,12 +13,16 @@
       "site with zero build step; adding a `build` script would make Vercel start",
       "building and change the output directory resolution. Dependencies here exist",
       "for the /api serverless functions, which Vercel installs and traces on deploy.",
-      "Run `npm run site` and `npm run bundle` locally and COMMIT their output."
+      "Run `npm run site` and `npm run bundle` locally and COMMIT their output.",
+      "That now includes styles.min.css / blog.min.css / script.min.js — the files the",
+      "browser actually loads. `npm run site` regenerates them; scripts/assets.test.js",
+      "fails if a committed .min file is stale relative to its source."
     ]
   },
   "scripts": {
     "dev": "node scripts/dev.js",
-    "site": "node build.js && node scripts/compile-pages.js",
+    "site": "node build.js && node scripts/minify-assets.js && node scripts/compile-pages.js",
+    "assets": "node scripts/minify-assets.js",
     "bundle": "node scripts/bundle.js",
     "favicon": "node scripts/gen-favicon.js",
     "watch": "node scripts/bundle.js --watch",

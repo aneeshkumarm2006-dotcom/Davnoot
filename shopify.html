@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.min.css" />
   <!-- BUILD:SEO -->
 <link rel="canonical" href="https://www.davnoot.com/services/shopify" />
 <meta name="robots" content="index, follow" />
@@ -231,6 +231,7 @@
 </nav>
 <!-- /BUILD:NAV -->
 
+  <main id="main">
   <!-- HERO -->
   <header class="service-hero">
     <div class="breadcrumb">
@@ -761,39 +762,39 @@
     </div>
 
     <div class="faq-list reveal">
-      <div class="faq-item">
+      <article class="faq-item">
         <div class="faq-q"><span>How long does a Shopify build take?</span><span class="faq-toggle">+</span></div>
         <div class="faq-a">Most custom builds and migrations run five to eight weeks from kickoff to launch, depending
           on catalog size and how much custom functionality you need. A store audit is one to two weeks. We give you a
           fixed timeline with the bid, so you're not guessing.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>Do I own the store and the theme?</span><span class="faq-toggle">+</span></div>
         <div class="faq-a">Completely. It's your Shopify account and your custom theme, with no license fees and nothing
           locked behind us. If you want to take it in-house or hand it to another agency after launch, you can walk away
           with everything.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>Do I need Shopify Plus, or is standard Shopify enough?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Most brands do great on standard Shopify. Plus earns its cost when you need checkout
           customization, Shopify Functions, B2B, high volume, or multiple stores. We'll tell you honestly which one fits,
           even when the answer is the cheaper one.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>Can you migrate me from WooCommerce, Magento, or Wix?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Yes, that's a large part of what we do. We migrate products, customers, and content, then build
           a full redirect map so old URLs point to the right new pages. Done right, a migration is a fresh start, not a
           traffic cliff.</div>
-      </div>
-      <div class="faq-item">
+      </article>
+      <article class="faq-item">
         <div class="faq-q"><span>Will I lose my Google rankings when the store changes?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a">Not if it's handled properly, and that's exactly why SEO is part of every build. We preserve
           URL structure where we can, redirect everything else, keep your schema and metadata intact, and monitor after
           launch. Rankings should hold or improve, not drop.</div>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -839,7 +840,8 @@
     </div>
   </section>
 
-  <!-- BUILD:FOOTER -->
+    </main>
+<!-- BUILD:FOOTER -->
 <footer id="contact">
   <div class="footer-top">
     <div>
@@ -871,6 +873,14 @@
         <li><a href="/#about" data-cursor>About</a></li>
         <li><a href="/#results" data-cursor>Work</a></li>
         <li><a href="/#process" data-cursor>Process</a></li>
+        <li><a href="/blog" data-cursor>Blog</a></li>
+      </ul>
+      
+      <h4>Specialties</h4>
+      <ul>
+        <li><a href="/ai-seo-agency" data-cursor>AI SEO Agency</a></li>
+        <li><a href="/ai-seo-montreal" data-cursor>AI SEO Montreal</a></li>
+        <li><a href="/etf-marketing" data-cursor>ETF Marketing</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -888,12 +898,13 @@
 
   <div class="footer-bottom">
     <span>© 2025 Davnoot. All rights reserved.</span>
+    <a href="/privacy" data-cursor>Privacy Policy</a>
     <span>Built with intent in Montreal</span>
   </div>
 </footer>
 <!-- /BUILD:FOOTER -->
 
-  <script src="/script.js"></script>
+  <script src="/script.min.js"></script>
 </body>
 
 </html>

@@ -67,7 +67,33 @@ export class RichText {
       extensions: [
         StarterKit.configure({ heading: { levels: [2, 3, 4] } }),
         Underline,
-        Link.configure({ openOnClick: false, autolink: false }),
+        /* HTMLAttributes IS THE FIX, not decoration.
+         *
+         * @tiptap/extension-link's DEFAULT is
+         *     { target: '_blank', rel: 'noopener noreferrer nofollow' }
+         * and it is applied to EVERY link the toolbar inserts, internal ones
+         * included. That default is why the blog spent its life emitting
+         *     <a rel="noopener noreferrer nofollow" href="https://www.davnoot.com/">
+         * — 15 internal nofollows across 12 posts in the 2026-08-01 Semrush audit,
+         * i.e. telling Google not to follow links to our own money pages. There is
+         * no follow/nofollow control in this toolbar, so no author ever asked for it.
+         *
+         * Two halves to the fix, and BOTH are needed:
+         *   1. here — new links are written correctly from now on;
+         *   2. lib/link-rel.js — normalizes rel/target at RENDER time, which is what
+         *      actually repairs the ~20 posts already in the database (and anything
+         *      written before this bundle ships). Do not delete that on the grounds
+         *      that "the editor is fixed now".
+         *
+         * `noopener noreferrer` stays: with target="_blank" it is a security
+         * property (reverse tabnabbing), not an SEO one. The renderer strips
+         * target/noreferrer back off for internal hrefs, which this static
+         * attribute map cannot distinguish. */
+        Link.configure({
+          openOnClick: false,
+          autolink: false,
+          HTMLAttributes: { target: '_blank', rel: 'noopener noreferrer' },
+        }),
         Image.configure({ inline: false }),
       ],
       content: content || '<p></p>',

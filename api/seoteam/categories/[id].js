@@ -40,11 +40,13 @@ async function rename(req, res) {
   const parsed = categoryUpdateSchema.safeParse(body);
   if (!parsed.success) throw validationError(fieldErrors(parsed.error));
 
-  const result = await col.findOneAndUpdate(
-    { _id: id },
-    { $set: { name: parsed.data.name, updatedAt: new Date() } },
-    { returnDocument: 'after' },
-  );
+  // `description` is PATCHed only when the client sent the key. Writing `''` on
+  // every rename would silently wipe an archive's copy the moment someone fixed a
+  // typo in its name from a client that doesn't know about the field yet.
+  const $set = { name: parsed.data.name, updatedAt: new Date() };
+  if (parsed.data.description !== undefined) $set.description = parsed.data.description;
+
+  const result = await col.findOneAndUpdate({ _id: id }, { $set }, { returnDocument: 'after' });
 
   const doc = result?.value ?? result; // driver v5/v6 return-shape tolerance
   if (!doc) throw new ApiError(404, 'Category not found.');

@@ -45,7 +45,7 @@ export class Categories {
     <header class="page-head">
       <div>
         <h1>Categories</h1>
-        <p class="muted">The filter shown on the blog. Create a category, then tick it on any post.</p>
+        <p class="muted">The filter shown on the blog. Create a category, then tick it on any post. Give each one a description — it becomes the archive page's intro copy and its meta description, and without it the archive is a heading and a card grid.</p>
       </div>
       <div class="page-actions">
         <a class="btn btn-ghost" href="/seoteam">← Posts</a>
@@ -85,15 +85,24 @@ export class Categories {
 
   row(c) {
     const editing = this.editingId === String(c._id);
+    const desc = (c.description || '').trim();
 
+    /* The description is the archive page's ONLY unique copy. Without one, every
+     * /blog/category/<slug> is a heading plus a card grid — which is exactly what got
+     * all six archives flagged for thin content on 2026-08-01. So an empty one is
+     * surfaced as a warning, not left blank and forgotten. */
     const nameCell = editing
-      ? `<input class="input input-sm cat-rename-input" value="${esc(c.name)}" maxlength="60" />`
-      : `<strong>${esc(c.name)}</strong>`;
+      ? `<input class="input input-sm cat-rename-input" value="${esc(c.name)}" maxlength="60" />
+         <textarea class="input input-sm cat-desc-input" rows="4" maxlength="600"
+           placeholder="Two or three sentences on what this topic covers and who it's for. This is the archive page's intro copy and its meta description.">${esc(desc)}</textarea>
+         <span class="muted small">${desc.length}/600 · shown on the archive page and in search results</span>`
+      : `<strong>${esc(c.name)}</strong>
+         ${desc ? `<div class="muted small cat-desc">${esc(desc.length > 120 ? desc.slice(0, 120) + '…' : desc)}</div>` : '<div class="small cat-desc-missing">No description — the archive page is thin without one.</div>'}`;
 
     const actions = editing
       ? `<button class="icon-btn" data-save="${esc(c._id)}">Save</button>
          <button class="icon-btn" data-cancel="1">Cancel</button>`
-      : `<button class="icon-btn" data-rename="${esc(c._id)}">Rename</button>
+      : `<button class="icon-btn" data-rename="${esc(c._id)}">Edit</button>
          <button class="icon-btn is-danger" data-delete="${esc(c._id)}" data-count="${c.postCount || 0}" data-name="${esc(c.name)}">Delete</button>`;
 
     return `
@@ -181,10 +190,18 @@ export class Categories {
   async saveRename(id) {
     const name = $('.cat-rename-input', this.root)?.value.trim();
     if (!name) return;
+
+    // The textarea is only in the DOM while editing. Send `description` only when it
+    // is actually present, so a future caller that omits it can't blank the copy —
+    // the API mirrors that rule (it $sets description only when the key was sent).
+    const descEl = $('.cat-desc-input', this.root);
+    const payload = { name };
+    if (descEl) payload.description = descEl.value.trim();
+
     try {
-      await api.renameCategory(id, { name });
+      await api.renameCategory(id, payload);
       this.editingId = null;
-      toast('Renamed.');
+      toast('Saved.');
       await this.load();
     } catch (err) {
       toast(err.message, 'error');

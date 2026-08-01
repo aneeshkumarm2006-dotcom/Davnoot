@@ -370,7 +370,7 @@ describe('404.html — the only thing covering a no-route-matched miss', () => {
     assert.match(html, /<nav>/, 'no nav — the whole point is that the visitor can navigate out');
     assert.match(html, /<footer/, 'no footer');
     assert.match(html, /href="\/"/, 'no link home');
-    assert.match(html, /href="\/styles\.css"/, 'assets must be root-absolute, or they 404 one level down');
+    assert.match(html, /href="\/styles\.min\.css"/, 'assets must be root-absolute AND minified, or they 404 one level down / ship 154 kB of source');
     assert.doesNotMatch(html, /<script>/, "an inline script would be blocked by the CSP (no 'unsafe-inline')");
   });
 

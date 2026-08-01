@@ -152,11 +152,13 @@ describe('a composed page is a first-class, indexable document', () => {
     assert.equal((html.match(/name="robots"/g) || []).length, 1);
     assert.equal((html.match(/<title>/g) || []).length, 1);
   });
-  test('the shared marketing shell is present (styles.css, nav, footer, script.js)', () => {
-    assert.match(html, /<link rel="stylesheet" href="\/styles\.css"/);
+  test('the shared marketing shell is present (styles.min.css, nav, main, footer, script.min.js)', () => {
+    assert.match(html, /<link rel="stylesheet" href="\/styles\.min\.css"/);
     assert.match(html, /<nav>/);
+    assert.match(html, /<main id="main">/);
+    assert.match(html, /<\/main>/);
     assert.match(html, /<\/footer>/);
-    assert.match(html, /<script src="\/script\.js">/);
+    assert.match(html, /<script src="\/script\.min\.js">/);
   });
   test('the JSON-LD parses and includes a FAQPage derived from the faq section', () => {
     const m = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
