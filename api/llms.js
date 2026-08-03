@@ -67,6 +67,7 @@ const PAGE = {
   'index.html': ['Davnoot — home', 'Agency overview — six disciplines run as one revenue engine'],
   'services.html': ['Services', 'Every service we run, and what each one is for'],
   'ads.html': ['Ad platforms', 'The paid-advertising platforms we buy on, and when each makes sense'],
+  'ecommerce.html': ['Ecommerce', 'Ecommerce agency work — store development, SEO, ads, and retention as one engine'],
   'book-call.html': ['Book a strategy call', 'The only conversion path on the site — a 30-minute call'],
   'seo.html': [null, 'Technical SEO, content, and link acquisition for organic revenue'],
   'google-ads.html': [null, 'Search, Performance Max, and Shopping campaign management'],
@@ -169,6 +170,7 @@ Contact: info@davnoot.com · +1 (438) 223-7131 · Montreal, QC, Canada
 ${page('index.html')}
 ${page('services.html')}
 ${page('ads.html')}
+${page('ecommerce.html')}
 ${page('book-call.html')}
 
 ${section('Services', services)}

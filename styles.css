@@ -267,18 +267,39 @@ body > nav {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.4; transform: scale(0.85); }
 }
+/* Sized for the keyword H1 ("Digital Marketing Agency Montreal"), which is far
+   longer than the two-word headline this hero started with. Above 1000px the
+   headline shares a grid column with .hero-visual, so it caps at ~6.4vw; below
+   that the grid collapses to one column and it can take the wider ramp. */
 .hero-title {
   font-family: var(--font-sans);
-  font-size: clamp(56px, 11vw, 184px);
+  font-size: clamp(40px, 6.4vw, 100px);
   line-height: 0.92;
   letter-spacing: -0.05em;
   font-weight: 500;
-  margin-bottom: 40px;
+  margin-bottom: 26px;
 }
-.hero-title .line { display: block; overflow: hidden; }
+.hero-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+/* The mask that the headline slides up out of. line-height 0.92 pulls the
+   content box above the font's descender, so the box is padded down (and the
+   padding cancelled by an equal negative margin, leaving layout untouched) —
+   otherwise the mask shears the tails off g/y. The start offset clears the
+   taller mask. */
+.hero-title .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
 .hero-title .line > span {
   display: inline-block;
-  transform: translateY(105%);
+  transform: translateY(130%);
   animation: slideUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .hero-title .line:nth-child(1) > span { animation-delay: 0.2s; }
@@ -304,6 +325,19 @@ body > nav {
   color: var(--accent);
   font-family: var(--font-serif);
   font-style: italic;
+}
+/* Supporting line under the H1. Carries the rotating word the headline used to
+   hold, now that the H1 itself is fixed keyword copy. */
+.hero-lede {
+  font-family: var(--font-sans);
+  font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.7s forwards;
 }
 .hero-sub {
   font-size: 19px;
@@ -498,6 +532,7 @@ body > nav {
 }
 @media (max-width: 1000px) {
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-title { font-size: clamp(40px, 9vw, 96px); }
   .hero-visual { min-height: 320px; order: 2; }
   .hero-stats-row { gap: 24px; margin-top: 40px; }
 }
