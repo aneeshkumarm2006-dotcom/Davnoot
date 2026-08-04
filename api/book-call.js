@@ -125,6 +125,57 @@ function buildText(d) {
   ].join('\n');
 }
 
+// ── Auto-reply sent to the PERSON who filled the form ──────────────────────
+// A warm confirmation so they know the message landed and someone will follow up.
+function buildClientEmail(d) {
+  const first = esc((d.name || 'there').split(' ')[0]);
+  const slot = d.time_slot
+    ? `<tr><td style="padding:11px 0;font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#8d958e;width:140px;">Requested slot</td><td style="padding:11px 0;font-size:14px;color:#0a0a0a;">${esc(d.time_slot)}</td></tr>`
+    : '';
+  const brief = d.brief
+    ? `<tr><td style="padding:11px 0;font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#8d958e;width:140px;vertical-align:top;">Your message</td><td style="padding:11px 0;font-size:14px;line-height:1.5;color:#545b55;">${esc(d.brief)}</td></tr>`
+    : '';
+  return `<!doctype html>
+<html>
+<body style="margin:0;padding:0;background:#e8eee9;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#e8eee9;padding:32px 16px;">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border:1px solid #d4ddd5;border-radius:16px;overflow:hidden;">
+        <tr><td style="padding:22px 28px;border-bottom:1px solid #eef1ee;font-size:18px;font-weight:700;letter-spacing:-0.02em;color:#0a0a0a;">Davnoot Digital</td></tr>
+        <tr><td style="padding:28px 28px 6px;">
+          <h1 style="margin:0;font-size:23px;font-weight:700;letter-spacing:-0.02em;color:#0a0a0a;">Thanks, ${first} — we've got it.</h1>
+          <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#545b55;">Your message just reached the Davnoot team. One of us will get back to you personally, usually within one business day. Here's a copy of what you sent:</p>
+        </td></tr>
+        <tr><td style="padding:14px 28px 6px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${slot}${brief}</table>
+        </td></tr>
+        <tr><td style="padding:18px 28px 30px;">
+          <p style="margin:0;font-size:14px;line-height:1.6;color:#545b55;">Need us sooner? Just reply to this email or reach us at <a href="mailto:info@davnoot.com" style="color:#0a0a0a;">info@davnoot.com</a>.</p>
+        </td></tr>
+        <tr><td style="padding:18px 28px;background:#f5f8f5;border-top:1px solid #eef1ee;">
+          <p style="margin:0;font-size:12px;line-height:1.5;color:#8d958e;">Davnoot Digital · Independent growth agency · Montreal, QC</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+function buildClientText(d) {
+  const first = (d.name || 'there').split(' ')[0];
+  return [
+    `Thanks, ${first} — we've got it.`,
+    '',
+    "Your message just reached the Davnoot team. One of us will get back to you personally, usually within one business day.",
+    d.brief ? `\nYour message:\n${d.brief}` : '',
+    '',
+    'Need us sooner? Reply to this email or reach us at info@davnoot.com.',
+    '',
+    'Davnoot Digital · Montreal, QC',
+  ].filter(Boolean).join('\n');
+}
+
 // Keep only the fields we recognise, coerced to strings and length-capped so a
 // crafted body can't store unbounded junk in the leads collection.
 function cleanLead(d) {
@@ -199,6 +250,24 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     emailError = String(err?.message || err);
+  }
+
+  // Auto-reply to the prospect — best-effort. A failed confirmation must NOT flip
+  // the lead's emailSent flag (that tracks OUR notification) or fail the request;
+  // the internal email above is what matters. Only send to a plausible address.
+  if (d.email && /.+@.+\..+/.test(d.email)) {
+    try {
+      await mailer().sendMail({
+        from: FROM,
+        to: d.email,
+        replyTo: TO[0] || GMAIL_USER,
+        subject: 'We got your message — Davnoot',
+        html: buildClientEmail(d),
+        text: buildClientText(d),
+      });
+    } catch (err) {
+      console.error('Client confirmation email failed (non-fatal):', String(err?.message || err));
+    }
   }
 
   if (!emailError) {
