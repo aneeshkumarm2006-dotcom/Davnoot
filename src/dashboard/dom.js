@@ -35,6 +35,22 @@ export function fmtDate(value) {
   return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
+// Absolute date / time in Canada Eastern (America/Toronto), independent of where
+// the viewer's own machine is set. Used in the leads inbox, where an exact,
+// unambiguous timestamp matters more than a fuzzy "4d ago".
+export function estDate(value) {
+  if (!value) return '—';
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return '—';
+  return d.toLocaleDateString('en-US', { timeZone: 'America/Toronto', month: 'short', day: 'numeric', year: 'numeric' });
+}
+export function estClock(value) {
+  if (!value) return '';
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toLocaleTimeString('en-US', { timeZone: 'America/Toronto', hour: 'numeric', minute: '2-digit', hour12: true });
+}
+
 export function relTime(value) {
   if (!value) return '—';
   const d = new Date(value);

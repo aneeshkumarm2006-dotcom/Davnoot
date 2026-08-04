@@ -72,6 +72,33 @@
 .grid-table .url { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
 .table-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); }
 
+/* --- Leads table: one lead = one grouped <tbody> ----------------------- */
+/* Kill the per-cell divider inside a lead so its header + message read as a
+   single block; the separator line lives on the group instead. */
+.leads-table tbody.lead-group td { border-bottom: none; }
+.leads-table tbody.lead-group:not(:last-child) { border-bottom: 1px solid var(--border); }
+.leads-table tbody.lead-group:hover td { background: var(--bg-elev); }
+.leads-table td.nowrap, .grid-table td.nowrap { white-space: nowrap; }
+.leads-table .lead-msg-row td { padding-top: 0; }
+.lead-msg {
+  margin: 2px 0 4px;
+  padding-left: 12px;
+  border-left: 2px solid var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 860px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.lead-msg::before { content: '\201C'; }
+.lead-msg::after { content: '\201D'; }
+.lead-time { font-size: 11px; color: var(--text-dim); }
+.leads-table tbody.lead-group.is-promo td { opacity: 0.72; }
+.pill-mute { background: var(--bg-elev-2, #dde5de); color: var(--text-dim); margin-left: 8px; }
+
 /* --- Inline-editable SEO cell ----------------------------------------- */
 .cell-edit {
   width: 100%;
