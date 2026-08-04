@@ -30,6 +30,9 @@ async function patch(req, res) {
     $set.status = body.status;
   }
   if (typeof body.notes === 'string') $set.notes = body.notes.slice(0, 4000);
+  // Manual promotion flag. true = force-hide as a promo, false = force-show as a
+  // real lead (overriding the heuristic). Lets the team correct the auto-filter.
+  if (typeof body.promo === 'boolean') $set.promo = body.promo;
   if (!Object.keys($set).length) throw new ApiError(400, 'Nothing to update.');
 
   const r = await (await leads()).updateOne({ _id }, { $set });

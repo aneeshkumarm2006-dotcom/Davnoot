@@ -98,6 +98,68 @@
 .lead-time { font-size: 11px; color: var(--text-dim); }
 .leads-table tbody.lead-group.is-promo td { opacity: 0.72; }
 .pill-mute { background: var(--bg-elev-2, #dde5de); color: var(--text-dim); margin-left: 8px; }
+.lead-promo-btn {
+  display: inline-block;
+  margin-top: 7px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 11px;
+  color: var(--text-dim);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.lead-promo-btn:hover { color: var(--text); }
+
+/* --- Custom dropdown (house replacement for <select>) ------------------- */
+.cdrop { position: relative; display: inline-block; min-width: 130px; }
+.cdrop-sm { min-width: 116px; }
+.cdrop-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.cdrop-btn:hover { border-color: var(--border-hover); }
+.cdrop.is-open .cdrop-btn { border-color: var(--accent); }
+.cdrop-caret { color: var(--text-dim); transition: transform 0.15s; flex: none; }
+.cdrop.is-open .cdrop-caret { transform: rotate(180deg); }
+.cdrop-menu {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 100%;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(10, 10, 10, 0.12);
+}
+.cdrop-opt {
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cdrop-opt:hover { background: var(--bg-elev); }
+.cdrop-opt.is-selected { background: var(--accent); color: var(--accent-text); }
 
 /* --- Inline-editable SEO cell ----------------------------------------- */
 .cell-edit {

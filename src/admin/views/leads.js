@@ -1,7 +1,9 @@
 import { api } from '../api.js';
 import { esc, estDate, estClock, toast } from '../../dashboard/dom.js';
+import { dropdownHtml, wireDropdowns } from '../../dashboard/dropdown.js';
 
 const STATUSES = ['new', 'contacted', 'won', 'lost'];
+const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 
 // Pretty labels for the service codes the booking form submits (mirrors the map
 // in api/book-call.js). Unknown/empty codes fall back to the raw value or a dash.
@@ -22,7 +24,12 @@ const SERVICE_LABELS = {
 // This only HIDES by default — nothing is deleted, and the toggle reveals them —
 // so a rare false positive is fully recoverable.
 const PROMO_RE = /unsubscribe|wa\.me|t\.me\/|whats\s?app|telegram|jackpot|casino|crypto|bitcoin|https?:\/\/|www\.|\b\d{1,3}%\s*off\b|done-for-you|backlinks?\b/i;
+// A MANUAL flag always wins over the heuristic: promo === true force-hides a
+// lead the team marked as junk; promo === false rescues a real one the heuristic
+// mis-flagged. Only when unset does the auto-detector decide.
 function isPromo(l) {
+  if (l.promo === true) return true;
+  if (l.promo === false) return false;
   return PROMO_RE.test(`${l.brief || ''} ${l.name || ''} ${l.email || ''}`);
 }
 
@@ -72,19 +79,39 @@ export class Leads {
           <td>${esc(SERVICE_LABELS[l.service] || l.service || '—')}</td>
           <td class="small nowrap">${esc(l.timeSlot || '—')}</td>
           <td>${l.emailSent ? '<span class="pill pill-ok">sent</span>' : '<span class="pill pill-warn">failed</span>'}</td>
-          <td><select class="input input-sm" data-status="${esc(l._id)}">${STATUSES.map((s) => `<option value="${s}" ${l.status === s ? 'selected' : ''}>${s}</option>`).join('')}</select></td>
+          <td>
+            ${dropdownHtml({ id: l._id, value: l.status || 'new', cls: 'cdrop-sm', ariaLabel: 'Lead status', options: STATUSES.map((s) => ({ value: s, label: cap(s) })) })}
+            <button type="button" class="lead-promo-btn" data-promo="${esc(l._id)}" data-to="${isPromo(l) ? 'false' : 'true'}">${isPromo(l) ? 'Not a promotion' : 'Mark as promotion'}</button>
+          </td>
         </tr>${l.brief ? `<tr class="lead-msg-row"><td colspan="7"><p class="lead-msg" title="${esc(l.brief)}">${esc(l.brief)}</p></td></tr>` : ''}
       </tbody>`).join('')}
       </table></div>`;
   }
 
   wire() {
-    this.root.querySelectorAll('[data-status]').forEach((sel) => {
-      sel.addEventListener('change', async () => {
-        try { await api.patchLead({ id: sel.dataset.status, status: sel.value }); toast('Updated.'); }
-        catch (err) { toast(err.message, 'err'); }
+    // Custom status dropdowns (Davnoot house control, not a native <select>).
+    wireDropdowns(this.root, async (id, value) => {
+      try { await api.patchLead({ id, status: value }); toast('Status updated.'); }
+      catch (err) { toast(err.message, 'err'); }
+    });
+
+    // Per-lead promotion toggle — flips the manual promo flag and re-renders so
+    // the lead moves between the real list and the hidden promotions.
+    this.root.querySelectorAll('[data-promo]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.promo;
+        const to = btn.dataset.to === 'true';
+        try {
+          await api.patchLead({ id, promo: to });
+          const lead = this._all.find((l) => l._id === id);
+          if (lead) lead.promo = to;
+          toast(to ? 'Marked as promotion.' : 'Moved back to leads.');
+          this.render();
+          this.wire();
+        } catch (err) { toast(err.message, 'err'); }
       });
     });
+
     this.root.querySelector('#toggle-promos')?.addEventListener('click', () => {
       this.showPromos = !this.showPromos;
       this.render();
