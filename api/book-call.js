@@ -1,17 +1,42 @@
 // Vercel serverless function — receives the booking form and emails the lead to
-// Davnoot via Resend, using an on-brand HTML template.
+// Davnoot over Gmail SMTP (a Google Workspace app password), using an on-brand
+// HTML template.
 //
-// Required env var (set in Vercel → Settings → Environment Variables):
-//   RESEND_API_KEY   your Resend API key (re_...)
+// Required env vars (set in Vercel → Settings → Environment Variables):
+//   GMAIL_USER           the Gmail / Google Workspace address that sends, e.g. info@davnoot.com
+//   GMAIL_APP_PASSWORD   a 16-char Google App Password for that account (NOT the login password).
+//                        Requires 2-Step Verification on the account. Spaces are ignored.
 // Optional:
-//   RESEND_FROM      e.g. "Davnoot Digital <info@davnoot.com>"  (needs a verified
-//                    domain in Resend; defaults to Resend's test sender)
-//   LEAD_TO          where leads are delivered (defaults to info@davnoot.com)
+//   LEAD_TO              where leads are delivered (defaults to GMAIL_USER, then info@davnoot.com)
+//
+// Gmail requires the From address to be the authenticated account (or one of its
+// verified aliases), so FROM is always built from GMAIL_USER — you cannot spoof
+// an arbitrary sender here.
 
+import nodemailer from 'nodemailer';
 import { leads } from '../lib/db.js';
 
-const FROM = process.env.RESEND_FROM || 'Davnoot Digital <onboarding@resend.dev>';
-const TO = (process.env.LEAD_TO || 'info@davnoot.com').split(',').map((s) => s.trim());
+const GMAIL_USER = process.env.GMAIL_USER || '';
+// App passwords are shown grouped as "abcd efgh ijkl mnop"; Google accepts them
+// with or without the spaces, so strip them to be forgiving of a copy-paste.
+const GMAIL_PASS = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '');
+const FROM = `Davnoot Digital <${GMAIL_USER}>`;
+const TO = (process.env.LEAD_TO || GMAIL_USER || 'info@davnoot.com').split(',').map((s) => s.trim()).filter(Boolean);
+
+// One transport per warm lambda. Created lazily so a cold start with missing
+// credentials fails in the handler (with a captured lead) rather than at import.
+let _transport;
+function mailer() {
+  if (!_transport) {
+    _transport = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // implicit TLS
+      auth: { user: GMAIL_USER, pass: GMAIL_PASS },
+    });
+  }
+  return _transport;
+}
 
 const SERVICE_LABELS = {
   seo: 'SEO',
@@ -133,7 +158,7 @@ export default async function handler(req, res) {
 
   // ── PERSIST FIRST ────────────────────────────────────────────────────────
   // The lead is the thing we must never lose. Write it to Mongo BEFORE emailing,
-  // so a Resend outage (or a missing API key) can't drop a paying prospect on the
+  // so an SMTP outage (or a missing app password) can't drop a paying prospect on the
   // floor. Best-effort: if Mongo itself is down, we do NOT fail the form — a lead
   // that emails but isn't stored still beats a booking form that returns an error.
   let leadId = null;
@@ -154,33 +179,24 @@ export default async function handler(req, res) {
   }
 
   // ── THEN EMAIL ───────────────────────────────────────────────────────────
-  if (!process.env.RESEND_API_KEY) {
-    console.error('RESEND_API_KEY is not set — lead captured but no email sent.');
+  if (!GMAIL_USER || !GMAIL_PASS) {
+    console.error('GMAIL_USER / GMAIL_APP_PASSWORD not set — lead captured but no email sent.');
     // The lead is safe in Mongo if it persisted; only report failure if it didn't.
     return leadId
       ? res.status(200).json({ ok: true })
-      : res.status(500).json({ error: 'Email is not configured (missing RESEND_API_KEY).' });
+      : res.status(500).json({ error: 'Email is not configured (missing Gmail credentials).' });
   }
 
   let emailError = null;
   try {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: FROM,
-        to: TO,
-        reply_to: d.email,
-        subject: `New strategy call — ${d.name}${d.company ? ' · ' + d.company : ''}`,
-        html: buildEmail(d),
-        text: buildText(d),
-      }),
+    await mailer().sendMail({
+      from: FROM,
+      to: TO,
+      replyTo: d.email,
+      subject: `New strategy call — ${d.name}${d.company ? ' · ' + d.company : ''}`,
+      html: buildEmail(d),
+      text: buildText(d),
     });
-
-    if (!r.ok) emailError = `Resend ${r.status}: ${await r.text()}`;
   } catch (err) {
     emailError = String(err?.message || err);
   }
@@ -192,7 +208,7 @@ export default async function handler(req, res) {
 
   // Email failed. If we captured the lead, this is our vendor's problem, not the
   // prospect's — return success; the admin retries the send from the leads inbox.
-  console.error('Resend error:', emailError);
+  console.error('Gmail SMTP error:', emailError);
   if (leadId) {
     markEmail(leadId, false, emailError);
     return res.status(200).json({ ok: true });
