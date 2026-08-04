@@ -17,20 +17,11 @@ const SERVICE_LABELS = {
   multi: 'Multi-channel',
 };
 
-// Heuristic spam/promo detector. The booking form draws a steady stream of cold
-// outreach — link-dropping SEO pitches, "reply UNSUBSCRIBE" blasts, WhatsApp/
-// Telegram spam, jackpot junk. A genuine prospect describing their challenge
-// almost never pastes a URL or an unsubscribe line, so those are strong signals.
-// This only HIDES by default — nothing is deleted, and the toggle reveals them —
-// so a rare false positive is fully recoverable.
-const PROMO_RE = /unsubscribe|wa\.me|t\.me\/|whats\s?app|telegram|jackpot|casino|crypto|bitcoin|https?:\/\/|www\.|\b\d{1,3}%\s*off\b|done-for-you|backlinks?\b/i;
-// A MANUAL flag always wins over the heuristic: promo === true force-hides a
-// lead the team marked as junk; promo === false rescues a real one the heuristic
-// mis-flagged. Only when unset does the auto-detector decide.
+// Promotions are chosen MANUALLY — no auto-detection. A lead is a promotion only
+// once someone clicks "Mark as promotion" on it (sets promo === true). Everything
+// else stays a normal lead and is shown by default.
 function isPromo(l) {
-  if (l.promo === true) return true;
-  if (l.promo === false) return false;
-  return PROMO_RE.test(`${l.brief || ''} ${l.name || ''} ${l.email || ''}`);
+  return l.promo === true;
 }
 
 export class Leads {
