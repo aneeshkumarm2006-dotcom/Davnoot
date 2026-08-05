@@ -31,7 +31,7 @@
  */
 import { posts, pages, categories } from '../lib/db.js';
 import { publishedFilter } from '../lib/blog-query.js';
-import { SITE_URL, canonicalFor } from '../lib/templates.js';
+import { SITE_URL, canonicalFor, TRANSLATED_PAGES } from '../lib/templates.js';
 import { STATIC_URLS } from '../lib/sitemap-static.js';
 import { COMPILED_PAGES } from '../lib/compiled-pages.gen.js';
 import { isPageLive } from '../lib/page-model.js';
@@ -60,12 +60,32 @@ const escXml = (s) =>
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
 
-function urlEntry({ loc, lastmod, changefreq, priority }) {
+function urlEntry({ loc, lastmod, changefreq, priority, alternates }) {
+  // xhtml:link alternates repeat the hreflang cluster from the page <head>. Google
+  // accepts either, and having BOTH is the recommended belt-and-braces: the sitemap
+  // annotation is what gets picked up for a page whose head a crawler has not
+  // re-fetched yet. Every cluster must list ITSELF as well as its counterpart, or
+  // the annotation is ignored wholesale.
+  const alt = (alternates || [])
+    .map((a) => `\n    <xhtml:link rel="alternate" hreflang="${escXml(a.hreflang)}" href="${escXml(a.href)}" />`)
+    .join('');
   return `  <url>
     <loc>${escXml(loc)}</loc>${lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ''}${
       changefreq ? `\n    <changefreq>${changefreq}</changefreq>` : ''
-    }${priority ? `\n    <priority>${priority}</priority>` : ''}
+    }${priority ? `\n    <priority>${priority}</priority>` : ''}${alt}
   </url>`;
+}
+
+/* The hreflang cluster for a bilingual page, mirroring hreflangTags() in
+ * lib/templates.js. Both entries of a pair carry the SAME cluster — that is what
+ * "reciprocal" means, and a one-sided annotation is discarded by Google entirely. */
+function alternatesFor(file) {
+  if (!TRANSLATED_PAGES.has(file)) return undefined;
+  return [
+    { hreflang: 'en', href: canonicalFor(file, 'en') },
+    { hreflang: 'fr-CA', href: canonicalFor(file, 'fr') },
+    { hreflang: 'x-default', href: canonicalFor(file, 'en') },
+  ];
 }
 
 /* The compiled-in defaults, mirroring build.js's sitemapMeta(). Home ranks highest;
@@ -94,6 +114,11 @@ function defaultMeta(file) {
 function marketingEntries(byPath, now) {
   const out = [];
   for (const tpl of Object.values(COMPILED_PAGES)) {
+    // A French template whose translation is unfinished renders noindex (see
+    // seoHtml), and this file's own rule is that a noindexed URL is never
+    // advertised — Search Console reports that contradiction as an error.
+    if (tpl.locale === 'fr' && !TRANSLATED_PAGES.has(tpl.file)) continue;
+
     const doc = byPath.get(tpl.path);
     if (doc?.status === 'archived') continue;
 
@@ -108,7 +133,12 @@ function marketingEntries(byPath, now) {
     out.push({
       // Advertise the EXTENSIONLESS public URL (/seo), not the DB overlay key
       // (tpl.path is still /seo.html — an internal join key, never a public URL).
-      loc: canonicalFor(tpl.file),
+      // tpl.locale is what keeps the French template's URL at /fr/services/seo:
+      // COMPILED_PAGES now holds BOTH languages and they share tpl.file, so
+      // dropping the locale here would advertise every French page at its English
+      // URL — i.e. submit the English URL twice and the French one never.
+      loc: canonicalFor(tpl.file, tpl.locale),
+      alternates: alternatesFor(tpl.file),
       // lastmod is a PUBLISH-time signal, never a draft-edit one. buildDraftUpdate()
       // bumps doc.updatedAt on every 900ms autosave keystroke, so keying lastmod off
       // updatedAt would churn the live page's lastmod while a draft nobody has
@@ -248,7 +278,7 @@ export default async function handler(req, res) {
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <!-- ${Object.keys(COMPILED_PAGES).length} CMS page(s) from COMPILED_PAGES${pagesDegraded ? ' (Mongo unavailable — compiled defaults)' : ''} + ${STATIC_URLS.length} static + ${blogCount} published post(s) + ${categoryCount} non-empty category archive(s). -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${entries.map(urlEntry).join('\n')}
 </urlset>
 `;

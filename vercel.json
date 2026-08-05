@@ -149,6 +149,14 @@
     { "source": "/meta-ads-toronto", "destination": "/meta-ads-toronto.html" },
     { "source": "/chatgpt-ads-ottawa", "destination": "/chatgpt-ads-ottawa.html" },
     { "source": "/chatgpt-ads-toronto", "destination": "/chatgpt-ads-toronto.html" },
+    { "source": "/fr", "destination": "/api/page?p=fr/index.html" },
+    { "source": "/fr/book-call", "destination": "/api/page?p=fr/book-call.html" },
+    { "source": "/fr/services/seo", "destination": "/api/page?p=fr/seo.html" },
+    { "source": "/fr/services/meta-ads", "destination": "/api/page?p=fr/meta-ads.html" },
+    { "source": "/fr/services/email", "destination": "/api/page?p=fr/email.html" },
+    { "source": "/fr/services/ai-seo", "destination": "/api/page?p=fr/ai-seo.html" },
+    { "source": "/fr/services/chatgpt-ads", "destination": "/api/page?p=fr/chatgpt-ads.html" },
+    { "source": "/fr/services/software", "destination": "/api/page?p=fr/software.html" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/:slug", "destination": "/api/page?p=:slug" }
   ]

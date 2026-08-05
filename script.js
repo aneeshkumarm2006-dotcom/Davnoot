@@ -1170,20 +1170,52 @@ if (document.readyState === 'loading') {
     const nextBtn = document.querySelector('.cal-next');
     const rangeEl = document.querySelector('.cal-nav-range');
 
+    /* ---- Locale ------------------------------------------------------------
+     * The calendar is built at RUNTIME, so none of its text passes through the
+     * page source and none of it can be reached by lib/i18n/fr.json. Left alone,
+     * the French booking page renders "Thu, 6 Aug" and "1:00 PM" — English day
+     * names and a 12-hour clock — on the one page where a visitor is deciding
+     * whether to hand over their contact details.
+     *
+     * Keyed off <html lang>, which build.js has already set per page, so there is
+     * no second place to declare the language.
+     *
+     * The French slot list is 24-HOUR, not a translation of the English one:
+     * "1:00 PM" is not how a time is written in Quebec, it is "13:00". */
+    const isFr = (document.documentElement.lang || 'en').toLowerCase().startsWith('fr');
+    const CAL = isFr
+      ? {
+          dow: ['dim', 'lun', 'mar', 'mer', 'jeu', 'ven', 'sam'],
+          mon: ['janv', 'févr', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc'],
+          fmt: (dow, d, mon) => `${dow} ${d} ${mon}`,   // "jeu 6 août" — no comma in French
+          available: 'Disponible ',
+          yourSlot: (day, slot) => `Votre plage · <strong>${day}, ${slot}</strong>`,
+          prompt: 'Choisissez une journée et une heure ci-dessus pour réserver.',
+          slots: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+        }
+      : {
+          dow: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+          mon: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          fmt: (dow, d, mon) => `${dow}, ${d} ${mon}`,
+          available: 'Available ',
+          yourSlot: (day, slot) => `Your slot · <strong>${day}, ${slot}</strong>`,
+          prompt: 'Pick a day and time above to book.',
+          slots: ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'],
+        };
+
     // Content, not code: read from data-slots so the CMS can edit it. Falls back
-    // to the original list if the attribute is missing or malformed.
-    const DEFAULT_SLOTS = ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'];
-    let SLOTS = DEFAULT_SLOTS;
+    // to the locale's list if the attribute is missing or malformed.
+    let SLOTS = CAL.slots;
     if (slotsEl.dataset.slots) {
       try {
         const parsed = JSON.parse(slotsEl.dataset.slots);
         if (Array.isArray(parsed) && parsed.length) SLOTS = parsed;
       } catch { /* keep defaults */ }
     }
-    const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const DOW = CAL.dow;
+    const MON = CAL.mon;
     const PAGE = 6;
-    const fmt = (dt) => `${DOW[dt.getDay()]}, ${dt.getDate()} ${MON[dt.getMonth()]}`;
+    const fmt = (dt) => CAL.fmt(DOW[dt.getDay()], dt.getDate(), MON[dt.getMonth()]);
 
     // nth upcoming weekday (0 = first weekday after today)
     function weekdayAt(n) {
@@ -1204,8 +1236,8 @@ if (document.readyState === 'loading') {
       const ready = !!(selectedDay && selectedSlot);
       if (ctaBtn) ctaBtn.disabled = !ready;
       if (ctaText) ctaText.innerHTML = ready
-        ? `Your slot · <strong>${selectedDay}, ${selectedSlot}</strong>`
-        : 'Pick a day and time above to book.';
+        ? CAL.yourSlot(selectedDay, selectedSlot)
+        : CAL.prompt;
     }
     function pickSlot(s) {
       slotsEl.querySelectorAll('.cal-slot').forEach(x => x.classList.remove('active'));
@@ -1216,7 +1248,7 @@ if (document.readyState === 'loading') {
       daysEl.querySelectorAll('.cal-day').forEach(x => x.classList.remove('active'));
       el.classList.add('active');
       selectedDay = el.dataset.label;
-      if (labelEl) labelEl.textContent = 'Available ' + selectedDay;
+      if (labelEl) labelEl.textContent = CAL.available + selectedDay;
       pickSlot(null); // reset the time whenever the day changes
     }
     function renderDays() {

@@ -157,15 +157,27 @@ const cmsFiles = htmlIn(PAGES_DIR);
 const rootFiles = htmlIn(__dirname);
 const rootOnly = rootFiles.filter((f) => !cmsFiles.includes(f)); // the sitemap manifest's job
 
+/* The FRENCH sources, under pages/fr/. These are GENERATED — `node scripts/i18n.js
+ * build` writes them from pages/*.html plus lib/i18n/fr.json, and `npm run site`
+ * runs that BEFORE this script. Do not hand-edit them; edit the dictionary.
+ *
+ * They arrive here carrying the ENGLISH chrome (the i18n generator refuses to touch
+ * the BUILD regions, precisely because this script owns them), and this loop then
+ * bakes the FRENCH nav, footer and SEO head over the top. That ordering is the
+ * whole reason the chrome never has to appear in the translation dictionary. */
+const FR_DIR = path.join(PAGES_DIR, 'fr');
+const frFiles = htmlIn(FR_DIR);
+
 // Build every target: the CMS source AND (while they still exist) the root copies.
 const targets = [
-  ...cmsFiles.map((file) => ({ file, dir: PAGES_DIR, label: `pages/${file}` })),
-  ...rootFiles.map((file) => ({ file, dir: __dirname, label: file })),
+  ...cmsFiles.map((file) => ({ file, dir: PAGES_DIR, label: `pages/${file}`, locale: 'en' })),
+  ...rootFiles.map((file) => ({ file, dir: __dirname, label: file, locale: 'en' })),
+  ...frFiles.map((file) => ({ file, dir: FR_DIR, label: `pages/fr/${file}`, locale: 'fr' })),
 ];
 
 const lastmod = {}; // file -> YYYY-MM-DD, collected for the sitemap
 let built = 0;
-for (const { file, dir, label } of targets) {
+for (const { file, dir, label, locale } of targets) {
   const p = path.join(dir, file);
   const original = fs.readFileSync(p, 'utf8');
   const title = (original.match(/<title>([\s\S]*?)<\/title>/) || [, file])[1].trim();
@@ -175,21 +187,31 @@ for (const { file, dir, label } of targets) {
 
   // Every template keys off the BASENAME (canonicalFor, KEYWORDS, SERVICE_PAGES),
   // so pages/seo.html and ./seo.html bake byte-identical chrome. That identity is
-  // what makes the cutover a no-op.
-  let html = fill(original, 'SEO', seoHtml(file, title, desc, faqs));
-  html = fill(html, 'NAV', navHtml(file));
-  html = fill(html, 'FOOTER', footerHtml(file));
+  // what makes the cutover a no-op. The FRENCH copy shares that basename too, and
+  // the trailing `locale` is what makes its canonical /fr/services/seo instead.
+  //
+  // The title/description fed in here are read from the FILE, so a French page
+  // gets its FRENCH <title> into og:title and its French JSON-LD — the translated
+  // <title> is a hole in the generated source, not something this script invents.
+  let html = fill(original, 'SEO', seoHtml(file, title, desc, faqs, locale));
+  html = fill(html, 'NAV', navHtml(file, '', undefined, locale));
+  html = fill(html, 'FOOTER', footerHtml(file, '', undefined, locale));
 
   if (html !== original) {
     fs.writeFileSync(p, html);
-    lastmod[file] = TODAY; // content changed on this build
+    if (locale === 'en') lastmod[file] = TODAY; // content changed on this build
     console.log(`  ✓ ${label}`);
     built++;
   } else {
     // Unchanged — keep its real edit date. When a page exists in both places, the
     // pages/ copy is authoritative and is visited first, so the root copy's mtime
     // never overwrites it with a later date.
-    if (lastmod[file] === undefined) lastmod[file] = fmtDate(fs.statSync(p).mtime);
+    //
+    // French pages are EXCLUDED from `lastmod` entirely: it is keyed by basename,
+    // so pages/fr/seo.html and pages/seo.html are the same key, and letting the
+    // French build date land there would silently restamp the ENGLISH URL's
+    // <lastmod> in the sitemap every time a translation changed.
+    if (locale === 'en' && lastmod[file] === undefined) lastmod[file] = fmtDate(fs.statSync(p).mtime);
     console.log(`  · ${label} (unchanged)`);
   }
 }

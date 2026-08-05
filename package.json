@@ -21,7 +21,9 @@
   },
   "scripts": {
     "dev": "node scripts/dev.js",
-    "site": "node build.js && node scripts/minify-assets.js && node scripts/compile-pages.js",
+    "site": "node scripts/i18n.js build && node build.js && node scripts/minify-assets.js && node scripts/compile-pages.js",
+    "i18n": "node scripts/i18n.js extract",
+    "i18n:check": "node scripts/i18n.js check",
     "assets": "node scripts/minify-assets.js",
     "bundle": "node scripts/bundle.js",
     "favicon": "node scripts/gen-favicon.js",

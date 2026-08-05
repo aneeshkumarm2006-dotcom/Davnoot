@@ -157,6 +157,19 @@ body > nav {
   font-size: 14px;
   font-weight: 500;
 }
+/* French runs ~20% longer than English word for word, and the French nav carries
+ * one EXTRA item (the language switcher). Measured at the tightest desktop width
+ * — 1001px, one pixel above the 1000px burger breakpoint — the English nav has
+ * ~100px of slack while the French nav is packed flush against both the logo and
+ * the CTA with 0px to spare. It does not overlap today, but nothing may ever grow.
+ *
+ * Tightening the gap for French only buys back ~48px across the six gaps, which
+ * restores the breathing room without touching the English layout at all. Scoped
+ * to the horizontal nav: below 1000px .nav-links becomes the stacked burger panel,
+ * where the gap is a vertical rhythm and this would be wrong. */
+@media (min-width: 1001px) {
+  :root:lang(fr) .nav-links { gap: 28px; }
+}
 .nav-links a {
   color: var(--text-muted);
   text-decoration: none;

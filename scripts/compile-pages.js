@@ -42,10 +42,19 @@ const ROOT = path.join(__dirname, '..');
 const PAGES_DIR = path.join(ROOT, 'pages');
 const FIXTURES_DIR = path.join(__dirname, 'fixtures', 'pages');
 
-const PAGE_FILES = [
+export const PAGE_FILES = [
   'index.html', 'seo.html', 'meta-ads.html', 'email.html',
   'ai-seo.html', 'chatgpt-ads.html', 'software.html', 'book-call.html',
 ];
+
+/* The French counterparts, compiled from pages/fr/ and keyed "fr/<file>" in
+ * COMPILED_PAGES so api/page.js can look one up straight from the URL prefix.
+ *
+ * They are compiled only if the directory exists, so a checkout that has not run
+ * `node scripts/i18n.js build` yet still compiles the English site cleanly rather
+ * than failing on a missing folder. */
+const FR_DIR = path.join(PAGES_DIR, 'fr');
+const FR_FILES = fs.existsSync(FR_DIR) ? PAGE_FILES.filter((f) => fs.existsSync(path.join(FR_DIR, f))) : [];
 
 // ---- DOM helpers -----------------------------------------------------------
 const childrenOf = (node) => node.childNodes || [];
@@ -93,8 +102,12 @@ function attrFullRange(src, node, name) {
 }
 
 // ---- Compile one page ------------------------------------------------------
-function pathFor(file) {
-  return file === 'index.html' ? '/' : '/' + file;
+/* The DB OVERLAY KEY, not the public URL — /seo.html, never /services/seo. The
+ * admin CMS writes documents against this key; canonicalFor() owns the public form.
+ * French keeps the same convention one level down: /fr/seo.html. */
+function pathFor(file, locale = 'en') {
+  const pre = locale === 'en' ? '' : '/' + locale;
+  return file === 'index.html' ? pre || '/' : pre + '/' + file;
 }
 function kindFor(file) {
   if (file === 'index.html') return 'home';
@@ -113,7 +126,7 @@ function seoRegionRange(src) {
   return [open, close + '<!-- /BUILD:SEO -->'.length];
 }
 
-function compilePage(file, src) {
+function compilePage(file, src, { locale = 'en', dir = PAGES_DIR } = {}) {
   const doc = parse(src, { sourceCodeLocationInfo: true });
 
   const cuts = []; // { start, end, hole?|excise }
@@ -200,10 +213,15 @@ function compilePage(file, src) {
   if (cursor < src.length) chunks.push(src.slice(cursor));
 
   return {
+    // `file` stays the BASENAME in both languages, because canonicalFor(),
+    // KEYWORDS and SERVICE_PAGES are all keyed by it — a French template must
+    // resolve to the same service page, just at a different URL. `locale` is what
+    // distinguishes them, and COMPILED_PAGES keys the French one "fr/<file>".
     file,
-    path: pathFor(file),
+    locale,
+    path: pathFor(file, locale),
     kind: kindFor(file),
-    compiledAt: fmtDate(fs.statSync(path.join(PAGES_DIR, file)).mtime),
+    compiledAt: fmtDate(fs.statSync(path.join(dir, file)).mtime),
     chunks,
     slots,
     seoRegion,
@@ -267,13 +285,42 @@ function serializeChunks(chunks) {
 }
 
 /** Compile all pages in memory (no file writes). Used by the currency test. */
-function compileAll() {
+export function compileAll() {
   const out = {};
   for (const file of PAGE_FILES) {
     const src = fs.readFileSync(path.join(PAGES_DIR, file), 'utf8');
     out[file] = compilePage(file, src);
   }
+  for (const file of FR_FILES) {
+    const src = fs.readFileSync(path.join(FR_DIR, file), 'utf8');
+    out['fr/' + file] = compilePage(file, src, { locale: 'fr', dir: FR_DIR });
+  }
   return out;
+}
+
+/* The FRENCH self-check reference.
+ *
+ * English has a hand-frozen fixture: the exact bytes Vercel serves today, which is
+ * what makes "the cutover is a no-op" provable. French has no such history, so the
+ * property to prove is the other half of what the English fixture proves — that
+ * THE COMPILER ROUND-TRIPS ITS SOURCE: renderPage(tpl, null) reproduces
+ * pages/fr/<file> exactly, minus the data-cms annotations it exists to excise.
+ *
+ * The reference is derived by REGEX where the compiler uses parse5 source offsets,
+ * so the two are independent implementations of "strip the annotations" and a bug
+ * in either shows up as a diff.
+ *
+ * NOT DERIVED FROM THE ENGLISH FIXTURE, and the reason is worth recording: the
+ * annotations CHANGE UNIT BOUNDARIES. In the annotated source a FAQ question is
+ * its own data-cms element, so the unit is the question text; in the annotation-
+ * free fixture the whole .faq-q (question span + "+" toggle span) is one leaf
+ * unit, a different dictionary key. Translating the fixture therefore produces
+ * legitimately different bytes, and a check built on it fails on correct output.
+ */
+function frReference(file) {
+  const src = fs.readFileSync(path.join(FR_DIR, file), 'utf8');
+  // Mirrors attrFullRange()'s single-leading-whitespace swallow in the compiler.
+  return src.replace(/\s?data-cms[a-z-]*="[^"]*"/g, '');
 }
 
 function generate() {
@@ -300,12 +347,35 @@ function generate() {
     }
   }
 
+  // ---- The same proof for French, against the independently-derived reference ----
+  for (const file of FR_FILES) {
+    const key = 'fr/' + file;
+    const rendered = renderPage(out[key], null);
+    const reference = frReference(file);
+    if (rendered !== reference) {
+      const at = firstDiff(rendered, reference);
+      throw new Error(
+        `${key}: renderPage(tpl, null) does not reproduce pages/fr/${file} at offset ${at}.\n` +
+          `  The compiler is not round-tripping the French source. Re-run \`npm run site\`.\n` +
+          `  compiled : …${JSON.stringify(rendered.slice(Math.max(0, at - 40), at + 40))}…\n` +
+          `  reference: …${JSON.stringify(reference.slice(Math.max(0, at - 40), at + 40))}…`,
+      );
+    }
+    if (out[key].demoted.length) {
+      throw new Error(`${key}: ${out[key].demoted.length} slot(s) were demoted — fix the annotation:\n` +
+        out[key].demoted.map((d) => `    ${d.key}: ${d.reason}`).join('\n'));
+    }
+  }
+
   // ---- Emit the committed module ----
-  const body = Object.values(out)
-    .map((tpl) => {
-      const meta = { file: tpl.file, path: tpl.path, kind: tpl.kind, compiledAt: tpl.compiledAt };
+  const body = Object.entries(out)
+    .map(([key, tpl]) => {
+      // Keyed by the MAP KEY ("seo.html" / "fr/seo.html"), never by tpl.file — the
+      // French template deliberately keeps the English basename, so keying by it
+      // would emit both under "seo.html" and the second would silently win.
+      const meta = { file: tpl.file, locale: tpl.locale, path: tpl.path, kind: tpl.kind, compiledAt: tpl.compiledAt };
       return (
-        `  ${JSON.stringify(tpl.file)}: {\n` +
+        `  ${JSON.stringify(key)}: {\n` +
         `    ...${JSON.stringify(meta)},\n` +
         `    chunks: ${serializeChunks(tpl.chunks)},\n` +
         `    slots: ${JSON.stringify(tpl.slots)},\n` +
@@ -342,4 +412,5 @@ if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith
   console.log(`  ✓ lib/compiled-pages.gen.js (${report.length} pages, byte-identical to fixtures)`);
 }
 
-export { compilePage, compileAll, generate, PAGE_FILES };
+// compileAll and PAGE_FILES are exported inline at their definitions.
+export { compilePage, generate };
