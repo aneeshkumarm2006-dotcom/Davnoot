@@ -86,6 +86,7 @@ const PAGE = {
   'ai-seo-agency.html': ['AI SEO agency', 'What to look for when hiring an AI SEO agency'],
   'ai-seo-montreal.html': ['AI SEO Montreal', 'AI search optimization for Montreal businesses, in English and French'],
   'etf-marketing.html': ['ETF marketing', 'Marketing for ETF issuers and asset managers'],
+  'startup-seo.html': ['Startup SEO', 'SEO for startups — SaaS, AI, fintech and early-stage companies, prioritised by revenue impact rather than ranking count'],
   'privacy.html': ['Privacy policy', 'What we collect, why, and how to have it removed'],
 };
 
@@ -181,6 +182,7 @@ ${section('Blog', [
 ])}
 ${section('Optional', [
   ...cityLines,
+  page('startup-seo.html'),
   page('ai-seo-agency.html'),
   page('ai-seo-montreal.html'),
   page('etf-marketing.html'),

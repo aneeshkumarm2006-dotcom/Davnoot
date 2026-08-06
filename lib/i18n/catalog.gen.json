@@ -9,7 +9,7 @@
     "software.html",
     "book-call.html"
   ],
-  "total": 1391,
+  "total": 1393,
   "entries": [
     {
       "en": "Monthly",
@@ -1681,6 +1681,15 @@
     },
     {
       "en": "Our local SEO services help businesses dominate Google Maps and local search results. We\n          optimize your Google Business Profile, local citations, service pages, reviews, location-based content, and\n          local keyword targeting so customers find your business when searching nearby. Built for companies targeting\n          Montreal and the surrounding areas.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "seo.html"
+      ]
+    },
+    {
+      "en": "Early-stage companies run the same work in a different\n        order. The budget is tighter, the product still moves, and the commercial pages have to earn their keep long\n        before the blog does. That is its own track too:\n        <a href=\"/startup-seo\" class=\"text-link\" data-cursor>SEO agency for startups</a> built around the stage you are\n        actually at.",
       "kind": "text",
       "tag": "p",
       "count": 1,
@@ -5007,6 +5016,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "[\"10:00 AM\",\"11:00 AM\",\"12:00 PM\",\"1:00 PM\",\"2:00 PM\",\"3:00 PM\",\"4:00 PM\",\"5:00 PM\"]",
+      "kind": "attr:data-slots",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
