@@ -45,6 +45,7 @@ const FIXTURES_DIR = path.join(__dirname, 'fixtures', 'pages');
 export const PAGE_FILES = [
   'index.html', 'seo.html', 'meta-ads.html', 'email.html',
   'ai-seo.html', 'chatgpt-ads.html', 'software.html', 'book-call.html',
+  'startup-seo.html',
 ];
 
 /* The French counterparts, compiled from pages/fr/ and keyed "fr/<file>" in

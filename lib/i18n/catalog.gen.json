@@ -7,10 +7,26 @@
     "ai-seo.html",
     "chatgpt-ads.html",
     "software.html",
-    "book-call.html"
+    "book-call.html",
+    "startup-seo.html"
   ],
-  "total": 1393,
+  "total": 1547,
   "entries": [
+    {
+      "en": "Explore →",
+      "kind": "text",
+      "tag": "div",
+      "count": 26,
+      "pages": [
+        "ai-seo.html",
+        "chatgpt-ads.html",
+        "email.html",
+        "meta-ads.html",
+        "seo.html",
+        "software.html",
+        "startup-seo.html"
+      ]
+    },
     {
       "en": "Monthly",
       "kind": "text",
@@ -22,20 +38,6 @@
         "email.html",
         "meta-ads.html",
         "seo.html"
-      ]
-    },
-    {
-      "en": "Explore →",
-      "kind": "text",
-      "tag": "div",
-      "count": 22,
-      "pages": [
-        "ai-seo.html",
-        "chatgpt-ads.html",
-        "email.html",
-        "meta-ads.html",
-        "seo.html",
-        "software.html"
       ]
     },
     {
@@ -65,6 +67,22 @@
       ]
     },
     {
+      "en": "FAQ",
+      "kind": "text",
+      "tag": "div",
+      "count": 8,
+      "pages": [
+        "ai-seo.html",
+        "book-call.html",
+        "chatgpt-ads.html",
+        "email.html",
+        "meta-ads.html",
+        "seo.html",
+        "software.html",
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Ready when you are",
       "kind": "text",
       "tag": "div",
@@ -80,18 +98,33 @@
       ]
     },
     {
-      "en": "FAQ",
+      "en": "Pairs well with",
       "kind": "text",
       "tag": "div",
       "count": 7,
       "pages": [
         "ai-seo.html",
-        "book-call.html",
         "chatgpt-ads.html",
         "email.html",
         "meta-ads.html",
         "seo.html",
-        "software.html"
+        "software.html",
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Davnoot",
+      "kind": "text",
+      "tag": "strong",
+      "count": 7,
+      "pages": [
+        "ai-seo.html",
+        "email.html",
+        "index.html",
+        "meta-ads.html",
+        "seo.html",
+        "software.html",
+        "startup-seo.html"
       ]
     },
     {
@@ -165,20 +198,6 @@
       ]
     },
     {
-      "en": "Pairs well with",
-      "kind": "text",
-      "tag": "div",
-      "count": 6,
-      "pages": [
-        "ai-seo.html",
-        "chatgpt-ads.html",
-        "email.html",
-        "meta-ads.html",
-        "seo.html",
-        "software.html"
-      ]
-    },
-    {
       "en": "Case in point",
       "kind": "text",
       "tag": "div",
@@ -221,17 +240,17 @@
       ]
     },
     {
-      "en": "Davnoot",
+      "en": "01 · SEO",
       "kind": "text",
-      "tag": "strong",
+      "tag": "div",
       "count": 6,
       "pages": [
         "ai-seo.html",
+        "chatgpt-ads.html",
         "email.html",
         "index.html",
         "meta-ads.html",
-        "seo.html",
-        "software.html"
+        "startup-seo.html"
       ]
     },
     {
@@ -271,19 +290,6 @@
         "meta-ads.html",
         "seo.html",
         "software.html"
-      ]
-    },
-    {
-      "en": "01 · SEO",
-      "kind": "text",
-      "tag": "div",
-      "count": 5,
-      "pages": [
-        "ai-seo.html",
-        "chatgpt-ads.html",
-        "email.html",
-        "index.html",
-        "meta-ads.html"
       ]
     },
     {
@@ -559,6 +565,17 @@
       ]
     },
     {
+      "en": "Scale",
+      "kind": "text",
+      "tag": "div",
+      "count": 3,
+      "pages": [
+        "email.html",
+        "index.html",
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "KB",
       "kind": "text",
       "tag": "div",
@@ -653,12 +670,39 @@
       ]
     },
     {
+      "en": "<span class=\"num\">12 months</span><span class=\"lbl\">what enterprise can wait, startups can't</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "<span class=\"num\">90 days</span><span class=\"lbl\">before the first real read on progress</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "<span class=\"num\">$94</span><span class=\"lbl\">revenue per subscriber · Apparel</span>",
       "kind": "text",
       "tag": "div",
       "count": 2,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "<span class=\"num\">01</span><span class=\"lbl\">technical foundation comes first</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -707,6 +751,15 @@
       ]
     },
     {
+      "en": "<span class=\"num\">8</span><span class=\"lbl\">startup verticals we work with</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "<span class=\"num\">+220%</span><span class=\"lbl\">AI-referred traffic · DTC</span>",
       "kind": "text",
       "tag": "div",
@@ -716,12 +769,30 @@
       ]
     },
     {
+      "en": "<span class=\"num\">0</span><span class=\"lbl\">vanity metrics in the report</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "<span class=\"num\">#1</span><span class=\"lbl\">on Google · Local services</span>",
       "kind": "text",
       "tag": "div",
       "count": 2,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "<span class=\"num\">4</span><span class=\"lbl\">growth stages, one strategy</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -914,6 +985,26 @@
       ]
     },
     {
+      "en": "Landing page <em>optimization</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 2,
+      "pages": [
+        "chatgpt-ads.html",
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "AI search <em>optimization</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 2,
+      "pages": [
+        "ai-seo.html",
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Performance <em>reporting</em>",
       "kind": "text",
       "tag": "h3",
@@ -933,6 +1024,15 @@
       ]
     },
     {
+      "en": "First honest read on progress",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Senior strategist on retainer",
       "kind": "text",
       "tag": "li",
@@ -949,6 +1049,16 @@
       "count": 2,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Keyword <em>strategy</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 2,
+      "pages": [
+        "seo.html",
+        "startup-seo.html"
       ]
     },
     {
@@ -1368,6 +1478,25 @@
       ]
     },
     {
+      "en": "Strategy",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "index.html",
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "90 days",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Brielle",
       "kind": "text",
       "tag": "div",
@@ -1480,13 +1609,13 @@
       ]
     },
     {
-      "en": "Scale",
+      "en": "Build",
       "kind": "text",
       "tag": "div",
       "count": 2,
       "pages": [
         "email.html",
-        "index.html"
+        "startup-seo.html"
       ]
     },
     {
@@ -1581,12 +1710,30 @@
       ]
     },
     {
+      "en": "<span class=\"tool-chip\"><span class=\"dot\"></span>SaaS startups</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>AI startups</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Ecommerce brands</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>FinTech companies</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>HealthTech startups</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>B2B software companies</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Professional service startups</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Technology companies</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "AI platform ads are still new, so almost nobody should bet a whole budget on them. Most\n        clients pair this with a proven channel: the same\n        <a href=\"/services/google-ads\" class=\"text-link\" data-cursor>Google Ads agency Montreal</a> team runs paid search\n        next to it, and our <a href=\"/services/meta-ads\" class=\"text-link\" data-cursor>Meta ads agency Montreal</a> team\n        covers Facebook and Instagram in parallel. AI-powered advertising performs best when paired with strong technical\n        optimization, including our\n        <a href=\"/services/shopify-seo\" class=\"text-link\" data-cursor>Shopify SEO services</a>.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "SEO that grows startups, not just search rankings. Launching a startup is hard. Getting discovered by the\n          right customers shouldn't be. We build sustainable organic growth through technical SEO, content strategy,\n          and search-first website optimization, whether you're launching an MVP, scaling a SaaS platform, or growing\n          an ecommerce brand. Unlike agencies that report vanity metrics, we work against the numbers founders\n          actually care about: qualified leads, demo requests, sign-ups, and revenue.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -1614,6 +1761,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Campaigns don't usually fail because Google changed its algorithm. They fail because the\n        strategy started in the wrong place. We've seen startups publish dozens of articles before optimizing a single\n        product page, target head terms while ignoring the commercial searches their customers actually use, and lean\n        on paid advertising because the website was never built to earn organic visibility at all.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -1653,12 +1809,30 @@
       ]
     },
     {
+      "en": "The earlier you build the SEO foundation, the easier it is to grow organic visibility over\n          time. Starting early lets search engines understand your website while you build authority, before\n          competitors dominate the niche. It is also far cheaper than retrofitting structure and technical fixes onto a\n          site that already has hundreds of pages on top of them.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Stop relying on one-size-fits-all email blasts. Partner with a trusted Email\n      Marketing Agency in Montreal to create tailored email campaigns, intelligent automation, and customer journeys\n      that increase engagement, improve conversions, and build lasting customer loyalty. Book a free email audit and\n      discover how much revenue your email marketing could be generating.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "And when the roadmap needs something search can't do on its own, it's the same\n        team: <a href=\"/services/google-ads\" class=\"text-link\" data-cursor>Google Ads management</a> for the demand you\n        need this quarter, and <a href=\"/services/software\" class=\"text-link\" data-cursor>custom software\n        development</a> when the growth problem turns out to be a product one.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -1707,6 +1881,15 @@
       ]
     },
     {
+      "en": "Yes. Paid advertising generates traffic while campaigns are active, and stops the day you\n          stop paying. SEO builds an organic acquisition channel that keeps producing qualified visitors over time.\n          Running both usually delivers the strongest result: paid becomes a growth lever rather than the only thing\n          keeping the pipeline alive.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Our on-page SEO services improve every element that influences rankings, including content\n          optimization, title tags, meta descriptions, heading structure, internal linking, schema markup, image\n          optimization, and conversion-focused page improvements. Every optimization is backed by data and aligned with\n          Google's best practices.",
       "kind": "text",
       "tag": "p",
@@ -1734,6 +1917,15 @@
       ]
     },
     {
+      "en": "SEO is a long-term investment, but improvements to technical SEO, website structure, and\n          commercial landing pages can start producing measurable results within a few months. Long-term growth comes\n          from consistent optimization rather than a single push. Anyone quoting a fixed timeline before looking at\n          your site is guessing.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "A growing technology company wanted to prepare for the next wave of AI-driven customer acquisition. We refined\n          their messaging, optimized landing pages, improved conversion paths and aligned campaigns with\n          <em>conversational search behaviour</em>, creating a stronger foundation for future AI advertising\n          opportunities.",
       "kind": "text",
       "tag": "p",
@@ -1758,6 +1950,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Publishing random blogs or chasing competitive keywords might increase traffic,\n        but it rarely helps a startup grow. A successful startup SEO strategy builds authority around the products and\n        services that generate revenue first. Once that foundation is in place, scaling organic growth becomes much\n        easier.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -1794,6 +1995,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Yes. We work with SaaS, AI, ecommerce, technology, and service-based startups looking to\n          improve organic visibility and build sustainable customer acquisition. The framework is the same across them;\n          what changes is which commercial pages carry the revenue and how competitive the category already is.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -1839,6 +2049,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Prioritization. Instead of trying to rank for everything, we identify the keywords, pages,\n          and technical improvements most likely to generate business impact at your current stage of growth. An\n          enterprise can afford to work the whole list at once. A startup has to work the top of it first.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -1905,12 +2124,30 @@
       ]
     },
     {
+      "en": "Growing a startup takes more than publishing content and hoping it ranks. Book a\n      free 30-minute call and we'll pressure-test your current strategy, show you which fix is worth the most in the\n      next 90 days, and tell you honestly whether SEO is the right channel for you right now.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "ChatGPT is changing how customers research, compare, and buy. As a leading\n          ChatGPT Ads Agency in Montreal, Davnoot helps businesses prepare for this shift with AI advertising strategies\n          built around customer intent, high-converting landing pages, and measurable growth.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "They need a partner who understands growth. We focus on the work that moves a\n        business forward: improving technical foundations, building commercial landing pages, strengthening topical\n        authority, and increasing the visibility of the pages that generate leads and revenue.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -1941,6 +2178,24 @@
       ]
     },
     {
+      "en": "By fixing these issues early, startups build a stronger foundation for long-term organic growth while\n          reducing customer acquisition costs over time. Most of them are cheaper to fix now than they will be after\n          the next hundred pages are published on top of them.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "The work itself is the same discipline behind our core\n        <a href=\"/services/seo\" class=\"text-link\" data-cursor>search engine optimization</a> engagements. What changes\n        for a startup is the order it happens in, and how quickly each decision has to pay for itself.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "SEO alone is slow. Combined with these disciplines, it compounds twice as fast. We also offer\n        <a href=\"/services/google-ads\" class=\"text-link\" data-cursor>Google Ads Management</a> for businesses looking to\n        combine paid advertising with long-term SEO growth.",
       "kind": "text",
       "tag": "p",
@@ -1956,6 +2211,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Our startup SEO services are built for businesses that need sustainable growth rather than\n        higher rankings on their own. If you sell online, the deeper store work lives on our\n        <a href=\"/ecommerce\" class=\"text-link\" data-cursor>ecommerce agency</a> page.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -1983,6 +2247,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Large companies can afford to wait twelve months for results. Most startups\n        can't. Limited budgets, a product that keeps changing, growing competition, and pressure to acquire customers\n        mean every marketing decision has to produce measurable value.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -2073,6 +2346,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "We start with your business, competitors, customers, and current search\n            visibility. That is what identifies the opportunities with the biggest impact, instead of spreading a small\n            budget thin across everything at once.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -2220,6 +2502,15 @@
       ]
     },
     {
+      "en": "Every recommendation is backed by business impact rather than SEO trend. Instead\n        of chasing every algorithm update, we build search strategies designed to hold up as the startup changes shape\n        around them.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Looking for a results-driven digital marketing agency in Montreal? Davnoot helps ambitious brands grow through\n          performance-focused digital strategies designed to increase visibility, conversions, and revenue.",
       "kind": "text",
       "tag": "p",
@@ -2235,6 +2526,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "We rank the technical improvements, commercial landing pages, and high-intent\n            keywords by what they do for customer acquisition, then work down that list rather than across a generic\n            checklist.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -2499,6 +2799,15 @@
       ]
     },
     {
+      "en": "Many startups come to us after months of investing in SEO without seeing meaningful business growth. In most\n          cases the problem isn't the product. It's the strategy behind the website.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "<span class=\"sc-ide-dots\"><span></span><span></span><span></span></span>\n            <span class=\"sc-ide-tab\">orders.ts</span>\n            <span class=\"sc-ide-meta\">ops-platform · main</span>",
       "kind": "text",
       "tag": "div",
@@ -2562,6 +2871,15 @@
       ]
     },
     {
+      "en": "Once the strategy is set we optimize the site, fix technical SEO, strengthen\n            internal linking, and create content that serves search engines and real buyers at the same time.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Strategic placements on the review sites, publications, and aggregators that AI\n            engines retrieve from most. Mentions on the right sources matter more than mentions in volume.",
       "kind": "text",
       "tag": "p",
@@ -2622,6 +2940,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Every startup is different, but successful SEO follows a clear process. Instead of chasing\n        rankings, we build a scalable search strategy that supports the business as it grows.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -2733,6 +3060,15 @@
       ]
     },
     {
+      "en": "Strengthen the product and service pages, build topical authority, and attract the\n          qualified traffic that supports real customer acquisition rather than a traffic chart.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Yes, but we don't rely on generic blasts. Every campaign is personalized, strategically\n          planned, and designed to provide value while driving measurable business results.",
       "kind": "text",
       "tag": "div",
@@ -2757,6 +3093,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "As the startup grows we expand keyword coverage, improve existing content,\n            monitor technical health, and find the next set of opportunities before a competitor does.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -2823,12 +3168,30 @@
       ]
     },
     {
+      "en": "Identify and resolve the technical issues that limit crawling, indexing, and overall search\n          performance, so everything built on top of the site actually compounds.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Yes. Davnoot provides AI SEO services in Montreal and works with businesses across Canada and\n          internationally to improve visibility in AI-powered search platforms.",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Build a strong technical foundation, launch an SEO-friendly website, and take the\n          early commercial opportunities before competitors establish authority over them.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -2958,6 +3321,15 @@
       ]
     },
     {
+      "en": "Startup SEO leans on the same disciplines we run for every client. These are the ones that\n        make an early-stage search strategy compound instead of stand alone.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "We continuously optimize audiences, creatives, placements, bidding strategies, and landing\n          pages while using performance data to maximize return on ad spend.",
       "kind": "text",
       "tag": "div",
@@ -3030,12 +3402,30 @@
       ]
     },
     {
+      "en": "Whether you're validating an idea or preparing for rapid expansion, the strategy has to\n        fit where the company actually is. These are the four we plan against.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Documentation, team training, runbooks, and a clean codebase your future\n            engineers will thank us for. Then optional ongoing support, only if you want it.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Improve visibility across Google AI Overviews and the emerging AI-powered search\n          experiences your next customers are already asking for recommendations in.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -3057,6 +3447,15 @@
       ]
     },
     {
+      "en": "Expand keyword coverage, improve technical performance, and scale organic visibility\n          across new products, services, and markets as the company opens them.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Operations dashboards, admin panels, custom CRMs. The systems your team uses every day\n          deserve to be designed for them, not retrofitted from generic SaaS.",
       "kind": "text",
       "tag": "p",
@@ -3072,6 +3471,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Target high-intent keywords that line up with your products, services, and growth\n          objectives, instead of the broad terms that look impressive in a report.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -3129,12 +3537,30 @@
       ]
     },
     {
+      "en": "Build topical authority with content that supports every stage of the customer journey,\n          published in the order that earns the most ground the soonest.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Buyers no longer rely only on Google. Today they ask ChatGPT, Perplexity, Claude, and Google AI Overviews for\n          recommendations before making decisions.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Davnoot is an SEO agency for startups. We help SaaS, AI, ecommerce, and technology startups increase organic visibility, attract qualified customers, and grow.",
+      "kind": "description",
+      "tag": "meta",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -3210,6 +3636,15 @@
       ]
     },
     {
+      "en": "Keep building authority, keep finding conversion opportunities, and support long-term\n          growth through continuous optimization and content expansion.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Yes. AI advertising complements Google Ads, Meta Ads, and other digital\n          marketing channels, creating a more complete customer acquisition strategy.",
       "kind": "text",
       "tag": "div",
@@ -3279,6 +3714,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "<span class=\"suviz-tag\">MVP</span>\n              <span class=\"suviz-name\">Seed-stage SaaS</span>\n              <span class=\"suviz-live\">Compounding</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -3516,6 +3960,15 @@
       ]
     },
     {
+      "en": "Create a logical structure that helps users navigate while pushing authority into the\n          product, feature, and commercial pages that need it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Sample 100+ buyer queries across ChatGPT, Perplexity, AI Overviews. Document where\n              you appear, where you don't, and who's beating you.",
       "kind": "text",
       "tag": "div",
@@ -3552,6 +4005,15 @@
       ]
     },
     {
+      "en": "Improve the service, product, and feature pages that carry your revenue, so they rank and\n          convert rather than doing only one of the two.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "We had three agencies before Davnoot. All blamed iOS. They showed us the <em>real</em>\n          attribution within two weeks. Brutal but useful.",
       "kind": "text",
       "tag": "p",
@@ -3561,12 +4023,39 @@
       ]
     },
     {
+      "en": "<a href=\"/book-call\" class=\"btn-primary\" data-cursor>\n        Book your free startup SEO session\n        <span class=\"arrow\">→</span>\n      </a>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "A structure that works at twelve pages quietly caps you at two hundred. Rebuilding\n              it later costs the rankings you already earned.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "2-week deep-dive into requirements, current systems, and technical constraints.\n              Output: architecture doc, sprint plan, fixed bid.",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Every startup has different goals, but the objective stays the same: make it easier for\n        the right customers to discover your business.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -3921,6 +4410,15 @@
       ]
     },
     {
+      "en": "Schema, indexation, canonicals, and crawl control. Unglamorous, and the reason\n              search engines misread what you sell.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "<span class=\"tier-row-label\">Scope</span><span class=\"tier-row-value\">The full\n              twelve-line ChatGPT Ads scope</span>",
       "kind": "text",
       "tag": "div",
@@ -3936,6 +4434,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Features, use cases, and blog posts sitting in isolation. Nothing passes authority\n              to the pages that need it most.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -3966,12 +4473,30 @@
       ]
     },
     {
+      "en": "<a href=\"/\" data-cursor>Davnoot</a>\n      <span class=\"crumb-sep\">/</span>\n      <span class=\"crumb-current\">Startup SEO</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "No mystery toolkit. These are the platforms we run every engagement on, the same tools the\n        best in-house SEO teams use.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "The pages that convert best are usually the thinnest. They carry the revenue and\n              almost none of the optimization.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -3999,6 +4524,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "<span class=\"suviz-chart-lbl\">Qualified organic sign-ups</span>\n                <span class=\"suviz-chart-val\">Month 12</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -4101,6 +4635,15 @@
       ]
     },
     {
+      "en": "Ranking for a term nobody buys from is a report line, not a growth channel. Intent\n              is what separates the two.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "<span class=\"fbad-domain\">lumeskin.co</span><span class=\"fbad-headline\">The\n                    morning glow ritual</span>",
       "kind": "text",
       "tag": "div",
@@ -4116,6 +4659,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Acquisition cost rising every quarter with no floor under it. Organic is the only\n              thing that puts one there.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -4200,6 +4752,15 @@
       ]
     },
     {
+      "en": "Volume without a point of view. It fills a content calendar and leaves the pipeline\n              exactly where it was.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "<span class=\"fbad-domain\">lumeskin.co</span><span class=\"fbad-headline\">Our\n                    founder's story</span>",
       "kind": "text",
       "tag": "div",
@@ -4278,6 +4839,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "The site was built to explain the product, not to be found. Every decision after\n              that inherits the gap.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -4566,6 +5136,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Speed is a conversion problem before it is a ranking problem, and for a startup\n              that pays twice.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -5010,6 +5589,15 @@
       ]
     },
     {
+      "en": "<span>Fix</span>\n                <span>Rank</span>\n                <span>Scale</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "The serum 12,000+ people swear by. Here's how to get the most from your first bottle.",
       "kind": "text",
       "tag": "p",
@@ -5271,6 +5859,15 @@
       ]
     },
     {
+      "en": "Book a free startup SEO session\n          <span class=\"arrow\">→</span>",
+      "kind": "text",
+      "tag": "a",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Confirm &amp; book the call <span\n              class=\"arrow\">→</span>",
       "kind": "text",
       "tag": "button",
@@ -5349,6 +5946,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Product, customers, and competitors understood before anything ships",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -5460,6 +6066,24 @@
       ]
     },
     {
+      "en": "Broad head terms chased against sites with ten years of authority",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Dozens of articles published before one product page is optimized",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Every milestone has a delivery date. Every line of code is yours.",
       "kind": "text",
       "tag": "p",
@@ -5541,6 +6165,24 @@
       ]
     },
     {
+      "en": "Paid ads carrying the entire funnel because the site can't rank",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "The technical foundation fixed so every page after it compounds",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Transparent SEO services<br />with <em>clear deliverables</em>.",
       "kind": "text",
       "tag": "h2",
@@ -5595,6 +6237,15 @@
       ]
     },
     {
+      "en": "Reporting tied to sign-ups, demo requests, and qualified leads",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "<span class=\"l\">Hook</span><span class=\"v\">Founder POV</span>",
       "kind": "text",
       "tag": "div",
@@ -5619,6 +6270,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Startup SEO is not<br />enterprise SEO, <em>scaled down</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -5685,6 +6345,15 @@
       ]
     },
     {
+      "en": "Startup SEO services,<br />built around <em>your stage</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Tied to incremental revenue: pre/post tests and geo holdouts",
       "kind": "text",
       "tag": "div",
@@ -5745,6 +6414,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Commercial pages and high-intent keywords prioritized first",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -5883,12 +6561,30 @@
       ]
     },
     {
+      "en": "Do startups still need SEO if they're running Google Ads?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Engine-specific strategies, each one optimized separately",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Founders don't need<br />another <em>ranking report</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -5955,6 +6651,15 @@
       ]
     },
     {
+      "en": "SEO Agency for Startups | Startup SEO Services | Davnoot",
+      "kind": "title",
+      "tag": "title",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Technical SEO that drives <em>real business growth</em>.",
       "kind": "text",
       "tag": "p",
@@ -5988,6 +6693,24 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "A startup SEO strategy<br />built to <em>compound</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Content scaled once the pages that convert already rank",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -6126,6 +6849,24 @@
       ]
     },
     {
+      "en": "Most startup SEO fails<br />before it <em>starts</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Nobody has asked which pages actually generate revenue",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Ready to grow your business<br />through <em>SEO</em>?",
       "kind": "text",
       "tag": "h2",
@@ -6243,6 +6984,24 @@
       ]
     },
     {
+      "en": "Let's build the channel<br />that <em>compounds</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Organic growth is stronger<br />with <em>backup</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Senior media buyer on every account. No buffer layer.",
       "kind": "text",
       "tag": "div",
@@ -6258,6 +7017,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Traffic reported every month, pipeline reported never",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -6357,6 +7125,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Poor internal linking between products and resources",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -6504,6 +7281,15 @@
       ]
     },
     {
+      "en": "Missing structured data and technical fundamentals",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "One platform.<br /><em>Endless conversations</em>.",
       "kind": "text",
       "tag": "h2",
@@ -6537,6 +7323,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "Slow-loading pages hurting experience and rankings",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -6594,6 +7389,15 @@
       ]
     },
     {
+      "en": "AI content that earns impressions, not customers",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "ChatGPT advertising<br />across <em>Canada</em>.",
       "kind": "text",
       "tag": "h2",
@@ -6612,6 +7416,15 @@
       ]
     },
     {
+      "en": "Heavy reliance on paid because organic plateaued",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Meta Ads management<br />across <em>Canada</em>.",
       "kind": "text",
       "tag": "h2",
@@ -6627,6 +7440,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "The problems founders<br />bring <em>to us</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -6666,12 +7488,30 @@
       ]
     },
     {
+      "en": "Product and landing pages that struggle to rank",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Start advertising<br />for the <em>AI era</em>.",
       "kind": "text",
       "tag": "h2",
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Your SEO should match<br />your <em>stage</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -6726,6 +7566,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Straight answers<br />on <em>startup SEO</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -6837,6 +7686,15 @@
       ]
     },
     {
+      "en": "Startup SEO · Pre-seed to Series A and beyond",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Traditional ads<br />vs <em>ChatGPT Ads</em>.",
       "kind": "text",
       "tag": "h2",
@@ -6900,12 +7758,39 @@
       ]
     },
     {
+      "en": "The full engine behind <em>the strategy</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Understand the business before the keywords.",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Will the code be maintainable after handoff?",
       "kind": "text",
       "tag": "span",
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Broad keywords instead of commercial intent",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -6951,6 +7836,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Weak architecture that limits future growth",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -7098,6 +7992,15 @@
       ]
     },
     {
+      "en": "Ready to build sustainable organic growth",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Run the whole program <em>on Klaviyo</em>",
       "kind": "text",
       "tag": "div",
@@ -7170,12 +8073,30 @@
       ]
     },
     {
+      "en": "A website launched with no SEO strategy",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "About 18,400,000 results (0.39 seconds)",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Built for every stage of startup growth",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -7260,6 +8181,15 @@
       ]
     },
     {
+      "en": "Do you work with SaaS and AI startups?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Dominate search. Drive organic growth.",
       "kind": "text",
       "tag": "p",
@@ -7314,6 +8244,15 @@
       ]
     },
     {
+      "en": "SEO agency<br />for <em>startups</em>.",
+      "kind": "text",
+      "tag": "h1",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "AI Platform<br /><em>Advertising</em>",
       "kind": "text",
       "tag": "div",
@@ -7332,12 +8271,30 @@
       ]
     },
     {
+      "en": "Be the startup <em>AI recommends</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Bilingual English and French creative",
       "kind": "text",
       "tag": "li",
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Build what the <em>roadmap needs</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -7386,6 +8343,15 @@
       ]
     },
     {
+      "en": "Not every SEO task is worth the same.",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Pick a time<br />that <em>works</em>.",
       "kind": "text",
       "tag": "h2",
@@ -7419,6 +8385,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "Buy the demand <em>you need now</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -7464,6 +8439,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "When should a startup invest in SEO?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -7620,15 +8604,6 @@
       ]
     },
     {
-      "en": "Landing page <em>optimization</em>",
-      "kind": "text",
-      "tag": "h3",
-      "count": 1,
-      "pages": [
-        "chatgpt-ads.html"
-      ]
-    },
-    {
       "en": "Live build · Custom CRM deployment",
       "kind": "text",
       "tag": "div",
@@ -7755,12 +8730,30 @@
       ]
     },
     {
+      "en": "Startup SEO · the first 12 months",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Tired, dull skin? Here's the fix.",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "What makes startup SEO different?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -7899,6 +8892,15 @@
       ]
     },
     {
+      "en": "Strategy, technical, and content",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Structured <em>data systems</em>",
       "kind": "text",
       "tag": "div",
@@ -7914,15 +8916,6 @@
       "count": 1,
       "pages": [
         "seo.html"
-      ]
-    },
-    {
-      "en": "AI search <em>optimization</em>",
-      "kind": "text",
-      "tag": "h3",
-      "count": 1,
-      "pages": [
-        "ai-seo.html"
       ]
     },
     {
@@ -7950,6 +8943,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "How long does startup SEO take?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -8151,6 +9153,15 @@
       ]
     },
     {
+      "en": "SEO is not a one-time project.",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Ship content that earns links.",
       "kind": "text",
       "tag": "h3",
@@ -8241,6 +9252,15 @@
       ]
     },
     {
+      "en": "Common startup SEO challenges",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Custom<br /><em>Software</em>",
       "kind": "text",
       "tag": "div",
@@ -8304,12 +9324,30 @@
       ]
     },
     {
+      "en": "Ship the work, in that order.",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "The <em>visibility layer</em>",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "What we help startups improve",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -8493,6 +9531,15 @@
       ]
     },
     {
+      "en": "Series A and <em>growth</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Structured <em>for LLMs</em>",
       "kind": "text",
       "tag": "div",
@@ -8517,6 +9564,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Vanity metrics in the report",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -8610,6 +9666,15 @@
       ]
     },
     {
+      "en": "Growth stages, one strategy",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Monthly campaign management",
       "kind": "text",
       "tag": "li",
@@ -8664,6 +9729,15 @@
       ]
     },
     {
+      "en": "Scaling <em>businesses</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Senior engineers throughout",
       "kind": "text",
       "tag": "li",
@@ -8688,6 +9762,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "Why founders choose Davnoot",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -8925,12 +10008,30 @@
       ]
     },
     {
+      "en": "The number we optimize for",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "What do I need to prepare?",
       "kind": "text",
       "tag": "span",
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Who we <em>work with</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -8976,6 +10077,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Content <em>strategy</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -9042,12 +10152,12 @@
       ]
     },
     {
-      "en": "Keyword <em>strategy</em>",
+      "en": "Internal <em>linking</em>",
       "kind": "text",
       "tag": "h3",
       "count": 1,
       "pages": [
-        "seo.html"
+        "startup-seo.html"
       ]
     },
     {
@@ -9075,6 +10185,24 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Our startup SEO framework",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Pre-seed and <em>MVP</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -9381,6 +10509,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Pre-seed through scaling",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -9699,6 +10836,15 @@
       ]
     },
     {
+      "en": "<em>Revenue first</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "4–8 editorial links/mo",
       "kind": "text",
       "tag": "li",
@@ -9843,6 +10989,15 @@
       ]
     },
     {
+      "en": "Technical <em>SEO</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "The <em>follow-up</em>",
       "kind": "text",
       "tag": "div",
@@ -9921,6 +11076,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "Content and authority",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -10293,6 +11457,15 @@
       ]
     },
     {
+      "en": "Technical foundation",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "VP Growth · DTC home",
       "kind": "text",
       "tag": "span",
@@ -10464,6 +11637,15 @@
       ]
     },
     {
+      "en": "Seed <em>stage</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "SEO <em>Growth</em>",
       "kind": "text",
       "tag": "div",
@@ -10488,6 +11670,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Where it goes wrong",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -10614,6 +11805,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Industries we help",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -10995,6 +12195,15 @@
       ]
     },
     {
+      "en": "Commercial pages",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Day 90+ · Defend",
       "kind": "text",
       "tag": "div",
@@ -11103,6 +12312,15 @@
       ]
     },
     {
+      "en": "Why this matters",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "<b>47%</b> open",
       "kind": "text",
       "tag": "span",
@@ -11127,6 +12345,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "03 · Google Ads",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -11235,6 +12462,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "The usual order",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -11418,6 +12654,15 @@
       ]
     },
     {
+      "en": "04 · Software",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "06 · Software",
       "kind": "text",
       "tag": "div",
@@ -11487,6 +12732,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Content first",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -11589,6 +12843,15 @@
       ]
     },
     {
+      "en": "Architecture",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Blast & burn",
       "kind": "text",
       "tag": "div",
@@ -11679,6 +12942,15 @@
       ]
     },
     {
+      "en": "02 · AI SEO",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "05 · AI SEO",
       "kind": "text",
       "tag": "div",
@@ -11721,6 +12993,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Acquisition",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -11784,6 +13065,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Performance",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -11874,6 +13164,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Prioritize",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -11994,6 +13293,15 @@
       ]
     },
     {
+      "en": "Technical",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "The shift",
       "kind": "text",
       "tag": "div",
@@ -12075,6 +13383,15 @@
       ]
     },
     {
+      "en": "4 stages",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "47% open",
       "kind": "text",
       "tag": "div",
@@ -12102,6 +13419,15 @@
       ]
     },
     {
+      "en": "Discover",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "K. Reddy",
       "kind": "text",
       "tag": "span",
@@ -12111,12 +13437,30 @@
       ]
     },
     {
+      "en": "Keywords",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Meta Ads",
       "kind": "text",
       "tag": "option",
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "One team",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -12156,12 +13500,39 @@
       ]
     },
     {
-      "en": "Strategy",
+      "en": "Stage 01",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
-        "index.html"
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Stage 02",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Stage 03",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Stage 04",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -12219,6 +13590,15 @@
       ]
     },
     {
+      "en": "Content",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Email 1",
       "kind": "text",
       "tag": "div",
@@ -12255,12 +13635,39 @@
       ]
     },
     {
+      "en": "Linking",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "On-page",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
+      ]
+    },
+    {
       "en": "Phase 1",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Revenue",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "startup-seo.html"
       ]
     },
     {
@@ -12387,15 +13794,6 @@
       "count": 1,
       "pages": [
         "software.html"
-      ]
-    },
-    {
-      "en": "Build",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "email.html"
       ]
     },
     {

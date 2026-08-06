@@ -66,6 +66,7 @@ const I18N_DIR = path.join(ROOT, 'lib', 'i18n');
 export const PAGE_FILES = [
   'index.html', 'seo.html', 'meta-ads.html', 'email.html',
   'ai-seo.html', 'chatgpt-ads.html', 'software.html', 'book-call.html',
+  'startup-seo.html',
 ];
 
 /* Inline elements may appear INSIDE a translation unit; the French keeps them.
