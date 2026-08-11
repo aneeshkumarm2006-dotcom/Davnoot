@@ -87,6 +87,10 @@ const PAGE = {
   'ai-seo-montreal.html': ['AI SEO Montreal', 'AI search optimization for Montreal businesses, in English and French'],
   'etf-marketing.html': ['ETF marketing', 'Marketing for ETF issuers and asset managers'],
   'startup-seo.html': ['Startup SEO', 'SEO for startups — SaaS, AI, fintech and early-stage companies, prioritised by revenue impact rather than ranking count'],
+  'ppc-agency-montreal.html': ['PPC agency Montreal', 'PPC management for Montreal businesses — campaign setup, keyword research, negative keywords, conversion tracking, and ongoing optimization'],
+  'google-ads-for-small-business.html': ['Google Ads for small business', 'Running Google Ads on a limited budget — objective-led campaigns, tight targeting, and conversion tracking instead of clicks'],
+  'google-ads-for-dentists.html': ['Google Ads for dentists', 'Dental Google Ads — one campaign per treatment, location targeting, and call and appointment tracking for practices'],
+  'google-ads-for-law-firms.html': ['Google Ads for law firms', 'Legal PPC — practice-area campaigns, high-intent keyword targeting, and cost per qualified lead rather than cost per click'],
   'privacy.html': ['Privacy policy', 'What we collect, why, and how to have it removed'],
 };
 
@@ -182,6 +186,10 @@ ${section('Blog', [
 ])}
 ${section('Optional', [
   ...cityLines,
+  page('ppc-agency-montreal.html'),
+  page('google-ads-for-small-business.html'),
+  page('google-ads-for-dentists.html'),
+  page('google-ads-for-law-firms.html'),
   page('startup-seo.html'),
   page('ai-seo-agency.html'),
   page('ai-seo-montreal.html'),
