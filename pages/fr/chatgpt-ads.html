@@ -46,6 +46,7 @@
       "@type": "Organization",
       "@id": "https://www.davnoot.com/#organization",
       "name": "Davnoot",
+      "alternateName": "Davnoot Digital",
       "url": "https://www.davnoot.com/",
       "logo": "https://www.davnoot.com/images/davnoot-logo.png",
       "image": "https://www.davnoot.com/images/davnoot-logo.png",
@@ -55,10 +56,30 @@
       "foundingDate": "2025",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Montreal",
+        "streetAddress": "4115 Sherbrooke St W",
+        "addressLocality": "Westmount",
         "addressRegion": "QC",
+        "postalCode": "H3Z 1B1",
         "addressCountry": "CA"
       },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "telephone": "+1-438-223-7131",
+        "email": "info@davnoot.com",
+        "areaServed": [
+          "CA",
+          "US"
+        ],
+        "availableLanguage": [
+          "English",
+          "French"
+        ]
+      },
+      "knowsLanguage": [
+        "en",
+        "fr-CA"
+      ],
       "areaServed": "Worldwide",
       "sameAs": [
         "https://www.instagram.com/davnootdigital/",
@@ -67,14 +88,52 @@
     },
     {
       "@type": "Service",
+      "@id": "https://www.davnoot.com/fr/services/chatgpt-ads#service",
       "name": "Agence de publicités ChatGPT Montréal | Publicité IA",
       "serviceType": "ChatGPT Ads and AI Advertising",
       "description": "Rejoignez vos clients au cœur des conversations avec l'IA grâce à des stratégies de publicités ChatGPT. Davnoot aide les entreprises à préparer, lancer et optimiser leurs campagnes de publicité IA.",
-      "url": "https://www.davnoot.com/services/chatgpt-ads",
+      "url": "https://www.davnoot.com/fr/services/chatgpt-ads",
       "provider": {
         "@id": "https://www.davnoot.com/#organization"
       },
-      "areaServed": "Worldwide"
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Montreal"
+        },
+        {
+          "@type": "Country",
+          "name": "Canada"
+        },
+        {
+          "@type": "Country",
+          "name": "United States"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.davnoot.com/fr/services/chatgpt-ads#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Davnoot",
+          "item": "https://www.davnoot.com/fr"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://www.davnoot.com/services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Agence publicités ChatGPT Montréal",
+          "item": "https://www.davnoot.com/fr/services/chatgpt-ads"
+        }
+      ]
     },
     {
       "@type": "FAQPage",

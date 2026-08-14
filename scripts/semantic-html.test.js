@@ -71,6 +71,37 @@ describe('the FAQ accordions are <article>, and build.js still finds them', () =
   }
 });
 
+describe('the visible breadcrumb trail reaches the JSON-LD', () => {
+  /* Exactly the FAQ guard above, for the same trap. extractBreadcrumb() in build.js
+   * scrapes the VISIBLE `.breadcrumb` div to emit BreadcrumbList JSON-LD, so it is
+   * anchored on markup that a CMS annotation pass or a class rename can move out
+   * from under it — which is precisely how FAQPage silently vanished from 8 live
+   * pages once. BreadcrumbList is a real Google rich result with its own Search
+   * Console report, so losing it costs something visible. */
+  const withCrumbs = PAGES.filter(({ file }) => fs.readFileSync(file, 'utf8').includes('class="breadcrumb"'));
+
+  test('nearly every page has a breadcrumb', () =>
+    assert.ok(withCrumbs.length > 30, `only ${withCrumbs.length} pages carry a breadcrumb`));
+
+  for (const { label, file } of withCrumbs) {
+    test(`${label} kept its BreadcrumbList schema`, () => {
+      const html = fs.readFileSync(file, 'utf8');
+      assert.ok(
+        html.includes('"BreadcrumbList"'),
+        `${label}: the breadcrumb schema vanished — extractBreadcrumb stopped matching`,
+      );
+    });
+  }
+
+  test('the homepage has neither a visible breadcrumb nor a BreadcrumbList', () => {
+    const home = PAGES.find(({ label }) => /(^|[\\/])index\.html/.test(label));
+    if (!home) return;
+    const html = fs.readFileSync(home.file, 'utf8');
+    assert.ok(!html.includes('class="breadcrumb"'), 'the homepage should not render a breadcrumb');
+    assert.ok(!html.includes('"BreadcrumbList"'), 'the homepage is the root — it has no trail to describe');
+  });
+});
+
 describe('the server-rendered pages carry the same landmark', () => {
   const post = {
     _id: 'x', slug: 'a-post', title: 'A post', content: '<p>Body</p>',

@@ -214,6 +214,44 @@ describe('Index page', () => {
     assert.ok(html.includes('"@type": "BreadcrumbList"'));
   });
 
+  /* The archive used to hand-assemble its own graph, which made it a SECOND JSON-LD
+   * builder alongside lib/structured-data.js. It now goes through buildGraph like
+   * every other surface, so its nodes are shaped — and @id'd — identically. */
+  test('the archive graph comes from the one builder, with @ids', () => {
+    const html = renderIndexPage({ posts: [POST], page: 1, totalPages: 1 });
+    const graph = JSON.parse(
+      html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/)[1].replace(/\\u003c/g, '<'),
+    )['@graph'];
+    assert.deepEqual(graph.map((n) => n['@type']), ['Organization', 'BreadcrumbList', 'ItemList']);
+    assert.equal(graph[0]['@id'], 'https://www.davnoot.com/#organization');
+    assert.equal(graph[1]['@id'], 'https://www.davnoot.com/blog#breadcrumb');
+    assert.equal(graph[2]['@id'], 'https://www.davnoot.com/blog#posts');
+
+    const trail = graph[1].itemListElement;
+    assert.deepEqual(trail.map((i) => i.name), ['Home', 'Blog']);
+    assert.deepEqual(trail.map((i) => i.position), [1, 2]);
+    // The last crumb has no href of its own and resolves to this page.
+    assert.equal(trail.at(-1).item, 'https://www.davnoot.com/blog');
+  });
+
+  test('a category archive adds a third crumb', () => {
+    const html = renderIndexPage({
+      posts: [POST],
+      page: 1,
+      totalPages: 1,
+      categories: [{ slug: 'seo', name: 'SEO' }],
+      activeCategory: { slug: 'seo', name: 'SEO' },
+    });
+    const graph = JSON.parse(
+      html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/)[1].replace(/\\u003c/g, '<'),
+    )['@graph'];
+    const trail = graph.find((n) => n['@type'] === 'BreadcrumbList').itemListElement;
+    assert.deepEqual(trail.map((i) => i.name), ['Home', 'Blog', 'SEO']);
+    assert.deepEqual(trail.map((i) => i.position), [1, 2, 3]);
+    assert.equal(trail[1].item, 'https://www.davnoot.com/blog');
+    assert.equal(trail.at(-1).item, 'https://www.davnoot.com/blog/category/seo');
+  });
+
   test('page 2 carries rel=prev and a page-specific canonical', () => {
     const html = renderIndexPage({ posts: [POST], page: 2, totalPages: 3 });
     assert.ok(html.includes('rel="prev"'));

@@ -61,6 +61,44 @@ function extractFaq(html) {
   return out;
 }
 
+/* Lift the visible breadcrumb trail out of a page, for BreadcrumbList JSON-LD.
+ *
+ * Same contract as extractFaq above, for the same reason: the schema must be a
+ * PROJECTION of what the visitor can see, never a second hand-authored copy that
+ * can drift. Every routable page except index.html renders exactly one
+ * `.breadcrumb` div, so this needs no per-page configuration.
+ *
+ * Attribute-tolerance is load-bearing, exactly as it is for extractFaq: the CMS
+ * codemod appends `data-cms` attributes, so every tag pattern here must be
+ * `[^>]*`. Anchor it on a literal `<div class="breadcrumb">` and the trail
+ * silently vanishes from 41 pages with no error anywhere.
+ *
+ * Two markup variants exist on disk and both must keep working:
+ *   <span class="crumb-sep">/</span> … <span class="crumb-current">SEO</span>
+ *   <span>/</span>                   … <span>Privacy Policy</span>   (privacy.html)
+ * so the current page is "the last <span> whose text is not a separator" rather
+ * than a class lookup. Anchors carry the ancestor crumbs; the final crumb has no
+ * href and the builder resolves it to the page's own canonical.
+ *
+ * Returns [] below 2 crumbs — Google needs at least two ListItems for the rich
+ * result, and a one-item trail would emit a node that can never do anything. */
+function extractBreadcrumb(html) {
+  const box = html.match(/<div class="breadcrumb"[^>]*>([\s\S]*?)<\/div>/);
+  if (!box) return [];
+  const crumbs = [];
+  const are = /<a[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g;
+  let m;
+  while ((m = are.exec(box[1]))) {
+    const name = toPlainText(m[2]);
+    if (name) crumbs.push({ name, href: m[1] });
+  }
+  const spans = [...box[1].matchAll(/<span[^>]*>([\s\S]*?)<\/span>/g)]
+    .map((s) => toPlainText(s[1]))
+    .filter((t) => t && t !== '/');
+  if (spans.length) crumbs.push({ name: spans[spans.length - 1], href: null });
+  return crumbs.length >= 2 ? crumbs : [];
+}
+
 // Per-page sitemap weighting. Home ranks highest; the booking page slightly lower
 // than the service pages. Anything new defaults to a sensible service-tier weight.
 function sitemapMeta(file) {
@@ -184,6 +222,7 @@ for (const { file, dir, label, locale } of targets) {
   const descM = original.match(/<meta\s+name="description"\s+content="([\s\S]*?)"\s*\/?>/i);
   const desc = descM ? descM[1].trim() : ORG_DESC;
   const faqs = extractFaq(original);
+  const crumbs = extractBreadcrumb(original);
 
   // Every template keys off the BASENAME (canonicalFor, KEYWORDS, SERVICE_PAGES),
   // so pages/seo.html and ./seo.html bake byte-identical chrome. That identity is
@@ -193,7 +232,7 @@ for (const { file, dir, label, locale } of targets) {
   // The title/description fed in here are read from the FILE, so a French page
   // gets its FRENCH <title> into og:title and its French JSON-LD — the translated
   // <title> is a hole in the generated source, not something this script invents.
-  let html = fill(original, 'SEO', seoHtml(file, title, desc, faqs, locale));
+  let html = fill(original, 'SEO', seoHtml(file, title, desc, faqs, locale, crumbs));
   html = fill(html, 'NAV', navHtml(file, '', undefined, locale));
   html = fill(html, 'FOOTER', footerHtml(file, '', undefined, locale));
 
