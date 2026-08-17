@@ -68,6 +68,15 @@ export const PAGE_FILES = [
   'ai-seo.html', 'chatgpt-ads.html', 'software.html', 'book-call.html',
   'startup-seo.html', 'ppc-agency-montreal.html', 'google-ads-for-small-business.html',
   'google-ads-for-dentists.html', 'google-ads-for-law-firms.html',
+  // The industry + channel cluster added 2026-08-16. Keep byte-identical to the
+  // literal in scripts/compile-pages.js — see the note there.
+  'google-ads-for-nonprofits.html', 'google-ads-for-real-estate.html',
+  'b2b-google-ads-agency.html', 'saas-google-ads-agency.html',
+  'hvac-google-ads-agency.html', 'healthcare-google-ads-agency.html',
+  'paid-social-agency-montreal.html', 'sem-agency-montreal.html',
+  'performance-marketing-agency-montreal.html',
+  // The fourth paid-media channel page, added 2026-08-17.
+  'media-buying-agency-montreal.html',
 ];
 
 /* Inline elements may appear INSIDE a translation unit; the French keeps them.
