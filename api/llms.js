@@ -101,6 +101,7 @@ const PAGE = {
   'sem-agency-montreal.html': ['SEM agency Montreal', 'Search engine marketing for Montreal businesses — commercial keyword research, search campaigns, landing-page relevance and conversion tracking'],
   'performance-marketing-agency-montreal.html': ['Performance marketing agency Montreal', 'Cross-channel paid media measured on conversions — search, paid social and remarketing run against cost per acquisition and return on ad spend'],
   'media-buying-agency-montreal.html': ['Media buying agency Montreal', 'Media planning and buying — channel selection, audience targeting, budget allocation and pacing, and ongoing optimization against cost per result'],
+  'marketing-conference.html': ['Marketing conferences and events', 'What marketing conferences in Toronto and across Canada cover, how to judge an agenda before registering, and the Canadian marketing awards worth following'],
   'privacy.html': ['Privacy policy', 'What we collect, why, and how to have it removed'],
 };
 
@@ -214,6 +215,7 @@ ${section('Optional', [
   page('ai-seo-agency.html'),
   page('ai-seo-montreal.html'),
   page('etf-marketing.html'),
+  page('marketing-conference.html'),
   page('privacy.html'),
 ])}`;
 

@@ -22,15 +22,16 @@
     "paid-social-agency-montreal.html",
     "sem-agency-montreal.html",
     "performance-marketing-agency-montreal.html",
-    "media-buying-agency-montreal.html"
+    "media-buying-agency-montreal.html",
+    "marketing-conference.html"
   ],
-  "total": 3465,
+  "total": 3582,
   "entries": [
     {
       "en": "Explore →",
       "kind": "text",
       "tag": "div",
-      "count": 91,
+      "count": 94,
       "pages": [
         "ai-seo.html",
         "b2b-google-ads-agency.html",
@@ -43,6 +44,7 @@
         "google-ads-for-small-business.html",
         "healthcare-google-ads-agency.html",
         "hvac-google-ads-agency.html",
+        "marketing-conference.html",
         "media-buying-agency-montreal.html",
         "meta-ads.html",
         "paid-social-agency-montreal.html",
@@ -104,7 +106,7 @@
       "en": "FAQ",
       "kind": "text",
       "tag": "div",
-      "count": 22,
+      "count": 23,
       "pages": [
         "ai-seo.html",
         "b2b-google-ads-agency.html",
@@ -118,6 +120,7 @@
         "google-ads-for-small-business.html",
         "healthcare-google-ads-agency.html",
         "hvac-google-ads-agency.html",
+        "marketing-conference.html",
         "media-buying-agency-montreal.html",
         "meta-ads.html",
         "paid-social-agency-montreal.html",
@@ -1137,6 +1140,17 @@
       ]
     },
     {
+      "en": "Every channel <em>we buy on</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 3,
+      "pages": [
+        "marketing-conference.html",
+        "media-buying-agency-montreal.html",
+        "paid-social-agency-montreal.html"
+      ]
+    },
+    {
       "en": "Reports that stop at impressions",
       "kind": "text",
       "tag": "div",
@@ -1598,6 +1612,15 @@
       ]
     },
     {
+      "en": "<span class=\"num\">01</span><span class=\"lbl\">the agenda matters more than the\n          name</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "<span class=\"num\">12 months</span><span class=\"lbl\">what enterprise can wait, startups can't</span>",
       "kind": "text",
       "tag": "div",
@@ -1686,6 +1709,15 @@
       "count": 2,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"num\">0</span><span class=\"lbl\">events worth attending on autopilot</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -2040,6 +2072,15 @@
       ]
     },
     {
+      "en": "<span class=\"num\">9</span><span class=\"lbl\">topics a full agenda covers</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "<span class=\"num\">EN + FR</span><span class=\"lbl\">bilingual ad creative</span>",
       "kind": "text",
       "tag": "div",
@@ -2102,6 +2143,15 @@
       "count": 2,
       "pages": [
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "<span class=\"num\">5</span><span class=\"lbl\">checks before you register</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -2440,16 +2490,6 @@
       "pages": [
         "ppc-agency-montreal.html",
         "sem-agency-montreal.html"
-      ]
-    },
-    {
-      "en": "Every channel <em>we buy on</em>",
-      "kind": "text",
-      "tag": "div",
-      "count": 2,
-      "pages": [
-        "media-buying-agency-montreal.html",
-        "paid-social-agency-montreal.html"
       ]
     },
     {
@@ -3376,6 +3416,15 @@
       ]
     },
     {
+      "en": "<span class=\"tool-chip\"><span class=\"dot\"></span>Digital marketing and SEO</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Google Ads and paid search</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Social media marketing</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Content and brand strategy</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>AI in marketing</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Customer acquisition</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Marketing analytics</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Advertising and media</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Emerging marketing trends</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "<span class=\"tool-chip\"><span class=\"dot\"></span>Product-related searches</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Software category keywords</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Solution-based searches</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>“Best” and comparison searches</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Competitor searches</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>High-intent commercial terms</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Jobs and careers, excluded</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Training and free resources, excluded</span>",
       "kind": "text",
       "tag": "div",
@@ -3517,6 +3566,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Whether the interest is digital marketing,\n        advertising, <a href=\"/services/seo\" class=\"text-link\" data-cursor>SEO</a>, social media, branding, or\n        emerging technology, following the Canadian marketing conference calendar is a cheap way to stay aware of new\n        ideas and where the industry is moving. The\n        <a href=\"/services/google-ads\" class=\"text-link\" data-cursor>paid search</a> and\n        <a href=\"/services/ai-seo\" class=\"text-link\" data-cursor>AI search</a> sessions date fastest, which is a good\n        reason to check the year on an agenda before trusting it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -3814,6 +3872,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "For marketing professionals, attending selectively\n        beats trying to attend everything. Choose events on the subjects, the speakers, and the people you actually\n        want to learn from, and skip the rest without guilt. If you would rather read than travel, the\n        <a href=\"/blog\" class=\"text-link\" data-cursor>Davnoot blog</a> covers much of the same ground through the\n        year.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -4393,6 +4460,15 @@
       ]
     },
     {
+      "en": "Following them is worth doing even when you are not\n        attending in person. Award-winning campaigns usually mark a shift in creative strategy, customer engagement,\n        media, technology, or <a href=\"/services\" class=\"text-link\" data-cursor>digital marketing</a> before that\n        shift reaches anybody's playbook.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Many agencies promise rankings. As a results-driven SEO company in Montreal, Davnoot focuses\n        on improving visibility, attracting qualified traffic, and generating revenue through ethical, long-term SEO\n        strategies. Every recommendation is backed by data, search intent, and measurable outcomes, not guesswork.",
       "kind": "text",
       "tag": "p",
@@ -4555,6 +4631,15 @@
       ]
     },
     {
+      "en": "They are industry awards recognizing campaigns and marketers across\n          Canada, including the awards run by the Canadian Marketing Association. Reading the winners is a fast way to\n          see which creative strategies, channels, and technologies the industry is rewarding, whether or not you\n          attend.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Your advertising budget should be working toward something you\n      can name. We will read what is running now, research where your audience can actually be reached, and put a\n      media plan behind your objectives and budget. Book a free 30-minute call and we will tell you what we would\n      change first and why.",
       "kind": "text",
       "tag": "p",
@@ -4600,6 +4685,15 @@
       ]
     },
     {
+      "en": "That depends on the agenda rather than the city. Toronto hosts a wide\n          range of marketing events, so the useful check is whether the sessions, speakers, and audience match the\n          work you do. A well-matched smaller event usually beats a large one that covers your field in a single\n          panel.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "We build a real estate campaign in a fixed order. Keyword\n        research against the properties, services, and locations the business sells. Campaign and ad group structure\n        that keeps those apart. Conversion tracking for enquiries, calls, viewings, and valuations. Then, last, the\n        advertisements.",
       "kind": "text",
       "tag": "p",
@@ -4615,6 +4709,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "If you are looking for a marketing conference in\n        Toronto, look past the event name and read the speakers, the topics, the audience, and the companies\n        attending. A conference is far more useful when its sessions match the work you actually do, and that is\n        rarely what the headline promises.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -5068,6 +5171,15 @@
       ]
     },
     {
+      "en": "Search behaviour, advertising platforms, social media,\n        AI, content, and customer expectations all keep moving. A good marketing conference pulls many of those topics\n        into one agenda over a day or two, which is faster than piecing the same picture together from newsletters.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Where a business covers several areas, those\n        areas are worth keeping in separate campaigns. One campaign covering the island, the South Shore, and\n        everywhere in between tells you nothing about any of them, and the cheapest area quietly funds the\n        most expensive one.",
       "kind": "text",
       "tag": "p",
@@ -5119,6 +5231,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-dentists.html"
+      ]
+    },
+    {
+      "en": "Marketing conferences bring together people working across digital marketing,\n          advertising, branding, media, content, and business growth. They are also a\n          useful way to see how the industry is changing and which strategies businesses\n          are paying attention to.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -5194,6 +5315,15 @@
       ]
     },
     {
+      "en": "Events there cover everything from digital marketing\n        and advertising to branding, technology, customer experience, and business growth. That range is the appeal\n        and also the difficulty: two events with almost the same name are often aimed at completely different rooms.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "For SaaS companies selling to businesses, the\n        conversion is a demo or a sales enquiry rather than an immediate purchase. So the campaign has two\n        jobs: put the search in front of the page that answers it, and make the next step obvious once the\n        visitor is there.",
       "kind": "text",
       "tag": "p",
@@ -5245,6 +5375,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "A marketing conference is an industry event where marketers, business\n          owners, agencies, and vendors meet for sessions on digital marketing, advertising, branding, media, content,\n          and business growth. Most run one to three days and pair talks with networking time.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -5635,6 +5774,15 @@
       ]
     },
     {
+      "en": "For marketing professionals in Montreal and across Canada, the right conference\n          is a chance to learn from people who do the work, meet other professionals, and\n          come back with an approach worth testing. The wrong one is a day out of the\n          office.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Sending every Google Ads visitor to the homepage makes it\n        harder to turn a property search into an enquiry. The visitor arrives having asked a specific question about a\n        specific property or area, and gets handed a menu and a search bar instead of an answer.",
       "kind": "text",
       "tag": "p",
@@ -5761,6 +5909,15 @@
       ]
     },
     {
+      "en": "The value is not only in the presentations either.\n        Conversations between marketers, business owners, agencies, and industry professionals are where most of the\n        useful ideas come from, and those happen in the gaps between sessions rather than inside them.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "A media budget has to be allocated against objectives and\n          then re-allocated as evidence arrives. Money moves toward the audiences and strategies producing results,\n          which usually means fewer active campaigns at the end of a quarter than at the start.",
       "kind": "text",
       "tag": "p",
@@ -5875,6 +6032,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Decide what you want before you arrive, pick a few sessions tied to\n          current goals, make time for conversations, and leave with a short list of ideas you can test. The value is\n          in what gets applied afterward, not in how many sessions were attended.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -6616,6 +6782,15 @@
       ]
     },
     {
+      "en": "Some conferences are designed for agencies and\n            marketers, others for business owners, executives, or one specific industry. The room decides how every\n            session gets pitched, so a mismatch there costs more than a mismatch on topic.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "The conversions we set up match the action the campaign was built around. We then review the account against\n          them on the cadence below, which is how the organization sees which campaigns are contributing and which ones\n          are only busy.",
       "kind": "text",
       "tag": "p",
@@ -6931,6 +7106,15 @@
       ]
     },
     {
+      "en": "The best sessions send you home with something to try. If you\n      want help deciding which of those ideas deserves budget, book a free 30-minute call. We will look at what you\n      are running now and tell you what we would test first and why.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "We count contact forms, phone calls, quote\n        requests, bookings, purchases, and lead forms, each as its own action rather than one total. A booking\n        and a newsletter signup are not the same event and should not carry the same weight.",
       "kind": "text",
       "tag": "p",
@@ -7018,6 +7202,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "Not every marketing event is relevant to every business or every\n        marketing professional. These five checks take about ten minutes, and they are the difference between a day\n        that changes something and a day that fills a calendar.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -7498,6 +7691,15 @@
       ]
     },
     {
+      "en": "Decide what you want before you arrive. Choose a few\n        sessions tied directly to your work, make time for conversations with other attendees, and write down the\n        ideas that could realistically be tested once you are back.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "For a business serving Montreal, we structure\n        campaigns around specific locations and service areas. The budget then reaches the customers the\n        business actually serves instead of spreading across areas it cannot cover.",
       "kind": "text",
       "tag": "p",
@@ -7885,6 +8087,15 @@
       ]
     },
     {
+      "en": "Canadian marketing awards and the Canadian Marketing\n        Association awards, for example, show what the industry is currently rewarding. That is useful information\n        even in the years you disagree with the shortlist.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Each can be improved on its own and still leave the campaign\n        where it started. A sharper audience pointed at the wrong objective, or a well-paced budget with nothing\n        counting the outcome, both end the same way.",
       "kind": "text",
       "tag": "p",
@@ -7900,6 +8111,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-dentists.html"
+      ]
+    },
+    {
+      "en": "Marketing events sit inside a wider Canadian marketing\n        community. Industry awards and professional organizations are a second way to see the campaigns, ideas, and\n        marketers being recognized across the country.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -8065,6 +8285,15 @@
       ]
     },
     {
+      "en": "Experienced practitioners tend to give more\n            practical insight than sessions built on broad theory. Look for people who have run the thing they are\n            speaking about, recently, at a scale close to yours.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Technical issues compound. Every broken page, slow load, and bad redirect costs\n            you traffic daily. We patch the foundation before adding floors. No new content until the infrastructure can\n            handle it.",
       "kind": "text",
       "tag": "p",
@@ -8164,6 +8393,15 @@
       ]
     },
     {
+      "en": "A smaller event with the right audience is often\n            worth more than a large conference with hundreds of unrelated attendees. Count the people you would\n            actually want to meet, not the people attending.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Ad groups, match types, ad copy, bids and budgets built\n          around the products or services you sell and the businesses you want to reach. The ad names its business\n          audience before the click, not after it.",
       "kind": "text",
       "tag": "p",
@@ -8206,6 +8444,15 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Look at the sessions and confirm they cover areas\n            that matter to your current marketing goals. An agenda that reads well in a brochure and touches nothing\n            you work on is a day you do not get back.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -8431,6 +8678,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "A conference should not just be a day of\n        presentations. The value shows up when the ideas get applied to your own marketing strategy, which usually\n        means picking one or two and letting the rest go.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -8800,6 +9056,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Favour sessions that explain how a strategy is\n            being implemented over sessions that describe where marketing is heading. A trend you cannot act on is a\n            headline you have already read.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -9259,6 +9524,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Depending on the event, sessions can cover any of the\n        areas below. Very few conferences cover all nine well, and the ones that claim to usually give each of them a\n        single panel.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -10387,6 +10661,15 @@
       ]
     },
     {
+      "en": "Toronto is a major centre for marketing events, but\n        conferences and industry events run across the country, Montreal, Ottawa, Vancouver, and Calgary included.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "We make your tools talk to each other. Shopify, Stripe, your ERP, your CRM, your data\n          warehouse, all connected with real engineering, not no-code duct tape.",
       "kind": "text",
       "tag": "p",
@@ -10810,6 +11093,15 @@
       ]
     },
     {
+      "en": "Explore marketing conferences and marketing events in Toronto and across Canada, covering digital marketing, advertising, industry trends, networking and awards.",
+      "kind": "description",
+      "tag": "meta",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Most SEO retainers are deliberately vague. \"Monthly optimization.\" \"Ongoing content.\" That's not strategy,\n          it's billable hours dressed up as a service.",
       "kind": "text",
       "tag": "p",
@@ -10927,6 +11219,15 @@
       ]
     },
     {
+      "en": "Toronto is one of Canada's largest marketing and\n        business hubs, so it hosts a wide range of marketing conferences and marketing events through the year.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "What one qualified opportunity is worth to the business. That\n          number, not the cost per click, is what decides how expensive a search is allowed to be.",
       "kind": "text",
       "tag": "p",
@@ -11014,6 +11315,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-bar-l\">Follow-up</span><span class=\"pc-bar-track\"><i\n                    style=\"width:20%\"></i></span><span class=\"pc-bar-v\">Afterwards</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -11251,6 +11561,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-bar-l\">Hallway</span><span class=\"pc-bar-track\"><i\n                    style=\"width:35%\"></i></span><span class=\"pc-bar-v\">Unplanned</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-bar-l\">Homepage</span><span class=\"pc-bar-track\"><i\n                    style=\"width:15%\"></i></span><span class=\"pc-bar-v\">Redirect</span>",
       "kind": "text",
       "tag": "div",
@@ -11359,6 +11678,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-bar-l\">Dropped</span><span class=\"pc-bar-track\"><i\n                    style=\"width:16%\"></i></span><span class=\"pc-bar-v\">Not ours</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-bar-l\">Emergency</span><span class=\"pc-bar-track\"><i\n                    style=\"width:41%\"></i></span><span class=\"pc-bar-v\">Urgent</span>",
       "kind": "text",
       "tag": "div",
@@ -11383,6 +11711,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-bar-l\">Sessions</span><span class=\"pc-bar-track\"><i\n                    style=\"width:45%\"></i></span><span class=\"pc-bar-v\">Planned</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -11539,6 +11876,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-bar-l\">Tested</span><span class=\"pc-bar-track\"><i\n                    style=\"width:58%\"></i></span><span class=\"pc-bar-v\">Try it</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "<span class=\"tier-row-label\">For</span>\n            <span class=\"tier-row-value\">Brands ready to scale Meta as their primary acquisition engine.</span>",
       "kind": "text",
       "tag": "div",
@@ -11572,6 +11918,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-bar-l\">Parked</span><span class=\"pc-bar-track\"><i\n                    style=\"width:26%\"></i></span><span class=\"pc-bar-v\">Later</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -11653,6 +12008,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "A conference is one way to keep up with the industry. These are\n        the pages covering what we actually do with the ideas once the event is over.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -11980,6 +12344,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-var-l\">Ideas tested after</span><span\n                  class=\"pc-var-v\">Decision</span><span class=\"pc-var-pill\">Focus</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Every startup has different goals, but the objective stays the same: make it easier for\n        the right customers to discover your business.",
       "kind": "text",
       "tag": "p",
@@ -12304,12 +12677,39 @@
       ]
     },
     {
+      "en": "<a href=\"/\" data-cursor>Davnoot</a>\n      <span class=\"crumb-sep\">/</span>\n      <span class=\"crumb-current\">Marketing Conference</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "<a href=\"/book-call\" class=\"btn-primary\" data-cursor>\n        Request a PPC consultation\n        <span class=\"arrow\">→</span>\n      </a>",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "ppc-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "<a href=\"/book-call\" class=\"btn-primary\" data-cursor>\n        Talk to our marketing team\n        <span class=\"arrow\">→</span>\n      </a>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">By the agenda</span><span\n                  class=\"pc-var-v\">Decided</span><span class=\"pc-var-pill\">Focus</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -12727,6 +13127,15 @@
       ]
     },
     {
+      "en": "That last part is the step most people skip. Notes\n        that never turn into a test are a receipt for a day out of the office.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "The seller-side action, worth isolating because\n              seller leads and buyer leads almost never cost the same to acquire.",
       "kind": "text",
       "tag": "div",
@@ -12760,6 +13169,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-name\">Where the value actually comes from</span>\n              <span class=\"pc-tag\">Sessions and hallways</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -13816,6 +14234,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-name\">What the day is judged on</span>\n              <span class=\"pc-tag\">Beyond attendance</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Every campaign is built to increase engagement, improve conversions, and maximize customer\n        lifetime value.",
       "kind": "text",
       "tag": "p",
@@ -14065,6 +14492,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-name\">What happens to the notes</span>\n              <span class=\"pc-tag\">Follow-through</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -14668,6 +15104,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-name\">How an event gets chosen</span>\n              <span class=\"pc-tag\">Selection</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -15346,6 +15791,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-var-l\">Contacts collected</span><span class=\"pc-var-v\">Context</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-var-l\">Property enquiries</span><span class=\"pc-var-v\">Tracked</span>",
       "kind": "text",
       "tag": "div",
@@ -15388,6 +15842,24 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">Sessions attended</span><span class=\"pc-var-v\">Context</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">By the speakers</span><span class=\"pc-var-v\">Checked</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -15553,6 +16025,15 @@
       ]
     },
     {
+      "en": "<span>Every session earns its slot</span><span class=\"pc-val\">Or it goes</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "A business visitor needs more<br />before they\n        <em>fill in a form</em>.",
       "kind": "text",
       "tag": "h2",
@@ -15577,6 +16058,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">By the name</span><span class=\"pc-var-v\">Skipped</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -15658,6 +16148,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-real-estate.html"
+      ]
+    },
+    {
+      "en": "<span>The number that matters</span><span class=\"pc-val\">Ideas shipped</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -17074,6 +17573,15 @@
       ]
     },
     {
+      "en": "Talk to our marketing team\n          <span class=\"arrow\">→</span>",
+      "kind": "text",
+      "tag": "a",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "The page has to finish<br />what the ad\n        <em>started</em>.",
       "kind": "text",
       "tag": "h2",
@@ -17098,6 +17606,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Ideas are cheap.<br />Testing them is the\n        <em>work</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -17470,6 +17987,15 @@
       ]
     },
     {
+      "en": "The work the industry<br />decides to\n        <em>reward</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "<span class=\"l\">Hook</span><span class=\"v\">Founder POV</span>",
       "kind": "text",
       "tag": "div",
@@ -17485,6 +18011,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "<span>Rule</span><span class=\"pc-val\">Test, then adopt</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -17668,6 +18203,15 @@
       ]
     },
     {
+      "en": "Agenda read, sessions chosen, ideas tested once you are back",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Book a free SEO audit\n          <span class=\"arrow\">→</span>",
       "kind": "text",
       "tag": "a",
@@ -17701,6 +18245,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Marketing conferences and events · Toronto and across Canada",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -18025,6 +18578,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "<span>Judged</span><span class=\"pc-val\">Weeks later</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -18442,6 +19004,15 @@
       ]
     },
     {
+      "en": "Every idea worth testing written down with its next step",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Five ways a legal budget<br />gets <em>spent twice</em>.",
       "kind": "text",
       "tag": "h2",
@@ -18520,6 +19091,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Straight answers on<br /><em>marketing conferences</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -18673,6 +19253,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Marketing changes faster<br />than most <em>plans</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -18853,6 +19442,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "A full day of sessions, none of them picked in advance",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -19186,6 +19784,15 @@
       "count": 1,
       "pages": [
         "media-buying-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Are marketing conferences in Toronto worth attending?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -19531,6 +20138,15 @@
       ]
     },
     {
+      "en": "Last year's event judged on what it actually changed",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Let's find the<br /><em>leverage</em> in your stack.",
       "kind": "text",
       "tag": "h1",
@@ -19675,6 +20291,15 @@
       ]
     },
     {
+      "en": "Conversations planned with the people worth meeting",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Custom-designed emails matching brand voice exactly",
       "kind": "text",
       "tag": "div",
@@ -19717,6 +20342,24 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "How do you get value out of a marketing conference?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "Marketing Conference and Events in Canada | Davnoot",
+      "kind": "title",
+      "tag": "title",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -19861,6 +20504,15 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Five checks before<br />you book the <em>day</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -20467,6 +21119,15 @@
       ]
     },
     {
+      "en": "A short list of sessions chosen before arriving",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "A signup is a step,<br />not a <em>result</em>.",
       "kind": "text",
       "tag": "h2",
@@ -20500,6 +21161,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "Events chosen on agenda, speakers, and audience",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -20545,6 +21215,24 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Marketing conferences<br />and <em>events</em>.",
+      "kind": "text",
+      "tag": "h1",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "Marketing conferences<br />in <em>Toronto</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -20626,6 +21314,15 @@
       "count": 1,
       "pages": [
         "media-buying-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "The same event attended every year out of habit",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -21058,6 +21755,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Beyond Toronto,<br />across <em>Canada</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -21646,6 +22352,15 @@
       ]
     },
     {
+      "en": "Go in with a clear<br /><em>purpose</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Google Ads for<br /><em>real estate</em>.",
       "kind": "text",
       "tag": "h1",
@@ -21781,6 +22496,15 @@
       ]
     },
     {
+      "en": "Turn the notes into<br />a <em>plan</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "What if I'm not ready to hire anyone yet?",
       "kind": "text",
       "tag": "span",
@@ -21877,6 +22601,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Networking counted in contacts collected",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -22015,6 +22748,15 @@
       ]
     },
     {
+      "en": "Checks worth making before you register",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Complete <em>ChatGPT Ads services</em>.",
       "kind": "text",
       "tag": "h2",
@@ -22087,6 +22829,15 @@
       ]
     },
     {
+      "en": "Notes taken once and never opened again",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Paid media campaign <em>management</em>",
       "kind": "text",
       "tag": "h3",
@@ -22156,6 +22907,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-real-estate.html"
+      ]
+    },
+    {
+      "en": "What are the Canadian marketing awards?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -22753,6 +23513,15 @@
       ]
     },
     {
+      "en": "Events chosen by name and reputation",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Get more from your Google Ads budget",
       "kind": "text",
       "tag": "div",
@@ -22888,6 +23657,15 @@
       ]
     },
     {
+      "en": "Smaller rooms, better conversations.",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "The future of search. Powered by AI.",
       "kind": "text",
       "tag": "p",
@@ -23011,6 +23789,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Events worth attending on autopilot",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -23482,6 +24269,15 @@
       ]
     },
     {
+      "en": "The same ground, <em>all year</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Track what happens after the click",
       "kind": "text",
       "tag": "div",
@@ -23668,6 +24464,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Read the agenda, not the tagline.",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -23866,6 +24671,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Check five · Practical takeaways",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -24157,6 +24971,15 @@
       ]
     },
     {
+      "en": "How to read a conference agenda",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "How to request more information",
       "kind": "text",
       "tag": "div",
@@ -24307,6 +25130,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "What is a marketing conference?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -24877,6 +25709,15 @@
       ]
     },
     {
+      "en": "Practitioners over theorists.",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Rank in <em>AI overviews</em>",
       "kind": "text",
       "tag": "div",
@@ -25372,6 +26213,15 @@
       ]
     },
     {
+      "en": "<em>Attend selectively</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "<em>Narrow, then widen</em>",
       "kind": "text",
       "tag": "div",
@@ -25669,6 +26519,15 @@
       ]
     },
     {
+      "en": "Topics a full agenda covers",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Track qualified legal leads",
       "kind": "text",
       "tag": "div",
@@ -25783,6 +26642,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Check three · The audience",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -26245,6 +27113,15 @@
       ]
     },
     {
+      "en": "Everything <em>we do</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Full retargeting buildout",
       "kind": "text",
       "tag": "li",
@@ -26566,6 +27443,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Check two · The speakers",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -26911,6 +27797,15 @@
       ]
     },
     {
+      "en": "Who else is in the room.",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "24/7 production support",
       "kind": "text",
       "tag": "li",
@@ -26980,6 +27875,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Check four · Networking",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -27127,6 +28031,15 @@
       ]
     },
     {
+      "en": "Look for how, not what.",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Pipeline sourced via AI",
       "kind": "text",
       "tag": "div",
@@ -27235,6 +28148,15 @@
       ]
     },
     {
+      "en": "Awards and recognition",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Buyer and seller leads",
       "kind": "text",
       "tag": "div",
@@ -27250,6 +28172,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Check one · The topics",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -27820,6 +28751,15 @@
       ]
     },
     {
+      "en": "After the conference",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "After you hit submit",
       "kind": "text",
       "tag": "div",
@@ -27952,6 +28892,15 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Getting more from it",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -28195,6 +29144,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "Before you register",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -28720,6 +29678,15 @@
       ]
     },
     {
+      "en": "The usual approach",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Tools consolidated",
       "kind": "text",
       "tag": "div",
@@ -28828,12 +29795,30 @@
       ]
     },
     {
+      "en": "02 · Ad platforms",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "04 · PPC Montreal",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Attend everything",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -29350,6 +30335,15 @@
       ]
     },
     {
+      "en": "Where to go next",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Why this matters",
       "kind": "text",
       "tag": "div",
@@ -29602,6 +30596,15 @@
       ]
     },
     {
+      "en": "Why they matter",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "you@company.com",
       "kind": "attr:placeholder",
       "tag": "input",
@@ -29827,6 +30830,15 @@
       ]
     },
     {
+      "en": "01 · Services",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "02 · PAID ADS",
       "kind": "text",
       "tag": "div",
@@ -29878,6 +30890,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Across Canada",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -30058,6 +31079,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-real-estate.html"
+      ]
+    },
+    {
+      "en": "Worth the day",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -30349,6 +31379,15 @@
       ]
     },
     {
+      "en": "Conferences",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
+      ]
+    },
+    {
       "en": "Evaluations",
       "kind": "text",
       "tag": "div",
@@ -30607,6 +31646,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "03 · Blog",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {
@@ -31192,6 +32240,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-dentists.html"
+      ]
+    },
+    {
+      "en": "Toronto",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "marketing-conference.html"
       ]
     },
     {

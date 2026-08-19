@@ -57,6 +57,8 @@ export const PAGE_FILES = [
   'performance-marketing-agency-montreal.html',
   // The fourth paid-media channel page, added 2026-08-17.
   'media-buying-agency-montreal.html',
+  // The marketing conference / events resource page, added 2026-08-20.
+  'marketing-conference.html',
 ];
 
 /* The French counterparts, compiled from pages/fr/ and keyed "fr/<file>" in
