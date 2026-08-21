@@ -73,6 +73,8 @@
     { "source": "/performance-marketing-agency-montreal.html", "destination": "/performance-marketing-agency-montreal", "permanent": true },
     { "source": "/media-buying-agency-montreal.html", "destination": "/media-buying-agency-montreal", "permanent": true },
     { "source": "/marketing-conference.html", "destination": "/marketing-conference", "permanent": true },
+    { "source": "/online-reputation-management-canada.html", "destination": "/online-reputation-management-canada", "permanent": true },
+    { "source": "/online-reputation-management-montreal.html", "destination": "/online-reputation-management-montreal", "permanent": true },
     { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
     { "source": "/services.html", "destination": "/services", "permanent": true },
     { "source": "/ads.html", "destination": "/ads", "permanent": true },
@@ -160,6 +162,8 @@
     { "source": "/performance-marketing-agency-montreal", "destination": "/performance-marketing-agency-montreal.html" },
     { "source": "/media-buying-agency-montreal", "destination": "/media-buying-agency-montreal.html" },
     { "source": "/marketing-conference", "destination": "/marketing-conference.html" },
+    { "source": "/online-reputation-management-canada", "destination": "/online-reputation-management-canada.html" },
+    { "source": "/online-reputation-management-montreal", "destination": "/online-reputation-management-montreal.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/services", "destination": "/services.html" },
     { "source": "/ads", "destination": "/ads.html" },
@@ -205,6 +209,8 @@
     { "source": "/fr/performance-marketing-agency-montreal", "destination": "/api/page?p=fr/performance-marketing-agency-montreal.html" },
     { "source": "/fr/media-buying-agency-montreal", "destination": "/api/page?p=fr/media-buying-agency-montreal.html" },
     { "source": "/fr/marketing-conference", "destination": "/api/page?p=fr/marketing-conference.html" },
+    { "source": "/fr/online-reputation-management-canada", "destination": "/api/page?p=fr/online-reputation-management-canada.html" },
+    { "source": "/fr/online-reputation-management-montreal", "destination": "/api/page?p=fr/online-reputation-management-montreal.html" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/:slug", "destination": "/api/page?p=:slug" }
   ]

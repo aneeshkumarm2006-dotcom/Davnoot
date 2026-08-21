@@ -59,6 +59,10 @@ export const PAGE_FILES = [
   'media-buying-agency-montreal.html',
   // The marketing conference / events resource page, added 2026-08-20.
   'marketing-conference.html',
+  // The reputation-management pair, added 2026-08-21: a national hub and its
+  // Montreal spoke. The spoke's breadcrumb links up to the hub.
+  'online-reputation-management-canada.html',
+  'online-reputation-management-montreal.html',
 ];
 
 /* The French counterparts, compiled from pages/fr/ and keyed "fr/<file>" in

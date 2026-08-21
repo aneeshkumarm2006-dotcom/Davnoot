@@ -102,6 +102,8 @@ const PAGE = {
   'performance-marketing-agency-montreal.html': ['Performance marketing agency Montreal', 'Cross-channel paid media measured on conversions — search, paid social and remarketing run against cost per acquisition and return on ad spend'],
   'media-buying-agency-montreal.html': ['Media buying agency Montreal', 'Media planning and buying — channel selection, audience targeting, budget allocation and pacing, and ongoing optimization against cost per result'],
   'marketing-conference.html': ['Marketing conferences and events', 'What marketing conferences in Toronto and across Canada cover, how to judge an agenda before registering, and the Canadian marketing awards worth following'],
+  'online-reputation-management-canada.html': ['Online reputation management', 'How a brand\'s search results, reviews and ratings get managed — review generation and response, monitoring, correcting listings, and publishing owned pages that outrank unwanted results, rather than promising removals nobody controls'],
+  'online-reputation-management-montreal.html': ['Online reputation management Montreal', 'Reputation management for Montreal and Quebec businesses — reviews answered in the language they were written in, Google Business Profile kept accurate per location, and the local platforms a Montreal customer actually checks'],
   'privacy.html': ['Privacy policy', 'What we collect, why, and how to have it removed'],
 };
 
@@ -216,6 +218,8 @@ ${section('Optional', [
   page('ai-seo-montreal.html'),
   page('etf-marketing.html'),
   page('marketing-conference.html'),
+  page('online-reputation-management-canada.html'),
+  page('online-reputation-management-montreal.html'),
   page('privacy.html'),
 ])}`;
 

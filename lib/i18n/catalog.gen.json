@@ -23,15 +23,17 @@
     "sem-agency-montreal.html",
     "performance-marketing-agency-montreal.html",
     "media-buying-agency-montreal.html",
-    "marketing-conference.html"
+    "marketing-conference.html",
+    "online-reputation-management-canada.html",
+    "online-reputation-management-montreal.html"
   ],
-  "total": 3582,
+  "total": 3829,
   "entries": [
     {
       "en": "Explore →",
       "kind": "text",
       "tag": "div",
-      "count": 94,
+      "count": 102,
       "pages": [
         "ai-seo.html",
         "b2b-google-ads-agency.html",
@@ -47,6 +49,8 @@
         "marketing-conference.html",
         "media-buying-agency-montreal.html",
         "meta-ads.html",
+        "online-reputation-management-canada.html",
+        "online-reputation-management-montreal.html",
         "paid-social-agency-montreal.html",
         "performance-marketing-agency-montreal.html",
         "ppc-agency-montreal.html",
@@ -61,7 +65,7 @@
       "en": "Monthly",
       "kind": "text",
       "tag": "div",
-      "count": 73,
+      "count": 78,
       "pages": [
         "ai-seo.html",
         "b2b-google-ads-agency.html",
@@ -73,6 +77,7 @@
         "hvac-google-ads-agency.html",
         "media-buying-agency-montreal.html",
         "meta-ads.html",
+        "online-reputation-management-canada.html",
         "paid-social-agency-montreal.html",
         "performance-marketing-agency-montreal.html",
         "ppc-agency-montreal.html",
@@ -85,7 +90,7 @@
       "en": "Weekly",
       "kind": "text",
       "tag": "div",
-      "count": 56,
+      "count": 61,
       "pages": [
         "b2b-google-ads-agency.html",
         "chatgpt-ads.html",
@@ -95,6 +100,7 @@
         "healthcare-google-ads-agency.html",
         "hvac-google-ads-agency.html",
         "media-buying-agency-montreal.html",
+        "online-reputation-management-canada.html",
         "paid-social-agency-montreal.html",
         "performance-marketing-agency-montreal.html",
         "ppc-agency-montreal.html",
@@ -106,7 +112,7 @@
       "en": "FAQ",
       "kind": "text",
       "tag": "div",
-      "count": 23,
+      "count": 25,
       "pages": [
         "ai-seo.html",
         "b2b-google-ads-agency.html",
@@ -123,35 +129,8 @@
         "marketing-conference.html",
         "media-buying-agency-montreal.html",
         "meta-ads.html",
-        "paid-social-agency-montreal.html",
-        "performance-marketing-agency-montreal.html",
-        "ppc-agency-montreal.html",
-        "saas-google-ads-agency.html",
-        "sem-agency-montreal.html",
-        "seo.html",
-        "software.html",
-        "startup-seo.html"
-      ]
-    },
-    {
-      "en": "Davnoot",
-      "kind": "text",
-      "tag": "strong",
-      "count": 21,
-      "pages": [
-        "ai-seo.html",
-        "b2b-google-ads-agency.html",
-        "email.html",
-        "google-ads-for-dentists.html",
-        "google-ads-for-law-firms.html",
-        "google-ads-for-nonprofits.html",
-        "google-ads-for-real-estate.html",
-        "google-ads-for-small-business.html",
-        "healthcare-google-ads-agency.html",
-        "hvac-google-ads-agency.html",
-        "index.html",
-        "media-buying-agency-montreal.html",
-        "meta-ads.html",
+        "online-reputation-management-canada.html",
+        "online-reputation-management-montreal.html",
         "paid-social-agency-montreal.html",
         "performance-marketing-agency-montreal.html",
         "ppc-agency-montreal.html",
@@ -166,7 +145,7 @@
       "en": "Pairs well with",
       "kind": "text",
       "tag": "div",
-      "count": 20,
+      "count": 22,
       "pages": [
         "ai-seo.html",
         "b2b-google-ads-agency.html",
@@ -181,8 +160,40 @@
         "hvac-google-ads-agency.html",
         "media-buying-agency-montreal.html",
         "meta-ads.html",
+        "online-reputation-management-canada.html",
+        "online-reputation-management-montreal.html",
         "paid-social-agency-montreal.html",
         "performance-marketing-agency-montreal.html",
+        "saas-google-ads-agency.html",
+        "sem-agency-montreal.html",
+        "seo.html",
+        "software.html",
+        "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Davnoot",
+      "kind": "text",
+      "tag": "strong",
+      "count": 22,
+      "pages": [
+        "ai-seo.html",
+        "b2b-google-ads-agency.html",
+        "email.html",
+        "google-ads-for-dentists.html",
+        "google-ads-for-law-firms.html",
+        "google-ads-for-nonprofits.html",
+        "google-ads-for-real-estate.html",
+        "google-ads-for-small-business.html",
+        "healthcare-google-ads-agency.html",
+        "hvac-google-ads-agency.html",
+        "index.html",
+        "media-buying-agency-montreal.html",
+        "meta-ads.html",
+        "online-reputation-management-canada.html",
+        "paid-social-agency-montreal.html",
+        "performance-marketing-agency-montreal.html",
+        "ppc-agency-montreal.html",
         "saas-google-ads-agency.html",
         "sem-agency-montreal.html",
         "seo.html",
@@ -423,6 +434,22 @@
       ]
     },
     {
+      "en": "Why it works",
+      "kind": "text",
+      "tag": "div",
+      "count": 8,
+      "pages": [
+        "google-ads-for-real-estate.html",
+        "hvac-google-ads-agency.html",
+        "media-buying-agency-montreal.html",
+        "meta-ads.html",
+        "online-reputation-management-canada.html",
+        "paid-social-agency-montreal.html",
+        "performance-marketing-agency-montreal.html",
+        "sem-agency-montreal.html"
+      ]
+    },
+    {
       "en": "Campaign <em>structure</em>",
       "kind": "text",
       "tag": "h3",
@@ -449,21 +476,6 @@
         "performance-marketing-agency-montreal.html",
         "ppc-agency-montreal.html",
         "saas-google-ads-agency.html",
-        "sem-agency-montreal.html"
-      ]
-    },
-    {
-      "en": "Why it works",
-      "kind": "text",
-      "tag": "div",
-      "count": 7,
-      "pages": [
-        "google-ads-for-real-estate.html",
-        "hvac-google-ads-agency.html",
-        "media-buying-agency-montreal.html",
-        "meta-ads.html",
-        "paid-social-agency-montreal.html",
-        "performance-marketing-agency-montreal.html",
         "sem-agency-montreal.html"
       ]
     },
@@ -966,6 +978,18 @@
       ]
     },
     {
+      "en": "What we manage",
+      "kind": "text",
+      "tag": "div",
+      "count": 4,
+      "pages": [
+        "google-ads-for-nonprofits.html",
+        "media-buying-agency-montreal.html",
+        "online-reputation-management-canada.html",
+        "sem-agency-montreal.html"
+      ]
+    },
+    {
       "en": "Capabilities",
       "kind": "text",
       "tag": "div",
@@ -1029,6 +1053,17 @@
       "pages": [
         "index.html",
         "software.html"
+      ]
+    },
+    {
+      "en": "What working with us<br />actually\n        <em>involves</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 3,
+      "pages": [
+        "media-buying-agency-montreal.html",
+        "online-reputation-management-canada.html",
+        "sem-agency-montreal.html"
       ]
     },
     {
@@ -1250,6 +1285,17 @@
       ]
     },
     {
+      "en": "Why choose Davnoot",
+      "kind": "text",
+      "tag": "div",
+      "count": 3,
+      "pages": [
+        "media-buying-agency-montreal.html",
+        "online-reputation-management-canada.html",
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Conversion volume",
       "kind": "text",
       "tag": "div",
@@ -1302,17 +1348,6 @@
         "chatgpt-ads.html",
         "email.html",
         "meta-ads.html"
-      ]
-    },
-    {
-      "en": "What we manage",
-      "kind": "text",
-      "tag": "div",
-      "count": 3,
-      "pages": [
-        "google-ads-for-nonprofits.html",
-        "media-buying-agency-montreal.html",
-        "sem-agency-montreal.html"
       ]
     },
     {
@@ -1491,6 +1526,16 @@
       ]
     },
     {
+      "en": "<a href=\"/book-call\" class=\"btn-primary\" data-cursor>\n        Get a reputation audit\n        <span class=\"arrow\">→</span>\n      </a>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-canada.html",
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"t-card-name\">William Felberbaum</span>\n              <span class=\"t-card-role\">Founder · Jasztex</span>",
       "kind": "text",
       "tag": "div",
@@ -1563,6 +1608,15 @@
       "pages": [
         "ai-seo.html",
         "email.html"
+      ]
+    },
+    {
+      "en": "<span class=\"num\">01</span><span class=\"lbl\">the brand search is the first\n          impression</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -1685,6 +1739,15 @@
       ]
     },
     {
+      "en": "<span class=\"num\">0</span><span class=\"lbl\">reviews answered by translation alone</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"num\">7</span><span class=\"lbl\">dental service areas, seven campaigns</span>",
       "kind": "text",
       "tag": "div",
@@ -1703,6 +1766,24 @@
       ]
     },
     {
+      "en": "<span class=\"num\">01</span><span class=\"lbl\">reply in the language they wrote in</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"num\">2</span><span class=\"lbl\">languages every review is handled in</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"num\">8</span><span class=\"lbl\">targeting signals behind an audience</span>",
       "kind": "text",
       "tag": "div",
@@ -1718,6 +1799,15 @@
       "count": 2,
       "pages": [
         "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "<span class=\"num\">10</span><span class=\"lbl\">results on page one to account for</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -1916,6 +2006,15 @@
       "count": 2,
       "pages": [
         "media-buying-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"num\">6</span><span class=\"lbl\">parts of a reputation we manage</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -2218,6 +2317,15 @@
       ]
     },
     {
+      "en": "<span class=\"num\">6</span><span class=\"lbl\">local surfaces we monitor</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"num\">7</span><span class=\"lbl\">objectives we buy against</span>",
       "kind": "text",
       "tag": "div",
@@ -2270,6 +2378,15 @@
       "count": 2,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "<span class=\"num\">0</span><span class=\"lbl\">reviews we write for you</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -2393,13 +2510,13 @@
       ]
     },
     {
-      "en": "What working with us<br />actually\n        <em>involves</em>.",
+      "en": "Get a reputation audit\n          <span class=\"arrow\">→</span>",
       "kind": "text",
-      "tag": "h2",
+      "tag": "a",
       "count": 2,
       "pages": [
-        "media-buying-agency-montreal.html",
-        "sem-agency-montreal.html"
+        "online-reputation-management-canada.html",
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -2430,6 +2547,16 @@
       "pages": [
         "b2b-google-ads-agency.html",
         "ppc-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Rank for what <em>customers search</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-canada.html",
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -2510,6 +2637,16 @@
       "pages": [
         "ai-seo.html",
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Be found in <em>AI answers</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-canada.html",
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -2776,6 +2913,16 @@
       "pages": [
         "media-buying-agency-montreal.html",
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "04 · PPC Montreal",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-montreal.html",
+        "performance-marketing-agency-montreal.html"
       ]
     },
     {
@@ -3155,6 +3302,16 @@
       ]
     },
     {
+      "en": "02 · SEO",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "online-reputation-management-canada.html",
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Consults",
       "kind": "text",
       "tag": "div",
@@ -3425,12 +3582,48 @@
       ]
     },
     {
+      "en": "<span class=\"tool-chip\"><span class=\"dot\"></span>Restaurants and cafés</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Clinics and wellness</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Home services and contractors</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Retail and showrooms</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Hotels and short stays</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Professional services</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Auto and repair</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Fitness and studios</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Multi-location groups</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"tool-chip\"><span class=\"dot\"></span>Branded search results</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>New reviews</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Rating movement</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Social mentions</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Forums and communities</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>News and press</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Executive name searches</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Competitor comparison pages</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Profile edits</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "<span class=\"tool-chip\"><span class=\"dot\"></span>Google Business Profile</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Google Maps</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Facebook pages and groups</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Yelp Montréal</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Pages Jaunes</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Quebec industry directories</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Instagram tags</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Reddit r/montreal</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Local news and blogs</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"tool-chip\"><span class=\"dot\"></span>Product-related searches</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Software category keywords</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Solution-based searches</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>“Best” and comparison searches</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Competitor searches</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>High-intent commercial terms</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Jobs and careers, excluded</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Training and free resources, excluded</span>",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "saas-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "<span class=\"tool-chip\"><span class=\"dot\"></span>Google Business Profile</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Facebook</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Trustpilot</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Yelp</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Better Business Bureau</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Industry directories</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>App stores</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Marketplace seller ratings</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Employer review sites</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -3668,6 +3861,15 @@
       ]
     },
     {
+      "en": "That is ordinary\n        <a href=\"/services/seo\" class=\"text-link\" data-cursor>SEO</a> pointed at your own name instead of at your\n        market. It is also why the two disciplines belong together: the assets that hold page one for a brand search\n        are the same assets that earn links and rankings everywhere else. Where AI assistants summarise a company,\n        they are reading much the same set of sources, which is covered separately under\n        <a href=\"/services/ai-seo\" class=\"text-link\" data-cursor>AI SEO</a>.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span class=\"tool-chip\"><span class=\"dot\"></span>Lead generation</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Online sales</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Website traffic</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Phone calls</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Bookings</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Brand visibility</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Product launches</span>",
       "kind": "text",
       "tag": "div",
@@ -3683,6 +3885,15 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Sometimes, and only where there are grounds. A review that breaks a\n          platform's policy or comes from someone who was never a customer can be reported and is often taken down. A\n          factual error can be corrected by the publisher. Most negative content is neither, and the reliable answer\n          there is to answer it publicly and rank stronger pages above it. Any agency guaranteeing removal of content\n          it does not control is guaranteeing something it cannot deliver.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -3803,6 +4014,15 @@
       ]
     },
     {
+      "en": "Machine translation is not the shortcut it looks\n        like. Quebec French has its own vocabulary and register, and a reply assembled from a translation tool lands\n        somewhere between formal and foreign. Under Quebec's language rules the French version of customer-facing\n        communication also has to be at least as prominent as the English, which is worth knowing before a bilingual\n        template gets designed.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Campaigns don't usually fail because Google changed its algorithm. They fail because the\n        strategy started in the wrong place. We've seen startups publish dozens of articles before optimizing a single\n        product page, target head terms while ignoring the commercial searches their customers actually use, and lean\n        on paid advertising because the website was never built to earn organic visibility at all.",
       "kind": "text",
       "tag": "p",
@@ -3827,6 +4047,15 @@
       "count": 1,
       "pages": [
         "saas-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "They overlap and they are not the same. SEO works to rank your pages\n          for what customers search when they do not know you yet. Reputation management works on what appears when\n          they search your name specifically, and adds reviews, profiles, monitoring, and response to the picture.\n          The ranking half of the job uses the same methods, which is why the two are usually better run together.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -3863,6 +4092,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Review flow and response times change within weeks. Ratings move over a\n          few months, because an average built from hundreds of reviews is slow to shift by design. Changes to page\n          one of a brand search usually take three to six months, since it depends on new pages earning their\n          positions. Anything faster than that on any of the three is worth asking hard questions about.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -3911,6 +4149,15 @@
       ]
     },
     {
+      "en": "Online reputation management is the ongoing work of shaping what\n          appears when somebody searches your name: the reviews and ratings, the profiles, and the pages that rank on\n          the first page of results. In practice it combines review generation and response, monitoring, correcting\n          listings, and publishing pages you control so they hold the positions that matter.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Davnoot plans and manages nonprofit Google Ads accounts around\n      the organization's specific goals: keyword research, campaign structure, conversion tracking, and the\n      optimization that follows. Whether the objective is donations, volunteers, events, or a nonprofit service people\n      need to find, the campaign gets built around the action the organization wants people to take.",
       "kind": "text",
       "tag": "p",
@@ -3920,12 +4167,30 @@
       ]
     },
     {
+      "en": "For anything a customer finds on a map, they are close to the whole\n          decision. Someone comparing three options nearby has a star rating, a review count, and the two or three\n          newest comments to work from. For businesses where the sale involves a conversation, reviews matter less at\n          the start and quite a lot at the point where someone checks you before signing.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "This is the cheapest thing to fix in most real estate\n        accounts. The targeting is often close to right, and the enquiries are being lost in the ten seconds after the\n        click. That is the one part of the funnel that costs nothing extra in media to improve. Often the right\n        destination is a page that already exists on the site, and nobody had pointed the ad group at it.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "google-ads-for-real-estate.html"
+      ]
+    },
+    {
+      "en": "Yes, and they are written in French rather than translated from an\n          English reply. A review left in French gets a French answer, an English one gets an English answer, and a\n          reviewer who switches between the two gets whichever language they used most. A Quebec reader spots a\n          machine-translated reply immediately, and that undoes most of the point of replying.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -4046,6 +4311,15 @@
       ]
     },
     {
+      "en": "Only where there are grounds. A review that breaks Google's policy, or\n          one from someone who was never a customer, can be reported and is often removed. A genuine bad experience\n          cannot be, and it should not be. Those get a public answer, and the rating gets moved by asking more\n          customers for reviews rather than by deleting the ones you dislike.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Our local SEO services help businesses dominate Google Maps and local search results. We\n          optimize your Google Business Profile, local citations, service pages, reviews, location-based content, and\n          local keyword targeting so customers find your business when searching nearby. Built for companies targeting\n          Montreal and the surrounding areas.",
       "kind": "text",
       "tag": "p",
@@ -4088,6 +4362,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "We will also say when the answer is not a reputation\n        engagement. If four reviews in a row describe the same operational problem, no amount of publishing fixes\n        that, and the honest recommendation is to spend the budget elsewhere. We work with businesses across Canada,\n        in English and in French, and we tell you what we would change first.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -4226,12 +4509,30 @@
       ]
     },
     {
+      "en": "Removal is worth trying where it genuinely applies:\n        content that breaks a platform's own policy, a review from someone who was never a customer, a factual error a\n        publisher will correct, or personal information that qualifies for removal. We pursue those properly, and we\n        tell you honestly when a request has little chance.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "The advertising objective was never defined. That is the\n        first problem, and the rest follow from it: keywords that are too broad, every visitor sent to the homepage, no\n        negative keywords, weak conversion tracking, several nonprofit goals mixed into one campaign, clicks treated as\n        the result, and search terms nobody reads.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "It changes the setup more than the work. Each location needs its own\n          accurate profile with its own reviews, hours, and address, and the reviews should not be pooled. A South\n          Shore location carrying the ratings of a downtown one tells a customer nothing useful, and it hides the\n          location that actually has a problem.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -4358,6 +4659,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-real-estate.html"
+      ]
+    },
+    {
+      "en": "Before anything gets promised, the page itself is worth\n      reading. We will record what your brand search returns today, classify every result on it, and tell you which\n      problems are solvable, which are only outrankable, and which are not worth chasing. Book a free 30-minute call\n      and we will walk through it with you.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -4766,6 +5076,15 @@
       ]
     },
     {
+      "en": "The mechanics of reputation management are the same\n        everywhere, and they are written up in full on the\n        <a href=\"/online-reputation-management-canada\" class=\"text-link\" data-cursor>online reputation\n          management</a> page. What changes in Montreal is who is reading, and in which language.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Prioritization. Instead of trying to rank for everything, we identify the keywords, pages,\n          and technical improvements most likely to generate business impact at your current stage of growth. An\n          enterprise can afford to work the whole list at once. A startup has to work the top of it first.",
       "kind": "text",
       "tag": "div",
@@ -4853,6 +5172,15 @@
       "count": 1,
       "pages": [
         "ppc-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "The engagement starts the same way it does anywhere:\n        your brand search recorded as it stands, every result classified, and a straight assessment of what is\n        solvable. The difference is that the audit gets run twice, once in each language, because the two pages are\n        rarely identical.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -5045,6 +5373,24 @@
       ]
     },
     {
+      "en": "A Montreal business does not have one reputation. It has two, and they are rarely\n          in the same condition. The English reviews and the French reviews are read by\n          different people, written in different tones, and answered by whoever happened to\n          be free that afternoon.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "If the answer turns out to be an operational\n        problem rather than a reputation one, we will say so. Four reviews describing the same complaint is not\n        something publishing fixes, and paying an agency to work around it is the most expensive way to postpone the\n        conversation.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Our monthly AI SEO services combine technical implementation, AI content optimization, structured data,\n          entity development, citation building, and continuous monitoring. Every deliverable is designed to improve\n          how AI platforms understand, trust, and recommend your business.",
       "kind": "text",
       "tag": "p",
@@ -5213,6 +5559,15 @@
       "count": 1,
       "pages": [
         "ppc-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Davnoot manages what a search for your brand returns: the reviews, the profiles,\n          the pages that rank, and the ones you would rather did not. We answer the reviews,\n          publish and rank pages you own, and read the whole page every week instead of\n          once a quarter.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -5585,6 +5940,15 @@
       ]
     },
     {
+      "en": "So the work is about flow, not about a number. We build\n        review requests into the moment a job finishes or an order arrives, ask through the channel the customer\n        already uses, and keep asking. Steady beats a one-off push that leaves an obvious gap in the timeline.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "So we test different combinations of images and video,\n        ad copy, headlines, offers, and calls to action. We change one part at a time against the same audience,\n        because a test that moves three things at once gives you a result without giving you the reason for it.",
       "kind": "text",
       "tag": "p",
@@ -5654,6 +6018,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "We record what your brand search returns today, result by\n          result, and mark each one as owned, neutral, or a problem. Everything after this is measured against that\n          starting page, because reputation work without a baseline is impossible to argue about later.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -6008,6 +6381,15 @@
       ]
     },
     {
+      "en": "Not every reputation problem is an attack. Old hours, a\n        former address, a phone number that rings nowhere, a name spelled two ways across three listings. None of it\n        is hostile and all of it costs customers who assume the business is closed or careless.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "We read campaign data to adjust keywords, locations,\n          advertisements, landing pages, and budgets. The measure is property enquiries and cost per lead, so the\n          monthly conversation is about which markets produced clients, not which ad got impressions.",
       "kind": "text",
       "tag": "p",
@@ -6032,6 +6414,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "A francophone customer scrolling your reviews is not\n        reading the average. They are reading the French ones, and if the three most recent are unanswered while the\n        English ones all have polished replies, that gap says something the star rating does not.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -6089,6 +6480,24 @@
       ]
     },
     {
+      "en": "A plan removes the improvisation. Who speaks, who\n        approves, what the holding statement says while facts are still being confirmed, which channels get used, and\n        what gets published afterwards so the search results are not left telling the story alone.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Businesses break this rule for practical reasons\n        rather than careless ones. Whoever handles reviews is comfortable in one language, so the French ones wait,\n        then get a short reply, then eventually get none. The pattern is legible to anyone scrolling.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Language works the same way. We run campaigns in English,\n        French, or both, and in a bilingual market the two audiences respond to different wording and rarely cost the\n        same. Translating one into the other hides that. Running them separately shows it.",
       "kind": "text",
       "tag": "p",
@@ -6122,6 +6531,15 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "We will run your brand search twice, once in English and once\n      in French, classify what comes back on each, and show you where the two versions of your reputation have drifted\n      apart. Book a free 30-minute call and we will walk through both pages with you.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -6242,6 +6660,24 @@
       ]
     },
     {
+      "en": "Reputation used to be what people said about a business\n        when it was not in the room. It is now something more specific and much easier to read: the ten results, the\n        star rating, and the handful of profiles that appear when somebody types the name.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Review requests go out in whichever language the customer\n          dealt with you in. A francophone client asked in English will usually leave nothing at all. The review\n          profile then misrepresents half the customer base, and nothing on it explains why.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "The creative has to give people a reason to stop,\n        understand the offer, and take the next step. A well-defined audience shown a forgettable ad is still a\n        forgettable ad, and the platform will keep delivering it for as long as the budget holds out.",
       "kind": "text",
       "tag": "p",
@@ -6257,6 +6693,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "We do not write reviews, buy them, or filter who gets\n        asked based on how happy they seem. All three are against the terms of every platform below, all three are\n        detectable, and the penalty lands on the business rather than on whoever suggested it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -6329,6 +6774,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "<a href=\"/\" data-cursor>Davnoot</a>\n      <span class=\"crumb-sep\">/</span>\n      <a href=\"/online-reputation-management-canada\" data-cursor>Online Reputation Management</a>\n      <span class=\"crumb-sep\">/</span>\n      <span class=\"crumb-current\">Montreal</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -6464,6 +6918,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-dentists.html"
+      ]
+    },
+    {
+      "en": "We are a search agency that took on reputation work,\n        rather than a reputation firm that discovered search. That matters, because the useful half of this job is\n        publishing and ranking pages, and the rest of our week is spent doing exactly that.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -6692,6 +7155,15 @@
       ]
     },
     {
+      "en": "A business name written with accents in one listing and\n          without them in the next is a small problem that repeats across every directory. It splits reviews, confuses\n          matching, and is tedious enough that nobody gets around to fixing it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "A local SEO company understands the Montreal market, local search behaviour, and regional\n          competition. Working with a Montreal SEO agency also makes collaboration easier while improving visibility for\n          both local and national searches.",
       "kind": "text",
       "tag": "div",
@@ -6782,6 +7254,15 @@
       ]
     },
     {
+      "en": "Most people decide whether to deal with a business before they ever contact it.\n          They search the name, read the first page, glance at a star rating, and move on.\n          That page is the reputation, whether or not anyone has been managing it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Some conferences are designed for agencies and\n            marketers, others for business owners, executives, or one specific industry. The room decides how every\n            session gets pitched, so a mismatch there costs more than a mismatch on topic.",
       "kind": "text",
       "tag": "p",
@@ -6797,6 +7278,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "The rule is simple and it is applied without\n        exceptions. French review, French reply. English review, English reply. It costs nothing, and francophone\n        customers read it as the clearest available signal of whether you take them seriously.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -6836,6 +7326,15 @@
       ]
     },
     {
+      "en": "The most reliable way to change a rating is more recent\n          reviews from real customers. We build the asking into the points where a customer is already satisfied, so\n          the flow is steady rather than a campaign that spikes once and stops.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "There is no fixed amount. The right budget depends on the industry,\n          competition, location, cost per click, and the value of a new customer. Those four numbers are a better\n          starting point than a figure borrowed from another business.",
       "kind": "text",
       "tag": "div",
@@ -6851,6 +7350,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "We audit the profiles that rank for your name, correct\n        them, and keep them consistent. Consistency matters twice: once to the person reading, and once to the search\n        engines deciding whether these listings describe the same organisation.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -7052,6 +7560,15 @@
       ]
     },
     {
+      "en": "Pages you control, ranked deliberately for your own name.\n          Profiles, a properly structured site, leadership pages, and published work. This is the part that moves an\n          unwanted result down, because something has to take its place.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "The account gets shaped by three answers: what you sell,\n        who you want walking through the door, and what a good month looks like in numbers. Change any one of them and\n        the keyword list, the structure and the bidding change with it.",
       "kind": "text",
       "tag": "p",
@@ -7079,12 +7596,30 @@
       ]
     },
     {
+      "en": "A written plan for the bad week: who speaks, what gets\n          said, what gets published, and in what order. The plan is worth more than the speed, because most damage in\n          a crisis is done by an improvised reply sent in the first hour.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Email us at <a href=\"mailto:info@davnoot.com\"\n            style=\"color:var(--accent);text-decoration:none;\">info@davnoot.com</a> with two or three windows that suit\n          you. We'll work it out. Saturdays included if you're on the West Coast.",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Everything else is a ranking problem. A result you\n        dislike sits at position four because nothing better is competing for that query, and the reliable fix is to\n        publish and rank pages that deserve those positions more than it does.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -7106,12 +7641,30 @@
       ]
     },
     {
+      "en": "Quebec still has directory sites that rank for a business\n          name here and nowhere else. Half of them hold information nobody has updated in years, and they sit on page\n          one because nothing has been published to take the position.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "The best sessions send you home with something to try. If you\n      want help deciding which of those ideas deserves budget, book a free 30-minute call. We will look at what you\n      are running now and tell you what we would test first and why.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "The engagement starts with the audit: your brand\n        search recorded as it stands, every result classified, and a plain assessment of which problems are solvable,\n        which are only outrankable, and which are not worth the money to chase.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -7466,6 +8019,15 @@
       ]
     },
     {
+      "en": "Davnoot manages both. Reviews answered in the language they were written in,\n          Google Business Profile kept accurate for every location, and the brand search\n          watched across the platforms Montreal customers actually check.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Most of what decides whether an HVAC campaign works happens before it goes live. Structure, keywords,\n          negatives, targeting and tracking are all cheaper to get right on day one than to unpick after three months\n          of spend.",
       "kind": "text",
       "tag": "p",
@@ -7481,6 +8043,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "That page is not neutral. Every result on it is\n        published by somebody, ranked for a reason, and can be influenced by publishing something better. The\n        businesses that look good on it are almost never the ones that got lucky.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -7526,6 +8097,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "People do not read a star average on its own. They read\n        the number, then how many reviews are behind it, then how recent the newest one is. A 4.8 from eleven reviews\n        two years ago is weaker than a 4.4 that is still moving.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -7637,6 +8217,15 @@
       ]
     },
     {
+      "en": "Mentions get tracked in French and English, including the\n          accented and unaccented spellings of your name. Watch only one spelling and a discussion can run for a\n          month before anyone inside the business hears about it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "We are not trying to cover every search connected to the\n        cause. The list that survives is much shorter than the one a keyword tool hands back, and every keyword left on\n        it matches something the nonprofit actually offers.",
       "kind": "text",
       "tag": "p",
@@ -7679,6 +8268,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "<a href=\"/\" data-cursor>Davnoot</a>\n      <span class=\"crumb-sep\">/</span>\n      <a href=\"/services\" data-cursor>Services</a>\n      <span class=\"crumb-sep\">/</span>\n      <span class=\"crumb-current\">Online Reputation Management</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -7733,6 +8331,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Every review gets an answer, including the ones that sting.\n          The reply is not written for the reviewer. It is written for the next person reading, who is deciding what\n          kind of business handles a complaint that way.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -7871,12 +8478,30 @@
       ]
     },
     {
+      "en": "Reviews, mentions, ratings, and brand search positions\n          watched continuously rather than reviewed at month end. Most reputation problems are cheap to handle in the\n          first week and expensive to handle in the sixth.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "We provide complete SEO services including technical SEO, keyword research, on-page\n          optimization, local SEO, content strategy, link building, schema implementation, SEO audits, and ongoing\n          performance reporting.",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "A review left in French gets an answer written in French,\n          not run through a translator. The difference is visible in a sentence, and a stiff reply to a complaint\n          reads as a second insult rather than an apology.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -7949,6 +8574,15 @@
       "count": 1,
       "pages": [
         "sem-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Reputation work pays back fastest where a customer\n        chooses between three options on a map and has nothing to go on but a star rating and the newest review. In\n        those categories, a tenth of a point is a real number.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -8039,6 +8673,15 @@
       "count": 1,
       "pages": [
         "ppc-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Reviews, profiles, search results, monitoring, response, and\n        crisis planning are sold separately often enough that businesses buy one and wonder why nothing moved. They\n        are six views of the same page of results.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -8357,6 +9000,15 @@
       ]
     },
     {
+      "en": "Monitoring closes that gap. We watch the places your\n        name appears and the position your brand search sits in, and the alert goes to a person who can actually act\n        rather than into a shared inbox nobody owns.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "One of the easiest ways to waste a small budget is appearing\n          for searches that aren't relevant. The Search Terms report shows what people actually typed, and that is where\n          the exclusion list comes from.",
       "kind": "text",
       "tag": "p",
@@ -8456,6 +9108,15 @@
       ]
     },
     {
+      "en": "Reputation is only as broad as the places people\n        look, and that list is regional. A national tool watching the obvious platforms will miss the neighbourhood\n        Facebook group where half your enquiries start.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "A budget and a keyword list will get a campaign running. Getting relevant traffic out of it is a different\n          job: search terms, bids, ads, landing pages and conversion tracking all have to agree with each other.",
       "kind": "text",
       "tag": "p",
@@ -8501,6 +9162,15 @@
       ]
     },
     {
+      "en": "It pays back more slowly where the sale involves a\n        conversation, though it still matters: a brand search happens somewhere between the first meeting and the\n        signature, and it is rarely a neutral moment.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Looking for a results-driven digital marketing agency in Montreal? Davnoot helps ambitious brands grow through\n          performance-focused digital strategies designed to increase visibility, conversions, and revenue.",
       "kind": "text",
       "tag": "p",
@@ -8516,6 +9186,24 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "The same applies to the panel of information beside a\n        brand search. It is assembled from sources you can influence, and a business that leaves it alone ends up\n        described by a page nobody there has read.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "A business on the island, one on the South Shore, and one\n          in Laval need three accurate profiles, not one shared listing with an address that sends people across a\n          bridge they did not need to cross.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -8615,6 +9303,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "These are the surfaces we check for a business here.\n        Which ones matter depends on the industry, and the one that causes the most trouble is usually a listing\n        nobody in the business remembers creating.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -8831,6 +9528,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Reputation management means deciding what belongs on\n        that page, then earning the position. It is closer to publishing than to public relations, and it compounds\n        the way search results always have.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -9104,6 +9810,15 @@
       ]
     },
     {
+      "en": "This is the most common finding when we audit a\n        Montreal business. Not a bad reputation. A reputation that was managed attentively in one language and left to\n        look after itself in the other.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"cite-lbl\">Sources:</span>\n              <span class=\"cite-chip\">acmecrm.com</span>\n              <span class=\"cite-chip\">g2.com</span>\n              <span class=\"cite-chip\">capterra.com</span>",
       "kind": "text",
       "tag": "div",
@@ -9266,6 +9981,15 @@
       ]
     },
     {
+      "en": "Almost every expensive reputation problem was cheap at\n        some point. A single review, one thread, one article that nobody inside the business saw until it had already\n        been linked to twice.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Four stages, in that order. Most people do not call or buy the\n        first time they see a business, which is why stage four holds the retargeting and the optimization and never\n        really closes.",
       "kind": "text",
       "tag": "p",
@@ -9281,6 +10005,24 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Reputation management attracts confident promises\n        because the person buying is usually upset and in a hurry. Guaranteed removals, a scrubbed first page, a\n        rating repaired by next month.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Sentiment scores are easy to produce and impossible to argue\n        with. That combination is what makes them a poor report. These are the things we read instead, each on the\n        cadence it earns.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -9317,6 +10059,24 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Most of the value is in having decided in advance. The\n        replies that make things worse are almost always written quickly, by someone who was not sure whether it was\n        their call to make.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "None of them are exotic. They are the details that get\n        skipped by an agency running the same process from another province, and they are the ones a local customer\n        notices immediately.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -9389,6 +10149,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "A rating barely shifts for two months while the review count builds underneath it. Then it moves.\n          Page-one changes tend to arrive the same way, in one visible step rather than gradually.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -9491,6 +10260,15 @@
       ]
     },
     {
+      "en": "The single most useful artefact is a screenshot of your brand search on the day work started. Almost\n          every question about progress is answered by putting this month's version beside it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Completely. Your GitHub, your repos, your IP from sprint one. We work in your environment,\n          not behind a curtain. If you want to take the code elsewhere at any point, nothing stops you.",
       "kind": "text",
       "tag": "div",
@@ -9554,12 +10332,30 @@
       ]
     },
     {
+      "en": "A better star rating with an old news article still ranking\n        above it, or a clean first page with nobody watching the second, both end in the same conversation six months\n        later.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Book a free 30-minute call about your nonprofit Google Ads\n      campaign. Tell us which action the organization needs, and we will tell you how we would structure the account\n      around it.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "We are based in Montreal and run client work in\n        English and French every week. Handling reviews in both languages is not an add-on we sell. It is what\n        the market here requires.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -9626,6 +10422,15 @@
       ]
     },
     {
+      "en": "Reputation damage does not arrive on a schedule. It\n        arrives on a Friday, in a form nobody predicted, and the first hour of response usually decides how long the\n        story lasts.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Whether the wording points at a buying decision. Pricing,\n          suppliers, vendors, quotes, demos and comparisons behave very differently from definitions and how-to\n          phrasing.",
       "kind": "text",
       "tag": "p",
@@ -9686,6 +10491,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Nobody can guarantee a removal they do not control, and\n        a rating that jumps in a fortnight is a rating that was interfered with. The honest version is slower and it\n        holds.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -10004,6 +10818,15 @@
       ]
     },
     {
+      "en": "Davnoot is an online reputation management agency working with businesses across Canada: review generation and response, monitoring, and owned assets that outrank negative results.",
+      "kind": "description",
+      "tag": "meta",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Someone comparing aligner brands is at a different\n            stage from someone with a broken tooth at 8pm. Intent, competition, and cost per click all move\n            together.",
       "kind": "text",
       "tag": "p",
@@ -10028,6 +10851,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Reputation management for Montreal businesses: Google reviews answered in English and French, Google Business Profile kept accurate, and your brand search monitored across Quebec.",
+      "kind": "description",
+      "tag": "meta",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -10445,6 +11277,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-bar-l\">Facebook groups</span><span class=\"pc-bar-track\"><i\n                    style=\"width:22%\"></i></span><span class=\"pc-bar-v\">Recommendations</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "A high cost per click is only high relative to what a\n            matter is worth. That comparison is what decides whether a practice area belongs in the account at all.",
       "kind": "text",
       "tag": "p",
@@ -10625,12 +11466,30 @@
       ]
     },
     {
+      "en": "<span class=\"pc-bar-l\">Found by a customer</span><span class=\"pc-bar-track\"><i\n                    style=\"width:10%\"></i></span><span class=\"pc-bar-v\">Too late</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-bar-l\">Jobs and assignments</span><span class=\"pc-bar-track\"><i\n                    style=\"width:15%\"></i></span><span class=\"pc-bar-v\">Exclude</span>",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-bar-l\">Third parties</span><span class=\"pc-bar-track\"><i\n                    style=\"width:42%\"></i></span><span class=\"pc-bar-v\">Reviews, press</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -10649,6 +11508,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "These are the surfaces we track. Which of them matter\n        varies by business, and the one that causes the most trouble is usually the one nobody thought to check.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -10697,6 +11565,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-bar-l\">English</span><span class=\"pc-bar-track\"><i\n                    style=\"width:40%\"></i></span><span class=\"pc-bar-v\">Answered in English</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-bar-l\">General health info</span><span class=\"pc-bar-track\"><i\n                    style=\"width:19%\"></i></span><span class=\"pc-bar-v\">Exclude</span>",
       "kind": "text",
       "tag": "div",
@@ -10721,6 +11598,15 @@
       "count": 1,
       "pages": [
         "saas-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-bar-l\">Owned by you</span><span class=\"pc-bar-track\"><i\n                    style=\"width:40%\"></i></span><span class=\"pc-bar-v\">Site, profiles</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -10784,6 +11670,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-bar-l\">Checked monthly</span><span class=\"pc-bar-track\"><i\n                    style=\"width:26%\"></i></span><span class=\"pc-bar-v\">Weeks late</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -10874,6 +11769,24 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-bar-l\">Directories</span><span class=\"pc-bar-track\"><i\n                    style=\"width:14%\"></i></span><span class=\"pc-bar-v\">Still ranking</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-bar-l\">French</span><span class=\"pc-bar-track\"><i\n                    style=\"width:52%\"></i></span><span class=\"pc-bar-v\">Answered in French</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -11039,6 +11952,24 @@
       ]
     },
     {
+      "en": "<span class=\"pc-bar-l\">Mixed</span><span class=\"pc-bar-track\"><i\n                    style=\"width:8%\"></i></span><span class=\"pc-bar-v\">Follow the reviewer</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-bar-l\">Unfavourable</span><span class=\"pc-bar-track\"><i\n                    style=\"width:18%\"></i></span><span class=\"pc-bar-v\">The problem</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span class=\"tier-row-label\">For</span><span class=\"tier-row-value\">Multi-brand\n              operators or global brands with category leadership at stake.</span>",
       "kind": "text",
       "tag": "div",
@@ -11126,6 +12057,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-bar-l\">Google Maps</span><span class=\"pc-bar-track\"><i\n                    style=\"width:68%\"></i></span><span class=\"pc-bar-v\">First stop</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -11261,6 +12201,15 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "A clean brand search only helps the people already looking for\n        you. These are the pages covering how the rest of Montreal finds you in the first place.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -11522,6 +12471,15 @@
       "count": 1,
       "pages": [
         "sem-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-bar-l\">Monitored</span><span class=\"pc-bar-track\"><i\n                    style=\"width:70%\"></i></span><span class=\"pc-bar-v\">Same day</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -11792,6 +12750,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-dentists.html"
+      ]
+    },
+    {
+      "en": "Reputation decides what people find when they already know your\n        name. These are the pages covering how they come to search it in the first place.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -12164,6 +13131,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-var-l\">One profile per location</span><span\n                  class=\"pc-var-v\">Correct</span><span class=\"pc-var-pill\">Focus</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-var-l\">Property management</span><span class=\"pc-var-v\">Own\n                  campaign</span><span class=\"pc-var-pill\">Split</span>",
       "kind": "text",
       "tag": "div",
@@ -12308,6 +13284,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-var-l\">Recency and replies</span><span\n                  class=\"pc-var-v\">Decision</span><span class=\"pc-var-pill\">Focus</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "2-week deep-dive into requirements, current systems, and technical constraints.\n              Output: architecture doc, sprint plan, fixed bid.",
       "kind": "text",
       "tag": "div",
@@ -12362,6 +13347,15 @@
       ]
     },
     {
+      "en": "These are the parts of a reputation engagement that get\n        rewritten for a Montreal business rather than copied from a national playbook.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Through audience segmentation, copywriting, A/B testing, automation, deliverability\n          improvements, and ongoing campaign optimization.",
       "kind": "text",
       "tag": "div",
@@ -12386,6 +13380,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">Answer, then outrank</span><span\n                  class=\"pc-var-v\">Works</span><span class=\"pc-var-pill\">Focus</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -12566,6 +13569,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">Written in French</span><span\n                  class=\"pc-var-v\">Works</span><span class=\"pc-var-pill\">Focus</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -13424,6 +14436,15 @@
       ]
     },
     {
+      "en": "The ten results as they stand, each marked owned,\n              neutral, or a problem, against the same list from last month.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span class=\"kw\">const</span> <span class=\"prompt\">pipeline</span> = <span\n                class=\"kw\">await</span> db.query(",
       "kind": "text",
       "tag": "div",
@@ -13520,6 +14541,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "How many people are looking for you by name. If\n              that number is small, so is the value of everything above it.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -13631,12 +14661,30 @@
       ]
     },
     {
+      "en": "Which of your own pages hold a position on the\n              brand search, and which ones were published and never landed.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "With order value passed through, so the report can\n              compare spend against revenue rather than against counts.",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-name\">How the French reply usually gets written</span>\n              <span class=\"pc-tag\">Response</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -13673,6 +14721,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "What complaints repeat. This is the part of the\n              report that belongs to operations rather than to marketing.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -13829,6 +14886,15 @@
       ]
     },
     {
+      "en": "Whether the listings that rank still agree with\n              each other on the name, address, hours, and phone number.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span class=\"fbad-domain\">lumeskin.co</span><span class=\"fbad-headline\">Our\n                    founder's story</span>",
       "kind": "text",
       "tag": "div",
@@ -13919,6 +14985,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-name\">What the rating is actually built from</span>\n              <span class=\"pc-tag\">Reviews</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-name\">Where the HVAC budget goes</span>\n              <span class=\"pc-tag\">Search terms report</span>",
       "kind": "text",
       "tag": "div",
@@ -14006,6 +15081,15 @@
       "count": 1,
       "pages": [
         "media-buying-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">Answered in English</span><span class=\"pc-var-v\">Reads as\n                  dismissive</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -14144,6 +15228,15 @@
       ]
     },
     {
+      "en": "How long a review waits for a reply, read for the\n              negative ones separately rather than as an average.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "The number most campaign decisions should\n              be made against, once the conversions are tracked properly.",
       "kind": "text",
       "tag": "div",
@@ -14231,6 +15324,15 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-name\">How a negative result gets handled</span>\n              <span class=\"pc-tag\">Response</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -14378,6 +15480,24 @@
       ]
     },
     {
+      "en": "<span class=\"pc-name\">Which language the review arrives in</span>\n              <span class=\"pc-tag\">Both</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">Accented business name</span><span\n                  class=\"pc-var-v\">Inconsistent</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"tier-row-label\">Timeline</span><span class=\"tier-row-value\">8–20 weeks\n              typical</span>",
       "kind": "text",
       "tag": "div",
@@ -14486,6 +15606,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-name\">How fast a problem is noticed</span>\n              <span class=\"pc-tag\">Monitoring</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-name\">Lead quality</span>\n              <span class=\"pc-tag\">Not every enquiry is a case</span>",
       "kind": "text",
       "tag": "div",
@@ -14519,6 +15648,15 @@
       "count": 1,
       "pages": [
         "media-buying-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-name\">Who controls page one today</span>\n              <span class=\"pc-tag\">Brand search</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -14609,6 +15747,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Both together, because an average without the\n              volume behind it says very little about direction.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -14774,6 +15921,15 @@
       ]
     },
     {
+      "en": "What was submitted, on what grounds, and what came\n              back, including the ones that were declined.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Where the spend is going right now, checked against\n              where the conversions came from last month.",
       "kind": "text",
       "tag": "div",
@@ -14798,6 +15954,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-name\">Where the listing goes wrong</span>\n              <span class=\"pc-tag\">Profiles</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -15035,6 +16200,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-name\">Where Montreal customers look</span>\n              <span class=\"pc-tag\">Local</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-name\">Where the click lands</span>\n              <span class=\"pc-tag\">Landing pages</span>",
       "kind": "text",
       "tag": "div",
@@ -15158,6 +16332,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "How many arrived, on which platforms, and whether\n              the flow is steady or arriving in bursts.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -15296,6 +16479,15 @@
       ]
     },
     {
+      "en": "Where the name appeared, whether it needed a\n              response, and how long it took to be noticed.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Worth separating from a general enquiry, because they\n              usually convert at a different rate.",
       "kind": "text",
       "tag": "div",
@@ -15320,6 +16512,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">Machine translated</span><span\n                  class=\"pc-var-v\">Obvious</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -15872,6 +17073,15 @@
       ]
     },
     {
+      "en": "<span>Deleting is rarely available</span><span class=\"pc-val\">Outranking is</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span>The number budget moves on</span><span class=\"pc-val\">Cost per result</span>",
       "kind": "text",
       "tag": "div",
@@ -15896,6 +17106,15 @@
       "count": 1,
       "pages": [
         "media-buying-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "<span>What a reader checks first</span><span class=\"pc-val\">The newest one</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -15941,6 +17160,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">Argue with it</span><span class=\"pc-var-v\">Spreads</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -16016,6 +17244,24 @@
       ]
     },
     {
+      "en": "<span class=\"pc-var-l\">Review count</span><span class=\"pc-var-v\">Context</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">Star average</span><span class=\"pc-var-v\">Context</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-var-l\">Trial signup</span><span class=\"pc-var-v\">Tracked</span>",
       "kind": "text",
       "tag": "div",
@@ -16061,12 +17307,30 @@
       ]
     },
     {
+      "en": "We have several locations around Montreal. Does that\n            change things?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-var-l\">By the name</span><span class=\"pc-var-v\">Skipped</span>",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "<span class=\"pc-var-l\">Holiday hours</span><span class=\"pc-var-v\">Stale</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -16331,6 +17595,15 @@
       ]
     },
     {
+      "en": "<span class=\"pc-var-l\">Ignore it</span><span class=\"pc-var-v\">Grows</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span class=\"prompt\">→</span> <span class=\"str\">42 hot leads synced</span>",
       "kind": "text",
       "tag": "div",
@@ -16547,6 +17820,15 @@
       ]
     },
     {
+      "en": "<span>Quebec readers notice</span><span class=\"pc-val\">Every time</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "A campaign is built around<br />what it has to\n        <em>produce</em>.",
       "kind": "text",
       "tag": "h2",
@@ -16610,6 +17892,15 @@
       ]
     },
     {
+      "en": "<span>Most common finding</span><span class=\"pc-val\">Wrong hours</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Buyers who are already<br /><em>shopping for a\n          supplier</em>.",
       "kind": "text",
       "tag": "h2",
@@ -16670,6 +17961,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Reported as the brand search itself, result by result, month over month",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -16772,6 +18072,15 @@
       ]
     },
     {
+      "en": "A clean brand search<br />is worth more with\n        <em>traffic</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "A firm's services cover<br />very different\n        <em>searches</em>.",
       "kind": "text",
       "tag": "h2",
@@ -16832,6 +18141,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "How much do Google reviews matter for a Montreal\n            business?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -16913,6 +18231,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Every review answered, because the reply is read by the next customer",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -17006,6 +18333,15 @@
       ]
     },
     {
+      "en": "<span>Rule</span><span class=\"pc-val\">Reply in their language</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "A plan is written before<br />anything gets\n        <em>bought</em>.",
       "kind": "text",
       "tag": "h2",
@@ -17075,6 +18411,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Online reputation management · Montreal-based, working across Canada",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -17186,6 +18531,15 @@
       ]
     },
     {
+      "en": "<span>Rule</span><span class=\"pc-val\">Find it before they do</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "A media plan is only<br />as good as its\n        <em>channels</em>.",
       "kind": "text",
       "tag": "h2",
@@ -17255,6 +18609,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Six things that are<br />different in\n        <em>this market</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -17408,6 +18771,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Six parts of a reputation,<br />run as <em>one\n          job</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -17600,6 +18972,24 @@
       ]
     },
     {
+      "en": "Two audiences reading<br />the same\n        <em>star rating</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "Answer them in the<br />language they\n        <em>wrote in</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Custom Software Development | CRM Development Services | Davnoot",
       "kind": "title",
       "tag": "title",
@@ -17759,6 +19149,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Negative reviews left unanswered so they attract less attention",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -18518,6 +19917,15 @@
       ]
     },
     {
+      "en": "Reported as sentiment, with no before-and-after of page one",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Revenue-attributed reporting tied to your actual sales data",
       "kind": "text",
       "tag": "div",
@@ -18698,12 +20106,48 @@
       ]
     },
     {
+      "en": "Ratings moved by more real reviews, asked for continuously",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Removals guaranteed on content the agency does not control",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Reporting that carries through to cost per paying customer",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "saas-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Reputation work should<br />be\n        <em>checkable</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Reviews answered, profiles corrected, page one earned back",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -18743,6 +20187,15 @@
       ]
     },
     {
+      "en": "Your reputation is a<br />page of <em>search results</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span>Best variant</span><span class=\"pc-val\">4.7×</span>",
       "kind": "text",
       "tag": "div",
@@ -18758,6 +20211,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "<span>Re-checked</span><span class=\"pc-val\">Weekly</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -18860,12 +20322,30 @@
       ]
     },
     {
+      "en": "Online Reputation Management Montreal | Reputation Agency",
+      "kind": "title",
+      "tag": "title",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Radius set to the area patients realistically travel from",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "google-ads-for-dentists.html"
+      ]
+    },
+    {
+      "en": "Removal pursued only where a policy or a fact supports it",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -18932,6 +20412,15 @@
       ]
     },
     {
+      "en": "You rarely delete a<br />result. You <em>replace</em> it.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<span>Action</span><span class=\"pc-val\">Rebalance</span>",
       "kind": "text",
       "tag": "div",
@@ -18947,6 +20436,15 @@
       "count": 1,
       "pages": [
         "media-buying-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "A rating is read as<br />three things, not <em>one</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -18974,6 +20472,15 @@
       "count": 1,
       "pages": [
         "media-buying-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Businesses where the<br />rating <em>is</em> the funnel.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -19121,6 +20628,15 @@
       ]
     },
     {
+      "en": "Where a Montreal<br />customer actually <em>checks</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<a href=\"/book-call\" data-cursor>Start a retainer →</a>",
       "kind": "text",
       "tag": "div",
@@ -19199,6 +20715,15 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Fewer assets, each one strong enough to hold a position",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -19283,6 +20808,15 @@
       ]
     },
     {
+      "en": "Online reputation<br />management in <em>Montreal</em>.",
+      "kind": "text",
+      "tag": "h1",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Performance marketing agency<br />in <em>Montreal</em>.",
       "kind": "text",
       "tag": "h1",
@@ -19307,6 +20841,15 @@
       "count": 1,
       "pages": [
         "ppc-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Reputation management · Montreal, in English and French",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -19433,6 +20976,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "<span>Watched</span><span class=\"pc-val\">Weekly</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -19658,6 +21210,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "The plan is written<br />before the <em>bad week</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -19913,6 +21474,15 @@
       ]
     },
     {
+      "en": "Online reputation<br />management in <em>Canada</em>.",
+      "kind": "text",
+      "tag": "h1",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Organic growth is stronger<br />with <em>backup</em>.",
       "kind": "text",
       "tag": "h2",
@@ -19982,6 +21552,15 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Two ways to answer<br />a bad <em>search result</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -20129,6 +21708,15 @@
       ]
     },
     {
+      "en": "Half the damage is<br />simply being <em>wrong</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "How should law firms measure Google Ads performance?",
       "kind": "text",
       "tag": "span",
@@ -20192,12 +21780,30 @@
       ]
     },
     {
+      "en": "Reputation is one<br />half of being <em>found</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Search engine marketing · Montreal and across Canada",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "sem-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "See your brand search<br />the way <em>they</em> do.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -20252,6 +21858,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "Thin pages published in bulk to crowd out one result",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -20435,6 +22050,15 @@
       ]
     },
     {
+      "en": "Two languages, one brand search, watched every week",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "<span class=\"service-link\">Explore AI SEO →</span>",
       "kind": "text",
       "tag": "div",
@@ -20507,6 +22131,24 @@
       ]
     },
     {
+      "en": "Can you remove negative reviews or search results?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Finding it first is<br />most of the <em>fix</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Five checks before<br />you book the <em>day</em>.",
       "kind": "text",
       "tag": "h2",
@@ -20531,6 +22173,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "Looking for online reputation management in Canada",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -20576,6 +22227,24 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Ratings moved quickly by reviews of unclear origin",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Read your reviews<br />in <em>both languages</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -20912,6 +22581,15 @@
       ]
     },
     {
+      "en": "A Montreal agency<br />working in <em>both</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "AI content that earns impressions, not customers",
       "kind": "text",
       "tag": "div",
@@ -21008,6 +22686,15 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Online Reputation Management Canada | ORM Agency",
+      "kind": "title",
+      "tag": "title",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -21623,6 +23310,15 @@
       ]
     },
     {
+      "en": "Looking for reputation management in Montreal",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "More than keywords<br />and <em>ad copy</em>.",
       "kind": "text",
       "tag": "h2",
@@ -21692,6 +23388,15 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Straight answers<br />on <em>reputation</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -22055,6 +23760,15 @@
       ]
     },
     {
+      "en": "Straight answers<br />on <em>Montreal</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Targeting signals an audience is built from",
       "kind": "text",
       "tag": "div",
@@ -22388,6 +24102,15 @@
       ]
     },
     {
+      "en": "How long does reputation management take?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "How much do Google Ads for law firms cost",
       "kind": "text",
       "tag": "div",
@@ -22421,6 +24144,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Is reputation management the same as SEO?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -22901,6 +24633,15 @@
       ]
     },
     {
+      "en": "What a Montreal brand search looks like",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "What a real estate account gets read on",
       "kind": "text",
       "tag": "div",
@@ -23207,6 +24948,15 @@
       ]
     },
     {
+      "en": "Asking in the <em>right language</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Be the startup <em>AI recommends</em>",
       "kind": "text",
       "tag": "div",
@@ -23351,6 +25101,15 @@
       ]
     },
     {
+      "en": "Monitoring in <em>both languages</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Not every SEO task is worth the same.",
       "kind": "text",
       "tag": "h3",
@@ -23396,6 +25155,15 @@
       ]
     },
     {
+      "en": "Reviews answered by translation alone",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "SaaS Google Ads<br /><em>agency</em>.",
       "kind": "text",
       "tag": "h1",
@@ -23438,6 +25206,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-dentists.html"
+      ]
+    },
+    {
+      "en": "What is online reputation management?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -23492,6 +25269,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Buy the <em>demand you need now</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -23594,6 +25380,15 @@
       ]
     },
     {
+      "en": "Languages every review is handled in",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Live · \"Best CRM for small business\"",
       "kind": "text",
       "tag": "div",
@@ -23609,6 +25404,15 @@
       "count": 1,
       "pages": [
         "media-buying-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Names, accents and <em>spelling</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -23690,6 +25494,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "What a search for your brand returns",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -24233,6 +26046,33 @@
       ]
     },
     {
+      "en": "Replies written in <em>French</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "Results on page one to account for",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Reviews in <em>both languages</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Send visitors to the practice area",
       "kind": "text",
       "tag": "div",
@@ -24365,6 +26205,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Can you remove a negative review?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -24701,6 +26550,15 @@
       ]
     },
     {
+      "en": "Do you answer reviews in French?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Everything lands on the homepage",
       "kind": "text",
       "tag": "div",
@@ -25025,6 +26883,15 @@
       ]
     },
     {
+      "en": "Owned asset <em>publishing</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Paid social campaign management",
       "kind": "text",
       "tag": "div",
@@ -25049,6 +26916,15 @@
       "count": 1,
       "pages": [
         "media-buying-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Parts of a reputation we manage",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -25322,6 +27198,15 @@
       ]
     },
     {
+      "en": "Monitoring and <em>alerts</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "One campaign per practice area",
       "kind": "text",
       "tag": "div",
@@ -25373,6 +27258,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Profiles per <em>location</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -25454,6 +27348,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "The local <em>directories</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -26222,6 +28125,15 @@
       ]
     },
     {
+      "en": "<em>Earn the page back</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "<em>Narrow, then widen</em>",
       "kind": "text",
       "tag": "div",
@@ -26282,6 +28194,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Brand search <em>audit</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -26717,6 +28638,15 @@
       ]
     },
     {
+      "en": "Everything <em>we run</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Everything in Build, plus:",
       "kind": "text",
       "tag": "li",
@@ -26885,6 +28815,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Review <em>generation</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -27185,6 +29124,15 @@
       ]
     },
     {
+      "en": "Local surfaces we monitor",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "Map the entire landscape.",
       "kind": "text",
       "tag": "h3",
@@ -27482,6 +29430,15 @@
       ]
     },
     {
+      "en": "Crisis <em>response</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Custom attribution stack",
       "kind": "text",
       "tag": "li",
@@ -27653,6 +29610,15 @@
       ]
     },
     {
+      "en": "How this is usually sold",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Live · AI recommendation",
       "kind": "text",
       "tag": "div",
@@ -27734,6 +29700,24 @@
       ]
     },
     {
+      "en": "Review <em>response</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Reviews we write for you",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Schema & <em>entity</em>",
       "kind": "text",
       "tag": "h3",
@@ -27776,6 +29760,15 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "The full <em>method</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -28055,6 +30048,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Rating and review count",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -28463,12 +30465,30 @@
       ]
     },
     {
+      "en": "Brand search page one",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Brand story + welcome",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Branded search volume",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -28607,6 +30627,15 @@
       ]
     },
     {
+      "en": "Profiles and listings",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Recommendation-driven",
       "kind": "text",
       "tag": "div",
@@ -28640,6 +30669,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "The language question",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -28703,6 +30741,15 @@
       "count": 1,
       "pages": [
         "saas-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "03 · AI SEO Montreal",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -28982,6 +31029,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-real-estate.html"
+      ]
+    },
+    {
+      "en": "Owned assets ranking",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -29336,6 +31392,15 @@
       ]
     },
     {
+      "en": "Reviews and ratings",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Sales opportunities",
       "kind": "text",
       "tag": "div",
@@ -29387,6 +31452,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "What we handle here",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -29750,21 +31824,21 @@
       ]
     },
     {
+      "en": "What gets measured",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Who you'll talk to",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "book-call.html"
-      ]
-    },
-    {
-      "en": "Why choose Davnoot",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "media-buying-agency-montreal.html"
       ]
     },
     {
@@ -29801,15 +31875,6 @@
       "count": 1,
       "pages": [
         "marketing-conference.html"
-      ]
-    },
-    {
-      "en": "04 · PPC Montreal",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "performance-marketing-agency-montreal.html"
       ]
     },
     {
@@ -29966,6 +32031,15 @@
       ]
     },
     {
+      "en": "Make it disappear",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Monthly · 6mo min",
       "kind": "text",
       "tag": "div",
@@ -30062,6 +32136,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Why it works here",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -30254,6 +32337,15 @@
       ]
     },
     {
+      "en": "Profile accuracy",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Raise the budget",
       "kind": "text",
       "tag": "div",
@@ -30269,6 +32361,15 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Removal requests",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -30380,6 +32481,15 @@
       ]
     },
     {
+      "en": "01 · Reputation",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
+      ]
+    },
+    {
       "en": "03 · Google Ads",
       "kind": "text",
       "tag": "div",
@@ -30461,6 +32571,15 @@
       ]
     },
     {
+      "en": "Crisis response",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Custom Software",
       "kind": "text",
       "tag": "option",
@@ -30494,6 +32613,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Local platforms",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -30560,6 +32688,15 @@
       ]
     },
     {
+      "en": "The usual pitch",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Two SaaS models",
       "kind": "text",
       "tag": "div",
@@ -30593,6 +32730,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Who this is for",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -30749,6 +32895,15 @@
       ]
     },
     {
+      "en": "Mentions found",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Meta Ads · SEO",
       "kind": "text",
       "tag": "div",
@@ -30803,6 +32958,15 @@
       ]
     },
     {
+      "en": "Search results",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Weekly reports",
       "kind": "text",
       "tag": "li",
@@ -30830,6 +32994,15 @@
       ]
     },
     {
+      "en": "01 · Montreal",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "01 · Services",
       "kind": "text",
       "tag": "div",
@@ -30845,6 +33018,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "04 · Services",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -31028,6 +33210,15 @@
       ]
     },
     {
+      "en": "Response time",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Revenue moved",
       "kind": "text",
       "tag": "div",
@@ -31043,6 +33234,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Review themes",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -31289,6 +33489,15 @@
       ]
     },
     {
+      "en": "03 · AI SEO",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "03 · Dental",
       "kind": "text",
       "tag": "div",
@@ -31442,6 +33651,15 @@
       ]
     },
     {
+      "en": "New reviews",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Our process",
       "kind": "text",
       "tag": "div",
@@ -31586,6 +33804,15 @@
       ]
     },
     {
+      "en": "Monitoring",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
+      ]
+    },
+    {
       "en": "Perplexity",
       "kind": "text",
       "tag": "span",
@@ -31619,6 +33846,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Reputation",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -31988,6 +34224,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Montreal",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "online-reputation-management-montreal.html"
       ]
     },
     {
