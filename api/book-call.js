@@ -14,7 +14,50 @@
 // an arbitrary sender here.
 
 import nodemailer from 'nodemailer';
-import { leads } from '../lib/db.js';
+import { leads, formAttempts } from '../lib/db.js';
+
+// ── Anti-spam knobs ────────────────────────────────────────────────────────
+// Rate limit: generous enough that a whole office submitting once each is fine,
+// tight enough that a flooding bot is capped. Keyed on IP AND email.
+const RL_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const RL_MAX_PER_IP = 5;
+const RL_MAX_PER_EMAIL = 3;
+
+// Cloudflare Turnstile (invisible CAPTCHA). Enforced ONLY when the secret is set,
+// so the form keeps working until the keys are added — then bots are blocked.
+const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY || '';
+
+// Trust only the platform-set client IP. x-forwarded-for's leftmost entry is
+// attacker-controlled (a client prepends its own), so keying a throttle on it lets
+// a bot rotate past the limit. Mirrors api/seoteam/login.js.
+function clientIp(req) {
+  const h = req.headers || {};
+  const vercel = h['x-vercel-forwarded-for'] || h['x-real-ip'];
+  if (typeof vercel === 'string' && vercel) return vercel.split(',')[0].trim();
+  const fwd = h['x-forwarded-for'];
+  if (typeof fwd === 'string' && fwd) return fwd.split(',')[0].trim();
+  return req.socket?.remoteAddress || 'unknown';
+}
+
+// Verify a Turnstile token with Cloudflare. Returns true only on a confirmed
+// human. Any error/timeout returns false so a broken verifier fails CLOSED.
+async function verifyTurnstile(token, ip) {
+  if (!token) return false;
+  try {
+    const body = new URLSearchParams({ secret: TURNSTILE_SECRET, response: token });
+    if (ip && ip !== 'unknown') body.set('remoteip', ip);
+    const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body,
+    });
+    const data = await r.json();
+    return data?.success === true;
+  } catch (err) {
+    console.error('Turnstile verify error (failing closed):', String(err?.message || err));
+    return false;
+  }
+}
 
 const GMAIL_USER = process.env.GMAIL_USER || '';
 // App passwords are shown grouped as "abcd efgh ijkl mnop"; Google accepts them
@@ -207,6 +250,39 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Name and email are required.' });
   }
 
+  const ip = clientIp(req);
+  const email = String(d.email || '').toLowerCase().slice(0, 320);
+
+  // ── ANTI-SPAM: TURNSTILE (invisible CAPTCHA) ───────────────────────────────
+  // Enforced only once TURNSTILE_SECRET_KEY is configured, so the form keeps
+  // working until the keys are added. A verified human is remembered so we only
+  // send the auto-reply to real people (never amplifying spam).
+  let verifiedHuman = false;
+  if (TURNSTILE_SECRET) {
+    verifiedHuman = await verifyTurnstile(d['cf-turnstile-response'], ip);
+    if (!verifiedHuman) {
+      return res.status(400).json({ error: "Couldn't verify you're human. Please refresh and try again." });
+    }
+  }
+
+  // ── ANTI-SPAM: RATE LIMIT (per IP and per email) ───────────────────────────
+  // Best-effort: if the throttle store is unreachable we ALLOW the submission —
+  // a booking form that fails closed on a DB blip would drop real leads.
+  try {
+    const col = await formAttempts();
+    const since = new Date(Date.now() - RL_WINDOW_MS);
+    const [byIp, byEmail] = await Promise.all([
+      col.countDocuments({ ip, at: { $gte: since } }),
+      email ? col.countDocuments({ email, at: { $gte: since } }) : Promise.resolve(0),
+    ]);
+    if (byIp >= RL_MAX_PER_IP || byEmail >= RL_MAX_PER_EMAIL) {
+      return res.status(429).json({ error: 'Too many submissions. Please try again in a few minutes.' });
+    }
+    await col.insertOne({ ip, email, at: new Date() });
+  } catch (err) {
+    console.error('Form rate-limit check failed (allowing submission):', String(err?.message || err));
+  }
+
   // ── PERSIST FIRST ────────────────────────────────────────────────────────
   // The lead is the thing we must never lose. Write it to Mongo BEFORE emailing,
   // so an SMTP outage (or a missing app password) can't drop a paying prospect on the
@@ -253,9 +329,14 @@ export default async function handler(req, res) {
   }
 
   // Auto-reply to the prospect — best-effort. A failed confirmation must NOT flip
-  // the lead's emailSent flag (that tracks OUR notification) or fail the request;
-  // the internal email above is what matters. Only send to a plausible address.
-  if (d.email && /.+@.+\..+/.test(d.email)) {
+  // the lead's emailSent flag (that tracks OUR notification) or fail the request.
+  //
+  // Gated on verifiedHuman so we NEVER email an address a bot supplied — the form
+  // must not become a spam relay, and sending to fake addresses would wreck our
+  // Gmail deliverability. So: confirmations go out only when Turnstile has proven
+  // the sender is human. Until Turnstile is configured, we skip the auto-reply and
+  // just capture + notify (you still get every lead).
+  if (verifiedHuman && d.email && /.+@.+\..+/.test(d.email)) {
     try {
       await mailer().sendMail({
         from: FROM,
