@@ -27,7 +27,7 @@
     "online-reputation-management-canada.html",
     "online-reputation-management-montreal.html"
   ],
-  "total": 3829,
+  "total": 3827,
   "entries": [
     {
       "en": "Explore →",
@@ -2378,15 +2378,6 @@
       "count": 2,
       "pages": [
         "google-ads-for-law-firms.html"
-      ]
-    },
-    {
-      "en": "<span class=\"num\">0</span><span class=\"lbl\">reviews we write for you</span>",
-      "kind": "text",
-      "tag": "div",
-      "count": 2,
-      "pages": [
-        "online-reputation-management-canada.html"
       ]
     },
     {
@@ -29703,15 +29694,6 @@
       "en": "Review <em>response</em>",
       "kind": "text",
       "tag": "h3",
-      "count": 1,
-      "pages": [
-        "online-reputation-management-canada.html"
-      ]
-    },
-    {
-      "en": "Reviews we write for you",
-      "kind": "text",
-      "tag": "div",
       "count": 1,
       "pages": [
         "online-reputation-management-canada.html"
