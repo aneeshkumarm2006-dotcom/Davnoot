@@ -14,7 +14,8 @@
 // an arbitrary sender here.
 
 import nodemailer from 'nodemailer';
-import { leads, formAttempts } from '../lib/db.js';
+import { leads, formAttempts, blockedSubmissions } from '../lib/db.js';
+import { classifyLead, contentHash, ipPrefix } from '../lib/spam.js';
 
 // ── Anti-spam knobs ────────────────────────────────────────────────────────
 // Rate limit: generous enough that a whole office submitting once each is fine,
@@ -22,6 +23,23 @@ import { leads, formAttempts } from '../lib/db.js';
 const RL_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
 const RL_MAX_PER_IP = 5;
 const RL_MAX_PER_EMAIL = 3;
+
+// The neighbourhood limit, over a longer window. The 2026-08 flood put 33
+// submissions through by rotating addresses inside a handful of rented /24s,
+// each address politely staying under RL_MAX_PER_IP. Capping the subnet is what
+// makes that rotation cost the operator something.
+const RL_SUBNET_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const RL_MAX_PER_SUBNET = 8;
+
+// How far back the duplicate-payload check looks. Bounded by the form_attempts
+// TTL (24h) — asking for more than that silently gets less.
+const DUPE_WINDOW_MS = 24 * 60 * 60 * 1000;
+
+// Minimum time between our script stamping the form and the POST arriving.
+// Nobody types a name, email, company and a paragraph in three seconds.
+const MIN_DWELL_MS = 3000;
+// A stamp older than this is a stale tab, not a session — treat it as absent.
+const MAX_DWELL_MS = 12 * 60 * 60 * 1000;
 
 // Cloudflare Turnstile (invisible CAPTCHA). Enforced ONLY when the secret is set,
 // so the form keeps working until the keys are added — then bots are blocked.
@@ -251,7 +269,20 @@ export default async function handler(req, res) {
   }
 
   const ip = clientIp(req);
+  const prefix = ipPrefix(ip);
   const email = String(d.email || '').toLowerCase().slice(0, 320);
+  const lead = cleanLead(d);
+  const hash = contentHash(lead);
+
+  // How long the form was open before it was submitted. script.js stamps `t0`
+  // with Date.now() when it wires the form up, so a POST made straight to this
+  // endpoint — no browser, no our-JS — carries no stamp at all. That absence is
+  // a signal in its own right, scored (not enforced) by the classifier so that a
+  // browser holding a stale cached script.js right after a deploy still gets
+  // through rather than having every real lead bounced.
+  const t0 = Number(d.t0);
+  const dwellMs = Number.isFinite(t0) && t0 > 0 ? Date.now() - t0 : null;
+  const hasJsStamp = dwellMs !== null && dwellMs >= 0 && dwellMs < MAX_DWELL_MS;
 
   // ── ANTI-SPAM: TURNSTILE (invisible CAPTCHA) ───────────────────────────────
   // Enforced only once TURNSTILE_SECRET_KEY is configured, so the form keeps
@@ -268,20 +299,56 @@ export default async function handler(req, res) {
   // ── ANTI-SPAM: RATE LIMIT (per IP and per email) ───────────────────────────
   // Best-effort: if the throttle store is unreachable we ALLOW the submission —
   // a booking form that fails closed on a DB blip would drop real leads.
+  let duplicateCount = 0;
   try {
     const col = await formAttempts();
-    const since = new Date(Date.now() - RL_WINDOW_MS);
-    const [byIp, byEmail] = await Promise.all([
+    const now = Date.now();
+    const since = new Date(now - RL_WINDOW_MS);
+    const [byIp, byEmail, bySubnet, byHash] = await Promise.all([
       col.countDocuments({ ip, at: { $gte: since } }),
       email ? col.countDocuments({ email, at: { $gte: since } }) : Promise.resolve(0),
+      col.countDocuments({ prefix, at: { $gte: new Date(now - RL_SUBNET_WINDOW_MS) } }),
+      col.countDocuments({ hash, at: { $gte: new Date(now - DUPE_WINDOW_MS) } }),
     ]);
-    if (byIp >= RL_MAX_PER_IP || byEmail >= RL_MAX_PER_EMAIL) {
+    if (byIp >= RL_MAX_PER_IP || byEmail >= RL_MAX_PER_EMAIL || (prefix !== 'unknown' && bySubnet >= RL_MAX_PER_SUBNET)) {
       return res.status(429).json({ error: 'Too many submissions. Please try again in a few minutes.' });
     }
-    await col.insertOne({ ip, email, at: new Date() });
+    // Not a limit — an input to the verdict. One payload replayed from many
+    // addresses is the flood signature, and it survives every per-address cap.
+    duplicateCount = byHash;
+    await col.insertOne({ ip, prefix, email, hash, at: new Date() });
   } catch (err) {
     console.error('Form rate-limit check failed (allowing submission):', String(err?.message || err));
   }
+
+  // ── ANTI-SPAM: CLASSIFY ────────────────────────────────────────────────────
+  // Three verdicts (see lib/spam.js): allow through, quarantine into the Spam
+  // tab without emailing, or reject before the leads collection ever sees it.
+  const verdict = classifyLead(lead, { hasJsStamp, dwellMs, duplicateCount });
+
+  if (verdict.verdict === 'reject') {
+    // 200, not 4xx, and deliberately: an error teaches the sender which rule it
+    // tripped and what to change. Silence teaches nothing. The submission is
+    // kept for 30 days in blocked_submissions so a false positive is one click
+    // from being recovered in /admin rather than gone forever.
+    console.warn(`[book-call] blocked (${verdict.category}, ${verdict.score}): ${verdict.reasons.join('; ')}`);
+    try {
+      await (await blockedSubmissions()).insertOne({
+        ...lead,
+        ip,
+        prefix,
+        spamCategory: verdict.category,
+        spamScore: verdict.score,
+        spamReasons: verdict.reasons,
+        at: new Date(),
+      });
+    } catch (err) {
+      console.error('Blocked-submission log failed (non-fatal):', String(err?.message || err));
+    }
+    return res.status(200).json({ ok: true });
+  }
+
+  const isSpam = verdict.verdict === 'quarantine';
 
   // ── PERSIST FIRST ────────────────────────────────────────────────────────
   // The lead is the thing we must never lose. Write it to Mongo BEFORE emailing,
@@ -291,7 +358,6 @@ export default async function handler(req, res) {
   let leadId = null;
   try {
     const col = await leads();
-    const lead = cleanLead(d);
     const { insertedId } = await col.insertOne({
       ...lead,
       status: 'new',
@@ -299,10 +365,25 @@ export default async function handler(req, res) {
       emailSent: false,
       emailError: null,
       createdAt: new Date(),
+      // Quarantine is a display + notification decision, never a storage one.
+      // The document is identical either way; `spam` only decides which tab it
+      // appears under and whether the phone buzzes.
+      spam: isSpam,
+      spamCategory: isSpam ? verdict.category : null,
+      spamScore: verdict.score,
+      spamReasons: verdict.reasons,
     });
     leadId = insertedId;
   } catch (err) {
     console.error('Lead persist error (continuing to email):', err);
+  }
+
+  // Quarantined: captured, categorised, and NOT delivered. Emailing it would
+  // defeat the entire point — the inbox flood is the problem being solved, and
+  // the Spam tab in /admin is where this is now read.
+  if (isSpam) {
+    console.warn(`[book-call] quarantined (${verdict.category}, ${verdict.score}): ${verdict.reasons.join('; ')}`);
+    return res.status(200).json({ ok: true });
   }
 
   // ── THEN EMAIL ───────────────────────────────────────────────────────────

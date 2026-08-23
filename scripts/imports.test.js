@@ -13,7 +13,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { computeSrcHash, bannerFor } from './src-hash.js';
+import { computeSrcHash, bannerFor, bundledLibFiles } from './src-hash.js';
 
 const ROOT = path.join(import.meta.dirname, '..');
 
@@ -121,7 +121,8 @@ describe('the signed-out login page has no gated dependencies', () => {
 describe('the committed SPA bundles are current (did you run `npm run bundle`?)', () => {
   // The repo's worst silent failure: edit src/, forget to rebundle, and the dashboard
   // ships stale — no build error, because there is no build step. bundle.js stamps a
-  // /*srchash:…*/ banner over src/**/*.js; we recompute it and demand a match.
+  // /*srchash:…*/ banner over src/**/*.js AND every lib/ module those files import
+  // (esbuild inlines them); we recompute it and demand a match.
   const BUNDLES = ['seoteam/app.js', 'admin/app.js'];
 
   for (const rel of BUNDLES) {
@@ -136,6 +137,48 @@ describe('the committed SPA bundles are current (did you run `npm run bundle`?)'
       );
     });
   }
+
+  /* THE HOLE THE BANNER ALONE DOES NOT CLOSE.
+   *
+   * esbuild follows imports wherever they lead, so a src/ file importing from
+   * lib/ gets that module INLINED into the committed bundle. If the hash covered
+   * only src/, editing such a lib/ module would leave every staleness check green
+   * while the deployed dashboard ran the old copy — the exact silent failure the
+   * banner exists to catch, entering through a side door. computeSrcHash() now
+   * walks those imports; these tests make sure it keeps doing so. */
+  test('the freshness hash follows src/ imports into lib/', () => {
+    const covered = bundledLibFiles().map((f) => path.relative(ROOT, f).replace(/\\/g, '/'));
+
+    const imported = new Set();
+    for (const file of walk(path.join(ROOT, 'src'))) {
+      const source = fs.readFileSync(file, 'utf8');
+      for (const m of source.matchAll(/\bfrom\s+['"](\.[^'"]+)['"]/g)) {
+        const rel = path.relative(ROOT, path.resolve(path.dirname(file), m[1])).replace(/\\/g, '/');
+        if (rel.startsWith('lib/')) imported.add(rel);
+      }
+    }
+
+    assert.ok(imported.size > 0, 'expected src/ to share at least one module with lib/');
+    for (const dep of imported) {
+      assert.ok(covered.includes(dep), `${dep} is inlined into a bundle but not covered by the freshness hash`);
+    }
+  });
+
+  test('editing a bundled lib/ module changes the hash', () => {
+    // The property that actually matters, asserted directly rather than inferred
+    // from the file list: perturb a covered file, and the hash must move.
+    const target = bundledLibFiles()[0];
+    assert.ok(target, 'no bundled lib/ module to test with');
+    const before = computeSrcHash();
+    const original = fs.readFileSync(target);
+    try {
+      fs.writeFileSync(target, Buffer.concat([original, Buffer.from('\n// srchash probe\n')]));
+      assert.notEqual(computeSrcHash(), before, 'a change to an inlined lib/ module went unnoticed');
+    } finally {
+      fs.writeFileSync(target, original);
+    }
+    assert.equal(computeSrcHash(), before, 'the probe did not restore the file');
+  });
 });
 
 describe('dev.js gates from the middleware matcher, not a hardcoded regex', () => {

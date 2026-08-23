@@ -11,7 +11,11 @@ async function overview(req, res) {
   const [pageDocs, postCounts, unreadLeads, mediaCount, recent] = await Promise.all([
     (await pages()).find({}).project({ path: 1, base: 1, status: 1, hasUnpublishedChanges: 1 }).toArray(),
     (await posts()).aggregate([{ $group: { _id: '$status', n: { $sum: 1 } } }]).toArray(),
-    (await leads()).countDocuments({ status: 'new' }),
+    // Spam is excluded deliberately. Before the classifier existed this badge
+    // read "62 unread" while 61 of them were bots, which is the same as reading
+    // nothing at all — a notification you learn to ignore has negative value.
+    // `promo` is the pre-classifier hand-set flag; both must be absent.
+    (await leads()).countDocuments({ status: 'new', spam: { $ne: true }, promo: { $ne: true } }),
     (await media()).countDocuments({}),
     (await auditLog()).find({}).sort({ at: -1 }).limit(10).toArray(),
   ]);

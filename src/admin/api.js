@@ -47,6 +47,7 @@ export const api = {
 
   listLeads: () => request('GET', '/api/admin/leads'),
   patchLead: (body) => request('PATCH', '/api/admin/leads', body),
+  deleteLeads: (body) => request('DELETE', '/api/admin/leads', body),
 
   listRedirects: () => request('GET', '/api/admin/redirects'),
   createRedirect: (body) => request('POST', '/api/admin/redirects', body),

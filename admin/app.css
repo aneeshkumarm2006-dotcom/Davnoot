@@ -112,6 +112,56 @@
   text-underline-offset: 2px;
 }
 .lead-promo-btn:hover { color: var(--text); }
+.lead-promo-btn.is-danger { color: var(--warn, #a4553a); margin-left: 12px; }
+
+/* --- Leads: Inbox / Spam / Blocked tabs --------------------------------- */
+.lead-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 18px;
+  border-bottom: 1px solid var(--border);
+}
+.lead-tab {
+  padding: 9px 14px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+.lead-tab:hover { color: var(--text); }
+.lead-tab.is-active { color: var(--text); border-bottom-color: var(--text); }
+.lead-tab-n {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 1px 7px;
+  border-radius: 9px;
+  background: var(--bg-elev-2, #dde5de);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-dim);
+}
+.lead-tab.is-active .lead-tab-n { background: var(--text); color: var(--bg, #fff); }
+
+.pill-spam {
+  background: var(--warn-bg, #f6e9e2);
+  color: var(--warn, #a4553a);
+  margin-left: 8px;
+}
+
+/* Why the filter flagged it. Always visible next to the message, because a
+   verdict the operator cannot see the reasoning for is one they cannot correct. */
+.lead-why {
+  margin: 4px 0 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
 
 /* --- Custom dropdown (house replacement for <select>) ------------------- */
 .cdrop { position: relative; display: inline-block; min-width: 130px; }

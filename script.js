@@ -1281,9 +1281,65 @@ if (document.readyState === 'loading') {
     refreshCta();
   })();
 
-  // Form submit — POST the lead to /api/book-call (Resend), then reveal confirmation
+  // Form submit — POST the lead to /api/book-call, then reveal confirmation
   const form = document.querySelector('form.book-form');
   if (form) {
+    // ── Anti-spam: proof this form was rendered by a browser ────────────────
+    // The server scores a submission that arrives without this stamp, and one
+    // that arrives implausibly soon after it. A bot POSTing straight at
+    // /api/book-call has neither. Recorded here, at wire-up time, so the elapsed
+    // value measures how long the form was actually open.
+    const openedAt = Date.now();
+
+    // ── Anti-spam: Cloudflare Turnstile, injected only if a key is configured ─
+    // The widget is added by script rather than shipped in book-call.html on
+    // purpose — that page is golden-tested byte-for-byte and mirrored into
+    // French, so its markup is expensive to change, while an env var is free.
+    // See api/form-config.js. Everything here fails open: no key, no network, or
+    // a blocked Cloudflare means the form behaves exactly as it did before.
+    let turnstileWidget = null;   // widget id, once rendered
+    let turnstileToken = '';      // freshest token; cleared when it expires
+    let turnstileFirst = null;    // resolves on the first outcome, good or bad
+
+    (async () => {
+      try {
+        const cfg = await (await fetch('/api/form-config')).json();
+        if (!cfg || !cfg.turnstileSiteKey) return;
+
+        const holder = document.createElement('div');
+        holder.className = 'form-row turnstile-row';
+        const note = form.querySelector('.form-note');
+        if (note) note.parentNode.insertBefore(holder, note);
+        else form.appendChild(holder);
+
+        turnstileFirst = new Promise((settle) => {
+          window.davnootTurnstileInit = () => {
+            turnstileWidget = window.turnstile.render(holder, {
+              sitekey: cfg.turnstileSiteKey,
+              // Invisible unless Cloudflare decides this visitor needs checking,
+              // so the overwhelming majority of real people never see anything.
+              appearance: 'interaction-only',
+              callback: (token) => { turnstileToken = token; settle(); },
+              // A token lives ~5 minutes. Someone filling in a thoughtful brief
+              // can easily outlast that, so re-run rather than submit a stale
+              // one and hand them an unexplained failure.
+              'expired-callback': () => { turnstileToken = ''; window.turnstile.reset(turnstileWidget); },
+              'error-callback': () => { turnstileToken = ''; settle(); },
+              'timeout-callback': () => { turnstileToken = ''; settle(); },
+            });
+          };
+          const s = document.createElement('script');
+          s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=davnootTurnstileInit';
+          s.async = true;
+          s.defer = true;
+          s.onerror = () => settle();
+          document.head.appendChild(s);
+        });
+      } catch (err) {
+        /* fail open — api/book-call.js is the actual boundary */
+      }
+    })();
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.querySelector('.cal-cta-btn') || form.querySelector('button[type="submit"]') || form.querySelector('button');
@@ -1292,6 +1348,13 @@ if (document.readyState === 'loading') {
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
       try {
         const data = Object.fromEntries(new FormData(form).entries());
+        data.t0 = openedAt;
+        // Wait for a token only when a widget was actually mounted, and only if
+        // we don't already hold a fresh one.
+        if (turnstileFirst && !turnstileToken) {
+          await Promise.race([turnstileFirst, new Promise((r) => setTimeout(r, 15000))]);
+        }
+        if (turnstileToken) data['cf-turnstile-response'] = turnstileToken;
         const res = await fetch('/api/book-call', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1305,6 +1368,12 @@ if (document.readyState === 'loading') {
         if (btn) { btn.innerHTML = 'Booked ✓'; btn.disabled = true; }
       } catch (err) {
         if (btn) { btn.disabled = false; btn.innerHTML = original; }
+        // Turnstile tokens are single-use, so a retry after a failed send needs a
+        // fresh one or it would fail again for a completely different reason.
+        if (turnstileWidget !== null && window.turnstile) {
+          turnstileToken = '';
+          window.turnstile.reset(turnstileWidget);
+        }
         alert('Sorry — something went wrong sending your request. Please email info@davnoot.com directly.');
       }
     });
