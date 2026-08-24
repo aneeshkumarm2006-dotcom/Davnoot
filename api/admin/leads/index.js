@@ -12,6 +12,22 @@ import { SPAM_CATEGORIES, SPAM_CATEGORY_KEYS } from '../../../lib/spam.js';
 const STATUSES = new Set(['new', 'contacted', 'won', 'lost']);
 const CATEGORIES = new Set(SPAM_CATEGORY_KEYS);
 
+/* Where a lead came in. Two intakes write to this collection now — the strategy-
+ * call form (api/book-call.js) and the funnel-teardown modal on the blog
+ * (api/funnel-teardown.js) — and they carry different fields, so the inbox has to
+ * know which shape it is rendering.
+ *
+ * Documents written before the teardown existed have no `source` at all, and are
+ * treated as 'book-call' on READ rather than being backfilled: the inference is
+ * exact (nothing else could have written them), and a migration that rewrites
+ * every historical lead to add a field the code can derive is a risk taken for
+ * nothing. Keep in sync with the labels in src/admin/views/leads.js. */
+export const LEAD_SOURCES = [
+  { key: 'book-call', label: 'Booking form' },
+  { key: 'funnel-teardown', label: 'Blog teardown' },
+];
+const SOURCE_KEYS = new Set(LEAD_SOURCES.map((s) => s.key));
+
 /* `promo` was the original hand-set "this is junk" flag, from before the
  * classifier existed. Documents written under it are still in the collection and
  * still have to disappear from the inbox, so it is folded into `spam` on read
@@ -19,6 +35,7 @@ const CATEGORIES = new Set(SPAM_CATEGORY_KEYS);
  * "Mark as promotion" clicks keep meaning what the person meant by them. */
 function normalise(doc) {
   const spam = doc.spam === true || (doc.spam == null && doc.promo === true);
+  const source = SOURCE_KEYS.has(doc.source) ? doc.source : 'book-call';
   return {
     ...doc,
     _id: String(doc._id),
@@ -26,6 +43,22 @@ function normalise(doc) {
     spamCategory: doc.spamCategory || (spam ? 'manual' : null),
     spamScore: doc.spamScore ?? null,
     spamReasons: doc.spamReasons || [],
+    source,
+    website: doc.website || '',
+    sourceUrl: doc.sourceUrl || '',
+    /* Tri-state, and the resolution happens HERE so the client never has to guess.
+     *   true/false  a notification was attempted, and this is how it went
+     *   null        none was ever attempted — the intake does not notify
+     *
+     * Teardowns don't notify at all (api/funnel-teardown.js), so a missing flag on
+     * one means null. A missing flag on a booking lead means the opposite — those
+     * always attempt, so absence is an old document from before the flag existed,
+     * and `false` is the truthful reading. Collapsing the two would either paint a
+     * red "failed" on every teardown or quietly excuse a booking lead that never
+     * got emailed. */
+    emailSent: doc.emailSent == null
+      ? (source === 'funnel-teardown' ? null : false)
+      : doc.emailSent,
   };
 }
 
@@ -45,7 +78,7 @@ async function list(req, res) {
 
   res.status(200).json({
     leads: all,
-    blocked: blocked.map((b) => ({ ...b, _id: String(b._id), createdAt: b.at })),
+    blocked: blocked.map((b) => ({ ...normalise({ ...b, _id: b._id }), createdAt: b.at })),
     // Counts only genuine unworked leads. This drives the sidebar badge, and a
     // badge that includes spam is a badge nobody trusts within a week.
     unread: real.filter((r) => r.status === 'new').length,
@@ -55,6 +88,13 @@ async function list(req, res) {
     // keeps src/ free of any import from lib/ — see the guard in
     // scripts/imports.test.js for why that matters more than it looks.
     categories: SPAM_CATEGORIES,
+    // Same contract for the intake labels: shipped, never restated in the client.
+    sources: LEAD_SOURCES,
+    // Per-intake breakdown of the real inbox, so "the blog modal is working" is
+    // answerable at a glance without exporting the CSV.
+    bySource: Object.fromEntries(
+      LEAD_SOURCES.map((s) => [s.key, real.filter((r) => r.source === s.key).length]),
+    ),
   });
 }
 

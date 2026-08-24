@@ -19,9 +19,10 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  classifyLead, contentHash, ipPrefix,
-  SERVICE_CODES, SPAM_CATEGORY_KEYS, QUARANTINE_AT, REJECT_AT,
+  classifyLead, classifyTeardown, contentHash, ipPrefix,
+  SERVICE_CODES, SPAM_CATEGORY_KEYS, QUARANTINE_AT, REJECT_AT, TEARDOWN_HASH_FIELDS,
 } from '../lib/spam.js';
+import { normalizeWebsite } from '../lib/lead-intake.js';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -270,5 +271,158 @@ describe('helpers', () => {
     assert.match(view, /data\.categories/, 'the admin must read the payload it is sent');
 
     assert.ok(SPAM_CATEGORY_KEYS.includes('manual'), 'hand-marked spam needs a category');
+  });
+});
+
+/* ===========================================================================
+ * THE SECOND FRONT DOOR: the /blog funnel-teardown modal
+ * ===========================================================================
+ * The trap this whole block exists to nail down: the teardown lead has NO name,
+ * NO company and NO brief, and `isFiller('')` is true — so running one through
+ * classifyLead() rejects it as "placeholder name/company/message". Every single
+ * teardown, silently, with a 200 OK to the visitor. The first assertion below is
+ * that failure written down, so nobody ever "simplifies" the two classifiers back
+ * into one without meeting it.
+ */
+describe('the funnel-teardown classifier', () => {
+  const good = { email: 'sam@northpeak.io', websiteHost: 'northpeak.io' };
+  const browser = { hasJsStamp: true, dwellMs: 30000, duplicateCount: 0 };
+
+  test('a teardown run through the BOOKING classifier is destroyed — hence the split', () => {
+    const asBookingLead = { name: '', company: '', brief: '', email: good.email };
+    assert.equal(classifyLead(asBookingLead, browser).verdict, 'reject');
+    assert.equal(classifyTeardown(good, browser).verdict, 'allow');
+  });
+
+  test('an ordinary request from a browser is allowed', () => {
+    const v = classifyTeardown(good, browser);
+    assert.equal(v.verdict, 'allow', v.reasons.join('; '));
+    assert.equal(v.category, null);
+  });
+
+  test('a free-mail address with an unrelated website is still a real lead', () => {
+    // The most common shape a small business submits. Nothing about it is a signal.
+    const v = classifyTeardown({ email: 'joanne@gmail.com', websiteHost: 'joannesflowers.ca' }, browser);
+    assert.equal(v.verdict, 'allow', v.reasons.join('; '));
+  });
+
+  test('an @davnoot.com sender is always allowed', () => {
+    const v = classifyTeardown({ email: 'prem@davnoot.com', websiteHost: 'davnoot.com' }, { hasJsStamp: false, dwellMs: 5, duplicateCount: 9 });
+    assert.equal(v.verdict, 'allow');
+  });
+
+  test('an address we cannot reply to is rejected', () => {
+    assert.equal(classifyTeardown({ email: 'not-an-email', websiteHost: 'acme.com' }, browser).verdict, 'reject');
+  });
+
+  test('test@test.com + test.com is rejected', () => {
+    assert.equal(classifyTeardown({ email: 'test@test.com', websiteHost: 'test.com' }, browser).verdict, 'reject');
+  });
+
+  test('a messaging link submitted as a website is held', () => {
+    const v = classifyTeardown({ email: 'x@mail.com', websiteHost: 't.me' }, browser);
+    assert.equal(v.verdict, 'quarantine');
+    assert.equal(v.category, 'link-drop');
+  });
+
+  test('our own domain is held, not rejected — it is usually one of us testing', () => {
+    const v = classifyTeardown({ email: 'someone@elsewhere.com', websiteHost: 'davnoot.com' }, browser);
+    assert.equal(v.verdict, 'quarantine');
+  });
+
+  test('a clean submission with no browser stamp still gets through', () => {
+    // Same posture as the booking form: a stale cached script.js right after a
+    // deploy must not bounce real leads.
+    const v = classifyTeardown(good, { hasJsStamp: false, dwellMs: null, duplicateCount: 0 });
+    assert.equal(v.verdict, 'allow', v.reasons.join('; '));
+  });
+
+  test('no stamp AND an instant fill is held', () => {
+    const v = classifyTeardown(good, { hasJsStamp: false, dwellMs: 200, duplicateCount: 0 });
+    assert.equal(v.verdict, 'quarantine');
+  });
+
+  /* The gentler ladder. A repeat here is 'someone typed acme.com again', not a
+   * byte-identical message — so one repeat must NOT be enough to hold a lead. */
+  test('a second person at the same company is a lead, not a duplicate', () => {
+    const v = classifyTeardown({ email: 'cfo@northpeak.io', websiteHost: 'northpeak.io' }, { ...browser, duplicateCount: 1 });
+    assert.equal(v.verdict, 'allow', v.reasons.join('; '));
+  });
+
+  test('a third and fourth repeat escalate — held, then refused', () => {
+    assert.equal(classifyTeardown(good, { ...browser, duplicateCount: 2 }).verdict, 'quarantine');
+    assert.equal(classifyTeardown(good, { ...browser, duplicateCount: 3 }).verdict, 'reject');
+  });
+
+  test('one repeat still colours the verdict when something else is off', () => {
+    // 25 (repeat) + 35 (no browser stamp) clears the quarantine line together,
+    // which is the point of scoring it below the line rather than ignoring it.
+    const v = classifyTeardown(good, { hasJsStamp: false, dwellMs: null, duplicateCount: 1 });
+    assert.equal(v.verdict, 'quarantine');
+  });
+
+  test('every category it can assign has a label the admin can render', () => {
+    for (const shape of [
+      { lead: { email: 'x@y.com', websiteHost: 't.me' }, ctx: browser },
+      { lead: { email: 'test@test.com', websiteHost: 'test.com' }, ctx: browser },
+      { lead: { email: 'bad', websiteHost: 'acme.com' }, ctx: browser },
+    ]) {
+      const v = classifyTeardown(shape.lead, shape.ctx);
+      assert.ok(SPAM_CATEGORY_KEYS.includes(v.category), `unlabelled category: ${v.category}`);
+    }
+  });
+
+  test('the duplicate fingerprint keys on the website, not the rotating email', () => {
+    const a = contentHash({ websiteHost: 'acme.com' }, TEARDOWN_HASH_FIELDS);
+    const b = contentHash({ websiteHost: 'acme.com', email: 'someone-else@x.com' }, TEARDOWN_HASH_FIELDS);
+    assert.equal(a, b, 'a bot rotating addresses must not defeat the duplicate check');
+    assert.notEqual(a, contentHash({ websiteHost: 'othersite.com' }, TEARDOWN_HASH_FIELDS));
+  });
+
+  test('contentHash still defaults to the booking form fields', () => {
+    // The teardown added a second argument; the booking form calls it with one.
+    const lead = { name: 'A', company: 'B', brief: 'C' };
+    assert.equal(contentHash(lead), contentHash(lead, ['name', 'company', 'brief']));
+  });
+
+  test('the intake labels travel with the payload, like the spam categories do', () => {
+    const api = fs.readFileSync(path.join(ROOT, 'api', 'admin', 'leads', 'index.js'), 'utf8');
+    assert.match(api, /sources: LEAD_SOURCES/, 'the leads endpoint must ship the source labels');
+    const view = fs.readFileSync(path.join(ROOT, 'src', 'admin', 'views', 'leads.js'), 'utf8');
+    assert.match(view, /data\.sources/, 'the admin must read the source labels it is sent');
+  });
+});
+
+describe('normalizeWebsite', () => {
+  test('the four ways people type the same site collapse to one host', () => {
+    const hosts = ['acme.com', 'www.acme.com', 'https://acme.com/', 'HTTPS://WWW.ACME.COM'].map(
+      (raw) => normalizeWebsite(raw).host,
+    );
+    assert.deepEqual(hosts, ['acme.com', 'acme.com', 'acme.com', 'acme.com']);
+  });
+
+  test('a path is kept — /pricing is real context for the teardown', () => {
+    assert.equal(normalizeWebsite('acme.com/pricing').url, 'https://acme.com/pricing');
+    assert.equal(normalizeWebsite('https://acme.com/pricing/').url, 'https://acme.com/pricing');
+  });
+
+  test('the scheme is normalised to https so two spellings hash alike', () => {
+    assert.equal(normalizeWebsite('http://acme.com').host, normalizeWebsite('https://acme.com').host);
+  });
+
+  test('non-websites are refused', () => {
+    for (const bad of ['', '   ', 'acme', 'not a url', 'mailto:me@acme.com', 'javascript:alert(1)', 'https://', '.com']) {
+      assert.equal(normalizeWebsite(bad), null, `should have refused: ${JSON.stringify(bad)}`);
+    }
+  });
+
+  test('a bare IP parses but is scored as a bot tell rather than silently accepted', () => {
+    const site = normalizeWebsite('203.0.113.7');
+    assert.equal(site.host, '203.0.113.7');
+    assert.equal(classifyTeardown({ email: 'x@y.com', websiteHost: site.host }, { hasJsStamp: true, dwellMs: 9000, duplicateCount: 0 }).verdict, 'quarantine');
+  });
+
+  test('a subdomain is preserved — app.acme.com is not acme.com', () => {
+    assert.equal(normalizeWebsite('app.acme.com').host, 'app.acme.com');
   });
 });

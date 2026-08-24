@@ -13,91 +13,18 @@
 // verified aliases), so FROM is always built from GMAIL_USER — you cannot spoof
 // an arbitrary sender here.
 
-import nodemailer from 'nodemailer';
-import { leads, formAttempts, blockedSubmissions } from '../lib/db.js';
+import { leads, blockedSubmissions } from '../lib/db.js';
 import { classifyLead, contentHash, ipPrefix } from '../lib/spam.js';
+import {
+  clientIp, verifyTurnstile, turnstileEnabled,
+  mailer, mailFrom, mailTo, mailConfigured,
+  dwellFrom, throttle, esc,
+} from '../lib/lead-intake.js';
 
-// ── Anti-spam knobs ────────────────────────────────────────────────────────
-// Rate limit: generous enough that a whole office submitting once each is fine,
-// tight enough that a flooding bot is capped. Keyed on IP AND email.
-const RL_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
-const RL_MAX_PER_IP = 5;
-const RL_MAX_PER_EMAIL = 3;
-
-// The neighbourhood limit, over a longer window. The 2026-08 flood put 33
-// submissions through by rotating addresses inside a handful of rented /24s,
-// each address politely staying under RL_MAX_PER_IP. Capping the subnet is what
-// makes that rotation cost the operator something.
-const RL_SUBNET_WINDOW_MS = 60 * 60 * 1000; // 1 hour
-const RL_MAX_PER_SUBNET = 8;
-
-// How far back the duplicate-payload check looks. Bounded by the form_attempts
-// TTL (24h) — asking for more than that silently gets less.
-const DUPE_WINDOW_MS = 24 * 60 * 60 * 1000;
-
-// Minimum time between our script stamping the form and the POST arriving.
-// Nobody types a name, email, company and a paragraph in three seconds.
-const MIN_DWELL_MS = 3000;
-// A stamp older than this is a stale tab, not a session — treat it as absent.
-const MAX_DWELL_MS = 12 * 60 * 60 * 1000;
-
-// Cloudflare Turnstile (invisible CAPTCHA). Enforced ONLY when the secret is set,
-// so the form keeps working until the keys are added — then bots are blocked.
-const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY || '';
-
-// Trust only the platform-set client IP. x-forwarded-for's leftmost entry is
-// attacker-controlled (a client prepends its own), so keying a throttle on it lets
-// a bot rotate past the limit. Mirrors api/seoteam/login.js.
-function clientIp(req) {
-  const h = req.headers || {};
-  const vercel = h['x-vercel-forwarded-for'] || h['x-real-ip'];
-  if (typeof vercel === 'string' && vercel) return vercel.split(',')[0].trim();
-  const fwd = h['x-forwarded-for'];
-  if (typeof fwd === 'string' && fwd) return fwd.split(',')[0].trim();
-  return req.socket?.remoteAddress || 'unknown';
-}
-
-// Verify a Turnstile token with Cloudflare. Returns true only on a confirmed
-// human. Any error/timeout returns false so a broken verifier fails CLOSED.
-async function verifyTurnstile(token, ip) {
-  if (!token) return false;
-  try {
-    const body = new URLSearchParams({ secret: TURNSTILE_SECRET, response: token });
-    if (ip && ip !== 'unknown') body.set('remoteip', ip);
-    const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body,
-    });
-    const data = await r.json();
-    return data?.success === true;
-  } catch (err) {
-    console.error('Turnstile verify error (failing closed):', String(err?.message || err));
-    return false;
-  }
-}
-
-const GMAIL_USER = process.env.GMAIL_USER || '';
-// App passwords are shown grouped as "abcd efgh ijkl mnop"; Google accepts them
-// with or without the spaces, so strip them to be forgiving of a copy-paste.
-const GMAIL_PASS = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '');
-const FROM = `Davnoot Digital <${GMAIL_USER}>`;
-const TO = (process.env.LEAD_TO || GMAIL_USER || 'info@davnoot.com').split(',').map((s) => s.trim()).filter(Boolean);
-
-// One transport per warm lambda. Created lazily so a cold start with missing
-// credentials fails in the handler (with a captured lead) rather than at import.
-let _transport;
-function mailer() {
-  if (!_transport) {
-    _transport = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true, // implicit TLS
-      auth: { user: GMAIL_USER, pass: GMAIL_PASS },
-    });
-  }
-  return _transport;
-}
+// The transport, the throttle, the IP trust rule and the Turnstile check all live
+// in lib/lead-intake.js — shared with api/funnel-teardown.js so the anti-spam
+// posture can only ever be tuned in one place. What stays here is what is specific
+// to the strategy-call form: its fields, its labels and its two email templates.
 
 const SERVICE_LABELS = {
   seo: 'SEO',
@@ -108,13 +35,6 @@ const SERVICE_LABELS = {
   software: 'Custom Software',
   multi: 'Multi-channel / Not sure yet',
 };
-
-const esc = (s) =>
-  String(s == null ? '' : s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
 
 function row(label, value, isLast) {
   if (!value) return '';
@@ -274,51 +194,25 @@ export default async function handler(req, res) {
   const lead = cleanLead(d);
   const hash = contentHash(lead);
 
-  // How long the form was open before it was submitted. script.js stamps `t0`
-  // with Date.now() when it wires the form up, so a POST made straight to this
-  // endpoint — no browser, no our-JS — carries no stamp at all. That absence is
-  // a signal in its own right, scored (not enforced) by the classifier so that a
-  // browser holding a stale cached script.js right after a deploy still gets
-  // through rather than having every real lead bounced.
-  const t0 = Number(d.t0);
-  const dwellMs = Number.isFinite(t0) && t0 > 0 ? Date.now() - t0 : null;
-  const hasJsStamp = dwellMs !== null && dwellMs >= 0 && dwellMs < MAX_DWELL_MS;
+  // How long the form was open before it was submitted (see lib/lead-intake.js).
+  const { dwellMs, hasJsStamp } = dwellFrom(d.t0);
 
   // ── ANTI-SPAM: TURNSTILE (invisible CAPTCHA) ───────────────────────────────
   // Enforced only once TURNSTILE_SECRET_KEY is configured, so the form keeps
   // working until the keys are added. A verified human is remembered so we only
   // send the auto-reply to real people (never amplifying spam).
   let verifiedHuman = false;
-  if (TURNSTILE_SECRET) {
+  if (turnstileEnabled()) {
     verifiedHuman = await verifyTurnstile(d['cf-turnstile-response'], ip);
     if (!verifiedHuman) {
       return res.status(400).json({ error: "Couldn't verify you're human. Please refresh and try again." });
     }
   }
 
-  // ── ANTI-SPAM: RATE LIMIT (per IP and per email) ───────────────────────────
-  // Best-effort: if the throttle store is unreachable we ALLOW the submission —
-  // a booking form that fails closed on a DB blip would drop real leads.
-  let duplicateCount = 0;
-  try {
-    const col = await formAttempts();
-    const now = Date.now();
-    const since = new Date(now - RL_WINDOW_MS);
-    const [byIp, byEmail, bySubnet, byHash] = await Promise.all([
-      col.countDocuments({ ip, at: { $gte: since } }),
-      email ? col.countDocuments({ email, at: { $gte: since } }) : Promise.resolve(0),
-      col.countDocuments({ prefix, at: { $gte: new Date(now - RL_SUBNET_WINDOW_MS) } }),
-      col.countDocuments({ hash, at: { $gte: new Date(now - DUPE_WINDOW_MS) } }),
-    ]);
-    if (byIp >= RL_MAX_PER_IP || byEmail >= RL_MAX_PER_EMAIL || (prefix !== 'unknown' && bySubnet >= RL_MAX_PER_SUBNET)) {
-      return res.status(429).json({ error: 'Too many submissions. Please try again in a few minutes.' });
-    }
-    // Not a limit — an input to the verdict. One payload replayed from many
-    // addresses is the flood signature, and it survives every per-address cap.
-    duplicateCount = byHash;
-    await col.insertOne({ ip, prefix, email, hash, at: new Date() });
-  } catch (err) {
-    console.error('Form rate-limit check failed (allowing submission):', String(err?.message || err));
+  // ── ANTI-SPAM: RATE LIMIT (per IP, email and /24) ──────────────────────────
+  const { limited, duplicateCount } = await throttle({ ip, prefix, email, hash });
+  if (limited) {
+    return res.status(429).json({ error: 'Too many submissions. Please try again in a few minutes.' });
   }
 
   // ── ANTI-SPAM: CLASSIFY ────────────────────────────────────────────────────
@@ -387,7 +281,7 @@ export default async function handler(req, res) {
   }
 
   // ── THEN EMAIL ───────────────────────────────────────────────────────────
-  if (!GMAIL_USER || !GMAIL_PASS) {
+  if (!mailConfigured()) {
     console.error('GMAIL_USER / GMAIL_APP_PASSWORD not set — lead captured but no email sent.');
     // The lead is safe in Mongo if it persisted; only report failure if it didn't.
     return leadId
@@ -398,8 +292,8 @@ export default async function handler(req, res) {
   let emailError = null;
   try {
     await mailer().sendMail({
-      from: FROM,
-      to: TO,
+      from: mailFrom(),
+      to: mailTo(),
       replyTo: d.email,
       subject: `New strategy call — ${d.name}${d.company ? ' · ' + d.company : ''}`,
       html: buildEmail(d),
@@ -420,9 +314,9 @@ export default async function handler(req, res) {
   if (verifiedHuman && d.email && /.+@.+\..+/.test(d.email)) {
     try {
       await mailer().sendMail({
-        from: FROM,
+        from: mailFrom(),
         to: d.email,
-        replyTo: TO[0] || GMAIL_USER,
+        replyTo: mailTo()[0],
         subject: 'We got your message — Davnoot',
         html: buildClientEmail(d),
         text: buildClientText(d),

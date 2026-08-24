@@ -1153,6 +1153,107 @@ if (document.readyState === 'loading') {
 })();
 
 // ========================================================================
+//  TURNSTILE — shared invisible-CAPTCHA loader
+// ========================================================================
+// Two forms need it now: the booking form on /book-call and the funnel-teardown
+// modal on /blog/*. Both mount the SAME widget from the SAME env-var-driven site
+// key, which is the point — turning TURNSTILE_SITE_KEY on in Vercel has to protect
+// every door at once, or the one nobody remembered becomes the one bots use.
+//
+// Everything here fails OPEN. No key, no network, or a blocked Cloudflare and the
+// form behaves exactly as it did before; api/*.js is the actual boundary.
+
+// One fetch of /api/form-config per page, shared by every caller.
+let _formConfig = null;
+function formConfig() {
+  if (!_formConfig) {
+    _formConfig = fetch('/api/form-config')
+      .then((r) => r.json())
+      .catch(() => ({}));
+  }
+  return _formConfig;
+}
+
+// One <script> load of Cloudflare's api.js per page, however many widgets mount.
+let _turnstileApi = null;
+function turnstileApi() {
+  if (!_turnstileApi) {
+    _turnstileApi = new Promise((resolve, reject) => {
+      window.davnootTurnstileInit = () => resolve(window.turnstile);
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=davnootTurnstileInit';
+      s.async = true;
+      s.defer = true;
+      s.onerror = () => reject(new Error('turnstile blocked'));
+      document.head.appendChild(s);
+    });
+  }
+  return _turnstileApi;
+}
+
+/**
+ * Mount a Turnstile widget into `holder`, if one is configured.
+ *
+ * `attach` puts the holder into the DOM and is called ONLY once a key came back —
+ * an empty `.form-row` left in a form would otherwise open a 22px hole in the
+ * layout of every visitor's page for a widget that never renders.
+ *
+ * Returns a handle whose methods are all safe to call when no widget mounted:
+ *   ready()  resolves once the first outcome (token, error or timeout) has landed
+ *   token()  the freshest token, or '' — cleared when it expires or is spent
+ *   reset()  re-run the challenge; tokens are SINGLE-USE, so a retry after a
+ *            failed send needs a fresh one or it fails again for a different reason
+ */
+function mountTurnstile(holder, attach) {
+  let widget = null;
+  let token = '';
+  let first = null;
+
+  const mounted = (async () => {
+    try {
+      const cfg = await formConfig();
+      if (!cfg || !cfg.turnstileSiteKey) return;
+      if (attach) attach(holder);
+
+      first = new Promise((settle) => {
+        turnstileApi().then((turnstile) => {
+          widget = turnstile.render(holder, {
+            sitekey: cfg.turnstileSiteKey,
+            // Invisible unless Cloudflare decides this visitor needs checking, so
+            // the overwhelming majority of real people never see anything.
+            appearance: 'interaction-only',
+            callback: (t) => { token = t; settle(); },
+            // A token lives ~5 minutes. Someone filling in a thoughtful brief can
+            // easily outlast that, so re-run rather than submit a stale one and
+            // hand them an unexplained failure.
+            'expired-callback': () => { token = ''; turnstile.reset(widget); },
+            'error-callback': () => { token = ''; settle(); },
+            'timeout-callback': () => { token = ''; settle(); },
+          });
+        }, () => settle());
+      });
+    } catch (err) {
+      /* fail open */
+    }
+  })();
+
+  return {
+    async ready(timeoutMs) {
+      await mounted;
+      if (!first || token) return;
+      await Promise.race([first, new Promise((r) => setTimeout(r, timeoutMs || 15000))]);
+    },
+    token: () => token,
+    reset() {
+      if (widget !== null && window.turnstile) {
+        token = '';
+        window.turnstile.reset(widget);
+      }
+    },
+  };
+}
+
+// ========================================================================
 //  BOOK A CALL — calendar + form interactions
 // ========================================================================
 
@@ -1295,50 +1396,14 @@ if (document.readyState === 'loading') {
     // The widget is added by script rather than shipped in book-call.html on
     // purpose — that page is golden-tested byte-for-byte and mirrored into
     // French, so its markup is expensive to change, while an env var is free.
-    // See api/form-config.js. Everything here fails open: no key, no network, or
-    // a blocked Cloudflare means the form behaves exactly as it did before.
-    let turnstileWidget = null;   // widget id, once rendered
-    let turnstileToken = '';      // freshest token; cleared when it expires
-    let turnstileFirst = null;    // resolves on the first outcome, good or bad
-
-    (async () => {
-      try {
-        const cfg = await (await fetch('/api/form-config')).json();
-        if (!cfg || !cfg.turnstileSiteKey) return;
-
-        const holder = document.createElement('div');
-        holder.className = 'form-row turnstile-row';
-        const note = form.querySelector('.form-note');
-        if (note) note.parentNode.insertBefore(holder, note);
-        else form.appendChild(holder);
-
-        turnstileFirst = new Promise((settle) => {
-          window.davnootTurnstileInit = () => {
-            turnstileWidget = window.turnstile.render(holder, {
-              sitekey: cfg.turnstileSiteKey,
-              // Invisible unless Cloudflare decides this visitor needs checking,
-              // so the overwhelming majority of real people never see anything.
-              appearance: 'interaction-only',
-              callback: (token) => { turnstileToken = token; settle(); },
-              // A token lives ~5 minutes. Someone filling in a thoughtful brief
-              // can easily outlast that, so re-run rather than submit a stale
-              // one and hand them an unexplained failure.
-              'expired-callback': () => { turnstileToken = ''; window.turnstile.reset(turnstileWidget); },
-              'error-callback': () => { turnstileToken = ''; settle(); },
-              'timeout-callback': () => { turnstileToken = ''; settle(); },
-            });
-          };
-          const s = document.createElement('script');
-          s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=davnootTurnstileInit';
-          s.async = true;
-          s.defer = true;
-          s.onerror = () => settle();
-          document.head.appendChild(s);
-        });
-      } catch (err) {
-        /* fail open — api/book-call.js is the actual boundary */
-      }
-    })();
+    // See api/form-config.js and mountTurnstile() above.
+    const turnstileHolder = document.createElement('div');
+    turnstileHolder.className = 'form-row turnstile-row';
+    const captcha = mountTurnstile(turnstileHolder, (holder) => {
+      const note = form.querySelector('.form-note');
+      if (note) note.parentNode.insertBefore(holder, note);
+      else form.appendChild(holder);
+    });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1351,10 +1416,8 @@ if (document.readyState === 'loading') {
         data.t0 = openedAt;
         // Wait for a token only when a widget was actually mounted, and only if
         // we don't already hold a fresh one.
-        if (turnstileFirst && !turnstileToken) {
-          await Promise.race([turnstileFirst, new Promise((r) => setTimeout(r, 15000))]);
-        }
-        if (turnstileToken) data['cf-turnstile-response'] = turnstileToken;
+        await captcha.ready();
+        if (captcha.token()) data['cf-turnstile-response'] = captcha.token();
         const res = await fetch('/api/book-call', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1370,10 +1433,7 @@ if (document.readyState === 'loading') {
         if (btn) { btn.disabled = false; btn.innerHTML = original; }
         // Turnstile tokens are single-use, so a retry after a failed send needs a
         // fresh one or it would fail again for a completely different reason.
-        if (turnstileWidget !== null && window.turnstile) {
-          turnstileToken = '';
-          window.turnstile.reset(turnstileWidget);
-        }
+        captcha.reset();
         alert('Sorry — something went wrong sending your request. Please email info@davnoot.com directly.');
       }
     });
@@ -1460,4 +1520,305 @@ if (document.readyState === 'loading') {
     }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
     pairs.forEach(function (p) { io.observe(p.target); });
   }
+})();
+
+// ========================================================================
+//  LEAD MAGNET MODAL — the funnel-teardown offer, /blog/* only
+// ========================================================================
+//
+// WHAT IT DOES
+// ------------
+// On blog pages only, once every 14 days at most, offer a free 15-minute funnel
+// teardown in exchange for an email and a website. Posts to /api/funnel-teardown,
+// which files it in the same /admin leads inbox as the booking form.
+//
+// WHEN IT FIRES — whichever comes first:
+//   desktop   exit intent (cursor leaves through the top of the viewport)
+//   mobile    25 seconds of dwell, because there IS no exit intent on a phone:
+//             a coarse pointer never crosses the top edge, and the usual
+//             substitute — "detect a fast upward scroll" — fires on people who
+//             are simply reading back over a paragraph.
+//   both      60% scroll depth
+//
+// WHERE IT NEVER FIRES
+//   anywhere outside /blog, and never on /book-call — someone already filling in
+//   the booking form does not need interrupting with a smaller offer. That path is
+//   excluded explicitly rather than relying on it not matching /blog, so the rule
+//   survives the blog ever gaining a /blog/book-call page.
+//
+// The markup is built here rather than shipped in lib/blog-render.js so that the
+// visits which never see it pay nothing for it, and so a copy change is one file
+// rather than a re-render of every post.
+
+(function () {
+  const PATH = location.pathname.replace(/\/+$/, '') || '/';
+  const ON_BLOG = /^\/blog(\/|$)/.test(PATH);
+  const EXCLUDED = /^\/book-call(\/|$)/.test(PATH);
+  if (!ON_BLOG || EXCLUDED) return;
+
+  const KEY = 'davnoot:teardown';
+  const DAY = 24 * 60 * 60 * 1000;
+  const COOLDOWN_MS = 14 * DAY;   // "max once per 14 days"
+  const CONVERTED_MS = 365 * DAY; // someone who gave us their email is not asked again
+  const MOBILE_DWELL_MS = 25000;  // the exit-intent substitute on touch devices
+  const SCROLL_TRIGGER = 0.6;     // 60% of the scrollable distance
+  const ARM_DELAY_MS = 3000;      // let the reader land before anything is armed
+
+  /* Frequency capping lives in localStorage, NOT a cookie: it is a UX preference,
+   * never leaves the browser, and nothing on the server reads it. A visitor with
+   * storage disabled (private mode, some lockdowns) simply sees it once per page
+   * load, which is the correct failure direction for a thing that must not nag. */
+  function readState() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (err) { return {}; }
+  }
+  function writeState(patch) {
+    try { localStorage.setItem(KEY, JSON.stringify(Object.assign(readState(), patch))); } catch (err) { /* ignore */ }
+  }
+
+  const saved = readState();
+  const now = Date.now();
+  if (saved.convertedAt && now - saved.convertedAt < CONVERTED_MS) return;
+  if (saved.shownAt && now - saved.shownAt < COOLDOWN_MS) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Touch-first devices get the dwell timer instead of exit intent. Testing the
+   * POINTER rather than the viewport width is what lets a small laptop window still
+   * get exit intent, and a large tablet still get the timer. */
+  const coarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  let modal = null;
+  let opened = false;
+  let lastFocused = null;
+  const timers = [];
+  const listeners = [];
+
+  /* ---------------------------------------------------------------- markup -- */
+
+  function build() {
+    const el = document.createElement('div');
+    el.className = 'teardown-modal';
+    el.innerHTML = [
+      '<div class="teardown-backdrop" data-close></div>',
+      '<div class="teardown-panel" role="dialog" aria-modal="true"',
+      '     aria-labelledby="teardown-title" aria-describedby="teardown-sub">',
+      '  <button type="button" class="teardown-close" data-close aria-label="Close">&times;</button>',
+      '  <p class="teardown-eyebrow">Free teardown</p>',
+      '  <h2 class="teardown-title" id="teardown-title">Free 15-min funnel <em>teardown</em></h2>',
+      '  <p class="teardown-sub" id="teardown-sub">We’ll find where your ad spend is leaking — the ad, the click, the landing page, the form.</p>',
+      '  <form class="teardown-form" novalidate>',
+      '    <div class="teardown-field">',
+      '      <label for="teardown-email">Work email</label>',
+      '      <input type="email" id="teardown-email" name="email" autocomplete="email" placeholder="you@company.com" required />',
+      '    </div>',
+      '    <div class="teardown-field">',
+      '      <label for="teardown-website">Website</label>',
+      '      <input type="text" id="teardown-website" name="website" autocomplete="url" inputmode="url" placeholder="acme.com" required />',
+      '    </div>',
+      '    <input type="text" name="bot-field" class="teardown-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />',
+      '    <div class="teardown-turnstile"></div>',
+      '    <p class="teardown-error" role="alert"></p>',
+      '    <button type="submit" class="teardown-submit">Get my teardown <span class="arrow">&rarr;</span></button>',
+      '    <p class="teardown-note">No pitch, just the audit.</p>',
+      '  </form>',
+      '  <div class="teardown-success" role="status" tabindex="-1">',
+      '    <h3>On its way.</h3>',
+      '    <p>We’ll go through your funnel and email you what we find within one business day. No pitch — just the audit.</p>',
+      '  </div>',
+      '</div>',
+    ].join('\n');
+    return el;
+  }
+
+  /* ------------------------------------------------------------- open/close -- */
+
+  function close(reason) {
+    if (!modal) return;
+    const dying = modal;
+    modal = null;
+    document.removeEventListener('keydown', onKeydown, true);
+    document.documentElement.classList.remove('teardown-open');
+    dying.classList.remove('is-open');
+    if (reduce) dying.remove();
+    else setTimeout(function () { dying.remove(); }, 220);
+    // Returning focus to whatever the reader was on is the difference between a
+    // modal and a trap for anyone navigating by keyboard.
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    if (reason === 'dismiss') writeState({ dismissedAt: Date.now() });
+  }
+
+  function onKeydown(e) {
+    if (!modal) return;
+    if (e.key === 'Escape') { e.preventDefault(); close('dismiss'); return; }
+    if (e.key !== 'Tab') return;
+
+    /* Focus trap. Recomputed on every keypress rather than cached, because the
+     * panel's contents change: on success the form is replaced by the confirmation,
+     * and a cached list would keep tabbing into inputs that are no longer visible. */
+    const focusable = focusables();
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
+  function focusables() {
+    if (!modal) return [];
+    return Array.prototype.filter.call(
+      modal.querySelectorAll('button:not([disabled]), input:not([disabled]):not([tabindex="-1"]), a[href]'),
+      function (el) { return el.offsetParent !== null; },
+    );
+  }
+
+  function open() {
+    if (opened) return;
+    opened = true;
+    disarm();
+
+    /* Stamped BEFORE the modal is shown, so a reader who closes it immediately
+     * still counts as having seen it. Re-offering tomorrow because they dismissed
+     * it is exactly the behaviour that makes people hate these. */
+    writeState({ shownAt: Date.now() });
+
+    lastFocused = document.activeElement;
+    modal = build();
+    document.body.appendChild(modal);
+    document.documentElement.classList.add('teardown-open');
+    // One frame before .is-open so the entry transition actually runs.
+    requestAnimationFrame(function () { if (modal) modal.classList.add('is-open'); });
+
+    Array.prototype.forEach.call(modal.querySelectorAll('[data-close]'), function (el) {
+      el.addEventListener('click', function () { close('dismiss'); });
+    });
+    document.addEventListener('keydown', onKeydown, true);
+    modal.querySelector('#teardown-email').focus({ preventScroll: true });
+
+    wireForm(modal.querySelector('.teardown-form'));
+  }
+
+  /* ------------------------------------------------------------------ form -- */
+
+  function wireForm(form) {
+    /* t0 measures from the modal APPEARING, not from page load — the server scores
+     * an implausibly fast fill, and timing from page load would make every
+     * submission look slow however it arrived. See dwellFrom() in lib/lead-intake.js. */
+    const openedAt = Date.now();
+    const errorEl = form.querySelector('.teardown-error');
+    const btn = form.querySelector('.teardown-submit');
+    const captcha = mountTurnstile(form.querySelector('.teardown-turnstile'), function (holder) {
+      holder.classList.add('is-live');
+    });
+
+    function fail(msg, field) {
+      errorEl.textContent = msg;
+      form.classList.add('has-error');
+      const input = field && form.querySelector('[name="' + field + '"]');
+      if (input) { input.classList.add('is-invalid'); input.focus(); }
+    }
+
+    form.addEventListener('input', function () {
+      form.classList.remove('has-error');
+      errorEl.textContent = '';
+      Array.prototype.forEach.call(form.querySelectorAll('.is-invalid'), function (i) {
+        i.classList.remove('is-invalid');
+      });
+    });
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const email = form.email.value.trim();
+      const website = form.website.value.trim();
+
+      /* Validated here as well as on the server so a typo is corrected in place,
+       * rather than answered with a cheerful confirmation for a teardown the
+       * reader will then wait on forever. */
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { fail('That email address looks incomplete.', 'email'); return; }
+      if (!/^[^\s/]+\.[a-z]{2,}/i.test(website.replace(/^https?:\/\//i, ''))) {
+        fail('Add your website, e.g. acme.com.', 'website');
+        return;
+      }
+
+      const original = btn.innerHTML;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      try {
+        await captcha.ready();
+        const payload = {
+          email: email,
+          website: website,
+          'bot-field': form['bot-field'].value,
+          t0: openedAt,
+          // Which article they were reading — the most useful single piece of
+          // context for whoever writes the teardown, and free to collect.
+          sourceUrl: location.pathname,
+        };
+        if (captcha.token()) payload['cf-turnstile-response'] = captcha.token();
+
+        const res = await fetch('/api/funnel-teardown', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(function () { return {}; });
+        if (!res.ok) {
+          const err = new Error(data.error || 'send failed');
+          err.field = data.field;
+          err.shown = Boolean(data.error);
+          throw err;
+        }
+
+        // Converted: suppressed for a year, not fourteen days.
+        writeState({ convertedAt: Date.now() });
+        if (!modal) return;
+        modal.querySelector('.teardown-panel').classList.add('is-done');
+        modal.querySelector('.teardown-success').focus({ preventScroll: true });
+        timers.push(setTimeout(function () { close('converted'); }, 5000));
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = original;
+        // Turnstile tokens are single-use, so a retry needs a fresh one.
+        captcha.reset();
+        fail(err.shown ? err.message : 'Couldn’t send that — please try again, or email info@davnoot.com.', err.field);
+      }
+    });
+  }
+
+  /* -------------------------------------------------------------- triggers -- */
+
+  function disarm() {
+    timers.forEach(clearTimeout);
+    timers.length = 0;
+    listeners.forEach(function (off) { off(); });
+    listeners.length = 0;
+  }
+
+  function on(target, type, fn, opts) {
+    target.addEventListener(type, fn, opts);
+    listeners.push(function () { target.removeEventListener(type, fn, opts); });
+  }
+
+  function arm() {
+    /* 60% scroll — on both device classes. `scrollHeight - innerHeight` is the
+     * distance that can actually be travelled; on a post shorter than the viewport
+     * that is 0, and 0/0 must not read as "already past 60%". */
+    on(window, 'scroll', function () {
+      const travel = document.documentElement.scrollHeight - window.innerHeight;
+      if (travel > 0 && window.scrollY / travel >= SCROLL_TRIGGER) open();
+    }, { passive: true });
+
+    if (coarse) {
+      timers.push(setTimeout(open, MOBILE_DWELL_MS));
+      return;
+    }
+
+    /* Exit intent: the cursor leaves through the TOP of the viewport (toward the
+     * tabs, the address bar, the close button). relatedTarget is null only when the
+     * pointer left the document entirely — without that check this fires every time
+     * the cursor crosses an iframe or an open select. */
+    on(document, 'mouseout', function (e) {
+      if (e.clientY <= 0 && !e.relatedTarget) open();
+    });
+  }
+
+  timers.push(setTimeout(arm, ARM_DELAY_MS));
 })();

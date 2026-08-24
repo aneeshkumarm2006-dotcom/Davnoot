@@ -1,7 +1,7 @@
-# Booking-form anti-spam
+# Lead-form anti-spam
 
-What protects `/api/book-call`, why each layer exists, and the one thing left for
-a human to do (turn on Turnstile).
+What protects the two public lead forms, why each layer exists, and the one thing
+left for a human to do (turn on Turnstile).
 
 ## Why
 
@@ -18,14 +18,17 @@ gets missed.
 
 | # | Layer | Where | Fails |
 |---|-------|-------|-------|
-| 1 | Honeypot (`bot-field`) | `book-call.html` + handler | open |
-| 2 | Turnstile (invisible CAPTCHA) | `api/book-call.js` | **closed**, only when `TURNSTILE_SECRET_KEY` is set |
-| 3 | Rate limits: per IP, per email, per /24 subnet | `api/book-call.js` | open |
-| 4 | Duplicate-payload detection (24h) | `api/book-call.js` | open |
+| 1 | Honeypot (`bot-field`) | the form markup + each handler | open |
+| 2 | Turnstile (invisible CAPTCHA) | `lib/lead-intake.js` | **closed**, only when `TURNSTILE_SECRET_KEY` is set |
+| 3 | Rate limits: per IP, per email, per /24 subnet | `lib/lead-intake.js` | open |
+| 4 | Duplicate-payload detection (24h) | `lib/lead-intake.js` | open |
 | 5 | Content classifier | `lib/spam.js` | open |
 
+Layers 2–4 are shared by both intakes (see below); layer 5 has one classifier per
+form shape, because the two forms do not collect the same things.
+
 "Fails open" means: if Mongo is unreachable or Cloudflare is down, the
-submission is **allowed**. A booking form that drops real leads when a dependency
+submission is **allowed**. A lead form that drops real leads when a dependency
 blips is worse than one that occasionally lets a bot through.
 
 ### 3 — why a subnet limit
@@ -45,7 +48,8 @@ many addresses it arrives under.
 
 Three verdicts:
 
-- **allow** — stored, emailed, in the Inbox tab.
+- **allow** — stored, in the Inbox tab, and emailed *if that intake notifies*
+  (`/book-call` does; the teardown deliberately does not — see below).
 - **quarantine** — stored and categorised, **not emailed**, in the Spam tab.
 - **reject** — never written to `leads` at all. The response is still
   `200 {ok:true}` so the bot sees success and does not adapt. A copy goes to
@@ -71,6 +75,107 @@ worth remembering before adding anything:
 
 Anything from `@davnoot.com` is whitelisted outright, so internal diagnostics
 always come through.
+
+## The second front door: the blog teardown modal
+
+Since 2026-08-24 there are **two** public intakes, not one:
+
+| Intake | Endpoint | Fields | Classifier |
+|--------|----------|--------|------------|
+| Strategy call, `/book-call` | `api/book-call.js` | name, email, company, role, service, slot, brief | `classifyLead()` |
+| Funnel teardown, `/blog/*` modal | `api/funnel-teardown.js` | email, website | `classifyTeardown()` |
+
+Both write to the same `leads` collection and appear in the same `/admin` inbox,
+tagged by a `source` field and separable with the source chips above the table.
+Both share `lib/lead-intake.js` — one Gmail transport, one throttle, one IP trust
+rule, one Turnstile check — so the numbers in the tables above are tuned **once**
+and both doors move together. That sharing is the whole point of the module: the
+door nobody remembers to re-tune is the one bots end up using.
+
+What they do NOT share is notification policy: the booking form emails you, the
+teardown does not. See *The teardown sends NO notification email* below.
+
+### Why the teardown needs its own classifier
+
+It has no name, no company and no message, and `isFiller('')` is true. Run a
+teardown through `classifyLead()` and it trips *"placeholder name/company/message"*
+— a hard reject, on **every single one**, answered with a cheerful 200. That is
+written down as the first assertion in the `classifyTeardown` block of
+`scripts/spam.test.js`, so anyone who tries to merge the two classifiers back
+together meets it immediately.
+
+With no prose to read, the signal comes almost entirely from transport: was the
+form stamped by our script, how fast was it filled, and has this exact website been
+submitted before. Two extra content rules cover the shapes that are unambiguous —
+a messaging link (`t.me`, `wa.me`) or a bare IP submitted as "my website", and
+`test@test.com` + `test.com`.
+
+### Two deliberate differences from the booking form
+
+**The fill-speed floor is 2s, not 3s.** `t0` is stamped when the modal *appears*,
+not on page load, and there are only two boxes — a browser autofilling both at once
+is a real person, and 3 seconds would flag them.
+
+**The duplicate fingerprint keys on the website alone** (`TEARDOWN_HASH_FIELDS`).
+With two fields and one of them trivially rotatable, the site *is* the payload;
+including the email would let a bot defeat the check by changing an address it
+never reads.
+
+**And the repeat ladder is gentler**, because of exactly that. On the booking form a
+repeat is a byte-identical *message*, which a human essentially never sends twice.
+Here it is only "someone typed acme.com again" — which is what a second person at
+the same company does, or the first one after a flaky connection. So:
+
+| Repeats in 24h | Score | Verdict |
+|---|---|---|
+| 1 | 25 | allowed — below the line on its own, but colours the verdict |
+| 2 | 55 | held — Spam tab in /admin |
+| 3+ | reject | refused, kept 30 days in Blocked |
+
+### The teardown sends NO notification email
+
+`/book-call` emails every allowed lead to `LEAD_TO`. `/api/funnel-teardown`
+**emails nobody at Davnoot** — allowed or held, it is captured and left in
+`/admin` → Leads.
+
+That is an explicit product decision (Prem, 2026-08-24), not an oversight. A
+teardown is a low-friction blog ask, not a booking: at blog volume, one email per
+submission turns the inbox that exists for real enquiries back into a feed — the
+same failure this document was written to fix, just arriving through the front
+door instead of from bots.
+
+**Nothing is lost by it.** The lead is persisted before anything else can fail, it
+carries a status, notes and the spam verdict, it counts toward the sidebar unread
+badge, and it exports to CSV. The notification *channel* was dropped, not the lead.
+
+A teardown is therefore stored with **`emailSent: null`** — "no attempt was made",
+as distinct from `false`, which means "we tried and it failed". The admin renders
+null as a muted **admin only** pill rather than a red failure. If you ever turn
+notifications back on, do not backfill those nulls to `false`: historical rows
+would start looking broken.
+
+The **visitor's** confirmation is a separate question and stays enabled — they
+asked for a teardown and should know it landed. It is gated on Turnstile (so the
+form can never become a spam relay) and is never sent for a held submission.
+
+`scripts/e2e.test.js` asserts the silence by capturing what reached the mail
+transport, because every path here returns 200 and the response cannot tell you.
+
+### A typo is not spam
+
+`api/funnel-teardown.js` returns a real **400 with a field name** for a malformed
+email or website, before the classifier is consulted. The silent-200 treatment is
+for bots; a human who mistyped their address must not be shown a confirmation for
+a teardown that can never arrive.
+
+### Turnstile covers both doors at once
+
+`script.js` has one `mountTurnstile()` helper and one `/api/form-config` fetch,
+used by the booking form and the modal alike. Setting `TURNSTILE_SITE_KEY` /
+`TURNSTILE_SECRET_KEY` protects both — which is also why the modal had to mount
+the widget from day one. If it hadn't, switching Turnstile on later would have
+silently 400'd every teardown submission while the booking form kept working.
+
 
 ## Turning Turnstile on
 
@@ -108,6 +213,11 @@ and `connect-src`. Without those the widget is silently blocked and every
 submission fails verification. `frame-src` already permits `https:`.
 
 ## Operating it
+
+**Which door a lead came through** — `/admin` → Leads shows a source pill on every
+row, plus filter chips (All sources / Booking form / Blog teardown) once both have
+traffic. The CSV export ignores those filters on purpose and always contains
+everything, with `source`, `website` and `sourceUrl` columns.
 
 **The Spam tab** — `/admin` → Leads. Each row shows its category and the exact
 reasons that produced the verdict, so a call is never a black box. "Not spam"

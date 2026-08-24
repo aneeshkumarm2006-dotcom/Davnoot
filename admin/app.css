@@ -163,6 +163,59 @@
   color: var(--text-dim);
 }
 
+
+/* --- Leads: which intake a submission came through ---------------------- */
+/* Two doors write to the leads collection now (the /book-call form and the blog
+   funnel-teardown modal), so every row says which one. Muted on purpose: it is
+   context, not a status — the loud pills in this table mean "held" and "failed",
+   and a source that shouts would compete with them. */
+.pill-src {
+  background: var(--bg-elev-2, #dde5de);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.pill-src-funnel-teardown { background: #e6ecf5; color: #3f5878; }
+
+/* The filter chips above the table. Only rendered once a second intake actually
+   has traffic — see sourceFilter() in src/admin/views/leads.js. */
+.lead-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: -8px 0 16px;
+}
+.lead-src {
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: var(--bg-card);
+  font: inherit;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.lead-src:hover { color: var(--text); border-color: var(--text-dim); }
+.lead-src.is-active { background: var(--text); border-color: var(--text); color: var(--bg, #fff); }
+
+/* The teardown's detail line — the website it asked about, and the article it was
+   asked from. Sits where the booking form's message would be. */
+.lead-detail {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.lead-detail-k {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-right: 4px;
+}
+.lead-detail .url + .lead-detail-k { margin-left: 14px; }
+
 /* --- Custom dropdown (house replacement for <select>) ------------------- */
 .cdrop { position: relative; display: inline-block; min-width: 130px; }
 .cdrop-sm { min-width: 116px; }

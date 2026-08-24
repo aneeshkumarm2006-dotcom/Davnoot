@@ -769,3 +769,262 @@
   .blk-proscons-grid { grid-template-columns: 1fr; }
   .blk-cta { padding: 32px 22px; }
 }
+
+/* ========================================================================
+   LEAD MAGNET MODAL — the funnel-teardown offer
+   Fired by the LEAD MAGNET MODAL section of script.js on /blog/* only, which
+   is why it lives here rather than in styles.css: blog.css is loaded by exactly
+   the pages that can show it.
+   ======================================================================== */
+
+/* The scroll lock. `overflow: hidden` on the root rather than a fixed body, so
+   closing the modal returns the reader to the paragraph they were on instead of
+   the top of the article. */
+html.teardown-open,
+html.teardown-open body { overflow: hidden; }
+
+.teardown-modal {
+  position: fixed;
+  inset: 0;
+  /* Above the nav (100) and every in-page layer, but BELOW the custom cursor
+     (9998/9999) so the site's own pointer still draws over the panel. */
+  z-index: 9500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.teardown-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+.teardown-modal.is-open .teardown-backdrop { opacity: 1; }
+
+/* --- The panel: the site's one inverted surface ------------------------ */
+/* Everything else on davnoot.com is ink-on-sage. The teardown offer is the one
+   place that flips — black card, sage-white type, the same Fraunces italic and
+   mono eyebrow as the marketing pages. Interruption earns its keep by looking
+   like a deliberate object rather than a lightbox over the article.
+
+   The three literal rgba values below are the reason this block breaks blog.css's
+   "tokens only" rule, and they cannot not: there is no token for "muted text ON
+   the accent", because until now nothing sat on the accent. Defined once, as
+   custom properties, so the rest of the block still reads as tokens. */
+.teardown-panel {
+  --td-ink: var(--accent-text);
+  --td-ink-muted: rgba(255, 255, 255, 0.62);
+  --td-line: rgba(255, 255, 255, 0.16);
+  --td-field: rgba(255, 255, 255, 0.06);
+
+  position: relative;
+  width: 100%;
+  max-width: 470px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: var(--accent);
+  color: var(--td-ink);
+  border-radius: 22px;
+  padding: 40px 38px 34px;
+  box-shadow: 0 30px 80px rgba(10, 10, 10, 0.4);
+  opacity: 0;
+  transform: translateY(14px) scale(0.985);
+  transition: opacity 0.24s ease, transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.teardown-modal.is-open .teardown-panel { opacity: 1; transform: none; }
+
+.teardown-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--td-ink-muted);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.teardown-close:hover { color: var(--td-ink); background: var(--td-field); }
+
+.teardown-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--td-ink-muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.teardown-eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--td-line);
+}
+
+.teardown-title {
+  font-family: var(--font-sans);
+  font-size: clamp(28px, 4.4vw, 34px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+.teardown-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.teardown-sub {
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--td-ink-muted);
+}
+
+/* --- Form --------------------------------------------------------------- */
+
+.teardown-form { margin-top: 26px; }
+
+.teardown-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+.teardown-field label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--td-ink-muted);
+}
+.teardown-field input {
+  width: 100%;
+  background: var(--td-field);
+  border: 1px solid var(--td-line);
+  border-radius: 10px;
+  padding: 13px 15px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--td-ink);
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.teardown-field input::placeholder { color: rgba(255, 255, 255, 0.34); }
+.teardown-field input:focus {
+  border-color: var(--td-ink);
+  background: rgba(255, 255, 255, 0.1);
+}
+.teardown-field input.is-invalid { border-color: #e8a08a; }
+
+/* The honeypot. Off-screen rather than display:none — some bots skip hidden
+   fields, and one that fills this in identifies itself for free. aria-hidden and
+   tabindex="-1" in the markup keep it away from real people and screen readers. */
+.teardown-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Hidden until mountTurnstile() confirms a site key is configured and attaches
+   the widget, so an unconfigured deploy shows no empty gap. */
+.teardown-turnstile { display: none; }
+.teardown-turnstile.is-live { display: block; margin-bottom: 14px; }
+
+.teardown-error {
+  display: none;
+  margin-bottom: 12px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #f0b7a2;
+}
+.teardown-form.has-error .teardown-error { display: block; }
+
+.teardown-submit {
+  width: 100%;
+  margin-top: 4px;
+  background: var(--td-ink);
+  color: var(--accent);
+  border: 0;
+  border-radius: 100px;
+  padding: 15px 28px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.teardown-submit:hover:not(:disabled) { transform: translateY(-2px); }
+.teardown-submit:disabled { opacity: 0.6; cursor: default; }
+.teardown-submit .arrow { display: inline-block; transition: transform 0.3s ease; }
+.teardown-submit:hover:not(:disabled) .arrow { transform: translateX(5px); }
+
+/* The promise the whole offer rests on. Deliberately the last thing above the
+   fold of the panel, in mono, so it reads as a term rather than as marketing. */
+.teardown-note {
+  margin-top: 14px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--td-ink-muted);
+}
+
+/* --- Confirmation ------------------------------------------------------- */
+
+.teardown-success { display: none; outline: none; }
+.teardown-success h3 {
+  font-family: var(--font-sans);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.teardown-success p {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--td-ink-muted);
+}
+.teardown-panel.is-done .teardown-eyebrow,
+.teardown-panel.is-done .teardown-title,
+.teardown-panel.is-done .teardown-sub,
+.teardown-panel.is-done .teardown-form { display: none; }
+.teardown-panel.is-done .teardown-success { display: block; }
+
+/* --- Mobile: a bottom sheet, not a floating card ------------------------ */
+/* On a phone the panel is what the thumb reaches for, so it sits on the bottom
+   edge with the close button in the top corner of the sheet. */
+@media (max-width: 560px) {
+  .teardown-modal { padding: 0; align-items: flex-end; }
+  .teardown-panel {
+    max-width: none;
+    max-height: 88vh;
+    border-radius: 22px 22px 0 0;
+    padding: 32px 24px 28px;
+    transform: translateY(28px);
+  }
+  .teardown-title { font-size: 27px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teardown-panel,
+  .teardown-backdrop { transition: none; }
+  .teardown-panel { transform: none; }
+}

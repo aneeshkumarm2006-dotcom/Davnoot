@@ -579,3 +579,218 @@ describe('media', () => {
     assert.ok(res.body.discovered >= 1);
   });
 });
+
+/* ==========================================================================
+ * The funnel-teardown modal, end to end.
+ *
+ * The point of this block is the LAST test in it: a lead captured by the blog
+ * modal has to be readable in /admin. Everything upstream of that — the classifier,
+ * the throttle, the mailer — is only worth having if the lead arrives somewhere a
+ * human looks. The intake and the inbox are tested together, through the real
+ * handlers and a real Mongo, because they are only correct in relation to each
+ * other: `source` written by one and defaulted by the other is exactly the kind of
+ * agreement that unit tests on either side would both pass while the pair drifts.
+ * ========================================================================== */
+describe('the blog funnel-teardown modal', () => {
+  /* Captured outbound mail.
+   *
+   * WHY A CAPTURE AND NOT JUST 'did it 200': every path through this handler
+   * returns 200 — allowed, held and rejected alike, deliberately, so a bot learns
+   * nothing. "Did we get told about this lead?" is therefore invisible from the
+   * response, and it is the single thing most worth asserting: a lead nobody is
+   * notified about is a lead nobody works.
+   *
+   * The transport is patched rather than faked in lib/lead-intake.js, so no
+   * test-only branch has to exist in code that ships. */
+  const SENT = [];
+  let MAIL_TO;
+
+  before(async () => {
+    process.env.GMAIL_USER = 'info@davnoot.com';
+    process.env.GMAIL_APP_PASSWORD = 'abcd efgh ijkl mnop';
+    const { mailer, mailTo } = await import('../lib/lead-intake.js');
+    MAIL_TO = mailTo();
+    // Record and short-circuit — never delegate, or the suite dials smtp.gmail.com.
+    mailer().sendMail = async (msg) => { SENT.push(msg); return { messageId: 'test' }; };
+  });
+
+  const sentMail = () => SENT;
+  /** A request shaped like the one script.js sends: JSON body, real client IP. */
+  const post = (body, ip = '198.51.100.7') =>
+    mockReq({
+      method: 'POST',
+      body,
+      headers: { 'x-vercel-forwarded-for': ip },
+    });
+
+  /** A submission that looks like a browser made it: stamped, unhurried. */
+  const browserBody = (over = {}) => ({
+    email: 'sam@northpeak.io',
+    website: 'northpeak.io',
+    t0: Date.now() - 30000,
+    sourceUrl: '/blog/where-ad-spend-leaks',
+    ...over,
+  });
+
+  /* Returns the response AND exactly the mail that this one submission produced.
+   *
+   * Not doc.emailSent: the handler flags that with a fire-and-forget update issued
+   * AFTER it responds (so an SMTP round-trip never delays the visitor), which means
+   * reading it straight back is a race. What was handed to the transport is not. */
+  async function teardown(body, ip) {
+    const { default: handler } = await import('../api/funnel-teardown.js');
+    const from = SENT.length;
+    const res = await call(handler, post(body, ip));
+    return { res, mails: SENT.slice(from), statusCode: res.statusCode, body: res.body };
+  }
+
+  /* /api/admin/* is role-gated, and a token with no role claim reads as 'writer'
+   * (auth.js fails closed). The leads inbox is admin/editor, so mint the claim. */
+  async function inbox() {
+    const { createSessionToken, COOKIE_NAME } = await import('../lib/session.js');
+    const token = await createSessionToken(process.env.SESSION_SECRET, 60000, { role: 'admin' });
+    const { default: handler } = await import('../api/admin/leads/index.js');
+    return call(handler, mockReq({ method: 'GET', headers: { cookie: COOKIE_NAME + '=' + token } }));
+  }
+
+  test('GET is not a way in', async () => {
+    const { default: handler } = await import('../api/funnel-teardown.js');
+    const res = await call(handler, mockReq({ method: 'GET' }));
+    assert.equal(res.statusCode, 405);
+  });
+
+  test('a typo in the email is TOLD to the visitor, not silently swallowed', async () => {
+    // The classifier's silent-200 treatment is for bots. A human who mistyped
+    // their address must not be shown a confirmation for a teardown that can
+    // never arrive.
+    const res = await teardown(browserBody({ email: 'sam@northpeak' }));
+    assert.equal(res.statusCode, 400);
+    assert.equal(res.body.field, 'email');
+  });
+
+  test('a website that is not a website is TOLD too', async () => {
+    const res = await teardown(browserBody({ website: 'my company' }));
+    assert.equal(res.statusCode, 400);
+    assert.equal(res.body.field, 'website');
+  });
+
+  test('the honeypot is accepted and stored nowhere', async () => {
+    const { leads } = await import('../lib/db.js');
+    const before = await (await leads()).countDocuments({});
+    const res = await teardown(browserBody({ 'bot-field': 'http://spam.example' }));
+    assert.equal(res.statusCode, 200);
+    assert.equal(await (await leads()).countDocuments({}), before, 'a honeypot hit must not reach the collection');
+  });
+
+  test('a real submission is persisted with its source, website and article', async () => {
+    const { leads } = await import('../lib/db.js');
+    const res = await teardown(browserBody({ website: 'https://WWW.Northpeak.io/pricing/' }));
+    assert.equal(res.statusCode, 200);
+    assert.equal(res.body.ok, true);
+
+    const doc = await (await leads()).findOne({ email: 'sam@northpeak.io' });
+    assert.ok(doc, 'the lead must be stored even though no SMTP credentials exist here');
+    assert.equal(doc.source, 'funnel-teardown');
+    assert.equal(doc.status, 'new');
+    assert.equal(doc.spam, false);
+    // Normalised: scheme forced, www dropped, trailing slash trimmed, host kept
+    // separately so the duplicate check has something stable to fingerprint.
+    assert.equal(doc.website, 'https://northpeak.io/pricing');
+    assert.equal(doc.websiteHost, 'northpeak.io');
+    assert.equal(doc.sourceUrl, '/blog/where-ad-spend-leaks');
+  });
+
+  test('a second person at the same company gets through', async () => {
+    const { leads } = await import('../lib/db.js');
+    // Same site, different address, same day. On the booking form a repeat payload
+    // is the flood signature; here it is just a colleague asking too.
+    const { res } = await teardown(browserBody({ email: 'cfo@northpeak.io' }), '198.51.100.9');
+    assert.equal(res.statusCode, 200);
+    const doc = await (await leads()).findOne({ email: 'cfo@northpeak.io' });
+    assert.equal(doc.spam, false, 'one repeat must not hold a lead');
+  });
+
+  test('a third repeat is held, stored, and still recoverable', async () => {
+    const { leads } = await import('../lib/db.js');
+    const { res } = await teardown(browserBody({ email: 'third@northpeak.io' }), '198.51.100.11');
+    assert.equal(res.statusCode, 200, 'the sender must never learn which rule they tripped');
+    const doc = await (await leads()).findOne({ email: 'third@northpeak.io' });
+    assert.ok(doc, 'quarantine still STORES — the Spam tab is a tab, not a bin');
+    assert.equal(doc.spam, true);
+    assert.ok(doc.spamReasons.length, 'a verdict with no reasons cannot be corrected by a human');
+  });
+
+  /* ── The notification policy ────────────────────────────────────────────
+   * A teardown must NOT email anyone at Davnoot. It is worked in /admin, and at
+   * blog volume one mail per submission would turn the enquiry inbox back into a
+   * feed — the failure ANTISPAM.md exists to prevent, arriving through the front
+   * door instead of from bots.
+   *
+   * Asserted on what reached the mail transport, because every path through this
+   * handler returns 200 and the response cannot tell you. */
+  test('NO notification email is sent — not for a clean lead, not for a held one', async () => {
+    const clean = await teardown(browserBody({ email: 'quiet@othersite.io', website: 'othersite.io' }), '198.51.100.21');
+    assert.equal(clean.res.statusCode, 200);
+    assert.deepEqual(clean.mails, [], 'a clean teardown must not email us');
+
+    // Two more of the same site to force a hold, then check that stays quiet too.
+    await teardown(browserBody({ email: 'b@othersite.io', website: 'othersite.io' }), '198.51.100.22');
+    const held = await teardown(browserBody({ email: 'c@othersite.io', website: 'othersite.io' }), '198.51.100.23');
+    const { leads } = await import('../lib/db.js');
+    const doc = await (await leads()).findOne({ email: 'c@othersite.io' });
+    assert.equal(doc.spam, true, 'this one should have been held');
+    assert.deepEqual(held.mails, [], 'and a held teardown must not email us either');
+  });
+
+  test('the lead is flagged emailSent:null — no attempt, which is not a failure', async () => {
+    const { leads } = await import('../lib/db.js');
+    const doc = await (await leads()).findOne({ email: 'quiet@othersite.io' });
+    assert.equal(doc.emailSent, null, 'false would mean we tried and it failed');
+  });
+  test('a bot POSTing straight at the endpoint is rejected into the 30-day bin', async () => {
+    const { leads, blockedSubmissions } = await import('../lib/db.js');
+    // No form stamp, filled instantly, placeholder everything.
+    const res = await teardown({ email: 'test@test.com', website: 'test.com' }, '203.0.113.44');
+    assert.equal(res.statusCode, 200);
+
+    assert.equal(await (await leads()).countDocuments({ email: 'test@test.com' }), 0, 'a hard reject never enters the inbox');
+    const blocked = await (await blockedSubmissions()).findOne({ email: 'test@test.com' });
+    assert.ok(blocked, 'and is recoverable — a filter with no bin destroys prospects');
+    assert.equal(blocked.source, 'funnel-teardown');
+  });
+
+  test('THE POINT: the modal lead is readable in the /admin inbox, labelled by source', async () => {
+    const res = await inbox();
+    assert.equal(res.statusCode, 200);
+
+    const lead = res.body.leads.find((l) => l.email === 'sam@northpeak.io');
+    assert.ok(lead, 'a captured lead that the admin cannot see has not been captured');
+    assert.equal(lead.source, 'funnel-teardown');
+    assert.equal(lead.website, 'https://northpeak.io/pricing');
+
+    // The labels ship with the payload; the client must never restate them.
+    assert.ok(res.body.sources.some((s) => s.key === 'funnel-teardown'));
+    assert.ok(res.body.bySource['funnel-teardown'] >= 1);
+
+    // The blocked bin is normalised the same way, or the Blocked tab renders a
+    // teardown with no source pill and no website.
+    const bin = res.body.blocked.find((b) => b.email === 'test@test.com');
+    assert.equal(bin.source, 'funnel-teardown');
+  });
+
+  test('a booking-form lead written before `source` existed still reads as one', async () => {
+    // No backfill was run; the inbox infers it. If that inference ever breaks,
+    // every historical lead loses its label at once.
+    const { leads } = await import('../lib/db.js');
+    await (await leads()).insertOne({
+      name: 'Ria Johnston',
+      email: 'ria@studio-kind.com',
+      status: 'new',
+      createdAt: new Date(),
+    });
+
+    const res = await inbox();
+    const legacy = res.body.leads.find((l) => l.email === 'ria@studio-kind.com');
+    assert.equal(legacy.source, 'book-call');
+  });
+});

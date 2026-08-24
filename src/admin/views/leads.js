@@ -22,6 +22,8 @@ const SERVICE_LABELS = {
 // rows in the Spam tab labelled "undefined". Importing lib/spam.js directly would
 // also silently defeat the bundle-freshness hash (scripts/imports.test.js).
 let CATEGORY_LABELS = {};
+// Same deal for the intake labels — the leads endpoint owns LEAD_SOURCES.
+let SOURCE_LABELS = {};
 
 /* Three tabs, three very different things:
  *
@@ -40,7 +42,7 @@ const TABS = [
 ];
 
 export class Leads {
-  constructor(root) { this.root = root; this.tab = 'inbox'; }
+  constructor(root) { this.root = root; this.tab = 'inbox'; this.source = 'all'; }
 
   async mount() {
     this.root.innerHTML = '<div class="loading">Loading…</div>';
@@ -49,7 +51,9 @@ export class Leads {
     catch (err) { this.root.innerHTML = `<div class="empty"><h2>Couldn't load leads</h2><p class="muted">${esc(err.message)}</p></div>`; return; }
     this._all = data.leads || [];
     this._blocked = data.blocked || [];
+    this._sources = data.sources || [];
     CATEGORY_LABELS = Object.fromEntries((data.categories || []).map((c) => [c.key, c.label]));
+    SOURCE_LABELS = Object.fromEntries(this._sources.map((s) => [s.key, s.label]));
     this.render();
     this.wire();
   }
@@ -64,10 +68,18 @@ export class Leads {
     };
   }
 
-  render() {
-    const n = this.counts();
+  /* The visible rows for the current tab AND the current intake filter. Two
+   * independent axes: the tab says how much we trust it, the filter says which
+   * door it came through. */
+  visible() {
     const rows = this.tab === 'blocked' ? this._blocked
       : this._all.filter((l) => (this.tab === 'spam' ? l.spam : !l.spam));
+    return this.source === 'all' ? rows : rows.filter((l) => l.source === this.source);
+  }
+
+  render() {
+    const n = this.counts();
+    const rows = this.visible();
 
     const subtitle = {
       inbox: `${n.newReal} new · ${n.inbox} real ${n.inbox === 1 ? 'lead' : 'leads'}. Captured even when the email fails.`,
@@ -87,13 +99,30 @@ export class Leads {
       <nav class="lead-tabs">
         ${TABS.map((t) => `<button type="button" class="lead-tab${this.tab === t.key ? ' is-active' : ''}" data-tab="${t.key}">${t.label}<span class="lead-tab-n">${n[t.key]}</span></button>`).join('')}
       </nav>
+      ${this.sourceFilter()}
       ${rows.length ? (this.tab === 'blocked' ? this.blockedTable(rows) : this.table(rows)) : this.emptyState()}
     `;
   }
 
+  /* Shown only once a second intake actually has traffic. A filter offering a
+   * choice between "everything" and "everything" is noise on the one screen that
+   * has to stay scannable. */
+  sourceFilter() {
+    const pool = this.tab === 'blocked' ? this._blocked : this._all;
+    const present = this._sources.filter((s) => pool.some((l) => l.source === s.key));
+    if (present.length < 2) return '';
+    const chip = (key, label) =>
+      `<button type="button" class="lead-src${this.source === key ? ' is-active' : ''}" data-src="${esc(key)}">${esc(label)}</button>`;
+    return `<div class="lead-sources">${chip('all', 'All sources')}${present.map((s) => chip(s.key, s.label)).join('')}</div>`;
+  }
+
   emptyState() {
+    if (this.source !== 'all') {
+      const label = SOURCE_LABELS[this.source] || this.source;
+      return `<div class="empty"><h2>Nothing from ${esc(label)}</h2><p class="muted">Other sources may still have submissions — switch back to All sources.</p></div>`;
+    }
     const copy = {
-      inbox: ['No leads yet', 'Booking form submissions will appear here.'],
+      inbox: ['No leads yet', 'Booking form and blog teardown submissions will appear here.'],
       spam: ['Nothing in spam', 'Submissions the filter catches will collect here instead of your inbox.'],
       blocked: ['Nothing blocked', 'Rejected submissions appear here for 30 days.'],
     }[this.tab];
@@ -111,28 +140,92 @@ export class Leads {
     return `<span class="pill pill-spam">${esc(CATEGORY_LABELS[l.spamCategory] || l.spamCategory)}</span>`;
   }
 
+  /* Which door it came through. Rendered on every row rather than only on
+   * teardowns: a pill that appears on some rows and not others reads as a warning
+   * badge, and "Booking form" is not a warning. */
+  static sourcePill(l) {
+    const label = SOURCE_LABELS[l.source];
+    if (!label) return '';
+    return `<span class="pill pill-src pill-src-${esc(l.source)}">${esc(label)}</span>`;
+  }
+
+  /* Did a notification go out? This column answers exactly that and nothing else.
+   *
+   * THREE states, not two, because the two intakes have different policies:
+   *   sent/failed  a notification was attempted (the booking form always does)
+   *   held         quarantined by the filter and deliberately not emailed
+   *   admin only   `emailSent: null` — no notification was ever attempted, by
+   *                design. Teardowns are worked here rather than in an inbox
+   *                (see api/funnel-teardown.js).
+   *
+   * The null case must NOT fall through to "failed". Painting a red failure pill on
+   * every teardown would have the operator chasing an outage that does not exist,
+   * and would eventually get the real red pill ignored. */
+  static emailPill(l) {
+    if (l.emailSent === true) return '<span class="pill pill-ok">sent</span>';
+    if (l.emailSent === null || l.emailSent === undefined) {
+      return '<span class="pill pill-mute" title="Worked in the admin inbox — no notification email is sent for this source">admin only</span>';
+    }
+    if (l.spam) return '<span class="pill pill-mute">held</span>';
+    return '<span class="pill pill-warn">failed</span>';
+  }
+
+  /* A teardown has no name — the modal asks for two fields and inventing a third
+   * would put a string in the CRM that the person never typed. The website IS the
+   * identity of that lead, so it takes the name column. */
+  static who(l) {
+    if (l.name) {
+      return `<strong>${esc(l.name)}</strong>${l.company ? `<div class="muted small">${esc(l.company)}</div>` : ''}`;
+    }
+    if (l.website) {
+      const host = l.website.replace(/^https?:\/\//i, '').replace(/^www\./i, '');
+      return `<strong>${esc(host.split('/')[0])}</strong>`;
+    }
+    return '<span class="muted">—</span>';
+  }
+
+  /* The detail row: the booking form's brief, or the teardown's website and the
+   * article it was requested from. Whatever the filter thought, always shown. */
+  static detail(l) {
+    const bits = [];
+    if (l.brief) bits.push(`<p class="lead-msg" title="${esc(l.brief)}">${esc(l.brief)}</p>`);
+    if (l.website) {
+      bits.push(`<p class="lead-detail"><span class="lead-detail-k">Site</span> <a class="url" href="${esc(l.website)}" target="_blank" rel="noopener noreferrer">${esc(l.website)}</a>${
+        l.sourceUrl ? ` <span class="lead-detail-k">Read on</span> <a class="url" href="${esc(l.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(l.sourceUrl)}</a>` : ''
+      }</p>`);
+    }
+    bits.push(Leads.why(l));
+    const html = bits.join('');
+    return html.trim() ? html : '';
+  }
+
   table(leads) {
     // Each lead is its own <tbody class="lead-group"> so its detail row (the
     // message) stays visually joined to its header row — one lead, one block,
     // one hover highlight, one separator line beneath.
     const spamView = this.tab === 'spam';
+    const COLS = 8;
     return `<div class="table-scroll"><table class="grid-table leads-table">
-      <thead><tr><th>When (ET)</th><th>Name</th><th>Email</th><th>Service</th><th>Slot</th><th>Email</th><th>${spamView ? 'Actions' : 'Status'}</th></tr></thead>
-      ${leads.map((l) => `<tbody class="lead-group${l.spam ? ' is-promo' : ''}">
+      <thead><tr><th>When (ET)</th><th>Name</th><th>Email</th><th>Source</th><th>Service</th><th>Slot</th><th>Email</th><th>${spamView ? 'Actions' : 'Status'}</th></tr></thead>
+      ${leads.map((l) => {
+        const detail = Leads.detail(l);
+        return `<tbody class="lead-group${l.spam ? ' is-promo' : ''}">
         <tr>
           <td class="muted small nowrap">${esc(estDate(l.createdAt))}<div class="lead-time">${esc(estClock(l.createdAt))}</div></td>
-          <td><strong>${esc(l.name)}</strong>${l.company ? `<div class="muted small">${esc(l.company)}</div>` : ''}${Leads.categoryPill(l)}</td>
+          <td>${Leads.who(l)}${Leads.categoryPill(l)}</td>
           <td><a class="url" href="mailto:${esc(l.email)}">${esc(l.email)}</a></td>
+          <td>${Leads.sourcePill(l)}</td>
           <td>${esc(SERVICE_LABELS[l.service] || l.service || '—')}</td>
           <td class="small nowrap">${esc(l.timeSlot || '—')}</td>
-          <td>${l.spam ? '<span class="pill pill-mute">held</span>' : l.emailSent ? '<span class="pill pill-ok">sent</span>' : '<span class="pill pill-warn">failed</span>'}</td>
+          <td>${Leads.emailPill(l)}</td>
           <td>
             ${spamView ? '' : dropdownHtml({ id: l._id, value: l.status || 'new', cls: 'cdrop-sm', ariaLabel: 'Lead status', options: STATUSES.map((s) => ({ value: s, label: cap(s) })) })}
             <button type="button" class="lead-promo-btn" data-spam="${esc(l._id)}" data-to="${l.spam ? 'false' : 'true'}">${l.spam ? 'Not spam' : 'Mark as spam'}</button>
             ${spamView ? `<button type="button" class="lead-promo-btn is-danger" data-del="${esc(l._id)}">Delete</button>` : ''}
           </td>
-        </tr>${l.brief || l.spamReasons?.length ? `<tr class="lead-msg-row"><td colspan="7">${l.brief ? `<p class="lead-msg" title="${esc(l.brief)}">${esc(l.brief)}</p>` : ''}${Leads.why(l)}</td></tr>` : ''}
-      </tbody>`).join('')}
+        </tr>${detail ? `<tr class="lead-msg-row"><td colspan="${COLS}">${detail}</td></tr>` : ''}
+      </tbody>`;
+      }).join('')}
       </table></div>`;
   }
 
@@ -142,15 +235,21 @@ export class Leads {
    * filter was wrong, a human should be writing to that person anyway. */
   blockedTable(rows) {
     return `<div class="table-scroll"><table class="grid-table leads-table">
-      <thead><tr><th>When (ET)</th><th>Name</th><th>Email</th><th>Why it was blocked</th></tr></thead>
-      ${rows.map((b) => `<tbody class="lead-group is-promo">
+      <thead><tr><th>When (ET)</th><th>Name</th><th>Email</th><th>Source</th><th>Why it was blocked</th></tr></thead>
+      ${rows.map((b) => {
+        const detail = b.brief
+          ? `<p class="lead-msg" title="${esc(b.brief)}">${esc(b.brief)}</p>`
+          : b.website ? `<p class="lead-detail"><span class="lead-detail-k">Site</span> ${esc(b.website)}</p>` : '';
+        return `<tbody class="lead-group is-promo">
         <tr>
           <td class="muted small nowrap">${esc(estDate(b.createdAt))}<div class="lead-time">${esc(estClock(b.createdAt))}</div></td>
-          <td><strong>${esc(b.name)}</strong>${b.company ? `<div class="muted small">${esc(b.company)}</div>` : ''}${Leads.categoryPill(b)}</td>
+          <td>${Leads.who(b)}${Leads.categoryPill(b)}</td>
           <td class="small">${esc(b.email)}</td>
+          <td>${Leads.sourcePill(b)}</td>
           <td class="small">${esc((b.spamReasons || []).join(' · '))} <span class="muted">(${esc(String(b.spamScore ?? '—'))})</span></td>
-        </tr>${b.brief ? `<tr class="lead-msg-row"><td colspan="4"><p class="lead-msg" title="${esc(b.brief)}">${esc(b.brief)}</p></td></tr>` : ''}
-      </tbody>`).join('')}
+        </tr>${detail ? `<tr class="lead-msg-row"><td colspan="5">${detail}</td></tr>` : ''}
+      </tbody>`;
+      }).join('')}
       </table></div>`;
   }
 
@@ -158,7 +257,14 @@ export class Leads {
 
   wire() {
     this.root.querySelectorAll('[data-tab]').forEach((btn) => {
-      btn.addEventListener('click', () => { this.tab = btn.dataset.tab; this.redraw(); });
+      // The intake filter resets with the tab. Carrying "Blog teardown" into a tab
+      // that has none would show an empty screen with no visibly active chip —
+      // which reads as "there are no leads", not as "your filter excluded them".
+      btn.addEventListener('click', () => { this.tab = btn.dataset.tab; this.source = 'all'; this.redraw(); });
+    });
+
+    this.root.querySelectorAll('[data-src]').forEach((btn) => {
+      btn.addEventListener('click', () => { this.source = btn.dataset.src; this.redraw(); });
     });
 
     // Custom status dropdowns (Davnoot house control, not a native <select>).
@@ -214,11 +320,12 @@ export class Leads {
   }
 
   // CSV always exports EVERY lead (real + spam) so nothing is hidden from an
-  // export, with the category and score so the noise can be filtered — or the
-  // filter itself audited — in a spreadsheet.
+  // export — the on-screen tab and source filters deliberately do NOT narrow it.
+  // The category and score ride along so the noise can be filtered, or the filter
+  // itself audited, in a spreadsheet.
   exportCsv() {
     const rows = this._all || [];
-    const head = ['createdAt', 'name', 'email', 'company', 'role', 'service', 'timeSlot', 'status', 'emailSent', 'spam', 'spamCategory', 'spamScore', 'brief'];
+    const head = ['createdAt', 'source', 'name', 'email', 'website', 'sourceUrl', 'company', 'role', 'service', 'timeSlot', 'status', 'emailSent', 'spam', 'spamCategory', 'spamScore', 'brief'];
     const csv = [head.join(',')].concat(
       rows.map((l) => head.map((k) => {
         const v = k === 'spam' ? (l.spam ? 'yes' : 'no') : l[k];

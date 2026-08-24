@@ -87,6 +87,36 @@ lib/session.js       Edge-safe (Web Crypto ONLY — no node:crypto, ever)
 lib/uploader.js      uploadImage() — the ONE place Cloudinary is named
 ```
 
+## The teardown modal (blog-only lead capture)
+
+Blog pages carry a lead-capture modal that no other page does: a free 15-minute
+funnel teardown, offered once per visitor per 14 days.
+
+| Piece | Where |
+|-------|-------|
+| Trigger + markup + form | the LEAD MAGNET MODAL section of `script.js` |
+| Styling | the end of `blog.css` |
+| Intake | `api/funnel-teardown.js` |
+| Where the lead lands | the same `leads` collection and `/admin` inbox as `/book-call`, tagged `source: "funnel-teardown"` |
+| Notification | **none** — no email is sent; these are worked in `/admin`, not in your inbox |
+
+**It is scoped by PATH, in JavaScript** — `/^\/blog(\/|$)/`, with `/book-call`
+excluded explicitly. Nothing about it is rendered by `lib/blog-render.js`, so a
+copy change is one file and never a re-render of every post, and the visits that
+never see it pay nothing for it.
+
+Fires on whichever comes first: **exit intent** (desktop) or **60% scroll**. On a
+touch device there is no exit intent to detect, so a **25-second dwell** takes its
+place — the usual substitute, "watch for a fast upward scroll", fires on people who
+are simply re-reading a paragraph.
+
+Frequency capping is `localStorage` under `davnoot:teardown`: `shownAt` is stamped
+*before* the panel appears (so dismissing it does not earn a second showing
+tomorrow), and converting sets `convertedAt`, which suppresses it for a year.
+
+See ANTISPAM.md for why the two-field form needs its own classifier — running it
+through the booking form's would reject every single submission.
+
 ## Caching / "when does a publish go live?"
 
 This is not Next.js, so there is no `revalidatePath()` and no on-demand purge.
