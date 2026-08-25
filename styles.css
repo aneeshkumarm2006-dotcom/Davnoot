@@ -1671,46 +1671,68 @@ section {
 
 /* === FOOTER === */
 footer {
-  padding: 80px 40px 40px;
+  padding: 72px 40px 40px;
   border-top: 1px solid var(--border);
   max-width: 1600px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
 }
-.footer-top {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 96px;
+
+/* Brand band — logo + tagline on the left, the CTA hard right. Its own row, so
+   the link grid below gets the full width instead of losing a 1.4fr column to a
+   logo and one sentence. `align-items: end` sits the pill on the tagline's
+   baseline block rather than floating it against the logo. */
+.footer-brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px 40px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
 }
 .footer-tagline {
   font-family: var(--font-sans);
   font-size: 22px;
   letter-spacing: -0.02em;
   line-height: 1.25;
-  margin-top: 20px;
+  margin-top: 18px;
   color: var(--text-muted);
-  max-width: 280px;
+  max-width: 420px;
 }
 .footer-tagline em { font-family: var(--font-serif); font-style: italic; color: var(--accent); }
+.footer-cta { padding: 15px 26px; font-size: 14px; flex: none; }
+
+/* Five equal columns. minmax(0, 1fr) rather than 1fr: a long unbroken label
+   ("performance-marketing-agency-montreal" style copy, or its ~20% longer French
+   twin) otherwise sets the column's min-content width and blows the grid out of
+   its track sizes. */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 40px 28px;
+  margin-bottom: 72px;
+}
 .footer-col h4 {
   font-family: var(--font-mono);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: var(--text-muted);
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   font-weight: 500;
 }
-.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-/* A second heading inside one column (Company + Specialties). h4 only carries a
-   bottom margin, so without this the two groups collide. */
-.footer-col ul + h4 { margin-top: 36px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+/* A second heading inside one column (Ecommerce + Company, Specialties + Contact).
+   h4 only carries a bottom margin, so without this the two groups collide. */
+.footer-col ul + h4 { margin-top: 34px; }
 .footer-col a {
   color: var(--text);
   text-decoration: none;
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 1.35;
   transition: color 0.2s;
   display: inline-flex;
   align-items: center;
@@ -1737,7 +1759,7 @@ footer {
   font-weight: 500;
   letter-spacing: -0.05em;
   line-height: 0.85;
-  margin: 60px 0 40px;
+  margin: 0 0 36px;
   color: var(--text);
   overflow: hidden;
 }
@@ -1746,6 +1768,13 @@ footer {
   font-style: italic;
   color: var(--accent);
   font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+/* Five columns need ~230px each to hold "Healthcare Google Ads Agency" on two
+   lines or fewer; below ~1240px they stop earning their keep, so step down
+   rather than letting every label wrap to three lines. */
+@media (max-width: 1240px) {
+  .footer-links { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px 28px; }
 }
 
 /* Reveal */
@@ -2165,7 +2194,10 @@ footer {
   .services-grid { grid-template-columns: 1fr; border-radius: 12px; }
   .service-card { padding: 28px; min-height: auto; }
   .results-grid { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; margin-bottom: 56px; }
+  .footer-brand { align-items: flex-start; }
+  .footer-tagline { font-size: 19px; }
+  footer { padding: 56px 20px 32px; }
   .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
   .scroll-hint { left: 20px; bottom: 24px; }
   .ticker-item { font-size: 16px; }
