@@ -83,6 +83,41 @@ export const PAGE_FILES = [
   // Montreal spoke. The spoke's breadcrumb links up to the hub.
   'online-reputation-management-canada.html',
   'online-reputation-management-montreal.html',
+  // The Quebec city cluster added 2026-08-27: a /locations hub and one page per
+  // market. The hub is what keeps all fourteen out of the footer — see footerHtml.
+  'locations.html',
+  'digital-marketing-agency-laval.html',
+  'digital-marketing-agency-longueuil.html',
+  'digital-marketing-agency-sherbrooke.html',
+  'digital-marketing-agency-gatineau.html',
+  'digital-marketing-agency-quebec-city.html',
+  'digital-marketing-agency-trois-rivieres.html',
+  'digital-marketing-agency-saguenay.html',
+  'digital-marketing-agency-levis.html',
+  'digital-marketing-agency-granby.html',
+  'digital-marketing-agency-blainville.html',
+  'digital-marketing-agency-rimouski.html',
+  'digital-marketing-agency-boisbriand.html',
+  'digital-marketing-agency-vaudreuil.html',
+  'digital-marketing-agency-brossard.html',
+  // The pricing cluster added 2026-08-27: a /pricing hub and one page per discipline.
+  // The hub is the only one in the footer; it carries the other four.
+  'pricing.html',
+  'seo-pricing.html',
+  'google-ads-pricing.html',
+  'social-media-advertising-pricing.html',
+  'website-design-pricing.html',
+  // The training + supporting cluster added 2026-08-27. The four training tracks are
+  // TRAINING_PAGES in lib/templates.js and are served under /free-training/<slug>,
+  // so their FILE names carry a training- prefix their URLs do not — see the note there.
+  'free-training.html',
+  'training-seo.html',
+  'training-google-ads.html',
+  'training-wordpress.html',
+  'training-analytics.html',
+  'website-maintenance-plans.html',
+  'marketing-automation-cro.html',
+  'quebec-law-25-compliance-guide.html',
 ];
 
 /* Inline elements may appear INSIDE a translation unit; the French keeps them.

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nos régions desservies au Québec | Davnoot</title>
+  <meta name="description"
+    content="Davnoot fait du référencement, du Google Ads, du Meta Ads et de l’optimisation pour la recherche IA pour des entreprises partout au Québec — Montréal, la Rive-Sud, la Rive-Nord, Québec, l’Estrie et les régions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.min.css" />
+  <style>
+    .loc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 40px; }
+    .loc-card {
+      display: flex; align-items: center; gap: 12px; text-decoration: none;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 20px 22px; transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .loc-card:hover { background: var(--bg-elev); border-color: var(--accent); transform: translateY(-2px); }
+    .loc-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .loc-city { font-size: 17px; font-weight: 600; color: var(--text); }
+    .loc-region {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text-dim);
+    }
+    .loc-go { margin-left: auto; color: var(--text-dim); font-size: 15px; }
+    .loc-card:hover .loc-go { color: var(--accent); }
+    @media (max-width: 1100px) { .loc-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 620px) { .loc-grid { grid-template-columns: 1fr; } }
+  </style>
+  <!-- BUILD:SEO -->
+<link rel="canonical" href="https://www.davnoot.com/fr/locations" />
+<meta name="robots" content="index, follow" />
+<meta name="keywords" content="agence de marketing numérique Québec, agence de référencement Québec, marketing numérique au Québec, agence web Québec, référencement local Québec, agence de publicité Québec" />
+<link rel="alternate" hreflang="en" href="https://www.davnoot.com/locations" />
+<link rel="alternate" hreflang="fr-CA" href="https://www.davnoot.com/fr/locations" />
+<link rel="alternate" hreflang="x-default" href="https://www.davnoot.com/locations" />
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+<link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192x192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Davnoot" />
+<meta property="og:title" content="Nos régions desservies au Québec | Davnoot" />
+<meta property="og:description" content="Davnoot fait du référencement, du Google Ads, du Meta Ads et de l’optimisation pour la recherche IA pour des entreprises partout au Québec — Montréal, la Rive-Sud, la Rive-Nord, Québec, l’Estrie et les régions." />
+<meta property="og:url" content="https://www.davnoot.com/fr/locations" />
+<meta property="og:image" content="https://www.davnoot.com/images/davnoot-logo.png" />
+<meta property="og:locale" content="fr_CA" />
+<meta property="og:locale:alternate" content="en_CA" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Nos régions desservies au Québec | Davnoot" />
+<meta name="twitter:description" content="Davnoot fait du référencement, du Google Ads, du Meta Ads et de l’optimisation pour la recherche IA pour des entreprises partout au Québec — Montréal, la Rive-Sud, la Rive-Nord, Québec, l’Estrie et les régions." />
+<meta name="twitter:image" content="https://www.davnoot.com/images/davnoot-logo.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.davnoot.com/#organization",
+      "name": "Davnoot",
+      "alternateName": "Davnoot Digital",
+      "url": "https://www.davnoot.com/",
+      "logo": "https://www.davnoot.com/images/davnoot-logo.png",
+      "image": "https://www.davnoot.com/images/davnoot-logo.png",
+      "description": "Davnoot is an independent growth agency. Six disciplines: SEO, paid social, email, AI search, ChatGPT ads, and custom software. Engineered into one revenue engine.",
+      "email": "info@davnoot.com",
+      "telephone": "+1-438-223-7131",
+      "foundingDate": "2025",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "4115 Sherbrooke St W",
+        "addressLocality": "Westmount",
+        "addressRegion": "QC",
+        "postalCode": "H3Z 1B1",
+        "addressCountry": "CA"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "telephone": "+1-438-223-7131",
+        "email": "info@davnoot.com",
+        "areaServed": [
+          "CA",
+          "US"
+        ],
+        "availableLanguage": [
+          "English",
+          "French"
+        ]
+      },
+      "knowsLanguage": [
+        "en",
+        "fr-CA"
+      ],
+      "areaServed": "Worldwide",
+      "sameAs": [
+        "https://www.instagram.com/davnootdigital/",
+        "https://www.linkedin.com/company/davnoot/"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.davnoot.com/fr/locations#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Davnoot",
+          "item": "https://www.davnoot.com/fr"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Régions desservies",
+          "item": "https://www.davnoot.com/fr/locations"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- /BUILD:SEO -->
+</head>
+
+<body>
+
+  <canvas id="ambient"></canvas>
+  <div class="cursor"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- BUILD:NAV -->
+<nav>
+  <a href="/fr" class="logo" data-cursor>
+    <img src="/images/davnoot-logo.png" alt="Davnoot" class="logo-mark" />
+    <span class="wordmark">Davnoot Digital</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/services" data-cursor>Services</a></li>
+    <li><a href="/ads" data-cursor>Publicités</a></li>
+    <li><a href="/fr#process" data-cursor>Processus</a></li>
+    <li><a href="/fr#results" data-cursor>Réalisations</a></li>
+    <li><a href="/blog" data-cursor>Blogue</a></li>
+    <li><a href="/fr/book-call" data-cursor>Contact</a></li>
+    <li class="nav-lang"><a href="/locations" hreflang="en" lang="en" title="View this page in English" aria-label="View this page in English" data-cursor>EN</a></li>
+  </ul>
+  <a href="/fr/book-call" class="nav-cta" data-cursor>Réserver un appel →</a>
+  <button class="nav-toggle" type="button" aria-label="Afficher le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<!-- /BUILD:NAV -->
+
+  <main id="main">
+  <!-- HERO -->
+  <header class="service-hero" data-cms-section="hero" data-cms-label="Hero">
+    <div class="breadcrumb">
+      <a href="/fr" data-cursor>Davnoot</a>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-current">Régions desservies</span>
+    </div>
+
+    <div class="reveal">
+      <div class="service-num-badge" data-cms="hero.badge">Régions desservies · Québec</div>
+      <h1 class="service-hero-title" data-cms="hero.title">Où nous <em>travaillons</em>.</h1>
+      <p class="service-hero-sub" data-cms="hero.sub">Nous sommes basés à Montréal et gérons des comptes partout au Québec. Chaque marché de cette page est couvert par la même équipe chevronnée, avec les mêmes rapports hebdomadaires et les mêmes revues stratégiques mensuelles — et non confié à un junior parce qu’il est hors de l’île.</p>
+      <a href="/fr/book-call" class="btn-primary" data-cursor>
+        Réservez un appel stratégique gratuit
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- CITIES -->
+  <section data-cms-section="section1" data-cms-label="Cities">
+    <div class="reveal">
+      <div class="section-eyebrow" data-cms="section1.eyebrow">Villes</div>
+      <h2 class="section-title" data-cms="section1.title">Quatorze marchés,<br />une <em>équipe chevronnée</em>.</h2>
+      <p class="section-sub" data-cms="section1.sub">Chaque page explique ce que ce marché récompense, pour qui nous y avons mené des campagnes et comment un mandat commence.</p>
+    </div>
+
+    <div class="loc-grid reveal">
+      <a href="/fr/digital-marketing-agency-laval" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.0.name">Laval</span>
+          <span class="loc-region" data-cms="cities.0.region">Grand Montréal</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-longueuil" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.1.name">Longueuil</span>
+          <span class="loc-region" data-cms="cities.1.region">Rive-Sud</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-sherbrooke" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.2.name">Sherbrooke</span>
+          <span class="loc-region" data-cms="cities.2.region">Estrie</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-gatineau" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.3.name">Gatineau</span>
+          <span class="loc-region" data-cms="cities.3.region">Outaouais</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-quebec-city" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.4.name">Québec</span>
+          <span class="loc-region" data-cms="cities.4.region">Capitale-Nationale</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-trois-rivieres" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.5.name">Trois-Rivières</span>
+          <span class="loc-region" data-cms="cities.5.region">Mauricie</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-saguenay" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.6.name">Saguenay</span>
+          <span class="loc-region" data-cms="cities.6.region">Saguenay–Lac-Saint-Jean</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-levis" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.7.name">Lévis</span>
+          <span class="loc-region" data-cms="cities.7.region">Chaudière-Appalaches</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-granby" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.8.name">Granby</span>
+          <span class="loc-region" data-cms="cities.8.region">Montérégie</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-blainville" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.9.name">Blainville</span>
+          <span class="loc-region" data-cms="cities.9.region">Rive-Nord</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-rimouski" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.10.name">Rimouski</span>
+          <span class="loc-region" data-cms="cities.10.region">Bas-Saint-Laurent</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-boisbriand" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.11.name">Boisbriand</span>
+          <span class="loc-region" data-cms="cities.11.region">Rive-Nord</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-vaudreuil" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.12.name">Vaudreuil</span>
+          <span class="loc-region" data-cms="cities.12.region">Vaudreuil-Soulanges</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/digital-marketing-agency-brossard" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="cities.13.name">Brossard</span>
+          <span class="loc-region" data-cms="cities.13.region">Rive-Sud</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- MONTREAL -->
+  <section data-cms-section="section2" data-cms-label="Montreal">
+    <div class="reveal">
+      <div class="section-eyebrow" data-cms="section2.eyebrow">Montréal</div>
+      <h2 class="section-title" data-cms="section2.title">Notre <em>marché d’origine</em>.</h2>
+      <p class="section-sub" data-cms="section2.sub">Montréal est l’endroit où siège l’équipe, alors ce marché est découpé par discipline plutôt que par ville. Chaque page couvre un canal de bout en bout.</p>
+    </div>
+
+    <div class="loc-grid reveal">
+      <a href="/fr/ppc-agency-montreal" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="montreal.0.name">Agence PPC Montréal</span>
+          <span class="loc-region" data-cms="montreal.0.sub">Gestion de campagnes Google Ads</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/sem-agency-montreal" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="montreal.1.name">Agence SEM Montréal</span>
+          <span class="loc-region" data-cms="montreal.1.sub">Marketing sur les moteurs de recherche</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/paid-social-agency-montreal" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="montreal.2.name">Publicité sociale Montréal</span>
+          <span class="loc-region" data-cms="montreal.2.sub">Publicité Meta et sociale</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/performance-marketing-agency-montreal" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="montreal.3.name">Marketing de performance Montréal</span>
+          <span class="loc-region" data-cms="montreal.3.sub">Médias payants multicanaux</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/media-buying-agency-montreal" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="montreal.4.name">Achat média Montréal</span>
+          <span class="loc-region" data-cms="montreal.4.sub">Planification, achat et cadencement</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/ai-seo-montreal" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="montreal.5.name">Référencement IA Montréal</span>
+          <span class="loc-region" data-cms="montreal.5.sub">Visibilité dans les réponses générées par l’IA</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+      <a href="/fr/online-reputation-management-montreal" class="loc-card" data-cursor>
+        <div class="loc-text">
+          <span class="loc-city" data-cms="montreal.6.name">Gestion de réputation Montréal</span>
+          <span class="loc-region" data-cms="montreal.6.sub">Les avis dans les deux langues</span>
+        </div>
+        <span class="loc-go">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="cta" class="final-cta" data-cms-section="cta" data-cms-label="Final CTA">
+    <div class="final-cta-eyebrow reveal" data-cms="cta.eyebrow">Partout au Québec</div>
+    <h2 class="final-cta-title reveal" data-cms="cta.title">Pas dans la liste?<br />Nous la <em>couvrons quand même</em>.</h2>
+    <p class="final-cta-sub reveal" data-cms="cta.sub">Ce sont les marchés dont on nous parle le plus, pas la limite de notre territoire. Réservez un appel stratégique gratuit de 30 minutes et nous examinerons votre site, votre positionnement et vos concurrents, où que vous soyez.</p>
+    <div class="reveal">
+      <a href="/fr/book-call" class="btn-primary" data-cursor>
+        Réservez un appel stratégique gratuit
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+    </main>
+  <!-- BUILD:FOOTER -->
+<footer id="contact">
+  
+  <div class="footer-brand">
+    <div class="footer-brand-id">
+      <a href="/fr" class="logo" data-cursor>
+        <img src="/images/davnoot-logo.png" alt="Davnoot" class="logo-mark footer-logo-mark" />
+        <span class="wordmark">Davnoot Digital</span>
+      </a>
+      <p class="footer-tagline">Agence de croissance indépendante. Conçue pour le <em>revenu</em>.</p>
+    </div>
+    <a href="/fr/book-call" class="btn-primary footer-cta" data-cursor>Réserver un appel →</a>
+  </div>
+
+  
+  <div class="footer-links">
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/fr/services/seo" data-cursor>Référencement (SEO)</a></li>
+        <li><a href="/fr/services/ai-seo" data-cursor>Référencement IA</a></li>
+        <li><a href="/services/google-ads" data-cursor>Google Ads</a></li>
+        <li><a href="/fr/services/meta-ads" data-cursor>Meta Ads</a></li>
+        <li><a href="/fr/services/chatgpt-ads" data-cursor>Publicités ChatGPT</a></li>
+        <li><a href="/ads" data-cursor>Toutes les plateformes</a></li>
+        <li><a href="/fr/services/email" data-cursor>Courriel</a></li>
+        <li><a href="/fr/services/software" data-cursor>Logiciels sur mesure</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Commerce en ligne</h4>
+      <ul>
+        <li><a href="/ecommerce" data-cursor>Marketing e-commerce</a></li>
+        <li><a href="/services/shopify" data-cursor>Shopify</a></li>
+        <li><a href="/services/shopify-seo" data-cursor>Référencement Shopify</a></li>
+        <li><a href="/services/klaviyo" data-cursor>Klaviyo</a></li>
+      </ul>
+      <h4>Entreprise</h4>
+      <ul>
+        <li><a href="/fr#about" data-cursor>À propos</a></li>
+        <li><a href="/fr#results" data-cursor>Réalisations</a></li>
+        <li><a href="/fr#process" data-cursor>Processus</a></li>
+        <li><a href="/blog" data-cursor>Blogue</a></li>
+        <li><a href="/fr/marketing-conference" data-cursor>Conférences marketing</a></li>
+        <li><a href="/fr/locations" data-cursor>Régions desservies</a></li>
+        <li><a href="/fr/pricing" data-cursor>Tarifs</a></li>
+        <li><a href="/fr/free-training" data-cursor>Formation gratuite</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Secteurs</h4>
+      <ul>
+        <li><a href="/fr/google-ads-for-small-business" data-cursor>Google Ads pour PME</a></li>
+        <li><a href="/fr/google-ads-for-dentists" data-cursor>Google Ads pour dentistes</a></li>
+        <li><a href="/fr/google-ads-for-law-firms" data-cursor>Google Ads pour avocats</a></li>
+        <li><a href="/fr/healthcare-google-ads-agency" data-cursor>Google Ads pour cliniques</a></li>
+        <li><a href="/fr/hvac-google-ads-agency" data-cursor>Google Ads pour entreprises CVC</a></li>
+        <li><a href="/fr/google-ads-for-real-estate" data-cursor>Google Ads pour agences immobilières</a></li>
+        <li><a href="/fr/b2b-google-ads-agency" data-cursor>Google Ads B2B</a></li>
+        <li><a href="/fr/saas-google-ads-agency" data-cursor>Google Ads pour SaaS</a></li>
+        <li><a href="/fr/google-ads-for-nonprofits" data-cursor>Google Ads pour OBNL</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Montréal</h4>
+      <ul>
+        <li><a href="/fr/ppc-agency-montreal" data-cursor>Agence PPC Montréal</a></li>
+        <li><a href="/fr/paid-social-agency-montreal" data-cursor>Agence de publicité sociale Montréal</a></li>
+        <li><a href="/fr/sem-agency-montreal" data-cursor>Agence SEM Montréal</a></li>
+        <li><a href="/fr/performance-marketing-agency-montreal" data-cursor>Marketing de performance Montréal</a></li>
+        <li><a href="/fr/media-buying-agency-montreal" data-cursor>Agence d'achat média Montréal</a></li>
+        <li><a href="/ai-seo-montreal" data-cursor>Référencement IA Montréal</a></li>
+        <li><a href="/fr/online-reputation-management-montreal" data-cursor>Réputation en ligne Montréal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      
+      <h4>Spécialités</h4>
+      <ul>
+        <li><a href="/fr/startup-seo" data-cursor>Référencement pour startups</a></li>
+        <li><a href="/ai-seo-agency" data-cursor>Agence de référencement IA</a></li>
+        <li><a href="/etf-marketing" data-cursor>Marketing de FNB</a></li>
+        <li><a href="/fr/online-reputation-management-canada" data-cursor>Gestion de réputation en ligne</a></li>
+        <li><a href="/fr/website-maintenance-plans" data-cursor>Entretien de site web</a></li>
+        <li><a href="/fr/marketing-automation-cro" data-cursor>Automatisation et CRO</a></li>
+        <li><a href="/fr/quebec-law-25-compliance-guide" data-cursor>Guide Loi 25</a></li>
+      </ul>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:info@davnoot.com" data-cursor>info@davnoot.com</a></li>
+        <li><a href="tel:+14382237131" data-cursor>+1 (438) 223-7131</a></li>
+        <li><a href="https://www.linkedin.com/company/davnoot/" target="_blank" rel="noopener" data-cursor>LinkedIn ↗</a></li>
+        <li><a href="https://www.instagram.com/davnootdigital/" target="_blank" rel="noopener" data-cursor>Instagram ↗</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-big">Davnoot<em>.</em></div>
+
+  <div class="footer-bottom">
+    <span>© 2025 Davnoot. Tous droits réservés.</span>
+    <a href="/privacy" data-cursor>Politique de confidentialité</a>
+    <span>Conçu avec intention à Montréal</span>
+  </div>
+</footer>
+<!-- /BUILD:FOOTER -->
+
+  <script src="/script.min.js"></script>
+</body>
+
+</html>
