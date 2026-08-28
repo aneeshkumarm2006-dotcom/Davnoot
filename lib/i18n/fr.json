@@ -281,7 +281,6 @@
   "Your role": "Votre fonction",
   "Founder, CMO, etc.": "Fondateur, directeur marketing, etc.",
   "What do you want to discuss?": "De quoi souhaitez-vous discuter?",
-  "Choose one (or leave blank)": "Choisissez une option (ou laissez vide)",
   "SEO": "Référencement (SEO)",
   "Meta Ads": "Meta Ads",
   "Email Marketing": "Marketing par courriel",
@@ -4356,5 +4355,8 @@
   "We'll tell you on the call. We work with brands spending $15k+/month on whatever channel\n          we're discussing. Below that, the math doesn't work — but we know strong freelancers and smaller agencies,\n          and we're glad to make an introduction.": "Nous vous le dirons pendant l'appel. Nous travaillons avec des marques qui investissent 15 000 $ et plus par mois dans le canal concerné. En deçà, les chiffres ne tiennent pas — mais nous connaissons d'excellents pigistes et de plus petites agences, et c'est avec plaisir que nous ferons les présentations.",
   "From the moment you hit send to the call itself. No mystery, no chasing.": "Du moment où vous appuyez sur envoyer jusqu'à l'appel. Aucun mystère, aucune relance.",
   "A reply within one business day": "Une réponse en un jour ouvrable",
-  "A real person comes back to you with times that work, a Zoom link, a 3-question prep\n          doc, and our team's LinkedIn so you know who's joining.": "Une vraie personne revient vers vous avec des plages horaires qui fonctionnent, un lien Zoom, un court questionnaire de trois questions et le profil LinkedIn de notre équipe, pour savoir qui se joindra à l'appel."
+  "A real person comes back to you with times that work, a Zoom link, a 3-question prep\n          doc, and our team's LinkedIn so you know who's joining.": "Une vraie personne revient vers vous avec des plages horaires qui fonctionnent, un lien Zoom, un court questionnaire de trois questions et le profil LinkedIn de notre équipe, pour savoir qui se joindra à l'appel.",
+  "Choose one": "Choisissez une option",
+  "Other": "Autre",
+  "Tell us which service you have in mind in the box below.": "Dites-nous quel service vous avez en tête dans la case ci-dessous."
 }

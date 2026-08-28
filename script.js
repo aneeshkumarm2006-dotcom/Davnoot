@@ -1254,6 +1254,162 @@ function mountTurnstile(holder, attach) {
 }
 
 // ========================================================================
+//  CUSTOM SELECT — progressive enhancement over the native <select>
+// ========================================================================
+// The <select> is left in the DOM and merely hidden: it still submits `service`,
+// it still holds the translated <option> labels (so /fr needs no extra strings),
+// and with JS off the form falls back to it untouched. Labels are read FROM the
+// select at runtime, so this never has to know what the options say.
+
+(function () {
+  const selects = document.querySelectorAll('.book-form select');
+  if (!selects.length) return;
+
+  const drops = [];
+  const closeAll = (except) => drops.forEach((d) => { if (d.drop !== except) d.close(false); });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.cdrop')) closeAll(null);
+  });
+
+  selects.forEach((sel) => {
+    const opts = [...sel.options];
+    if (!opts.length) return;
+
+    const drop = document.createElement('div');
+    drop.className = 'cdrop';
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cdrop-btn';
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+
+    // Reuse the existing <label for="…"> so the control keeps its accessible name.
+    const label = sel.id && document.querySelector(`label[for="${sel.id}"]`);
+    if (label) {
+      if (!label.id) label.id = `${sel.id}-label`;
+      btn.setAttribute('aria-labelledby', label.id);
+    }
+
+    const labelSpan = document.createElement('span');
+    labelSpan.className = 'cdrop-label';
+    btn.appendChild(labelSpan);
+    btn.insertAdjacentHTML('beforeend',
+      '<svg class="cdrop-caret" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">' +
+      '<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" ' +
+      'stroke-linecap="round" stroke-linejoin="round"/></svg>');
+
+    const menu = document.createElement('ul');
+    menu.className = 'cdrop-menu';
+    menu.setAttribute('role', 'listbox');
+    menu.hidden = true;
+
+    const items = opts.map((o, i) => {
+      const li = document.createElement('li');
+      li.className = 'cdrop-opt';
+      li.setAttribute('role', 'option');
+      li.id = `${sel.id || 'cdrop'}-opt-${i}`;
+      li.textContent = o.textContent.trim();
+      menu.appendChild(li);
+      return li;
+    });
+
+    drop.append(btn, menu);
+    sel.parentNode.insertBefore(drop, sel);
+    sel.classList.add('cdrop-native');
+
+    let active = Math.max(0, sel.selectedIndex);
+
+    const paint = () => {
+      const i = Math.max(0, sel.selectedIndex);
+      labelSpan.textContent = items[i].textContent;
+      btn.dataset.placeholder = String(opts[i].value === '');
+      items.forEach((li, n) => {
+        li.classList.toggle('is-selected', n === i);
+        li.setAttribute('aria-selected', n === i ? 'true' : 'false');
+      });
+    };
+    const setActive = (i) => {
+      active = (i + items.length) % items.length;
+      items.forEach((li, n) => li.classList.toggle('is-active', n === active));
+      menu.setAttribute('aria-activedescendant', items[active].id);
+      items[active].scrollIntoView({ block: 'nearest' });
+    };
+    const open = () => {
+      closeAll(drop);
+      drop.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      menu.hidden = false;
+      setActive(Math.max(0, sel.selectedIndex));
+    };
+    const close = (refocus) => {
+      drop.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      menu.hidden = true;
+      if (refocus) btn.focus();
+    };
+    const choose = (i) => {
+      if (i !== sel.selectedIndex) {
+        sel.selectedIndex = i;
+        // Anything listening to the real field (validation, analytics) still hears it.
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+        paint();
+      }
+      close(true);
+    };
+
+    btn.addEventListener('click', () => (menu.hidden ? open() : close(false)));
+    menu.addEventListener('click', (e) => {
+      const li = e.target.closest('.cdrop-opt');
+      if (li) choose(items.indexOf(li));
+    });
+    menu.addEventListener('mousemove', (e) => {
+      const li = e.target.closest('.cdrop-opt');
+      if (li) setActive(items.indexOf(li));
+    });
+
+    // Type-ahead, so the control keeps the one affordance a native select has
+    // that arrow keys alone do not replace.
+    let typed = '', typedAt = 0;
+    drop.addEventListener('keydown', (e) => {
+      if (menu.hidden) {
+        if (['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(e.key)) { e.preventDefault(); open(); }
+        return;
+      }
+      switch (e.key) {
+        case 'ArrowDown': e.preventDefault(); setActive(active + 1); return;
+        case 'ArrowUp': e.preventDefault(); setActive(active - 1); return;
+        case 'Home': e.preventDefault(); setActive(0); return;
+        case 'End': e.preventDefault(); setActive(items.length - 1); return;
+        case 'Enter': case ' ': e.preventDefault(); choose(active); return;
+        case 'Escape': e.preventDefault(); close(true); return;
+        case 'Tab': close(false); return;
+      }
+      if (e.key.length === 1) {
+        const now = Date.now();
+        typed = now - typedAt > 700 ? e.key : typed + e.key;
+        typedAt = now;
+        const hit = items.findIndex((li) => li.textContent.toLowerCase().startsWith(typed.toLowerCase()));
+        if (hit >= 0) setActive(hit);
+      }
+    });
+
+    // A hint that only appears for the option it belongs to — permanent helper
+    // text would be clutter for the majority who pick a listed service.
+    const hint = sel.parentNode.querySelector('[data-hint-for]');
+    if (hint) {
+      const syncHint = () => { hint.hidden = sel.value !== hint.dataset.hintFor; };
+      sel.addEventListener('change', syncHint);
+      syncHint();
+    }
+
+    drops.push({ drop, close });
+    paint();
+  });
+})();
+
+// ========================================================================
 //  BOOK A CALL — form interactions
 // ========================================================================
 

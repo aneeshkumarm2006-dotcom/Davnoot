@@ -34,6 +34,7 @@ const SERVICE_LABELS = {
   'chatgpt-ads': 'ChatGPT / AI Ads',
   software: 'Custom Software',
   multi: 'Multi-channel / Not sure yet',
+  other: 'Other',
 };
 
 function row(label, value, isLast) {

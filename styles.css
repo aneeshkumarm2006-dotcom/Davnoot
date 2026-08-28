@@ -4167,6 +4167,90 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
   resize: vertical;
   font-family: var(--font-sans);
 }
+/* Custom select. The native <select> stays in the DOM — it is what submits the
+   value, it carries the translated <option> labels, and it is the fallback with
+   JS off — and this is layered over it, reading its options and writing back to
+   it. Class names match the .cdrop dropdown the dashboards already use. */
+.form-row .cdrop { position: relative; width: 100%; }
+.form-row select.cdrop-native { display: none; }
+
+/* Scoped under .form-row deliberately. `.book-form button` (0,1,1) styles the
+   submit button as a black pill with white text and beats a bare `.cdrop-btn`
+   (0,1,0), so the closed dropdown rendered black-on-black; this (0,2,0) wins,
+   and the resets below undo the pill it would otherwise inherit. */
+.form-row .cdrop-btn {
+  width: 100%;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.3s;
+}
+.form-row .cdrop-btn:hover { border-color: var(--border-hover); background: var(--bg); transform: none; }
+.form-row .cdrop.is-open .cdrop-btn,
+.form-row .cdrop-btn:focus-visible {
+  border-color: var(--accent);
+  background: var(--bg-elev);
+  outline: none;
+}
+/* The first option is a "Choose one" placeholder — dim it like placeholder text. */
+.form-row .cdrop-btn[data-placeholder="true"] .cdrop-label { color: var(--text-dim); }
+.cdrop-caret { flex: none; color: var(--text-muted); transition: transform 0.25s ease; }
+.cdrop.is-open .cdrop-caret { transform: rotate(180deg); }
+
+.cdrop-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(10, 10, 10, 0.12);
+  max-height: min(384px, 60vh);
+  overflow-y: auto;
+}
+.cdrop-menu[hidden] { display: none; }
+.cdrop-opt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--text);
+  cursor: pointer;
+}
+.cdrop-opt.is-active { background: var(--bg-elev-2); }
+.cdrop-opt.is-selected { font-weight: 600; }
+.cdrop-opt.is-selected::after { content: "\2713"; font-size: 13px; }
+@media (prefers-reduced-motion: reduce) {
+  .cdrop-caret, .cdrop-btn { transition: none; }
+}
+
+.form-hint {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.form-hint[hidden] { display: none; }
+
 .form-row-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
