@@ -6,3 +6,4 @@ node_modules
 
 # Local-disk upload fallback (dev only — production uploads go to Cloudinary).
 uploads
+.env*

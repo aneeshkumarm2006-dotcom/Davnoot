@@ -129,7 +129,7 @@
           "name": "What do I need to prepare?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Almost nothing. After you book, we'll send a 3-question prep doc. Takes about 5 minutes. We do the deeper homework before the call so you don't have to."
+            "text": "Almost nothing. Once we've agreed a time, we'll send a 3-question prep doc. Takes about 5 minutes. We do the deeper homework before the call so you don't have to."
           }
         },
         {
@@ -145,15 +145,15 @@
           "name": "What if we don't have a budget that justifies this size of agency?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We'll tell you on the call. We work with brands spending $15k+/month on whatever channel we're discussing. Below that, the math doesn't work, but we know good freelancers and smaller agencies and will point you their way without ego."
+            "text": "We'll tell you on the call. We work with brands spending $15k+/month on whatever channel we're discussing. Below that, the math doesn't work — but we know strong freelancers and smaller agencies, and we're glad to make an introduction."
           }
         },
         {
           "@type": "Question",
-          "name": "None of these times work for me. Other options?",
+          "name": "I need to talk sooner than one business day. Options?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Email us at info@davnoot.com with two or three windows that suit you. We'll work it out. Saturdays included if you're on the West Coast."
+            "text": "Email us at info@davnoot.com directly, or call +1&#8288;-&#8288;438&#8288;-&#8288;223&#8288;-&#8288;7131. Put two or three windows that suit you in the message and we'll work it out. Saturdays included if you're on the West Coast."
           }
         }
       ]
@@ -214,12 +214,12 @@
       <div class="ticker-item"><span class="num">94%</span><span class="lbl">of calls find leverage in first 10
           min</span></div>
       <div class="ticker-item"><span class="num">$0</span><span class="lbl">Cost. No strings.</span></div>
-      <div class="ticker-item"><span class="num">48h</span><span class="lbl">From booking to call</span></div>
+      <div class="ticker-item"><span class="num">48h</span><span class="lbl">From first reply to call</span></div>
       <div class="ticker-item"><span class="num">30 min</span><span class="lbl">No fluff. No slides.</span></div>
       <div class="ticker-item"><span class="num">94%</span><span class="lbl">of calls find leverage in first 10
           min</span></div>
       <div class="ticker-item"><span class="num">$0</span><span class="lbl">Cost. No strings.</span></div>
-      <div class="ticker-item"><span class="num">48h</span><span class="lbl">From booking to call</span></div>
+      <div class="ticker-item"><span class="num">48h</span><span class="lbl">From first reply to call</span></div>
     </div>
   </div>
 
@@ -274,23 +274,22 @@
   <!-- BOOKING FORM + CALENDAR -->
   <section id="form" data-cms-section="section1" data-cms-label="Section 1">
     <div class="reveal">
-      <div class="section-eyebrow" data-cms="section1.eyebrow">Book the call</div>
-      <h2 class="section-title" data-cms="section1.title">Pick a time<br />that <em>works</em>.</h2>
-      <p class="section-sub" data-cms="section1.sub">Fill the form, pick a slot, get an instant confirmation. No back-and-forth scheduling
-        emails. That ends here.</p>
+      <div class="section-eyebrow" data-cms="section1.eyebrow">Send us a note</div>
+      <h2 class="section-title" data-cms="section1.title">Tell us what<br />you're <em>working on</em>.</h2>
+      <p class="section-sub" data-cms="section1.sub">One form, one reply, one business day. A real person reads it and comes
+        back with times that work. No scheduling ping-pong.</p>
     </div>
 
     <div class="book-layout reveal">
       <!-- FORM -->
       <form class="book-form" method="POST" action="/api/book-call">
         <h3>Tell us <em>about you</em>.</h3>
-        <p class="intro">We'll use this to prep before the call so we're not wasting your 30 minutes on intros.</p>
+        <p class="intro">We use this to prep before we reply, so the first conversation starts at insight instead of intros.</p>
 
         <!-- Honeypot for spam -->
         <p style="display:none" aria-hidden="true">
           <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
         </p>
-        <input type="hidden" name="time_slot" value="" />
 
         <div class="form-row-grid">
           <div class="form-row">
@@ -331,40 +330,87 @@
         <div class="form-row">
           <label for="brief">What's the biggest challenge right now?</label>
           <textarea id="brief" name="brief"
-            placeholder="One or two sentences is fine. The more specific, the more useful the call."
+            placeholder="One or two sentences is fine. The more specific, the more useful our reply."
             required></textarea>
         </div>
 
-        <p class="form-note">Fill this in, then pick a slot on the right to book →</p>
+        <button type="submit" class="form-submit-btn">Send it over <span class="arrow">→</span></button>
+        <p class="form-note">We reply to every message. No newsletter signup, no drip sequence, no reselling your details.</p>
 
         <div class="form-success">
-          <strong>Got it.</strong> We'll email a confirmation with the calendar invite within the next 60 minutes. Talk
-          soon.
+          <strong>Got it.</strong> We'll come back to you within one business day, with times that work and a first read on
+          your setup.
         </div>
       </form>
 
-      <!-- CALENDAR WIDGET -->
-      <div class="cal-widget">
-        <h3>Pick a <em>slot</em></h3>
-        <p class="cal-sub">All times shown in your local timezone. We'll convert on our end.</p>
+      <!-- REPLY PROMISE + WHAT HAPPENS NEXT -->
+      <div class="reply-rail">
+        <div class="reply-promise">
+          <div class="reply-promise-label">You'll hear back within</div>
+          <div class="reply-promise-key">1 <em>business day</em></div>
+          <div class="reply-quotes" data-quote-rotator>
+            <figure class="reply-quote is-active">
+              <blockquote>If it doesn't sell, it isn't creative.</blockquote>
+              <figcaption>David Ogilvy</figcaption>
+            </figure>
+            <figure class="reply-quote" aria-hidden="true">
+              <blockquote>Do things that don't scale.</blockquote>
+              <figcaption>Paul Graham</figcaption>
+            </figure>
+            <figure class="reply-quote" aria-hidden="true">
+              <blockquote>Marketing is no longer about the stuff you make, but about the stories you tell.</blockquote>
+              <figcaption>Seth Godin</figcaption>
+            </figure>
+            <figure class="reply-quote" aria-hidden="true">
+              <blockquote>Your brand is what other people say about you when you're not in the room.</blockquote>
+              <figcaption>Jeff Bezos</figcaption>
+            </figure>
+            <figure class="reply-quote" aria-hidden="true">
+              <blockquote>Nobody counts the number of ads you run; they just remember the impression you make.</blockquote>
+              <figcaption>Bill Bernbach</figcaption>
+            </figure>
+          </div>
 
-        <div class="cal-nav">
-          <button type="button" class="cal-nav-btn cal-prev" aria-label="Earlier dates">‹</button>
-          <span class="cal-nav-range"></span>
-          <button type="button" class="cal-nav-btn cal-next" aria-label="Later dates">›</button>
+          <div class="reply-direct">
+            <span class="reply-direct-label">Or skip the wait</span>
+            <a href="tel:+14382237131" class="reply-direct-link" data-cursor>+1 438 223 7131</a>
+            <span class="reply-direct-note">Mon to Fri, 9am–6pm ET. A person picks up.</span>
+          </div>
         </div>
-        <div class="cal-days"></div>
 
-        <div class="cal-slots-label">Pick a day</div>
-        <div class="cal-slots" data-slots='["10:00 AM","11:00 AM","12:00 PM","1:00 PM","2:00 PM","3:00 PM","4:00 PM","5:00 PM"]'></div>
-
-        <div class="cal-cta">
-          <div class="cal-cta-text">Pick a day and time above to book.</div>
-          <button type="button" class="cal-cta-btn" disabled>Confirm &amp; book the call <span
-              class="arrow">→</span></button>
+        <div class="reply-next">
+          <h3>What happens <em>next</em>.</h3>
+          <div class="reply-step">
+            <span class="reply-step-num">01</span>
+            <div class="reply-step-body">
+              <div class="reply-step-title">We read it properly</div>
+              <div class="reply-step-desc">Not a ticket queue. Every submission is read by a person.</div>
+            </div>
+          </div>
+          <div class="reply-step">
+            <span class="reply-step-num">02</span>
+            <div class="reply-step-body">
+              <div class="reply-step-title">We do the homework</div>
+              <div class="reply-step-desc">30+ minutes before we reply: site audit, channel review, competitor scan.</div>
+            </div>
+          </div>
+          <div class="reply-step">
+            <span class="reply-step-num">03</span>
+            <div class="reply-step-body">
+              <div class="reply-step-title">You get three moves</div>
+              <div class="reply-step-desc">The three highest-leverage things we'd do first, with rough impact and
+                effort on each. Yours to keep, with or without us.</div>
+            </div>
+          </div>
+          <div class="reply-step">
+            <span class="reply-step-num">04</span>
+            <div class="reply-step-body">
+              <div class="reply-step-title">If we're not the right fit, we'll tell you</div>
+              <div class="reply-step-desc">You get a clear answer either way. If another team is better suited to
+                the work, we'll say so and recommend where to look.</div>
+            </div>
+          </div>
         </div>
-
-        <div class="cal-tz">↳ Times in Eastern Time (ET, UTC−4). Confirmation will adjust to your timezone.</div>
       </div>
     </div>
   </section>
@@ -374,14 +420,14 @@
     <div class="reveal">
       <div class="section-eyebrow" data-cms="section2.eyebrow">After you hit submit</div>
       <h2 class="section-title" data-cms="section2.title">No <em>black box</em>.<br />Here's exactly what happens.</h2>
-      <p class="section-sub" data-cms="section2.sub">From the moment you book to the call itself. No mystery, no chasing.</p>
+      <p class="section-sub" data-cms="section2.sub">From the moment you hit send to the call itself. No mystery, no chasing.</p>
     </div>
 
     <div class="next-grid reveal">
       <div class="next-card">
         <div class="next-num">01</div>
-        <div class="next-title">Instant confirmation</div>
-        <div class="next-desc">You'll get a calendar invite within 60 minutes. Includes a Zoom link, a 3-question prep
+        <div class="next-title">A reply within one business day</div>
+        <div class="next-desc">A real person comes back to you with times that work, a Zoom link, a 3-question prep
           doc, and our team's LinkedIn so you know who's joining.</div>
       </div>
       <div class="next-card">
@@ -446,7 +492,7 @@
       </article>
       <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.2.q">What do I need to prepare?</span><span class="faq-toggle">+</span></div>
-        <div class="faq-a" data-cms="faq.2.a">Almost nothing. After you book, we'll send a 3-question prep doc. Takes about 5 minutes. We
+        <div class="faq-a" data-cms="faq.2.a">Almost nothing. Once we've agreed a time, we'll send a 3-question prep doc. Takes about 5 minutes. We
           do the deeper homework before the call so you don't have to.</div>
       </article>
       <article class="faq-item">
@@ -460,15 +506,16 @@
         <div class="faq-q"><span data-cms="faq.4.q">What if we don't have a budget that justifies this size of agency?</span><span
             class="faq-toggle">+</span></div>
         <div class="faq-a" data-cms="faq.4.a">We'll tell you on the call. We work with brands spending $15k+/month on whatever channel
-          we're discussing. Below that, the math doesn't work, but we know good freelancers and smaller agencies and
-          will point you their way without ego.</div>
+          we're discussing. Below that, the math doesn't work — but we know strong freelancers and smaller agencies,
+          and we're glad to make an introduction.</div>
       </article>
       <article class="faq-item">
-        <div class="faq-q"><span data-cms="faq.5.q">None of these times work for me. Other options?</span><span class="faq-toggle">+</span>
+        <div class="faq-q"><span data-cms="faq.5.q">I need to talk sooner than one business day. Options?</span><span class="faq-toggle">+</span>
         </div>
         <div class="faq-a" data-cms="faq.5.a">Email us at <a href="mailto:info@davnoot.com"
-            style="color:var(--accent);text-decoration:none;">info@davnoot.com</a> with two or three windows that suit
-          you. We'll work it out. Saturdays included if you're on the West Coast.</div>
+            style="color:var(--accent);text-decoration:none;">info@davnoot.com</a> directly, or call
+          +1&#8288;-&#8288;438&#8288;-&#8288;223&#8288;-&#8288;7131. Put two or three windows that suit you in the
+          message and we'll work it out. Saturdays included if you're on the West Coast.</div>
       </article>
     </div>
   </section>

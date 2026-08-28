@@ -2218,7 +2218,6 @@ footer {
 @media (max-width: 600px) {
   .hero-cta-row { flex-direction: column; align-items: stretch; }
   .btn-primary, .btn-secondary { justify-content: center; }
-  .form-row-grid { grid-template-columns: 1fr; }
   .sc-meta-waterfall { grid-template-columns: 1fr; }
   .demo { height: 110px; }
   .approach-step-num { font-size: 64px; }
@@ -4104,7 +4103,7 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: 56px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .book-form {
@@ -4175,6 +4174,12 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
   margin-bottom: 22px;
 }
 .form-row-grid .form-row { margin-bottom: 0; }
+/* Must come AFTER the base rule above: same specificity, so source order decides.
+   Declared up in the shared max-width:600px block it lost the cascade silently and
+   the two columns survived down to 320px, truncating every placeholder. */
+@media (max-width: 600px) {
+  .form-row-grid { grid-template-columns: 1fr; }
+}
 
 .book-form button {
   background: var(--accent);
@@ -4209,138 +4214,146 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
   margin-top: 16px;
 }
 .form-success.show { display: block; animation: fadeInPop 0.5s; }
-/* Calendar date navigation */
-.cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.cal-nav-range { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--text-muted); }
-.cal-nav-btn { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-card);
-  color: var(--text); font-size: 18px; line-height: 1; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }
-.cal-nav-btn:hover:not(:disabled) { background: var(--bg-elev); border-color: var(--text-muted); }
-.cal-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
-/* Single booking CTA — lives in the calendar, enables once a slot is chosen */
-.cal-cta { margin-top: 18px; padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-elev); }
-.cal-cta-text { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
-.cal-cta-text strong { color: var(--text); font-weight: 600; }
-.cal-cta-btn { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  background: var(--accent); color: var(--accent-text); border: none; border-radius: 100px; padding: 14px 22px;
-  font-family: var(--font-sans); font-size: 15px; font-weight: 500; cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease; }
-.cal-cta-btn:hover:not(:disabled) { background: #3a3a3a; transform: translateY(-1px); }
-.cal-cta-btn:disabled { background: var(--bg-elev-2); color: var(--text-dim); cursor: not-allowed; }
-.cal-cta-btn .arrow { transition: transform 0.2s ease; }
-.cal-cta-btn:hover:not(:disabled) .arrow { transform: translateX(3px); }
-.form-note { font-size: 14px; color: var(--text-muted); margin-top: 8px; }
-@keyframes fadeInPop {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
+/* REPLY RAIL — replaces the old calendar column */
+.reply-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
-
-/* CALENDAR WIDGET */
-.cal-widget {
+.reply-promise {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-radius: 20px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.reply-promise-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+.reply-promise-key {
+  font-family: var(--font-serif);
+  font-size: clamp(34px, 4vw, 44px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.reply-promise-key em { font-style: italic; font-weight: 400; }
+/* Rotating quotes — one visible at a time, crossfading in place. The container
+   holds a fixed height so the promise card never reflows as quotes swap. */
+.reply-quotes {
+  display: grid;
+  margin-top: 8px;
+}
+.reply-quote {
+  grid-area: 1 / 1;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
+}
+.reply-quote.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.reply-quote blockquote {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+}
+.reply-quote figcaption {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+.reply-quote figcaption::before {
+  content: "— ";
+}
+@media (prefers-reduced-motion: reduce) {
+  .reply-quote { transition: opacity 0.2s ease, visibility 0.2s; transform: none; }
+  .reply-quote.is-active { transform: none; }
+}
+.reply-direct {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+.reply-direct-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+.reply-direct-link {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.reply-direct-link:hover { opacity: 0.72; }
+.reply-direct-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+.reply-direct-note {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+}
+.reply-next {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 36px;
-  position: sticky;
-  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  flex: 1;
 }
-.cal-widget h3 {
-  font-family: var(--font-sans);
-  font-size: 20px;
+.reply-next h3 {
+  font-family: var(--font-serif);
+  font-size: 24px;
   font-weight: 500;
-  letter-spacing: -0.02em;
-  margin-bottom: 6px;
+  letter-spacing: -0.01em;
 }
-.cal-widget h3 em {
-  font-family: var(--font-serif);
-  font-style: italic;
-  color: var(--accent);
-}
-.cal-widget p.cal-sub {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 28px;
-}
-.cal-days {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 24px;
-}
-.cal-day {
-  background: var(--bg-elev-2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px 8px;
-  text-align: center;
-  cursor: pointer;
-  transition: border-color 0.25s, background 0.25s, transform 0.25s;
-}
-.cal-day:hover { border-color: var(--border-hover); transform: translateY(-2px); }
-.cal-day.active {
-  border-color: var(--accent);
-  background: rgba(10, 10, 10,0.06);
-}
-.cal-day .dow {
+.reply-next h3 em { font-style: italic; font-weight: 400; }
+.reply-step { display: flex; gap: 16px; align-items: flex-start; }
+.reply-step-num {
   font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--text-muted);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-.cal-day .dom {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 26px;
-  color: var(--text);
-  margin: 6px 0 2px;
-  font-variation-settings: "opsz" 144;
-}
-.cal-day.active .dom { color: var(--accent); }
-.cal-day .mon {
-  font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   color: var(--text-dim);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  padding-top: 3px;
+  flex: none;
 }
-.cal-slots-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-muted);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
-.cal-slots {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-.cal-slot {
-  background: var(--bg-elev-2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 11px;
-  font-family: var(--font-sans);
-  font-size: 13px;
-  color: var(--text);
-  cursor: pointer;
-  text-align: center;
-  transition: border-color 0.25s, color 0.25s, background 0.25s;
-}
-.cal-slot:hover { border-color: var(--accent); color: var(--accent); }
-.cal-slot.active {
-  background: var(--accent);
-  color: var(--accent-text);
-  border-color: var(--accent);
-}
-.cal-tz {
-  margin-top: 18px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-dim);
-  letter-spacing: 0.12em;
+.reply-step-body { display: flex; flex-direction: column; gap: 4px; }
+.reply-step-title { font-size: 15px; font-weight: 600; }
+.reply-step-desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .reply-rail { position: static; }
 }
 
 /* WHAT HAPPENS NEXT */
@@ -4438,13 +4451,40 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
 /* book page mobile */
 @media (max-width: 1000px) {
   .book-layout { grid-template-columns: 1fr; gap: 32px; }
-  .cal-widget { position: static; }
   .agenda-grid { grid-template-columns: 1fr 1fr; }
   .next-grid { grid-template-columns: 1fr; }
   .host-card { grid-template-columns: 1fr; text-align: center; padding: 32px; }
   .host-avatar { margin: 0 auto; }
   .host-bio-meta { justify-content: center; }
   .book-form { padding: 32px; }
+}
+
+/* Nav on phones. At =<1000px the bar keeps logo + CTA + hamburger on one row, but
+   nothing was sized for it: at 390px the three want 382px inside a 350px bar, and
+   with no `nowrap` the wordmark and the CTA label each broke onto two lines. Trim
+   the three to fit rather than letting them wrap. */
+@media (max-width: 600px) {
+  body > nav { padding: 14px 16px; }
+  .logo-mark { height: 36px; }
+  .wordmark { font-size: 15px; white-space: nowrap; }
+  .nav-cta { font-size: 13px; padding: 9px 15px; white-space: nowrap; }
+  .nav-toggle { margin-left: 8px; }
+}
+/* Below this the wordmark no longer fits beside the CTA. The breakpoint is set by
+   FRENCH, not English: "Aller au formulaire" is 27px wider than "Jump to form", and
+   at 360px the French bar was over-constrained by 24px while English still fit.
+   Sizing this to English would have shipped a broken /fr nav on most phones.
+   The mark alone carries the brand below here and still links home (alt "Davnoot"). */
+@media (max-width: 419px) {
+  .wordmark { display: none; }
+}
+
+/* book page, phones. The block above stops at 1000px, so the agenda held two
+   columns all the way down to 320px — 124px of width per card. */
+@media (max-width: 600px) {
+  .agenda-grid { grid-template-columns: 1fr; }
+  .book-form { padding: 26px; }
+  .reply-promise, .reply-next { padding: 26px; }
 }
 
 /* =========================================================
