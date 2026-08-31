@@ -129,7 +129,7 @@
           "name": "Que dois-je préparer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Presque rien. Après la réservation, nous vous enverrons un document de préparation de 3 questions. Environ 5 minutes. Nous faisons le travail de fond avant l'appel pour que vous n'ayez pas à le faire."
+            "text": "Presque rien. Une fois l'heure convenue, nous vous envoyons un court questionnaire de trois questions. Environ cinq minutes. Nous faisons le travail de fond avant l'appel pour que vous n'ayez pas à le faire."
           }
         },
         {
@@ -145,15 +145,15 @@
           "name": "Et si notre budget ne justifie pas une agence de cette taille?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nous vous le dirons pendant l'appel. Nous travaillons avec des marques qui investissent plus de 15 000 $ par mois sur le canal dont il est question. En dessous, les chiffres ne tiennent pas, mais nous connaissons de bons pigistes et de plus petites agences et nous vous y dirigerons sans orgueil."
+            "text": "Nous vous le dirons pendant l'appel. Nous travaillons avec des marques qui investissent 15 000 $ et plus par mois dans le canal concerné. En deçà, les chiffres ne tiennent pas — mais nous connaissons d'excellents pigistes et de plus petites agences, et c'est avec plaisir que nous ferons les présentations."
           }
         },
         {
           "@type": "Question",
-          "name": "Aucune de ces heures ne me convient. D'autres options?",
+          "name": "J'ai besoin de parler avant un jour ouvrable. Des options ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Écrivez-nous à info@davnoot.com en proposant deux ou trois plages qui vous conviennent. Nous nous arrangerons. Samedis inclus si vous êtes sur la côte Ouest."
+            "text": "Écrivez-nous à info@davnoot.com directement, ou appelez le +1&#8288;-&#8288;438&#8288;-&#8288;223&#8288;-&#8288;7131. Indiquez deux ou trois plages horaires qui vous conviennent dans le message et nous nous arrangerons. Samedis inclus si vous êtes sur la côte Ouest."
           }
         }
       ]
@@ -214,12 +214,12 @@
       <div class="ticker-item"><span class="num">94%</span><span class="lbl">des appels trouvent un levier dans les 10 premières
           minutes</span></div>
       <div class="ticker-item"><span class="num">0 $</span><span class="lbl">Aucun coût. Aucune obligation.</span></div>
-      <div class="ticker-item"><span class="num">48 h</span><span class="lbl">De la réservation à l'appel</span></div>
+      <div class="ticker-item"><span class="num">48h</span><span class="lbl">De la première réponse à l'appel</span></div>
       <div class="ticker-item"><span class="num">30 min</span><span class="lbl">Sans blabla. Sans diapositives.</span></div>
       <div class="ticker-item"><span class="num">94%</span><span class="lbl">des appels trouvent un levier dans les 10 premières
           minutes</span></div>
       <div class="ticker-item"><span class="num">0 $</span><span class="lbl">Aucun coût. Aucune obligation.</span></div>
-      <div class="ticker-item"><span class="num">48 h</span><span class="lbl">De la réservation à l'appel</span></div>
+      <div class="ticker-item"><span class="num">48h</span><span class="lbl">De la première réponse à l'appel</span></div>
     </div>
   </div>
 
@@ -274,23 +274,21 @@
   <!-- BOOKING FORM + CALENDAR -->
   <section id="form" data-cms-section="section1" data-cms-label="Section 1">
     <div class="reveal">
-      <div class="section-eyebrow" data-cms="section1.eyebrow">Réserver l'appel</div>
-      <h2 class="section-title" data-cms="section1.title">Choisissez un moment<br />qui vous <em>convient</em>.</h2>
-      <p class="section-sub" data-cms="section1.sub">Remplissez le formulaire, choisissez une plage horaire, recevez une confirmation instantanée. Fini les échanges de courriels
-        pour fixer un rendez-vous.</p>
+      <div class="section-eyebrow" data-cms="section1.eyebrow">Écrivez-nous</div>
+      <h2 class="section-title" data-cms="section1.title">Dites-nous ce sur<br />quoi vous <em>travaillez</em>.</h2>
+      <p class="section-sub" data-cms="section1.sub">Un formulaire, une réponse, un jour ouvrable. Une vraie personne le lit et revient vers vous avec des plages horaires qui fonctionnent. Sans va-et-vient de courriels.</p>
     </div>
 
     <div class="book-layout reveal">
       <!-- FORM -->
       <form class="book-form" method="POST" action="/api/book-call">
         <h3>Parlez-nous <em>de vous</em>.</h3>
-        <p class="intro">Nous nous en servirons pour préparer l'appel afin de ne pas gaspiller vos 30 minutes en présentations.</p>
+        <p class="intro">Nous nous en servons pour préparer notre réponse, afin que la première conversation commence par des constats plutôt que des présentations.</p>
 
         <!-- Honeypot for spam -->
         <p style="display:none" aria-hidden="true">
           <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
         </p>
-        <input type="hidden" name="time_slot" value="" />
 
         <div class="form-row-grid">
           <div class="form-row">
@@ -317,7 +315,7 @@
         <div class="form-row">
           <label for="service">De quoi souhaitez-vous discuter?</label>
           <select id="service" name="service">
-            <option value="">Choisissez une option (ou laissez vide)</option>
+            <option value="">Choisissez une option</option>
             <option value="seo">Référencement (SEO)</option>
             <option value="meta">Meta Ads</option>
             <option value="email">Marketing par courriel</option>
@@ -325,46 +323,92 @@
             <option value="chatgpt-ads">Publicités ChatGPT / IA</option>
             <option value="software">Logiciels sur mesure</option>
             <option value="multi">Multicanal / Je ne sais pas encore</option>
+            <option value="other">Autre</option>
           </select>
+          <p class="form-hint" data-hint-for="other" hidden>Dites-nous quel service vous avez en tête dans la case ci-dessous.</p>
         </div>
 
         <div class="form-row">
           <label for="brief">Quel est votre plus grand défi en ce moment?</label>
           <textarea id="brief" name="brief"
-            placeholder="Une ou deux phrases suffisent. Plus c'est précis, plus l'appel sera utile."
+            placeholder="Une ou deux phrases suffisent. Plus c'est précis, plus notre réponse sera utile."
             required></textarea>
         </div>
 
-        <p class="form-note">Remplissez ceci, puis choisissez une plage horaire à droite pour réserver →</p>
+        <button type="submit" class="form-submit-btn">Envoyez-nous ça <span class="arrow">→</span></button>
+        <p class="form-note">Nous répondons à chaque message. Aucune infolettre, aucune séquence automatisée, aucune revente de vos coordonnées.</p>
 
         <div class="form-success">
-          <strong>C'est noté.</strong> Nous vous enverrons une confirmation avec l'invitation au calendrier dans les 60 prochaines minutes. À
-          bientôt.
+          <strong>C'est noté.</strong> Nous revenons vers vous d'ici un jour ouvrable, avec des plages horaires qui fonctionnent et une première lecture de votre situation.
         </div>
       </form>
 
-      <!-- CALENDAR WIDGET -->
-      <div class="cal-widget">
-        <h3>Choisissez une <em>plage horaire</em></h3>
-        <p class="cal-sub">Toutes les heures sont affichées dans votre fuseau horaire. Nous ferons la conversion de notre côté.</p>
+      <!-- REPLY PROMISE + WHAT HAPPENS NEXT -->
+      <div class="reply-rail">
+        <div class="reply-promise">
+          <div class="reply-promise-label">Vous aurez une réponse d'ici</div>
+          <div class="reply-promise-key">1 <em>jour ouvrable</em></div>
+          <div class="reply-quotes" data-quote-rotator>
+            <figure class="reply-quote is-active">
+              <blockquote>Si ça ne vend pas, ce n'est pas créatif.</blockquote>
+              <figcaption>David Ogilvy</figcaption>
+            </figure>
+            <figure class="reply-quote" aria-hidden="true">
+              <blockquote>Faites des choses qui ne sont pas extensibles.</blockquote>
+              <figcaption>Paul Graham</figcaption>
+            </figure>
+            <figure class="reply-quote" aria-hidden="true">
+              <blockquote>Le marketing ne porte plus sur ce que vous fabriquez, mais sur les histoires que vous racontez.</blockquote>
+              <figcaption>Seth Godin</figcaption>
+            </figure>
+            <figure class="reply-quote" aria-hidden="true">
+              <blockquote>Votre marque, c'est ce que les autres disent de vous quand vous n'êtes pas dans la pièce.</blockquote>
+              <figcaption>Jeff Bezos</figcaption>
+            </figure>
+            <figure class="reply-quote" aria-hidden="true">
+              <blockquote>Personne ne compte le nombre de publicités que vous diffusez ; on retient seulement l'impression que vous laissez.</blockquote>
+              <figcaption>Bill Bernbach</figcaption>
+            </figure>
+          </div>
 
-        <div class="cal-nav">
-          <button type="button" class="cal-nav-btn cal-prev" aria-label="Dates précédentes">‹</button>
-          <span class="cal-nav-range"></span>
-          <button type="button" class="cal-nav-btn cal-next" aria-label="Dates suivantes">›</button>
+          <div class="reply-direct">
+            <span class="reply-direct-label">Ou évitez l'attente</span>
+            <a href="tel:+14382237131" class="reply-direct-link" data-cursor>+1 438 223 7131</a>
+            <span class="reply-direct-note">Du lundi au vendredi, 9 h à 18 h HE. Une personne répond.</span>
+          </div>
         </div>
-        <div class="cal-days"></div>
 
-        <div class="cal-slots-label">Choisissez une journée</div>
-        <div class="cal-slots" data-slots='["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"]'></div>
-
-        <div class="cal-cta">
-          <div class="cal-cta-text">Choisissez une journée et une heure ci-dessus pour réserver.</div>
-          <button type="button" class="cal-cta-btn" disabled>Confirmer et réserver l'appel <span
-              class="arrow">→</span></button>
+        <div class="reply-next">
+          <h3>Ce qui se passe <em>ensuite</em>.</h3>
+          <div class="reply-step">
+            <span class="reply-step-num">01</span>
+            <div class="reply-step-body">
+              <div class="reply-step-title">Nous le lisons vraiment</div>
+              <div class="reply-step-desc">Pas une file de billets. Chaque message est lu par une personne.</div>
+            </div>
+          </div>
+          <div class="reply-step">
+            <span class="reply-step-num">02</span>
+            <div class="reply-step-body">
+              <div class="reply-step-title">Nous faisons nos devoirs</div>
+              <div class="reply-step-desc">Plus de 30 minutes avant de répondre : audit du site, revue des canaux, analyse de la concurrence.</div>
+            </div>
+          </div>
+          <div class="reply-step">
+            <span class="reply-step-num">03</span>
+            <div class="reply-step-body">
+              <div class="reply-step-title">Vous repartez avec trois actions</div>
+              <div class="reply-step-desc">Les trois actions à plus fort levier que nous ferions en premier, avec une estimation de l'impact et de l'effort pour chacune. Elles sont à vous, avec ou sans nous.</div>
+            </div>
+          </div>
+          <div class="reply-step">
+            <span class="reply-step-num">04</span>
+            <div class="reply-step-body">
+              <div class="reply-step-title">Si nous ne sommes pas le bon choix, nous vous le dirons</div>
+              <div class="reply-step-desc">Vous obtenez une réponse claire dans un cas comme dans l'autre. Si une autre équipe convient mieux au mandat, nous le dirons et vous indiquerons où chercher.</div>
+            </div>
+          </div>
         </div>
-
-        <div class="cal-tz">↳ Heures de l'Est (HE, UTC−4). La confirmation s'ajustera à votre fuseau horaire.</div>
       </div>
     </div>
   </section>
@@ -374,15 +418,14 @@
     <div class="reveal">
       <div class="section-eyebrow" data-cms="section2.eyebrow">Après l'envoi</div>
       <h2 class="section-title" data-cms="section2.title">Aucune <em>boîte noire</em>.<br />Voici exactement ce qui se passe.</h2>
-      <p class="section-sub" data-cms="section2.sub">Du moment où vous réservez jusqu'à l'appel. Aucun mystère, aucune relance.</p>
+      <p class="section-sub" data-cms="section2.sub">Du moment où vous appuyez sur envoyer jusqu'à l'appel. Aucun mystère, aucune relance.</p>
     </div>
 
     <div class="next-grid reveal">
       <div class="next-card">
         <div class="next-num">01</div>
-        <div class="next-title">Confirmation instantanée</div>
-        <div class="next-desc">Vous recevrez une invitation au calendrier en moins de 60 minutes. Elle comprend un lien Zoom, un document de préparation
-          de 3 questions et le LinkedIn de notre équipe pour savoir qui se joindra à vous.</div>
+        <div class="next-title">Une réponse en un jour ouvrable</div>
+        <div class="next-desc">Une vraie personne revient vers vous avec des plages horaires qui fonctionnent, un lien Zoom, un court questionnaire de trois questions et le profil LinkedIn de notre équipe, pour savoir qui se joindra à l'appel.</div>
       </div>
       <div class="next-card">
         <div class="next-num">02</div>
@@ -446,8 +489,7 @@
       </article>
       <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.2.q">Que dois-je préparer?</span><span class="faq-toggle">+</span></div>
-        <div class="faq-a" data-cms="faq.2.a">Presque rien. Après la réservation, nous vous enverrons un document de préparation de 3 questions. Environ 5 minutes. Nous
-          faisons le travail de fond avant l'appel pour que vous n'ayez pas à le faire.</div>
+        <div class="faq-a" data-cms="faq.2.a">Presque rien. Une fois l'heure convenue, nous vous envoyons un court questionnaire de trois questions. Environ cinq minutes. Nous faisons le travail de fond avant l'appel pour que vous n'ayez pas à le faire.</div>
       </article>
       <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.3.q">Allez-vous vraiment regarder mes comptes pendant l'appel?</span><span
@@ -459,16 +501,15 @@
       <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.4.q">Et si notre budget ne justifie pas une agence de cette taille?</span><span
             class="faq-toggle">+</span></div>
-        <div class="faq-a" data-cms="faq.4.a">Nous vous le dirons pendant l'appel. Nous travaillons avec des marques qui investissent plus de 15 000 $ par mois sur le canal
-          dont il est question. En dessous, les chiffres ne tiennent pas, mais nous connaissons de bons pigistes et de plus petites agences et
-          nous vous y dirigerons sans orgueil.</div>
+        <div class="faq-a" data-cms="faq.4.a">Nous vous le dirons pendant l'appel. Nous travaillons avec des marques qui investissent 15 000 $ et plus par mois dans le canal concerné. En deçà, les chiffres ne tiennent pas — mais nous connaissons d'excellents pigistes et de plus petites agences, et c'est avec plaisir que nous ferons les présentations.</div>
       </article>
       <article class="faq-item">
-        <div class="faq-q"><span data-cms="faq.5.q">Aucune de ces heures ne me convient. D'autres options?</span><span class="faq-toggle">+</span>
+        <div class="faq-q"><span data-cms="faq.5.q">J'ai besoin de parler avant un jour ouvrable. Des options ?</span><span class="faq-toggle">+</span>
         </div>
         <div class="faq-a" data-cms="faq.5.a">Écrivez-nous à <a href="mailto:info@davnoot.com"
-            style="color:var(--accent);text-decoration:none;">info@davnoot.com</a> en proposant deux ou trois plages qui vous
-          conviennent. Nous nous arrangerons. Samedis inclus si vous êtes sur la côte Ouest.</div>
+            style="color:var(--accent);text-decoration:none;">info@davnoot.com</a> directement, ou appelez le
+          +1&#8288;-&#8288;438&#8288;-&#8288;223&#8288;-&#8288;7131. Indiquez deux ou trois plages horaires qui vous conviennent dans le
+          message et nous nous arrangerons. Samedis inclus si vous êtes sur la côte Ouest.</div>
       </article>
     </div>
   </section>

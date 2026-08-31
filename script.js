@@ -1254,134 +1254,205 @@ function mountTurnstile(holder, attach) {
 }
 
 // ========================================================================
-//  BOOK A CALL — calendar + form interactions
+//  CUSTOM SELECT — progressive enhancement over the native <select>
+// ========================================================================
+// The <select> is left in the DOM and merely hidden: it still submits `service`,
+// it still holds the translated <option> labels (so /fr needs no extra strings),
+// and with JS off the form falls back to it untouched. Labels are read FROM the
+// select at runtime, so this never has to know what the options say.
+
+(function () {
+  const selects = document.querySelectorAll('.book-form select');
+  if (!selects.length) return;
+
+  const drops = [];
+  const closeAll = (except) => drops.forEach((d) => { if (d.drop !== except) d.close(false); });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.cdrop')) closeAll(null);
+  });
+
+  selects.forEach((sel) => {
+    const opts = [...sel.options];
+    if (!opts.length) return;
+
+    const drop = document.createElement('div');
+    drop.className = 'cdrop';
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cdrop-btn';
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+
+    // Reuse the existing <label for="…"> so the control keeps its accessible name.
+    const label = sel.id && document.querySelector(`label[for="${sel.id}"]`);
+    if (label) {
+      if (!label.id) label.id = `${sel.id}-label`;
+      btn.setAttribute('aria-labelledby', label.id);
+    }
+
+    const labelSpan = document.createElement('span');
+    labelSpan.className = 'cdrop-label';
+    btn.appendChild(labelSpan);
+    btn.insertAdjacentHTML('beforeend',
+      '<svg class="cdrop-caret" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">' +
+      '<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" ' +
+      'stroke-linecap="round" stroke-linejoin="round"/></svg>');
+
+    const menu = document.createElement('ul');
+    menu.className = 'cdrop-menu';
+    menu.setAttribute('role', 'listbox');
+    menu.hidden = true;
+
+    const items = opts.map((o, i) => {
+      const li = document.createElement('li');
+      li.className = 'cdrop-opt';
+      li.setAttribute('role', 'option');
+      li.id = `${sel.id || 'cdrop'}-opt-${i}`;
+      li.textContent = o.textContent.trim();
+      menu.appendChild(li);
+      return li;
+    });
+
+    drop.append(btn, menu);
+    sel.parentNode.insertBefore(drop, sel);
+    sel.classList.add('cdrop-native');
+
+    let active = Math.max(0, sel.selectedIndex);
+
+    const paint = () => {
+      const i = Math.max(0, sel.selectedIndex);
+      labelSpan.textContent = items[i].textContent;
+      btn.dataset.placeholder = String(opts[i].value === '');
+      items.forEach((li, n) => {
+        li.classList.toggle('is-selected', n === i);
+        li.setAttribute('aria-selected', n === i ? 'true' : 'false');
+      });
+    };
+    const setActive = (i) => {
+      active = (i + items.length) % items.length;
+      items.forEach((li, n) => li.classList.toggle('is-active', n === active));
+      menu.setAttribute('aria-activedescendant', items[active].id);
+      items[active].scrollIntoView({ block: 'nearest' });
+    };
+    const open = () => {
+      closeAll(drop);
+      drop.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      menu.hidden = false;
+      setActive(Math.max(0, sel.selectedIndex));
+    };
+    const close = (refocus) => {
+      drop.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      menu.hidden = true;
+      if (refocus) btn.focus();
+    };
+    const choose = (i) => {
+      if (i !== sel.selectedIndex) {
+        sel.selectedIndex = i;
+        // Anything listening to the real field (validation, analytics) still hears it.
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+        paint();
+      }
+      close(true);
+    };
+
+    btn.addEventListener('click', () => (menu.hidden ? open() : close(false)));
+    menu.addEventListener('click', (e) => {
+      const li = e.target.closest('.cdrop-opt');
+      if (li) choose(items.indexOf(li));
+    });
+    menu.addEventListener('mousemove', (e) => {
+      const li = e.target.closest('.cdrop-opt');
+      if (li) setActive(items.indexOf(li));
+    });
+
+    // Type-ahead, so the control keeps the one affordance a native select has
+    // that arrow keys alone do not replace.
+    let typed = '', typedAt = 0;
+    drop.addEventListener('keydown', (e) => {
+      if (menu.hidden) {
+        if (['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(e.key)) { e.preventDefault(); open(); }
+        return;
+      }
+      switch (e.key) {
+        case 'ArrowDown': e.preventDefault(); setActive(active + 1); return;
+        case 'ArrowUp': e.preventDefault(); setActive(active - 1); return;
+        case 'Home': e.preventDefault(); setActive(0); return;
+        case 'End': e.preventDefault(); setActive(items.length - 1); return;
+        case 'Enter': case ' ': e.preventDefault(); choose(active); return;
+        case 'Escape': e.preventDefault(); close(true); return;
+        case 'Tab': close(false); return;
+      }
+      if (e.key.length === 1) {
+        const now = Date.now();
+        typed = now - typedAt > 700 ? e.key : typed + e.key;
+        typedAt = now;
+        const hit = items.findIndex((li) => li.textContent.toLowerCase().startsWith(typed.toLowerCase()));
+        if (hit >= 0) setActive(hit);
+      }
+    });
+
+    // A hint that only appears for the option it belongs to — permanent helper
+    // text would be clutter for the majority who pick a listed service.
+    const hint = sel.parentNode.querySelector('[data-hint-for]');
+    if (hint) {
+      const syncHint = () => { hint.hidden = sel.value !== hint.dataset.hintFor; };
+      sel.addEventListener('change', syncHint);
+      syncHint();
+    }
+
+    drops.push({ drop, close });
+    paint();
+  });
+})();
+
+// ========================================================================
+//  BOOK A CALL — form interactions
 // ========================================================================
 
 (function () {
-  // Calendar — paginated upcoming weekdays + hourly slots, single book CTA
-  (function buildCalendar() {
-    const daysEl = document.querySelector('.cal-days');
-    const slotsEl = document.querySelector('.cal-slots');
-    if (!daysEl || !slotsEl) return;
-    const labelEl = document.querySelector('.cal-slots-label');
-    const slotInput = document.querySelector('input[name="time_slot"]');
-    const ctaText = document.querySelector('.cal-cta-text');
-    const ctaBtn = document.querySelector('.cal-cta-btn');
-    const prevBtn = document.querySelector('.cal-prev');
-    const nextBtn = document.querySelector('.cal-next');
-    const rangeEl = document.querySelector('.cal-nav-range');
+  /* Rotating quotes in the reply-promise card.
+   *
+   * The markup ships all five <figure>s with the first one .is-active, so the
+   * card reads correctly with JS off or still loading — this only advances what
+   * is already there. Pauses while the tab is hidden so a backgrounded page is
+   * not burning a timer, and while the pointer is over the card so a quote
+   * someone is mid-way through reading does not slide out from under them. */
+  const rail = document.querySelector('[data-quote-rotator]');
+  if (!rail) return;
+  const quotes = [...rail.querySelectorAll('.reply-quote')];
+  if (quotes.length < 2) return;
 
-    /* ---- Locale ------------------------------------------------------------
-     * The calendar is built at RUNTIME, so none of its text passes through the
-     * page source and none of it can be reached by lib/i18n/fr.json. Left alone,
-     * the French booking page renders "Thu, 6 Aug" and "1:00 PM" — English day
-     * names and a 12-hour clock — on the one page where a visitor is deciding
-     * whether to hand over their contact details.
-     *
-     * Keyed off <html lang>, which build.js has already set per page, so there is
-     * no second place to declare the language.
-     *
-     * The French slot list is 24-HOUR, not a translation of the English one:
-     * "1:00 PM" is not how a time is written in Quebec, it is "13:00". */
-    const isFr = (document.documentElement.lang || 'en').toLowerCase().startsWith('fr');
-    const CAL = isFr
-      ? {
-          dow: ['dim', 'lun', 'mar', 'mer', 'jeu', 'ven', 'sam'],
-          mon: ['janv', 'févr', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc'],
-          fmt: (dow, d, mon) => `${dow} ${d} ${mon}`,   // "jeu 6 août" — no comma in French
-          available: 'Disponible ',
-          yourSlot: (day, slot) => `Votre plage · <strong>${day}, ${slot}</strong>`,
-          prompt: 'Choisissez une journée et une heure ci-dessus pour réserver.',
-          slots: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
-        }
-      : {
-          dow: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-          mon: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          fmt: (dow, d, mon) => `${dow}, ${d} ${mon}`,
-          available: 'Available ',
-          yourSlot: (day, slot) => `Your slot · <strong>${day}, ${slot}</strong>`,
-          prompt: 'Pick a day and time above to book.',
-          slots: ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'],
-        };
+  const HOLD = 6000;
+  let i = 0;
+  let timer = null;
+  let paused = false;
 
-    // Content, not code: read from data-slots so the CMS can edit it. Falls back
-    // to the locale's list if the attribute is missing or malformed.
-    let SLOTS = CAL.slots;
-    if (slotsEl.dataset.slots) {
-      try {
-        const parsed = JSON.parse(slotsEl.dataset.slots);
-        if (Array.isArray(parsed) && parsed.length) SLOTS = parsed;
-      } catch { /* keep defaults */ }
-    }
-    const DOW = CAL.dow;
-    const MON = CAL.mon;
-    const PAGE = 6;
-    const fmt = (dt) => CAL.fmt(DOW[dt.getDay()], dt.getDate(), MON[dt.getMonth()]);
+  function show(next) {
+    quotes[i].classList.remove('is-active');
+    quotes[i].setAttribute('aria-hidden', 'true');
+    i = next;
+    quotes[i].classList.add('is-active');
+    quotes[i].removeAttribute('aria-hidden');
+  }
 
-    // nth upcoming weekday (0 = first weekday after today)
-    function weekdayAt(n) {
-      const d = new Date(); d.setHours(0, 0, 0, 0);
-      let i = -1;
-      while (i < n) { d.setDate(d.getDate() + 1); if (d.getDay() !== 0 && d.getDay() !== 6) i++; }
-      return d;
-    }
+  function tick() { if (!paused) show((i + 1) % quotes.length); }
+  function start() { stop(); timer = setInterval(tick, HOLD); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
 
-    let offset = 0;
-    let selectedDay = null;
-    let selectedSlot = null;
+  rail.addEventListener('mouseenter', () => { paused = true; });
+  rail.addEventListener('mouseleave', () => { paused = false; });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop(); else start();
+  });
 
-    slotsEl.innerHTML = SLOTS.map(s => `<div class="cal-slot">${s}</div>`).join('');
+  start();
+})();
 
-    function sync() { if (slotInput) slotInput.value = (selectedDay && selectedSlot) ? `${selectedDay} · ${selectedSlot}` : ''; }
-    function refreshCta() {
-      const ready = !!(selectedDay && selectedSlot);
-      if (ctaBtn) ctaBtn.disabled = !ready;
-      if (ctaText) ctaText.innerHTML = ready
-        ? CAL.yourSlot(selectedDay, selectedSlot)
-        : CAL.prompt;
-    }
-    function pickSlot(s) {
-      slotsEl.querySelectorAll('.cal-slot').forEach(x => x.classList.remove('active'));
-      if (s) { s.classList.add('active'); selectedSlot = s.textContent.trim(); } else { selectedSlot = null; }
-      sync(); refreshCta();
-    }
-    function pickDay(el) {
-      daysEl.querySelectorAll('.cal-day').forEach(x => x.classList.remove('active'));
-      el.classList.add('active');
-      selectedDay = el.dataset.label;
-      if (labelEl) labelEl.textContent = CAL.available + selectedDay;
-      pickSlot(null); // reset the time whenever the day changes
-    }
-    function renderDays() {
-      const days = [];
-      for (let i = 0; i < PAGE; i++) days.push(weekdayAt(offset + i));
-      daysEl.innerHTML = days.map(dt =>
-        `<div class="cal-day" data-label="${fmt(dt)}"><div class="dow">${DOW[dt.getDay()]}</div><div class="dom">${dt.getDate()}</div><div class="mon">${MON[dt.getMonth()]}</div></div>`
-      ).join('');
-      daysEl.querySelectorAll('.cal-day').forEach(el => { if (el.dataset.label === selectedDay) el.classList.add('active'); });
-      if (rangeEl) rangeEl.textContent = `${days[0].getDate()} ${MON[days[0].getMonth()]} – ${days[PAGE - 1].getDate()} ${MON[days[PAGE - 1].getMonth()]}`;
-      if (prevBtn) prevBtn.disabled = offset === 0;
-    }
-
-    daysEl.addEventListener('click', (e) => { const d = e.target.closest('.cal-day'); if (d) pickDay(d); });
-    slotsEl.addEventListener('click', (e) => { const s = e.target.closest('.cal-slot'); if (s && selectedDay) pickSlot(s); });
-    if (prevBtn) prevBtn.addEventListener('click', () => { offset = Math.max(0, offset - PAGE); renderDays(); });
-    if (nextBtn) nextBtn.addEventListener('click', () => { offset += PAGE; renderDays(); });
-    if (ctaBtn) ctaBtn.addEventListener('click', () => {
-      if (ctaBtn.disabled) return;
-      const bf = document.querySelector('form.book-form');
-      if (!bf) return;
-      bf.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (typeof bf.requestSubmit === 'function') bf.requestSubmit();
-      else { const b = bf.querySelector('button[type="submit"]'); if (b) b.click(); }
-    });
-
-    renderDays();
-    const firstDay = daysEl.querySelector('.cal-day');
-    if (firstDay) pickDay(firstDay);
-    refreshCta();
-  })();
-
+(function () {
   // Form submit — POST the lead to /api/book-call, then reveal confirmation
   const form = document.querySelector('form.book-form');
   if (form) {
@@ -1407,7 +1478,7 @@ function mountTurnstile(holder, attach) {
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const btn = document.querySelector('.cal-cta-btn') || form.querySelector('button[type="submit"]') || form.querySelector('button');
+      const btn = form.querySelector('button[type="submit"]') || form.querySelector('button');
       const success = document.querySelector('.form-success');
       const original = btn ? btn.innerHTML : '';
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
@@ -1428,7 +1499,7 @@ function mountTurnstile(holder, attach) {
           if (!c.classList.contains('form-success')) c.style.display = 'none';
         });
         if (success) success.classList.add('show');
-        if (btn) { btn.innerHTML = 'Booked ✓'; btn.disabled = true; }
+        if (btn) { btn.innerHTML = 'Sent ✓'; btn.disabled = true; }
       } catch (err) {
         if (btn) { btn.disabled = false; btn.innerHTML = original; }
         // Turnstile tokens are single-use, so a retry after a failed send needs a
