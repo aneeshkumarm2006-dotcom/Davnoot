@@ -55,7 +55,7 @@
     "marketing-automation-cro.html",
     "quebec-law-25-compliance-guide.html"
   ],
-  "total": 4324,
+  "total": 4363,
   "entries": [
     {
       "en": "Explore →",
@@ -2675,6 +2675,15 @@
       ]
     },
     {
+      "en": "<span class=\"num\">48h</span><span class=\"lbl\">From first reply to call</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "<span class=\"num\">5</span><span class=\"lbl\">checks before you register</span>",
       "kind": "text",
       "tag": "div",
@@ -2862,15 +2871,6 @@
       "count": 2,
       "pages": [
         "email.html"
-      ]
-    },
-    {
-      "en": "<span class=\"num\">48h</span><span class=\"lbl\">From booking to call</span>",
-      "kind": "text",
-      "tag": "div",
-      "count": 2,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -5060,6 +5060,15 @@
       ]
     },
     {
+      "en": "That distinction matters more in AI search than it did in traditional SEO, because the work is\n        never finished. A citation source that gets you cited by ChatGPT this month can lose that weight next month if a\n        competitor outranks you on it. A consultant's roadmap goes stale. A retained team catches the drift before it\n        costs you the citation.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
+      ]
+    },
+    {
       "en": "We've built campaigns for home service providers, healthcare clinics, and retailers serving Blainville's growing population — the kinds of businesses that live and die by local visibility. Blainville isn't a satellite market to us; it's covered by the same senior team that runs our Montreal accounts, with the same weekly reporting and monthly strategy reviews.",
       "kind": "text",
       "tag": "p",
@@ -5183,6 +5192,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "Email us at <a href=\"mailto:info@davnoot.com\"\n            style=\"color:var(--accent);text-decoration:none;\">info@davnoot.com</a> directly, or call\n          +1&#8288;-&#8288;438&#8288;-&#8288;223&#8288;-&#8288;7131. Put two or three windows that suit you in the\n          message and we'll work it out. Saturdays included if you're on the West Coast.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -6176,6 +6194,15 @@
       ]
     },
     {
+      "en": "Davnoot is a full-service SEO agency, not a solo consultant. You get a senior\n          strategist who owns the strategy and the monthly execution: technical fixes, content, and link building, all\n          under one team. You are not handed a report and left to hire someone else to act on it.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "seo.html"
+      ]
+    },
+    {
       "en": "Our AI SEO process follows four phases that improve discoverability, authority, and\n        citations across AI-powered search platforms. From AI visibility audits to long-term optimization, every step is\n        designed to help your business appear where customers are increasingly searching.",
       "kind": "text",
       "tag": "p",
@@ -6209,6 +6236,15 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Yes. We provide white-label SEO services for agencies and consultants who want to\n          offer SEO to their clients without building an in-house team. Work is delivered under your brand, with the\n          same technical audits, content, and reporting included in our standard engagements.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "seo.html"
       ]
     },
     {
@@ -7742,6 +7778,15 @@
       ]
     },
     {
+      "en": "An agency like Davnoot does both: the strategic call on which citation sources matter for your\n        category, and the actual placement, markup, and monitoring work every month. You're not paying for a report and\n        then re-hiring someone to act on it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
+      ]
+    },
+    {
       "en": "An HVAC account has more than one season in it. AC\n        repair searches arrive with the first stretch of heat and furnace repair searches arrive with the first cold\n        snap, so a budget set once and left alone is the wrong budget for most of the year.",
       "kind": "text",
       "tag": "p",
@@ -8021,6 +8066,15 @@
       ]
     },
     {
+      "en": "We'll tell you on the call. We work with brands spending $15k+/month on whatever channel\n          we're discussing. Below that, the math doesn't work — but we know strong freelancers and smaller agencies,\n          and we're glad to make an introduction.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "A business name written with accents in one listing and\n          without them in the next is a small problem that repeats across every directory. It splits reviews, confuses\n          matching, and is tedious enough that nobody gets around to fixing it.",
       "kind": "text",
       "tag": "p",
@@ -8180,15 +8234,6 @@
       "count": 1,
       "pages": [
         "sem-agency-montreal.html"
-      ]
-    },
-    {
-      "en": "We'll tell you on the call. We work with brands spending $15k+/month on whatever channel\n          we're discussing. Below that, the math doesn't work, but we know good freelancers and smaller agencies and\n          will point you their way without ego.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -8408,6 +8453,15 @@
       ]
     },
     {
+      "en": "<span class=\"reply-direct-label\">Or skip the wait</span>\n            <a href=\"tel:+14382237131\" class=\"reply-direct-link\" data-cursor>+1 438 223 7131</a>\n            <span class=\"reply-direct-note\">Mon to Fri, 9am–6pm ET. A person picks up.</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "Cost per click and conversion rate describe the campaign. Cost per acquisition, trial-to-paid\n          conversion, and revenue describe the business. Both get reported, but only the second group\n          should be deciding where the budget goes.",
       "kind": "text",
       "tag": "p",
@@ -8495,15 +8549,6 @@
       "count": 1,
       "pages": [
         "online-reputation-management-canada.html"
-      ]
-    },
-    {
-      "en": "Email us at <a href=\"mailto:info@davnoot.com\"\n            style=\"color:var(--accent);text-decoration:none;\">info@davnoot.com</a> with two or three windows that suit\n          you. We'll work it out. Saturdays included if you're on the West Coast.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -8918,6 +8963,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "A consultant typically audits, recommends, and hands you a roadmap. What happens after that is on\n        you or whoever you hire to execute it: the schema implementation, the citation placements, the monthly content\n        restructuring.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
       ]
     },
     {
@@ -10424,6 +10478,15 @@
       ]
     },
     {
+      "en": "We work all three simultaneously, because a brand that's structured for one is usually most of the\n        way structured for the others. The failure mode is treating them as separate projects instead of one system.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
+      ]
+    },
+    {
       "en": "Where a matching page does not exist yet, that\n        is worth knowing before the budget goes live. It is usually cheaper to write the page than to keep\n        paying for clicks that arrive somewhere close enough.",
       "kind": "text",
       "tag": "p",
@@ -10925,6 +10988,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "The technical layer underneath both: schema, entity clarity, and content structure that makes\n          your site legible to a language model doing retrieval, independent of which product surfaces the answer.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
       ]
     },
     {
@@ -11612,6 +11684,15 @@
       ]
     },
     {
+      "en": "If you only need the diagnostic, our Visibility Audit tier below is built for exactly that. If you\n        want someone accountable for the outcome month over month, that's the Active Program.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
+      ]
+    },
+    {
       "en": "Straight answers on what SEO, Google Ads, social advertising and website work cost with Davnoot — what drives the price, how engagements are structured, and why there is no fixed package list.",
       "kind": "description",
       "tag": "meta",
@@ -11708,6 +11789,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Yes. Our local SEO work covers Montreal and the surrounding boroughs, including the\n          West Island and LaSalle, as well as businesses competing nationally beyond the Montreal market.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "seo.html"
       ]
     },
     {
@@ -12134,6 +12224,15 @@
       ]
     },
     {
+      "en": "Structuring content so it directly answers a specific question, formatted for extraction: the\n          same discipline Google AI Overviews and voice assistants both retrieve from.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
+      ]
+    },
+    {
       "en": "Traditional SEO focuses on search engine rankings. AI Search Optimization focuses on how\n        large language models retrieve, understand, summarize, and recommend your business.",
       "kind": "text",
       "tag": "p",
@@ -12482,6 +12581,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Almost nothing. Once we've agreed a time, we'll send a 3-question prep doc. Takes about 5 minutes. We\n          do the deeper homework before the call so you don't have to.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -13466,15 +13574,6 @@
       ]
     },
     {
-      "en": "Almost nothing. After you book, we'll send a 3-question prep doc. Takes about 5 minutes. We\n          do the deeper homework before the call so you don't have to.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "Length is not the point. The next step should be obvious without anyone going looking for it, and the page\n          should match the search the ad was shown for.",
       "kind": "text",
       "tag": "p",
@@ -14357,15 +14456,6 @@
       ]
     },
     {
-      "en": "You'll get a calendar invite within 60 minutes. Includes a Zoom link, a 3-question prep\n          doc, and our team's LinkedIn so you know who's joining.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "<span class=\"pc-bar-l\">On target</span><span class=\"pc-bar-track\"><i\n                    style=\"width:58%\"></i></span><span class=\"pc-bar-v\">Keep</span>",
       "kind": "text",
       "tag": "div",
@@ -14408,6 +14498,15 @@
       "count": 1,
       "pages": [
         "website-maintenance-plans.html"
+      ]
+    },
+    {
+      "en": "Optimizing so generative AI engines (ChatGPT, Perplexity, Gemini) include your brand in the\n          answer they generate, not just in a list of links.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
       ]
     },
     {
@@ -14516,6 +14615,15 @@
       "count": 1,
       "pages": [
         "digital-marketing-agency-vaudreuil.html"
+      ]
+    },
+    {
+      "en": "A real person comes back to you with times that work, a Zoom link, a 3-question prep\n          doc, and our team's LinkedIn so you know who's joining.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -15347,6 +15455,15 @@
       ]
     },
     {
+      "en": "You get a clear answer either way. If another team is better suited to\n                the work, we'll say so and recommend where to look.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "<a href=\"/book-call\" class=\"btn-primary\" data-cursor>\n        Request an SEM consultation\n        <span class=\"arrow\">→</span>\n      </a>",
       "kind": "text",
       "tag": "div",
@@ -15371,6 +15488,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "The three highest-leverage things we'd do first, with rough impact and\n                effort on each. Yours to keep, with or without us.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -15546,6 +15672,15 @@
     },
     {
       "en": "<span>· 6+ years senior experience</span>\n          <span>· Hands-on operator</span>\n          <span>· Decision-maker on our end</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
+      "en": "<strong>Got it.</strong> We'll come back to you within one business day, with times that work and a first read on\n          your setup.",
       "kind": "text",
       "tag": "div",
       "count": 1,
@@ -15812,6 +15947,15 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "One form, one reply, one business day. A real person reads it and comes\n        back with times that work. No scheduling ping-pong.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -16361,15 +16505,6 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
-      ]
-    },
-    {
-      "en": "<strong>Got it.</strong> We'll email a confirmation with the calendar invite within the next 60 minutes. Talk\n          soon.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -17063,15 +17198,6 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
-      ]
-    },
-    {
-      "en": "Fill the form, pick a slot, get an instant confirmation. No back-and-forth scheduling\n        emails. That ends here.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -18992,6 +19118,15 @@
       ]
     },
     {
+      "en": "We use this to prep before we reply, so the first conversation starts at insight instead of intros.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "Security fundamentals: updates, backups, and the most common ways WordPress sites get compromised.",
       "kind": "text",
       "tag": "div",
@@ -19151,6 +19286,15 @@
       "count": 1,
       "pages": [
         "marketing-automation-cro.html"
+      ]
+    },
+    {
+      "en": "We reply to every message. No newsletter signup, no drip sequence, no reselling your details.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -19397,15 +19541,6 @@
       ]
     },
     {
-      "en": "We'll use this to prep before the call so we're not wasting your 30 minutes on intros.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "<span class=\"pc-var-l\">Contacts collected</span><span class=\"pc-var-v\">Context</span>",
       "kind": "text",
       "tag": "div",
@@ -19442,6 +19577,15 @@
       ]
     },
     {
+      "en": "Do you offer SEO services outside downtown Montreal, like the West Island or LaSalle?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "seo.html"
+      ]
+    },
+    {
       "en": "Privacy impact assessments before adopting new technology that handles personal data.",
       "kind": "text",
       "tag": "div",
@@ -19460,15 +19604,6 @@
       ]
     },
     {
-      "en": "[\"10:00 AM\",\"11:00 AM\",\"12:00 PM\",\"1:00 PM\",\"2:00 PM\",\"3:00 PM\",\"4:00 PM\",\"5:00 PM\"]",
-      "kind": "attr:data-slots",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "<span class=\"pc-var-l\">Copy and headline</span><span class=\"pc-var-v\">Running</span>",
       "kind": "text",
       "tag": "div",
@@ -19484,6 +19619,15 @@
       "count": 1,
       "pages": [
         "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "Nobody counts the number of ads you run; they just remember the impression you make.",
+      "kind": "text",
+      "tag": "blockquote",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -19694,9 +19838,9 @@
       ]
     },
     {
-      "en": "↳ Times in Eastern Time (ET, UTC−4). Confirmation will adjust to your timezone.",
+      "en": "Marketing is no longer about the stuff you make, but about the stories you tell.",
       "kind": "text",
-      "tag": "div",
+      "tag": "blockquote",
       "count": 1,
       "pages": [
         "book-call.html"
@@ -20081,6 +20225,15 @@
       ]
     },
     {
+      "en": "One or two sentences is fine. The more specific, the more useful our reply.",
+      "kind": "attr:placeholder",
+      "tag": "textarea",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "Setting up GA4 properly and reading reports that actually inform decisions.",
       "kind": "text",
       "tag": "div",
@@ -20216,15 +20369,6 @@
       ]
     },
     {
-      "en": "One or two sentences is fine. The more specific, the more useful the call.",
-      "kind": "attr:placeholder",
-      "tag": "textarea",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "Request a nonprofit campaign review\n          <span class=\"arrow\">→</span>",
       "kind": "text",
       "tag": "a",
@@ -20240,6 +20384,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-dentists.html"
+      ]
+    },
+    {
+      "en": "Your brand is what other people say about you when you're not in the room.",
+      "kind": "text",
+      "tag": "blockquote",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -20276,6 +20429,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "30+ minutes before we reply: site audit, channel review, competitor scan.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -20387,6 +20549,15 @@
       ]
     },
     {
+      "en": "AI SEO consultant vs. agency:<br />what you're <em>actually getting</em>",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
+      ]
+    },
+    {
       "en": "An implant search should not land<br />on the\n        <em>homepage</em>.",
       "kind": "text",
       "tag": "h2",
@@ -20402,6 +20573,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "From the moment you hit send to the call itself. No mystery, no chasing.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -20429,6 +20609,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "The terms get used interchangeably, but they're not the same engagement.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
       ]
     },
     {
@@ -20657,15 +20846,6 @@
       ]
     },
     {
-      "en": "Confirm &amp; book the call <span\n              class=\"arrow\">→</span>",
-      "kind": "text",
-      "tag": "button",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "Demo, trial, pricing, and product pages each fed by their own ad group",
       "kind": "text",
       "tag": "div",
@@ -20762,6 +20942,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "These terms get used interchangeably. They're not the same discipline.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
       ]
     },
     {
@@ -20951,15 +21140,6 @@
       "count": 1,
       "pages": [
         "google-ads-for-dentists.html"
-      ]
-    },
-    {
-      "en": "From the moment you book to the call itself. No mystery, no chasing.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -21332,6 +21512,15 @@
       ]
     },
     {
+      "en": "Do you work with SEO consultants or is this a full agency service?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "seo.html"
+      ]
+    },
+    {
       "en": "Email Marketing Agency Montreal | Email Marketing Agency | Davnoot",
       "kind": "title",
       "tag": "title",
@@ -21428,15 +21617,6 @@
       "count": 1,
       "pages": [
         "sem-agency-montreal.html"
-      ]
-    },
-    {
-      "en": "All times shown in your local timezone. We'll convert on our end.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -22295,6 +22475,15 @@
       ]
     },
     {
+      "en": "GEO vs. AEO vs. LLM SEO:<br /><em>what's the difference</em>",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
+      ]
+    },
+    {
       "en": "Marketing conferences and events · Toronto and across Canada",
       "kind": "text",
       "tag": "div",
@@ -22979,6 +23168,15 @@
       ]
     },
     {
+      "en": "Not a ticket queue. Every submission is read by a person.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "Online Reputation Management Montreal | Reputation Agency",
       "kind": "title",
       "tag": "title",
@@ -23291,6 +23489,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Tell us which service you have in mind in the box below.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -24131,15 +24338,6 @@
       ]
     },
     {
-      "en": "Fill this in, then pick a slot on the right to book →",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "Five ways a dental budget<br />goes <em>nowhere</em>.",
       "kind": "text",
       "tag": "h2",
@@ -24173,6 +24371,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "I need to talk sooner than one business day. Options?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -25940,15 +26147,6 @@
       ]
     },
     {
-      "en": "None of these times work for me. Other options?",
-      "kind": "text",
-      "tag": "span",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "One nonprofit goal,<br />one <em>campaign</em>.",
       "kind": "text",
       "tag": "h2",
@@ -26381,6 +26579,15 @@
       ]
     },
     {
+      "en": "Generative Engine <em>Optimization</em> (GEO)",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
+      ]
+    },
+    {
       "en": "Healthcare Google Ads · Clinics and practices",
       "kind": "text",
       "tag": "div",
@@ -26540,6 +26747,15 @@
       "count": 1,
       "pages": [
         "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Tell us what<br />you're <em>working on</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -27200,6 +27416,15 @@
       ]
     },
     {
+      "en": "Do you offer white-label SEO for agencies?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "seo.html"
+      ]
+    },
+    {
       "en": "Email Marketing<br /><em>& Automation</em>",
       "kind": "text",
       "tag": "div",
@@ -27224,6 +27449,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-real-estate.html"
+      ]
+    },
+    {
+      "en": "If we're not the right fit, we'll tell you",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -27305,6 +27539,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Answer Engine <em>Optimization</em> (AEO)",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
       ]
     },
     {
@@ -27548,6 +27791,15 @@
       "count": 1,
       "pages": [
         "website-maintenance-plans.html"
+      ]
+    },
+    {
+      "en": "Send it over <span class=\"arrow\">→</span>",
+      "kind": "text",
+      "tag": "button",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -28253,6 +28505,15 @@
       ]
     },
     {
+      "en": "If it doesn't sell, it isn't creative.",
+      "kind": "text",
+      "tag": "blockquote",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "Is this really free? What's the catch?",
       "kind": "text",
       "tag": "span",
@@ -28646,15 +28907,6 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
-      ]
-    },
-    {
-      "en": "Pick a time<br />that <em>works</em>.",
-      "kind": "text",
-      "tag": "h2",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -29684,15 +29936,6 @@
       ]
     },
     {
-      "en": "Pick a day and time above to book.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "Real client · \"premium home goods\"",
       "kind": "text",
       "tag": "div",
@@ -30446,6 +30689,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "A reply within one business day",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -32150,15 +32402,6 @@
       ]
     },
     {
-      "en": "Choose one (or leave blank)",
-      "kind": "text",
-      "tag": "option",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "Common paid social problems",
       "kind": "text",
       "tag": "div",
@@ -32183,6 +32426,15 @@
       "count": 1,
       "pages": [
         "digital-marketing-agency-granby.html"
+      ]
+    },
+    {
+      "en": "Do things that don't scale.",
+      "kind": "text",
+      "tag": "blockquote",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -32471,6 +32723,15 @@
       "count": 1,
       "pages": [
         "sem-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "What happens <em>next</em>.",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -33932,6 +34193,15 @@
       ]
     },
     {
+      "en": "1 <em>business day</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "24/7 production support",
       "kind": "text",
       "tag": "li",
@@ -34316,6 +34586,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "You'll hear back within",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -35201,15 +35480,6 @@
       ]
     },
     {
-      "en": "Instant confirmation",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "Legal PPC management",
       "kind": "text",
       "tag": "div",
@@ -35306,15 +35576,6 @@
       "count": 1,
       "pages": [
         "locations.html"
-      ]
-    },
-    {
-      "en": "Pick a <em>slot</em>",
-      "kind": "text",
-      "tag": "h3",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -35813,6 +36074,15 @@
       ]
     },
     {
+      "en": "We read it properly",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "Website maintenance",
       "kind": "text",
       "tag": "div",
@@ -35846,6 +36116,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "You get three moves",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -36197,6 +36476,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-real-estate.html"
+      ]
+    },
+    {
+      "en": "We do the homework",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -36713,6 +37001,15 @@
       ]
     },
     {
+      "en": "Engagement model",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
+      ]
+    },
+    {
       "en": "Founder · Edtech",
       "kind": "text",
       "tag": "span",
@@ -36746,6 +37043,15 @@
       "count": 1,
       "pages": [
         "locations.html"
+      ]
+    },
+    {
+      "en": "LLM <em>SEO</em>",
+      "kind": "text",
+      "tag": "h3",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
       ]
     },
     {
@@ -37451,6 +37757,15 @@
       ]
     },
     {
+      "en": "Send us a note",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "The four pages",
       "kind": "text",
       "tag": "div",
@@ -37622,9 +37937,9 @@
       ]
     },
     {
-      "en": "Book the call",
+      "en": "Bill Bernbach",
       "kind": "text",
-      "tag": "div",
+      "tag": "figcaption",
       "count": 1,
       "pages": [
         "book-call.html"
@@ -37691,15 +38006,6 @@
       "count": 1,
       "pages": [
         "software.html"
-      ]
-    },
-    {
-      "en": "Earlier dates",
-      "kind": "attr:aria-label",
-      "tag": "button",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -37898,6 +38204,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "David Ogilvy",
+      "kind": "text",
+      "tag": "figcaption",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -38189,15 +38504,6 @@
       ]
     },
     {
-      "en": "Later dates",
-      "kind": "attr:aria-label",
-      "tag": "button",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "New reviews",
       "kind": "text",
       "tag": "div",
@@ -38222,6 +38528,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Paul Graham",
+      "kind": "text",
+      "tag": "figcaption",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -38288,6 +38603,15 @@
       ]
     },
     {
+      "en": "Terminology",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "ai-seo.html"
+      ]
+    },
+    {
       "en": "Why Davnoot",
       "kind": "text",
       "tag": "div",
@@ -38342,6 +38666,15 @@
       ]
     },
     {
+      "en": "Choose one",
+      "kind": "text",
+      "tag": "option",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "Conv. rate",
       "kind": "text",
       "tag": "div",
@@ -38375,6 +38708,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Jeff Bezos",
+      "kind": "text",
+      "tag": "figcaption",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -38423,15 +38765,6 @@
       ]
     },
     {
-      "en": "Pick a day",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "Prioritize",
       "kind": "text",
       "tag": "div",
@@ -38465,6 +38798,15 @@
       "count": 1,
       "pages": [
         "sem-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Seth Godin",
+      "kind": "text",
+      "tag": "figcaption",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -39401,6 +39743,15 @@
       "count": 1,
       "pages": [
         "locations.html"
+      ]
+    },
+    {
+      "en": "Other",
+      "kind": "text",
+      "tag": "option",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
