@@ -172,16 +172,22 @@ export class Leads {
 
   /* A teardown has no name — the modal asks for two fields and inventing a third
    * would put a string in the CRM that the person never typed. The website IS the
-   * identity of that lead, so it takes the name column. */
-  static who(l) {
-    if (l.name) {
-      return `<strong>${esc(l.name)}</strong>${l.company ? `<div class="muted small">${esc(l.company)}</div>` : ''}`;
-    }
+   * identity of that lead, so it takes the name column.
+   *
+   * Phrasing content ONLY (no <div>), because this goes inside the <button> that
+   * opens the detail dialog and inside its <h2> heading. The company line is a
+   * separate block and is rendered as `sub()` beside it. */
+  static whoLabel(l) {
+    if (l.name) return `<strong>${esc(l.name)}</strong>`;
     if (l.website) {
       const host = l.website.replace(/^https?:\/\//i, '').replace(/^www\./i, '');
       return `<strong>${esc(host.split('/')[0])}</strong>`;
     }
     return '<span class="muted">—</span>';
+  }
+
+  static sub(l) {
+    return l.company ? `<div class="muted small">${esc(l.company)}</div>` : '';
   }
 
   /* The detail row: the booking form's brief, or the teardown's website and the
@@ -209,10 +215,10 @@ export class Leads {
       <thead><tr><th>When (ET)</th><th>Name</th><th>Email</th><th>Source</th><th>Service</th><th>Slot</th><th>Email</th><th>${spamView ? 'Actions' : 'Status'}</th></tr></thead>
       ${leads.map((l) => {
         const detail = Leads.detail(l);
-        return `<tbody class="lead-group${l.spam ? ' is-promo' : ''}">
+        return `<tbody class="lead-group${l.spam ? ' is-promo' : ''}" data-open="${esc(l._id)}">
         <tr>
           <td class="muted small nowrap">${esc(estDate(l.createdAt))}<div class="lead-time">${esc(estClock(l.createdAt))}</div></td>
-          <td>${Leads.who(l)}${Leads.categoryPill(l)}</td>
+          <td><button type="button" class="lead-open" data-open="${esc(l._id)}">${Leads.whoLabel(l)}</button>${Leads.sub(l)}${Leads.categoryPill(l)}</td>
           <td><a class="url" href="mailto:${esc(l.email)}">${esc(l.email)}</a></td>
           <td>${Leads.sourcePill(l)}</td>
           <td>${esc(SERVICE_LABELS[l.service] || l.service || '—')}</td>
@@ -240,10 +246,10 @@ export class Leads {
         const detail = b.brief
           ? `<p class="lead-msg" title="${esc(b.brief)}">${esc(b.brief)}</p>`
           : b.website ? `<p class="lead-detail"><span class="lead-detail-k">Site</span> ${esc(b.website)}</p>` : '';
-        return `<tbody class="lead-group is-promo">
+        return `<tbody class="lead-group is-promo" data-open="${esc(b._id)}">
         <tr>
           <td class="muted small nowrap">${esc(estDate(b.createdAt))}<div class="lead-time">${esc(estClock(b.createdAt))}</div></td>
-          <td>${Leads.who(b)}${Leads.categoryPill(b)}</td>
+          <td><button type="button" class="lead-open" data-open="${esc(b._id)}">${Leads.whoLabel(b)}</button>${Leads.sub(b)}${Leads.categoryPill(b)}</td>
           <td class="small">${esc(b.email)}</td>
           <td>${Leads.sourcePill(b)}</td>
           <td class="small">${esc((b.spamReasons || []).join(' · '))} <span class="muted">(${esc(String(b.spamScore ?? '—'))})</span></td>
@@ -251,6 +257,224 @@ export class Leads {
       </tbody>`;
       }).join('')}
       </table></div>`;
+  }
+
+  /* ── THE FULL RECORD ─────────────────────────────────────────────────────
+   *
+   * The table is a scanning surface and pays for it: the brief is clamped to one
+   * line, and `role`, `offer`, `notes` and the delivery error have no column at
+   * all. Widening the table until everything fits would cost the one property the
+   * inbox actually needs — being readable at a glance — so a row opens instead.
+   *
+   * This dialog is also the ONLY path to `notes`. The field has been on the
+   * documents and in the PATCH endpoint since the first version and was, until
+   * now, unreachable from the UI: written on every insert, never once shown. */
+  openDetail(id) {
+    const blocked = this.tab === 'blocked';
+    const lead = (blocked ? this._blocked : this._all).find((l) => l._id === id);
+    if (!lead) return;
+    this.closeDetail();
+
+    const returnFocus = document.activeElement;
+    const el = document.createElement('div');
+    el.className = 'modal-backdrop';
+    el.innerHTML = `
+      <div class="modal modal-detail" role="dialog" aria-modal="true" aria-label="Submission details">
+        <header class="modal-head">
+          <h2>${Leads.whoLabel(lead)}</h2>
+          <button type="button" class="modal-x" data-act="close" aria-label="Close">×</button>
+        </header>
+        <div class="modal-body">
+          ${Leads.detailList(lead, blocked)}
+          ${Leads.messageBlock(lead)}
+          ${blocked ? '' : Leads.notesBlock()}
+        </div>
+        <footer class="modal-foot">${Leads.detailActions(lead, blocked)}</footer>
+      </div>`;
+
+    const close = () => {
+      el.remove();
+      document.removeEventListener('keydown', onKey, true);
+      this._closeDetail = null;
+      // Only if it is still on the page — a redraw behind the dialog replaces the
+      // row that opened it, and focusing a detached node silently drops focus to
+      // <body>, which strands a keyboard user back at the top of the document.
+      if (returnFocus && document.contains(returnFocus)) returnFocus.focus();
+    };
+
+    /* Capture phase, deliberately. dropdown.js installs its own document-level
+     * Escape handler; on the bubble phase this one would run after the menu had
+     * already closed and would read "nothing open" — so dismissing a status menu
+     * would throw away the dialog behind it too. Running first leaves it alone. */
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return;
+      if (el.querySelector('.cdrop.is-open')) return;
+      close();
+    };
+
+    el.addEventListener('click', (e) => {
+      if (e.target === el || e.target.closest('[data-act="close"]')) close();
+    });
+    document.addEventListener('keydown', onKey, true);
+    document.body.appendChild(el);
+    this._closeDetail = close;
+
+    // Value set here rather than in the markup: a stored note can contain
+    // anything, and `</textarea>` inside a template literal would end the field
+    // early and spill the rest of the note into the document as markup.
+    const notes = el.querySelector('#ld-notes');
+    if (notes) notes.value = lead.notes || '';
+
+    el.querySelector('.modal-x').focus();
+
+    wireDropdowns(el, async (leadId, value) => {
+      try {
+        await api.patchLead({ id: leadId, status: value });
+        lead.status = value;
+        toast('Status updated.');
+        this.redraw();
+      } catch (err) { toast(err.message, 'err'); }
+    });
+
+    const notesBtn = el.querySelector('#ld-save-notes');
+    const notesState = el.querySelector('#ld-notes-state');
+    notes?.addEventListener('input', () => { notesState.textContent = 'Unsaved'; });
+    notesBtn?.addEventListener('click', async () => {
+      notesBtn.disabled = true;
+      try {
+        await api.patchLead({ id: lead._id, notes: notes.value });
+        lead.notes = notes.value;
+        notesState.textContent = 'Saved.';
+        toast('Notes saved.');
+      } catch (err) {
+        notesState.textContent = '';
+        toast(err.message, 'err');
+      }
+      notesBtn.disabled = false;
+    });
+
+    el.querySelector('[data-spam]')?.addEventListener('click', async (e) => {
+      const btn = e.currentTarget;
+      if (!(await this.setSpam(btn.dataset.spam, btn.dataset.to === 'true'))) return;
+      // The row has just moved to a tab this screen isn't showing. Leaving the
+      // dialog up would keep a record on screen that the table behind no longer
+      // lists, so the dialog goes with it.
+      close();
+      this.redraw();
+    });
+
+    el.querySelector('[data-del]')?.addEventListener('click', async (e) => {
+      if (!confirm('Delete this submission permanently?')) return;
+      if (!(await this.removeLead(e.currentTarget.dataset.del))) return;
+      close();
+      this.redraw();
+    });
+  }
+
+  /** Every stored field worth reading, in one list. Empty ones are dropped rather
+   *  than printed as a dash: a screen of "—" reads as broken, not as empty. */
+  static detailList(l, blocked) {
+    const row = (k, html) => (html ? `<div class="ld-row"><dt>${esc(k)}</dt><dd>${html}</dd></div>` : '');
+    const link = (href) => `<a class="url" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(href)}</a>`;
+
+    // Shown only when the filter actually had something to say. Every clean lead
+    // carries a score of 0, and a "score 0" line on all of them trains the eye to
+    // skip the one row where the score is the point.
+    const flagged = l.spamCategory || (l.spamReasons || []).length;
+    const verdict = flagged
+      ? `${Leads.categoryPill(l)}${l.spamScore != null ? ` <span class="muted small">score ${esc(String(l.spamScore))}</span>` : ''}${
+        (l.spamReasons || []).length ? `<div class="ld-reasons">${esc(l.spamReasons.join(' · '))}</div>` : ''}`
+      : '';
+
+    return `<dl class="ld">
+      ${row('Received', `${esc(estDate(l.createdAt))} · ${esc(estClock(l.createdAt))} <span class="muted small">ET</span>`)}
+      ${row('Came in via', Leads.sourcePill(l))}
+      ${row('Email', l.email ? `<a class="url" href="mailto:${esc(l.email)}">${esc(l.email)}</a>` : '')}
+      ${row('Name', esc(l.name || ''))}
+      ${row('Company', esc(l.company || ''))}
+      ${row('Role', esc(l.role || ''))}
+      ${row('Service', l.service ? esc(SERVICE_LABELS[l.service] || l.service) : '')}
+      ${row('Preferred slot', esc(l.timeSlot || ''))}
+      ${row('Website', l.website ? link(l.website) : '')}
+      ${row('Requested from', l.sourceUrl ? link(l.sourceUrl) : '')}
+      ${row('Offer', esc(l.offer || ''))}
+      ${blocked
+        ? row('IP', l.ip ? `<span class="ld-mono">${esc(l.ip)}</span>` : '')
+        : row('Notification', `${Leads.emailPill(l)}${l.emailError ? `<div class="ld-reasons">${esc(l.emailError)}</div>` : ''}`)}
+      ${row(blocked ? 'Why it was blocked' : 'Filter verdict', verdict)}
+      ${row('Record ID', `<span class="ld-mono">${esc(l._id)}</span>`)}
+    </dl>`;
+  }
+
+  /* The message in full, line breaks and all. The table's one-line clamp is the
+   * thing this dialog exists to undo, so nothing here truncates. */
+  static messageBlock(l) {
+    if (!l.brief) return '';
+    return `<section class="ld-block"><h3>Message</h3><p class="ld-full">${esc(l.brief)}</p></section>`;
+  }
+
+  static notesBlock() {
+    return `<section class="ld-block">
+      <h3>Private notes</h3>
+      <textarea class="input ld-notes" id="ld-notes" rows="4" placeholder="What you know about this lead. Never emailed, never leaves the admin."></textarea>
+      <div class="ld-notes-foot">
+        <button type="button" class="btn btn-ghost btn-sm" id="ld-save-notes">Save notes</button>
+        <span class="muted small" id="ld-notes-state"></span>
+      </div>
+    </section>`;
+  }
+
+  static detailActions(l, blocked) {
+    const mail = l.email ? `<a class="btn btn-ghost btn-sm" href="mailto:${esc(l.email)}">Reply by email</a>` : '';
+    const close = '<button type="button" class="btn btn-dark btn-sm" data-act="close">Close</button>';
+
+    /* A blocked submission was never written to `leads`: there is no document to
+     * set a status on and none to un-spam, so it gets neither control. Writing to
+     * the person is the whole recovery path, and it is the only button offered. */
+    if (blocked) return `<div class="modal-actions">${mail}${close}</div>`;
+
+    /* No status control on a quarantined submission — the same call the table
+     * makes. new/contacted/won/lost is a pipeline for things being worked, and
+     * offering it here would invite filing spam as "lost" instead of leaving it
+     * where it is. Put it back in the inbox first; then it gets a status. */
+    return `<div class="ld-foot-left">
+        ${l.spam ? '' : dropdownHtml({ id: l._id, value: l.status || 'new', cls: 'cdrop-sm', ariaLabel: 'Lead status', options: STATUSES.map((s) => ({ value: s, label: cap(s) })) })}
+        <button type="button" class="lead-promo-btn" data-spam="${esc(l._id)}" data-to="${l.spam ? 'false' : 'true'}">${l.spam ? 'Not spam' : 'Mark as spam'}</button>
+        ${l.spam ? `<button type="button" class="lead-promo-btn is-danger" data-del="${esc(l._id)}">Delete</button>` : ''}
+      </div>
+      <div class="modal-actions">${mail}${close}</div>`;
+  }
+
+  closeDetail() { this._closeDetail?.(); }
+
+  /* main.js tears the view down on navigation, and this dialog lives on <body>
+   * rather than inside #app — so without a destroy() it would outlive the screen
+   * that opened it and sit on top of Pages or Settings. */
+  destroy() { this.closeDetail(); }
+
+  /* Re-file one submission. Shared by the row button and the dialog button so the
+   * two can never drift into disagreeing about what "not spam" clears. */
+  async setSpam(id, to) {
+    try {
+      await api.patchLead({ id, spam: to, spamCategory: to ? 'manual' : undefined });
+      const lead = this._all.find((l) => l._id === id);
+      if (lead) {
+        lead.spam = to;
+        lead.spamCategory = to ? 'manual' : null;
+        if (!to) { lead.spamReasons = []; lead.spamScore = null; }
+      }
+      toast(to ? 'Moved to spam.' : 'Moved back to the inbox.');
+      return true;
+    } catch (err) { toast(err.message, 'err'); return false; }
+  }
+
+  async removeLead(id) {
+    try {
+      await api.deleteLeads({ ids: [id] });
+      this._all = this._all.filter((l) => l._id !== id);
+      toast('Deleted.');
+      return true;
+    } catch (err) { toast(err.message, 'err'); return false; }
   }
 
   redraw() { this.render(); this.wire(); }
@@ -273,35 +497,29 @@ export class Leads {
       catch (err) { toast(err.message, 'err'); }
     });
 
+    /* One lead = one clickable block. The whole <tbody> takes the click, so the
+     * message row opens the same record as the header row above it; the name is
+     * a real <button> so the dialog is reachable without a mouse. A click that
+     * landed on one of the row's own controls belongs to that control. */
+    this.root.querySelectorAll('tbody[data-open]').forEach((group) => {
+      group.addEventListener('click', (e) => {
+        const hit = e.target.closest('a, button, .cdrop, input, textarea, select');
+        if (hit && !hit.classList.contains('lead-open')) return;
+        this.openDetail(group.dataset.open);
+      });
+    });
+
     // Per-lead spam toggle — moves the row between the Inbox and Spam tabs.
     this.root.querySelectorAll('[data-spam]').forEach((btn) => {
       btn.addEventListener('click', async () => {
-        const id = btn.dataset.spam;
-        const to = btn.dataset.to === 'true';
-        try {
-          await api.patchLead({ id, spam: to, spamCategory: to ? 'manual' : undefined });
-          const lead = this._all.find((l) => l._id === id);
-          if (lead) {
-            lead.spam = to;
-            lead.spamCategory = to ? 'manual' : null;
-            if (!to) { lead.spamReasons = []; lead.spamScore = null; }
-          }
-          toast(to ? 'Moved to spam.' : 'Moved back to the inbox.');
-          this.redraw();
-        } catch (err) { toast(err.message, 'err'); }
+        if (await this.setSpam(btn.dataset.spam, btn.dataset.to === 'true')) this.redraw();
       });
     });
 
     this.root.querySelectorAll('[data-del]').forEach((btn) => {
       btn.addEventListener('click', async () => {
-        const id = btn.dataset.del;
         if (!confirm('Delete this submission permanently?')) return;
-        try {
-          await api.deleteLeads({ ids: [id] });
-          this._all = this._all.filter((l) => l._id !== id);
-          toast('Deleted.');
-          this.redraw();
-        } catch (err) { toast(err.message, 'err'); }
+        if (await this.removeLead(btn.dataset.del)) this.redraw();
       });
     });
 
