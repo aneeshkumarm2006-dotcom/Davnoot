@@ -4734,3 +4734,106 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
   .nf-code, .nf-title, .nf-sub, .nf-cta-row, .nf-links { opacity: 1; animation: none; }
   .nf-code::before { animation: none; }
 }
+
+/* =========================================================
+   VS TABLE — a labelled two-way comparison
+   ---------------------------------------------------------
+   Not a duplicate of .compare-grid. That one is two INDEPENDENT lists
+   side by side; it has no row dimension, so "what are we comparing on"
+   lives only in the prose of each bullet. This is for the other shape:
+   a fixed set of named criteria, each answered twice, where the point
+   is that the reader can scan ONE line and see both answers. That is a
+   table, so it is marked up as one — <th scope="row"> per criterion.
+
+   Below 760px the <thead> is dropped and each row becomes a stacked
+   card; the cells carry their column name in data-col so the labels
+   survive the collapse.
+   ========================================================= */
+.vs-table-wrap {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+.vs-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.vs-table th,
+.vs-table td {
+  padding: 24px 28px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.vs-table tr:last-child th,
+.vs-table tr:last-child td { border-bottom: 0; }
+.vs-table thead th {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  padding-top: 28px;
+  padding-bottom: 20px;
+}
+.vs-table thead .vs-us { color: var(--accent); }
+.vs-table tbody th {
+  width: 24%;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+}
+.vs-table td {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.vs-table .vs-us {
+  background: var(--bg-elev);
+  color: var(--text);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+.vs-table em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent);
+}
+
+@media (max-width: 760px) {
+  .vs-table,
+  .vs-table tbody,
+  .vs-table tr,
+  .vs-table th,
+  .vs-table td { display: block; width: auto; }
+  .vs-table thead { display: none; }
+  .vs-table tr {
+    padding: 26px 24px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .vs-table tr:last-child { border-bottom: 0; }
+  .vs-table th,
+  .vs-table td { padding: 0 0 16px; border-bottom: 0; }
+  /* width:24% above is a more specific selector than the reset, and a percentage
+     width on a display:block element is what turns the label into one word per line. */
+  .vs-table tbody th { width: auto; font-size: 17px; padding-bottom: 14px; }
+  .vs-table td::before {
+    content: attr(data-col);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+  }
+  .vs-table .vs-us {
+    background: transparent;
+    box-shadow: none;
+    padding-left: 14px;
+    border-left: 2px solid var(--accent);
+  }
+  .vs-table .vs-us::before { color: var(--accent); }
+}

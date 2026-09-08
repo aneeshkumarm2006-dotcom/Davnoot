@@ -55,7 +55,7 @@
     "marketing-automation-cro.html",
     "quebec-law-25-compliance-guide.html"
   ],
-  "total": 4363,
+  "total": 4381,
   "entries": [
     {
       "en": "Explore →",
@@ -1881,6 +1881,17 @@
         "google-ads-for-dentists.html",
         "google-ads-for-law-firms.html",
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "Montreal",
+      "kind": "text",
+      "tag": "div",
+      "count": 3,
+      "pages": [
+        "email.html",
+        "locations.html",
+        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -3798,16 +3809,6 @@
       "pages": [
         "performance-marketing-agency-montreal.html",
         "startup-seo.html"
-      ]
-    },
-    {
-      "en": "Montreal",
-      "kind": "text",
-      "tag": "div",
-      "count": 2,
-      "pages": [
-        "locations.html",
-        "online-reputation-management-montreal.html"
       ]
     },
     {
@@ -6209,6 +6210,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Whether you're a SaaS company, a professional services firm, or a B2B\n        supplier, we design email programs around pipeline stages rather than shopping carts. Welcome sequences for new\n        leads, drip campaigns tied to your sales funnel, and re-engagement flows for deals that stalled.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "email.html"
       ]
     },
     {
@@ -8750,6 +8760,15 @@
       ]
     },
     {
+      "en": "We build nurture sequences, newsletters, and lifecycle\n        automation designed around longer sales cycles: content that educates, builds trust across a whole buying\n        committee, and keeps you in mind until a prospect is ready to talk.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "email.html"
+      ]
+    },
+    {
       "en": "We start from the customer. Who they are, what they\n        already buy, where they spend attention, and what would make them act. The targeting options come after that,\n        as a way of expressing the answer rather than a way of finding it.",
       "kind": "text",
       "tag": "p",
@@ -9767,6 +9786,15 @@
       ]
     },
     {
+      "en": "Email is our core focus, not a side offering bundled into a broader\n          retainer. Every account gets a dedicated strategist and itemized monthly deliverables rather than a vague\n          promise to send some campaigns.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "email.html"
+      ]
+    },
+    {
       "en": "If you'd rather have someone else own the day-to-day optimization while you focus on running the business, that's what our <a href=\"/services/google-ads\" class=\"text-link\" data-cursor>Google Ads management service</a> is for.",
       "kind": "text",
       "tag": "p",
@@ -9953,6 +9981,15 @@
       "count": 1,
       "pages": [
         "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "Montreal has no shortage of email marketing agencies,\n        from boutique studios to full-service shops covering web, brand, and paid media on the same retainer. What sets\n        our approach apart is depth over breadth.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "email.html"
       ]
     },
     {
@@ -11297,6 +11334,15 @@
       ]
     },
     {
+      "en": "We don't treat email as an add-on to a broader engagement. It's\n        the core of what we do, run by dedicated strategists rather than a junior generalist splitting time across five\n        channels.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "email.html"
+      ]
+    },
+    {
       "en": "Continuous monitoring, fresh content shipping, and competitive defense. The\n            brands that win in AI search show up consistently. The ones that did the work once slip back out of the answers.",
       "kind": "text",
       "tag": "p",
@@ -12440,6 +12486,15 @@
       ]
     },
     {
+      "en": "Yes. Alongside ecommerce brands, we build lead nurture sequences, sales\n          pipeline emails, and newsletter programs for B2B and SaaS companies with longer sales cycles.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "email.html"
+      ]
+    },
+    {
       "en": "<span class=\"g-b\">G</span><span class=\"g-r\">o</span><span class=\"g-y\">o</span><span\n                  class=\"g-b\">g</span><span class=\"g-g\">l</span><span class=\"g-r\">e</span>",
       "kind": "text",
       "tag": "span",
@@ -13094,6 +13149,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Email isn't only an ecommerce channel. For B2B companies it's\n        often the difference between a lead that goes cold and one that turns into a sales conversation.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "email.html"
       ]
     },
     {
@@ -20882,6 +20946,15 @@
       ]
     },
     {
+      "en": "How is Davnoot different from other Montreal email marketing agencies?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "email.html"
+      ]
+    },
+    {
       "en": "How much do Google reviews matter for a Montreal\n            business?",
       "kind": "text",
       "tag": "span",
@@ -24293,6 +24366,15 @@
       ]
     },
     {
+      "en": "CRM-Integrated Email Automation (HubSpot, Salesforce)",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "email.html"
+      ]
+    },
+    {
       "en": "Digital marketing<br />agency in <em>Blainville</em>.",
       "kind": "text",
       "tag": "h1",
@@ -24515,6 +24597,15 @@
       "count": 1,
       "pages": [
         "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Why Montreal businesses<br />choose <em>Davnoot</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "email.html"
       ]
     },
     {
@@ -27479,6 +27570,15 @@
       ]
     },
     {
+      "en": "Newsletter Programs for Thought Leadership",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "email.html"
+      ]
+    },
+    {
       "en": "Our Email<br />Marketing <em>Process</em>.",
       "kind": "text",
       "tag": "h2",
@@ -27764,6 +27864,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Re-engagement Campaigns for Stalled Deals",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "email.html"
       ]
     },
     {
@@ -29396,6 +29505,15 @@
       ]
     },
     {
+      "en": "Account-Based Email Marketing (ABM)",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "email.html"
+      ]
+    },
+    {
       "en": "Attribution <em>infrastructure</em>",
       "kind": "text",
       "tag": "div",
@@ -30756,6 +30874,15 @@
     },
     {
       "en": "Do you send promotional emails?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "email.html"
+      ]
+    },
+    {
+      "en": "Do you work with B2B companies?",
       "kind": "text",
       "tag": "span",
       "count": 1,
@@ -33158,6 +33285,15 @@
       ]
     },
     {
+      "en": "Sales Pipeline Email Flows",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "email.html"
+      ]
+    },
+    {
       "en": "Segment opportunity report",
       "kind": "text",
       "tag": "li",
@@ -34364,6 +34500,15 @@
       ]
     },
     {
+      "en": "For B2B <em>teams</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "email.html"
+      ]
+    },
+    {
       "en": "Free analytics training",
       "kind": "text",
       "tag": "div",
@@ -34766,6 +34911,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Lead Nurture Sequences",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "email.html"
       ]
     },
     {
@@ -35765,6 +35919,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "B2B email marketing",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "email.html"
       ]
     },
     {
