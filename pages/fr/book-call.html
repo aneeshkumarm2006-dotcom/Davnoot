@@ -191,20 +191,127 @@
 <!-- /BUILD:NAV -->
 
   <main id="main">
-  <!-- HERO -->
-  <header class="call-hero">
-    <div class="breadcrumb">
-      <a href="/fr" data-cursor>Davnoot</a>
-      <span class="crumb-sep">/</span>
-      <span class="crumb-current">Réserver un appel</span>
+  <!-- HERO + BOOKING FORM -->
+  <header class="call-hero call-hero-split">
+    <div class="call-hero-copy">
+      <div class="breadcrumb">
+        <a href="/fr" data-cursor>Davnoot</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current">Réserver un appel</span>
+      </div>
+
+      <div class="call-hero-eyebrow">30 minutes · Aucun argumentaire de vente · Aucune préparation</div>
+      <h1 class="call-hero-title">Trouvons le<br /><em>levier</em> dans votre système.</h1>
+      <p class="call-hero-sub">Dites-nous sur quoi vous travaillez. Nous examinerons votre configuration actuelle, trouverons les trois plus grandes occasions et vous dirons par quoi nous commencerions, que vous nous embauchiez ou non.</p>
     </div>
 
-    <div class="call-hero-eyebrow">30 minutes · Aucun argumentaire de vente · Aucune préparation</div>
-    <h1 class="call-hero-title">Trouvons le<br /><em>levier</em> dans votre système.</h1>
-    <p class="call-hero-sub">
-      Dites-nous sur quoi vous travaillez. Nous examinerons votre configuration actuelle, trouverons les trois plus grandes occasions
-      et vous dirons par quoi nous commencerions, que vous nous embauchiez ou non.
-    </p>
+    <div class="call-hero-form" id="form" data-cms-section="section1" data-cms-label="Section 1">
+      <div class="call-form-head">
+        <div class="call-form-eyebrow" data-cms="section1.eyebrow">Écrivez-nous</div>
+        <h2 class="call-form-title" data-cms="section1.title">Dites-nous ce sur quoi vous <em>travaillez</em>.</h2>
+        <p class="call-form-sub" data-cms="section1.sub">Un formulaire, une réponse, un jour ouvrable. Une vraie personne le lit et revient vers vous avec des plages horaires qui fonctionnent. Sans va-et-vient de courriels.</p>
+      </div>
+
+      <form class="book-form" method="POST" action="/api/book-call">
+        <!-- Honeypot for spam -->
+        <p style="display:none" aria-hidden="true">
+          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+
+        <div class="form-row-grid">
+          <div class="form-row">
+            <label for="name">Votre nom</label>
+            <input type="text" id="name" name="name" required placeholder="Prénom et nom" />
+          </div>
+          <div class="form-row">
+            <label for="email">Courriel professionnel</label>
+            <input type="email" id="email" name="email" required placeholder="vous@entreprise.com" />
+          </div>
+        </div>
+
+        <div class="form-row-grid">
+          <div class="form-row">
+            <label for="company">Entreprise</label>
+            <input type="text" id="company" name="company" required placeholder="Votre marque ou entreprise" />
+          </div>
+          <div class="form-row">
+            <label for="role">Votre fonction</label>
+            <input type="text" id="role" name="role" placeholder="Fondateur, directeur marketing, etc." />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="service">De quoi souhaitez-vous discuter?</label>
+          <select id="service" name="service">
+            <option value="">Choisissez une option</option>
+            <option value="seo">Référencement (SEO)</option>
+            <option value="meta">Meta Ads</option>
+            <option value="email">Marketing par courriel</option>
+            <option value="ai-seo">Référencement IA</option>
+            <option value="chatgpt-ads">Publicités ChatGPT / IA</option>
+            <option value="software">Logiciels sur mesure</option>
+            <option value="multi">Multicanal / Je ne sais pas encore</option>
+            <option value="other">Autre</option>
+          </select>
+          <p class="form-hint" data-hint-for="other" hidden>Dites-nous quel service vous avez en tête dans la case ci-dessous.</p>
+        </div>
+
+        <div class="form-row">
+          <label for="brief">Quel est votre plus grand défi en ce moment?</label>
+          <textarea id="brief" name="brief"
+            placeholder="Une ou deux phrases suffisent. Plus c'est précis, plus notre réponse sera utile."
+            required></textarea>
+        </div>
+
+        <button type="submit" class="form-submit-btn">Envoyez-nous ça <span class="arrow">→</span></button>
+        <p class="form-note">Nous répondons à chaque message. Aucune infolettre, aucune séquence automatisée, aucune revente de vos coordonnées.</p>
+
+        <div class="form-success">
+          <strong>C'est noté.</strong> Nous revenons vers vous d'ici un jour ouvrable, avec des plages horaires qui fonctionnent et une première lecture de votre situation.
+        </div>
+      </form>
+
+      <div class="call-form-assurance">
+        <div class="reply-promise-label">Vous aurez une réponse d'ici</div>
+        <div class="reply-promise-key">1 <em>jour ouvrable</em></div>
+        <div class="reply-quotes" data-quote-rotator>
+          <figure class="reply-quote is-active">
+            <blockquote>Si ça ne vend pas, ce n'est pas créatif.</blockquote>
+            <figcaption>David Ogilvy</figcaption>
+          </figure>
+          <figure class="reply-quote" aria-hidden="true">
+            <blockquote>Faites des choses qui ne sont pas extensibles.</blockquote>
+            <figcaption>Paul Graham</figcaption>
+          </figure>
+          <figure class="reply-quote" aria-hidden="true">
+            <blockquote>Le marketing ne porte plus sur ce que vous fabriquez, mais sur les histoires que vous racontez.</blockquote>
+            <figcaption>Seth Godin</figcaption>
+          </figure>
+          <figure class="reply-quote" aria-hidden="true">
+            <blockquote>Votre marque, c'est ce que les autres disent de vous quand vous n'êtes pas dans la pièce.</blockquote>
+            <figcaption>Jeff Bezos</figcaption>
+          </figure>
+          <figure class="reply-quote" aria-hidden="true">
+            <blockquote>Personne ne compte le nombre de publicités que vous diffusez ; on retient seulement l'impression que vous laissez.</blockquote>
+            <figcaption>Bill Bernbach</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="call-hero-extra">
+      <ul class="call-hero-points">
+        <li>Pas de diapositives. Nous ouvrons vos comptes publicitaires et vos données analytiques, et nous vous disons ce que nous voyons.</li>
+        <li>Les trois recommandations vous appartiennent. Nous embaucher est une décision distincte.</li>
+        <li>La personne qui vous répond est celle qui ferait le travail.</li>
+      </ul>
+
+      <div class="call-hero-direct">
+        <span class="call-hero-direct-label">Ou évitez l'attente</span>
+        <a href="tel:+14382237131" class="call-hero-direct-link" data-cursor>+1 438 223 7131</a>
+        <span class="call-hero-direct-note">Du lundi au vendredi, 9 h à 18 h HE. Une personne répond.</span>
+      </div>
+    </div>
   </header>
 
   <!-- TICKER -->
@@ -271,148 +378,6 @@
     </div>
   </div>
 
-  <!-- BOOKING FORM + CALENDAR -->
-  <section id="form" data-cms-section="section1" data-cms-label="Section 1">
-    <div class="reveal">
-      <div class="section-eyebrow" data-cms="section1.eyebrow">Écrivez-nous</div>
-      <h2 class="section-title" data-cms="section1.title">Dites-nous ce sur<br />quoi vous <em>travaillez</em>.</h2>
-      <p class="section-sub" data-cms="section1.sub">Un formulaire, une réponse, un jour ouvrable. Une vraie personne le lit et revient vers vous avec des plages horaires qui fonctionnent. Sans va-et-vient de courriels.</p>
-    </div>
-
-    <div class="book-layout reveal">
-      <!-- FORM -->
-      <form class="book-form" method="POST" action="/api/book-call">
-        <h3>Parlez-nous <em>de vous</em>.</h3>
-        <p class="intro">Nous nous en servons pour préparer notre réponse, afin que la première conversation commence par des constats plutôt que des présentations.</p>
-
-        <!-- Honeypot for spam -->
-        <p style="display:none" aria-hidden="true">
-          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
-        </p>
-
-        <div class="form-row-grid">
-          <div class="form-row">
-            <label for="name">Votre nom</label>
-            <input type="text" id="name" name="name" required placeholder="Prénom et nom" />
-          </div>
-          <div class="form-row">
-            <label for="email">Courriel professionnel</label>
-            <input type="email" id="email" name="email" required placeholder="vous@entreprise.com" />
-          </div>
-        </div>
-
-        <div class="form-row-grid">
-          <div class="form-row">
-            <label for="company">Entreprise</label>
-            <input type="text" id="company" name="company" required placeholder="Votre marque ou entreprise" />
-          </div>
-          <div class="form-row">
-            <label for="role">Votre fonction</label>
-            <input type="text" id="role" name="role" placeholder="Fondateur, directeur marketing, etc." />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <label for="service">De quoi souhaitez-vous discuter?</label>
-          <select id="service" name="service">
-            <option value="">Choisissez une option</option>
-            <option value="seo">Référencement (SEO)</option>
-            <option value="meta">Meta Ads</option>
-            <option value="email">Marketing par courriel</option>
-            <option value="ai-seo">Référencement IA</option>
-            <option value="chatgpt-ads">Publicités ChatGPT / IA</option>
-            <option value="software">Logiciels sur mesure</option>
-            <option value="multi">Multicanal / Je ne sais pas encore</option>
-            <option value="other">Autre</option>
-          </select>
-          <p class="form-hint" data-hint-for="other" hidden>Dites-nous quel service vous avez en tête dans la case ci-dessous.</p>
-        </div>
-
-        <div class="form-row">
-          <label for="brief">Quel est votre plus grand défi en ce moment?</label>
-          <textarea id="brief" name="brief"
-            placeholder="Une ou deux phrases suffisent. Plus c'est précis, plus notre réponse sera utile."
-            required></textarea>
-        </div>
-
-        <button type="submit" class="form-submit-btn">Envoyez-nous ça <span class="arrow">→</span></button>
-        <p class="form-note">Nous répondons à chaque message. Aucune infolettre, aucune séquence automatisée, aucune revente de vos coordonnées.</p>
-
-        <div class="form-success">
-          <strong>C'est noté.</strong> Nous revenons vers vous d'ici un jour ouvrable, avec des plages horaires qui fonctionnent et une première lecture de votre situation.
-        </div>
-      </form>
-
-      <!-- REPLY PROMISE + WHAT HAPPENS NEXT -->
-      <div class="reply-rail">
-        <div class="reply-promise">
-          <div class="reply-promise-label">Vous aurez une réponse d'ici</div>
-          <div class="reply-promise-key">1 <em>jour ouvrable</em></div>
-          <div class="reply-quotes" data-quote-rotator>
-            <figure class="reply-quote is-active">
-              <blockquote>Si ça ne vend pas, ce n'est pas créatif.</blockquote>
-              <figcaption>David Ogilvy</figcaption>
-            </figure>
-            <figure class="reply-quote" aria-hidden="true">
-              <blockquote>Faites des choses qui ne sont pas extensibles.</blockquote>
-              <figcaption>Paul Graham</figcaption>
-            </figure>
-            <figure class="reply-quote" aria-hidden="true">
-              <blockquote>Le marketing ne porte plus sur ce que vous fabriquez, mais sur les histoires que vous racontez.</blockquote>
-              <figcaption>Seth Godin</figcaption>
-            </figure>
-            <figure class="reply-quote" aria-hidden="true">
-              <blockquote>Votre marque, c'est ce que les autres disent de vous quand vous n'êtes pas dans la pièce.</blockquote>
-              <figcaption>Jeff Bezos</figcaption>
-            </figure>
-            <figure class="reply-quote" aria-hidden="true">
-              <blockquote>Personne ne compte le nombre de publicités que vous diffusez ; on retient seulement l'impression que vous laissez.</blockquote>
-              <figcaption>Bill Bernbach</figcaption>
-            </figure>
-          </div>
-
-          <div class="reply-direct">
-            <span class="reply-direct-label">Ou évitez l'attente</span>
-            <a href="tel:+14382237131" class="reply-direct-link" data-cursor>+1 438 223 7131</a>
-            <span class="reply-direct-note">Du lundi au vendredi, 9 h à 18 h HE. Une personne répond.</span>
-          </div>
-        </div>
-
-        <div class="reply-next">
-          <h3>Ce qui se passe <em>ensuite</em>.</h3>
-          <div class="reply-step">
-            <span class="reply-step-num">01</span>
-            <div class="reply-step-body">
-              <div class="reply-step-title">Nous le lisons vraiment</div>
-              <div class="reply-step-desc">Pas une file de billets. Chaque message est lu par une personne.</div>
-            </div>
-          </div>
-          <div class="reply-step">
-            <span class="reply-step-num">02</span>
-            <div class="reply-step-body">
-              <div class="reply-step-title">Nous faisons nos devoirs</div>
-              <div class="reply-step-desc">Plus de 30 minutes avant de répondre : audit du site, revue des canaux, analyse de la concurrence.</div>
-            </div>
-          </div>
-          <div class="reply-step">
-            <span class="reply-step-num">03</span>
-            <div class="reply-step-body">
-              <div class="reply-step-title">Vous repartez avec trois actions</div>
-              <div class="reply-step-desc">Les trois actions à plus fort levier que nous ferions en premier, avec une estimation de l'impact et de l'effort pour chacune. Elles sont à vous, avec ou sans nous.</div>
-            </div>
-          </div>
-          <div class="reply-step">
-            <span class="reply-step-num">04</span>
-            <div class="reply-step-body">
-              <div class="reply-step-title">Si nous ne sommes pas le bon choix, nous vous le dirons</div>
-              <div class="reply-step-desc">Vous obtenez une réponse claire dans un cas comme dans l'autre. Si une autre équipe convient mieux au mandat, nous le dirons et vous indiquerons où chercher.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- WHAT HAPPENS NEXT -->
   <section data-cms-section="section2" data-cms-label="Section 2">
     <div class="reveal">
@@ -438,6 +403,11 @@
         <div class="next-title">L'appel lui-même</div>
         <div class="next-desc">30 minutes bien remplies suivant l'ordre du jour ci-dessus. Vous repartez avec trois recommandations claires et
           priorisées. À vous d'agir, avec ou sans nous.</div>
+      </div>
+      <div class="next-card">
+        <div class="next-num">04</div>
+        <div class="next-title">Si nous ne sommes pas le bon choix, nous vous le dirons</div>
+        <div class="next-desc">Vous obtenez une réponse claire dans un cas comme dans l'autre. Si une autre équipe convient mieux au mandat, nous le dirons et vous indiquerons où chercher.</div>
       </div>
     </div>
   </section>

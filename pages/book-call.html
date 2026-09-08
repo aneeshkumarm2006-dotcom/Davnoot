@@ -191,20 +191,128 @@
 <!-- /BUILD:NAV -->
 
   <main id="main">
-  <!-- HERO -->
-  <header class="call-hero">
-    <div class="breadcrumb">
-      <a href="/" data-cursor>Davnoot</a>
-      <span class="crumb-sep">/</span>
-      <span class="crumb-current">Book a call</span>
+  <!-- HERO + BOOKING FORM -->
+  <header class="call-hero call-hero-split">
+    <div class="call-hero-copy">
+      <div class="breadcrumb">
+        <a href="/" data-cursor>Davnoot</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current">Book a call</span>
+      </div>
+
+      <div class="call-hero-eyebrow">30 minutes · No sales pitch · No prep needed</div>
+      <h1 class="call-hero-title">Let's find the<br /><em>leverage</em> in your stack.</h1>
+      <p class="call-hero-sub">Tell us what you're working on. We'll review your current setup, find the three biggest opportunities, and tell you what we'd do first, whether you hire us or not.</p>
     </div>
 
-    <div class="call-hero-eyebrow">30 minutes · No sales pitch · No prep needed</div>
-    <h1 class="call-hero-title">Let's find the<br /><em>leverage</em> in your stack.</h1>
-    <p class="call-hero-sub">
-      Tell us what you're working on. We'll review your current setup, find the three biggest opportunities,
-      and tell you what we'd do first, whether you hire us or not.
-    </p>
+    <div class="call-hero-form" id="form" data-cms-section="section1" data-cms-label="Section 1">
+      <div class="call-form-head">
+        <div class="call-form-eyebrow" data-cms="section1.eyebrow">Send us a note</div>
+        <h2 class="call-form-title" data-cms="section1.title">Tell us what you're <em>working on</em>.</h2>
+        <p class="call-form-sub" data-cms="section1.sub">One form, one reply, one business day. A real person reads it and comes back with times that work. No scheduling ping-pong.</p>
+      </div>
+
+      <form class="book-form" method="POST" action="/api/book-call">
+        <!-- Honeypot for spam -->
+        <p style="display:none" aria-hidden="true">
+          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+
+        <div class="form-row-grid">
+          <div class="form-row">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" required placeholder="First and last" />
+          </div>
+          <div class="form-row">
+            <label for="email">Work email</label>
+            <input type="email" id="email" name="email" required placeholder="you@company.com" />
+          </div>
+        </div>
+
+        <div class="form-row-grid">
+          <div class="form-row">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" required placeholder="Your brand or company" />
+          </div>
+          <div class="form-row">
+            <label for="role">Your role</label>
+            <input type="text" id="role" name="role" placeholder="Founder, CMO, etc." />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="service">What do you want to discuss?</label>
+          <select id="service" name="service">
+            <option value="">Choose one</option>
+            <option value="seo">SEO</option>
+            <option value="meta">Meta Ads</option>
+            <option value="email">Email Marketing</option>
+            <option value="ai-seo">AI SEO</option>
+            <option value="chatgpt-ads">ChatGPT / AI Ads</option>
+            <option value="software">Custom Software</option>
+            <option value="multi">Multi-channel / Not sure yet</option>
+            <option value="other">Other</option>
+          </select>
+          <p class="form-hint" data-hint-for="other" hidden>Tell us which service you have in mind in the box below.</p>
+        </div>
+
+        <div class="form-row">
+          <label for="brief">What's the biggest challenge right now?</label>
+          <textarea id="brief" name="brief"
+            placeholder="One or two sentences is fine. The more specific, the more useful our reply."
+            required></textarea>
+        </div>
+
+        <button type="submit" class="form-submit-btn">Send it over <span class="arrow">→</span></button>
+        <p class="form-note">We reply to every message. No newsletter signup, no drip sequence, no reselling your details.</p>
+
+        <div class="form-success">
+          <strong>Got it.</strong> We'll come back to you within one business day, with times that work and a first read on
+          your setup.
+        </div>
+      </form>
+
+      <div class="call-form-assurance">
+        <div class="reply-promise-label">You'll hear back within</div>
+        <div class="reply-promise-key">1 <em>business day</em></div>
+        <div class="reply-quotes" data-quote-rotator>
+          <figure class="reply-quote is-active">
+            <blockquote>If it doesn't sell, it isn't creative.</blockquote>
+            <figcaption>David Ogilvy</figcaption>
+          </figure>
+          <figure class="reply-quote" aria-hidden="true">
+            <blockquote>Do things that don't scale.</blockquote>
+            <figcaption>Paul Graham</figcaption>
+          </figure>
+          <figure class="reply-quote" aria-hidden="true">
+            <blockquote>Marketing is no longer about the stuff you make, but about the stories you tell.</blockquote>
+            <figcaption>Seth Godin</figcaption>
+          </figure>
+          <figure class="reply-quote" aria-hidden="true">
+            <blockquote>Your brand is what other people say about you when you're not in the room.</blockquote>
+            <figcaption>Jeff Bezos</figcaption>
+          </figure>
+          <figure class="reply-quote" aria-hidden="true">
+            <blockquote>Nobody counts the number of ads you run; they just remember the impression you make.</blockquote>
+            <figcaption>Bill Bernbach</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="call-hero-extra">
+      <ul class="call-hero-points">
+        <li>No slides. We open your ad accounts and analytics, and tell you what we see.</li>
+        <li>You keep the three recommendations. Hiring us is a separate decision.</li>
+        <li>The person who replies is the person who'd do the work.</li>
+      </ul>
+
+      <div class="call-hero-direct">
+        <span class="call-hero-direct-label">Or skip the wait</span>
+        <a href="tel:+14382237131" class="call-hero-direct-link" data-cursor>+1 438 223 7131</a>
+        <span class="call-hero-direct-note">Mon to Fri, 9am–6pm ET. A person picks up.</span>
+      </div>
+    </div>
   </header>
 
   <!-- TICKER -->
@@ -271,152 +379,6 @@
     </div>
   </div>
 
-  <!-- BOOKING FORM + CALENDAR -->
-  <section id="form" data-cms-section="section1" data-cms-label="Section 1">
-    <div class="reveal">
-      <div class="section-eyebrow" data-cms="section1.eyebrow">Send us a note</div>
-      <h2 class="section-title" data-cms="section1.title">Tell us what<br />you're <em>working on</em>.</h2>
-      <p class="section-sub" data-cms="section1.sub">One form, one reply, one business day. A real person reads it and comes
-        back with times that work. No scheduling ping-pong.</p>
-    </div>
-
-    <div class="book-layout reveal">
-      <!-- FORM -->
-      <form class="book-form" method="POST" action="/api/book-call">
-        <h3>Tell us <em>about you</em>.</h3>
-        <p class="intro">We use this to prep before we reply, so the first conversation starts at insight instead of intros.</p>
-
-        <!-- Honeypot for spam -->
-        <p style="display:none" aria-hidden="true">
-          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
-        </p>
-
-        <div class="form-row-grid">
-          <div class="form-row">
-            <label for="name">Your name</label>
-            <input type="text" id="name" name="name" required placeholder="First and last" />
-          </div>
-          <div class="form-row">
-            <label for="email">Work email</label>
-            <input type="email" id="email" name="email" required placeholder="you@company.com" />
-          </div>
-        </div>
-
-        <div class="form-row-grid">
-          <div class="form-row">
-            <label for="company">Company</label>
-            <input type="text" id="company" name="company" required placeholder="Your brand or company" />
-          </div>
-          <div class="form-row">
-            <label for="role">Your role</label>
-            <input type="text" id="role" name="role" placeholder="Founder, CMO, etc." />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <label for="service">What do you want to discuss?</label>
-          <select id="service" name="service">
-            <option value="">Choose one</option>
-            <option value="seo">SEO</option>
-            <option value="meta">Meta Ads</option>
-            <option value="email">Email Marketing</option>
-            <option value="ai-seo">AI SEO</option>
-            <option value="chatgpt-ads">ChatGPT / AI Ads</option>
-            <option value="software">Custom Software</option>
-            <option value="multi">Multi-channel / Not sure yet</option>
-            <option value="other">Other</option>
-          </select>
-          <p class="form-hint" data-hint-for="other" hidden>Tell us which service you have in mind in the box below.</p>
-        </div>
-
-        <div class="form-row">
-          <label for="brief">What's the biggest challenge right now?</label>
-          <textarea id="brief" name="brief"
-            placeholder="One or two sentences is fine. The more specific, the more useful our reply."
-            required></textarea>
-        </div>
-
-        <button type="submit" class="form-submit-btn">Send it over <span class="arrow">→</span></button>
-        <p class="form-note">We reply to every message. No newsletter signup, no drip sequence, no reselling your details.</p>
-
-        <div class="form-success">
-          <strong>Got it.</strong> We'll come back to you within one business day, with times that work and a first read on
-          your setup.
-        </div>
-      </form>
-
-      <!-- REPLY PROMISE + WHAT HAPPENS NEXT -->
-      <div class="reply-rail">
-        <div class="reply-promise">
-          <div class="reply-promise-label">You'll hear back within</div>
-          <div class="reply-promise-key">1 <em>business day</em></div>
-          <div class="reply-quotes" data-quote-rotator>
-            <figure class="reply-quote is-active">
-              <blockquote>If it doesn't sell, it isn't creative.</blockquote>
-              <figcaption>David Ogilvy</figcaption>
-            </figure>
-            <figure class="reply-quote" aria-hidden="true">
-              <blockquote>Do things that don't scale.</blockquote>
-              <figcaption>Paul Graham</figcaption>
-            </figure>
-            <figure class="reply-quote" aria-hidden="true">
-              <blockquote>Marketing is no longer about the stuff you make, but about the stories you tell.</blockquote>
-              <figcaption>Seth Godin</figcaption>
-            </figure>
-            <figure class="reply-quote" aria-hidden="true">
-              <blockquote>Your brand is what other people say about you when you're not in the room.</blockquote>
-              <figcaption>Jeff Bezos</figcaption>
-            </figure>
-            <figure class="reply-quote" aria-hidden="true">
-              <blockquote>Nobody counts the number of ads you run; they just remember the impression you make.</blockquote>
-              <figcaption>Bill Bernbach</figcaption>
-            </figure>
-          </div>
-
-          <div class="reply-direct">
-            <span class="reply-direct-label">Or skip the wait</span>
-            <a href="tel:+14382237131" class="reply-direct-link" data-cursor>+1 438 223 7131</a>
-            <span class="reply-direct-note">Mon to Fri, 9am–6pm ET. A person picks up.</span>
-          </div>
-        </div>
-
-        <div class="reply-next">
-          <h3>What happens <em>next</em>.</h3>
-          <div class="reply-step">
-            <span class="reply-step-num">01</span>
-            <div class="reply-step-body">
-              <div class="reply-step-title">We read it properly</div>
-              <div class="reply-step-desc">Not a ticket queue. Every submission is read by a person.</div>
-            </div>
-          </div>
-          <div class="reply-step">
-            <span class="reply-step-num">02</span>
-            <div class="reply-step-body">
-              <div class="reply-step-title">We do the homework</div>
-              <div class="reply-step-desc">30+ minutes before we reply: site audit, channel review, competitor scan.</div>
-            </div>
-          </div>
-          <div class="reply-step">
-            <span class="reply-step-num">03</span>
-            <div class="reply-step-body">
-              <div class="reply-step-title">You get three moves</div>
-              <div class="reply-step-desc">The three highest-leverage things we'd do first, with rough impact and
-                effort on each. Yours to keep, with or without us.</div>
-            </div>
-          </div>
-          <div class="reply-step">
-            <span class="reply-step-num">04</span>
-            <div class="reply-step-body">
-              <div class="reply-step-title">If we're not the right fit, we'll tell you</div>
-              <div class="reply-step-desc">You get a clear answer either way. If another team is better suited to
-                the work, we'll say so and recommend where to look.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- WHAT HAPPENS NEXT -->
   <section data-cms-section="section2" data-cms-label="Section 2">
     <div class="reveal">
@@ -443,6 +405,12 @@
         <div class="next-title">The actual call</div>
         <div class="next-desc">30 focused minutes following the agenda above. You walk away with three clear,
           prioritized recommendations. Yours to act on, with or without us.</div>
+      </div>
+      <div class="next-card">
+        <div class="next-num">04</div>
+        <div class="next-title">If we're not the right fit, we'll tell you</div>
+        <div class="next-desc">You get a clear answer either way. If another team is better suited to
+          the work, we'll say so and recommend where to look.</div>
       </div>
     </div>
   </section>
