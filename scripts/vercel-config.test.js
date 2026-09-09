@@ -21,7 +21,7 @@ import crypto from 'node:crypto';
 import { COMPILED_PAGES } from '../lib/compiled-pages.gen.js';
 import { renderPage } from '../lib/page-render.js';
 import { renderNotFound } from '../lib/not-found.js';
-import { SERVICE_PAGES, ADS_PAGES, TRAINING_PAGES, trainingSlug } from '../lib/templates.js';
+import { SERVICE_PAGES, ADS_PAGES, TRAINING_PAGES, TOOLS_PAGES, trainingSlug } from '../lib/templates.js';
 import { STATIC_URLS } from '../lib/sitemap-static.js';
 
 const ROOT = path.join(import.meta.dirname, '..');
@@ -274,6 +274,19 @@ describe('vercel.json', () => {
         // training-seo.html is served at /free-training/seo, because a root file
         // named seo.html already exists (see TRAINING_PAGES in lib/templates.js).
         const clean = `/free-training/${trainingSlug(file)}`;
+        const rdHtml = redirect(`/${file}`);
+        assert.ok(rdHtml && rdHtml.destination === clean && rdHtml.permanent, `/${file} must 301 to ${clean}`);
+        const rdFlat = redirect(`/${name}`);
+        assert.ok(rdFlat && rdFlat.destination === clean && rdFlat.permanent, `/${name} must 301 to ${clean} (retire the flat URL)`);
+        const rw = rewrite(clean);
+        assert.ok(rw && rw.destination === `/${file}`, `${clean} must rewrite to /${file} (serve the static page cleanly)`);
+        continue;
+      }
+      if (TOOLS_PAGES.includes(file)) {
+        // The /tools/* namespace (e.g. /tools/content-analyzer) — the same three-rule
+        // shape as a service or an /ads page. The hub (tools.html) is NOT a member;
+        // it is a flat page at /tools, handled by the "otherwise" branch below.
+        const clean = `/tools/${name}`;
         const rdHtml = redirect(`/${file}`);
         assert.ok(rdHtml && rdHtml.destination === clean && rdHtml.permanent, `/${file} must 301 to ${clean}`);
         const rdFlat = redirect(`/${name}`);

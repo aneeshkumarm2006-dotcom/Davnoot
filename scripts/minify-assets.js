@@ -49,6 +49,12 @@ export const ASSETS = [
   { src: 'styles.css', out: 'styles.min.css', loader: 'css' },
   { src: 'blog.css', out: 'blog.min.css', loader: 'css' },
   { src: 'script.js', out: 'script.min.js', loader: 'js' },
+  /* The free-tools pages only. Kept OUT of styles.css/script.js on purpose: the
+   * analyzer is a self-contained application that two pages load and eighty-odd
+   * pages do not, and folding it into the sitewide bundles would put it on the wire
+   * for every visitor who will never open it. */
+  { src: 'tools.css', out: 'tools.min.css', loader: 'css' },
+  { src: 'tools.js', out: 'tools.min.js', loader: 'js' },
 ];
 
 /** sha256 of a source file's bytes — the freshness stamp. */

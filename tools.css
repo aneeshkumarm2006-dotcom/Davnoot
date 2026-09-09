@@ -1,0 +1,677 @@
+/* ========================================================================
+   DAVNOOT — Free tools
+   Loaded ONLY on /tools and /tools/content-analyzer, after /styles.min.css.
+   Everything here is scoped under .tool-app, .ca-* or .tools-* so it can
+   never reach a page that does not load it. Tokens come from :root in
+   styles.css — no hex value is restated here except the three status hues.
+
+   NAME COLLISION, on purpose avoided: styles.css already owns .tools-grid
+   (a flex row of .tool-chip pills, used on ~20 service pages). The hub grid
+   here is .tools-index so this sheet never redefines it.
+   ======================================================================== */
+
+/* === STATUS TOKENS ======================================================
+   The only new colours in the system. Each is dark enough to clear 4.5:1
+   on --bg-card (pass 6.5:1, warn 5.9:1, fail 7.5:1), which matters because
+   the check rows print the status as text in that colour. The -soft
+   variants are the same hue at low alpha, used only as a chip backdrop
+   behind that same text. Status is ALWAYS a coloured chip WITH a word in
+   it — never colour alone.
+   ------------------------------------------------------------------- */
+.tool-app,
+.tools-index {
+  --ca-pass: #196b45;
+  --ca-warn: #8a5a00;
+  --ca-fail: #a32020;
+  --ca-pass-soft: rgba(25, 107, 69, 0.10);
+  --ca-warn-soft: rgba(138, 90, 0, 0.10);
+  --ca-fail-soft: rgba(163, 32, 32, 0.10);
+}
+
+/* === APP SHELL ========================================================== */
+.tool-app {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* === FORM =============================================================== */
+.ca-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Two-up on desktop; the meta description spans the row because it is a
+   sentence, not a field. Collapses to one column at 760px. */
+.ca-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.ca-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.ca-field-wide { grid-column: 1 / -1; }
+
+/* The mono micro-label, used for every small uppercase caption in the tool.
+   Same 10px / 0.15em treatment as .form-row label and .deliv-freq. */
+.ca-label,
+.ca-score-title,
+.ca-score-of,
+.ca-freq-note,
+.ca-privacy {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Matches .form-row input on /book-call: recessed field on a white card. */
+.ca-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text);
+  transition: border-color 0.3s, background 0.3s;
+}
+.ca-input::placeholder { color: var(--text-dim); }
+.ca-input:hover { border-color: var(--border-hover); }
+.ca-input:focus { border-color: var(--accent); background: var(--bg-elev); outline: none; }
+
+/* Keyboard users must never lose their place in a form this long, so the
+   ring is a real outline layered on top of the focus border, not a border
+   swap that a colour-blind or low-vision user can miss. */
+.ca-input:focus-visible,
+.ca-btn-ghost:focus-visible,
+.ca-tab:focus-visible,
+.tool-app .btn-primary:focus-visible,
+.tools-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ca-textarea {
+  min-height: 340px;
+  resize: vertical;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.ca-textarea-sm { min-height: 76px; resize: vertical; }
+.ca-hint { font-size: 13px; line-height: 1.5; color: var(--text-muted); }
+.ca-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+
+/* Secondary button. Pairs with the existing .btn-primary pill: same height,
+   same radius, outlined instead of filled. */
+.ca-btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border-hover);
+  border-radius: 100px;
+  padding: 17px 26px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.ca-btn-ghost:hover { border-color: var(--accent); background: var(--bg-elev); transform: translateY(-2px); }
+/* The JS toggles element.hidden on #ca-copy — display:inline-flex above
+   would otherwise beat the UA [hidden] rule and the button would stay up. */
+.ca-btn-ghost[hidden] { display: none; }
+
+/* Inherits the mono micro-label rule above; the eyebrow dash is the same
+   28px hairline .section-eyebrow uses, so the promise reads as a caption. */
+.ca-privacy {
+  line-height: 1.7;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.ca-privacy::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  flex: none;
+  background: var(--accent);
+}
+
+/* === EMPTY STATE ======================================================== */
+.ca-empty {
+  border: 1px dashed var(--border-hover);
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+.ca-empty[hidden] { display: none; }
+
+/* === RESULTS ============================================================ */
+.ca-results {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ca-results[hidden] { display: none; }
+
+/* --- Score header ------------------------------------------------------
+   renderRing() in tools.js builds:
+     .ca-score > .ca-ring > svg.ca-ring-svg > .ca-ring-track / .ca-ring-value
+                                              .ca-ring-<band> / .ca-ring-num
+              > .ca-score-meta > .ca-score-title / .ca-score-grade.ca-grade-<band>
+                                 .ca-score-of / .ca-score-note
+   ------------------------------------------------------------------- */
+.ca-score {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 36px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;
+}
+
+.ca-ring { flex: none; min-width: 0; }
+/* The <svg> ships with a viewBox and NO width/height attribute, so without an
+   explicit size here it falls back to the replaced-element default of 300x150
+   and overruns the 280px content box a 360px phone leaves. */
+.ca-ring-svg {
+  display: block;
+  width: 132px;
+  height: 132px;
+}
+.ca-ring-track { stroke: var(--bg-elev-2); }
+.ca-ring-value {
+  stroke: var(--accent);
+  transition: stroke-dasharray 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ca-ring-num {
+  fill: var(--text);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+/* One band scale for the ring stroke and for every grade word. bandClass()
+   emits excellent / good / work / poor, so all four must be defined or a
+   score lands with no colour at all. */
+.ca-ring-excellent,
+.ca-ring-good { stroke: var(--ca-pass); }
+.ca-ring-work { stroke: var(--ca-warn); }
+.ca-ring-poor { stroke: var(--ca-fail); }
+
+.ca-grade-excellent,
+.ca-grade-good { color: var(--ca-pass); }
+.ca-grade-work { color: var(--ca-warn); }
+.ca-grade-poor { color: var(--ca-fail); }
+
+.ca-score-meta { min-width: 0; }
+.ca-score-title { margin-bottom: 10px; }
+/* The grade WORD carries the verdict; the colour only repeats it. */
+.ca-score-grade {
+  font-family: var(--font-sans);
+  font-size: clamp(21px, 2.4vw, 30px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+.ca-score-of { margin-top: 8px; }
+.ca-score-note {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* --- Group cards ------------------------------------------------------- */
+.ca-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.ca-group {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.ca-group-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+.ca-group-title {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+/* Percent (or "Not checked") on the right of the group head. Takes a
+   .ca-grade-<band> alongside, so its colour comes from the band scale. */
+.ca-group-score {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+/* Only the answer-engine group renders one: it says in the panel itself that
+   these checks are heuristics, not a ranking promise. */
+.ca-group-note {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  padding: 10px 0 6px;
+}
+
+/* --- Individual check rows --------------------------------------------
+   renderCheck() builds: li.ca-check.is-<status>
+                           > span.ca-status.ca-status-<status>
+                           > div.ca-check-body > .ca-check-label
+                                                 .ca-check-detail
+                                                 .ca-check-fix
+   ------------------------------------------------------------------- */
+.ca-checks { list-style: none; display: flex; flex-direction: column; }
+.ca-check {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 14px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+.ca-check:last-child { border-bottom: none; padding-bottom: 0; }
+
+/* Status is a WORD in a coloured pill, never colour alone. Every hue clears
+   4.5:1 twice over: on --bg-card (pass 6.50, warn 5.93, fail 7.54) and on its
+   own -soft fill composited over it (5.61 / 5.16 / 6.37). 'na' is neutral —
+   "not checked" is not a failure and must not read red. */
+.ca-status {
+  align-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 100px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.ca-status-pass { color: var(--ca-pass); background: var(--ca-pass-soft); }
+.ca-status-warn { color: var(--ca-warn); background: var(--ca-warn-soft); }
+.ca-status-fail { color: var(--ca-fail); background: var(--ca-fail-soft); }
+.ca-status-na { color: var(--text-muted); background: var(--bg-elev-2); }
+
+.ca-check-body { min-width: 0; }
+.ca-check-label {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  padding-top: 2px;
+  min-width: 0;
+}
+.ca-check-detail,
+.ca-check-fix {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+  margin-top: 6px;
+}
+.ca-check-detail code,
+.ca-check-fix code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--bg-elev-2);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+/* The actionable half of a failed check — set apart, not shouted. */
+.ca-check-fix { border-left: 2px solid var(--border-hover); padding-left: 12px; margin-top: 2px; color: var(--text); }
+
+/* --- Word frequency panel --------------------------------------------- */
+.ca-freq {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  /* BOTH of these, and `width` is the one that actually does the work.
+     .ca-results is a column flex container, so the cross-axis size of an item is
+     resolved by stretch — but stretch is still floored at the item's automatic
+     minimum size, and this item's min-content is the frequency table's 320px
+     min-width plus 56px of padding. At a 380px viewport that floor is 363px inside
+     a 325px column, i.e. 18px of horizontal PAGE scroll. min-width:0 alone does not
+     lift the floor here; an explicit width does. Measured in a real browser at
+     380x820 before and after — do not "tidy" this away. */
+  min-width: 0;
+  width: 100%;
+}
+/* renderFrequency() reuses .ca-group-title for the heading, then this note. */
+.ca-freq-note { margin: 10px 0 20px; line-height: 1.7; }
+
+/* Tab strip: single words / 2-word / 3-word phrases. */
+.ca-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.ca-tab {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 9px 18px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: border-color 0.25s, background 0.25s, color 0.25s;
+}
+.ca-tab:hover { border-color: var(--border-hover); color: var(--text); }
+/* show() sets BOTH aria-selected and .is-active; match either so the strip
+   cannot end up with no tab lit if one of them is ever dropped. */
+.ca-tab.is-active,
+.ca-tab[aria-selected="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+/* The one wide thing in the report — three-word phrases set in mono. The
+   panel scrolls inside itself, because `body { overflow-x: hidden }` in
+   styles.css would otherwise CLIP the overflow at 360px rather than let the
+   reader reach it. */
+.ca-freq-panel {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.ca-freq-empty {
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.ca-freq-table {
+  width: 100%;
+  min-width: 320px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.ca-freq-table th {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: left;
+  font-weight: 400;
+  padding: 12px 16px;
+  background: var(--bg-elev);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+/* Count and share are numbers; the header has to sit over the digits. */
+.ca-freq-table th:nth-child(n + 2) { text-align: right; }
+.ca-freq-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.ca-freq-table tr:last-child td { border-bottom: none; }
+.ca-freq-term { font-family: var(--font-mono); font-size: 13px; overflow-wrap: anywhere; }
+.ca-freq-count,
+.ca-freq-share { font-family: var(--font-mono); font-size: 13px; text-align: right; white-space: nowrap; }
+
+/* --- The analyzer's own failure state ---------------------------------
+   run() replaces #ca-results with these two paragraphs when analyze() throws.
+   Unstyled they were indistinguishable from a check detail. */
+.ca-error-title {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ca-fail);
+}
+.ca-error-body {
+  margin-top: -8px;
+  max-width: 60ch;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* === /tools HUB LISTING =================================================
+   Reads as a .related-card, but holds a name, a description and a status
+   line. NOT .tools-grid — styles.css already defines that as the .tool-chip
+   pill row on ~20 service pages, and redefining it here would rewrite those
+   rows on every page that loads this sheet.
+
+   auto-fit + min() sizes itself from 1 to n tools with no breakpoint and no
+   4-card special case, and the min() keeps a track from ever exceeding the
+   content box on a 360px phone.
+
+   auto-FIT, not auto-fill, and today that is the whole difference: there is
+   exactly ONE live tool, and auto-fill leaves its two empty tracks reserved, so
+   the card sits in the left third of a 1180px row with a void beside it and
+   reads as a broken render. auto-fit collapses the empty tracks and the lone
+   card fills the row, which reads as deliberate. Revisit only if the count ever
+   lands somewhere auto-fit stretches a short final row awkwardly.
+   ------------------------------------------------------------------- */
+.tools-index {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.tools-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 200px;
+  transition: border-color 0.35s ease, background 0.3s ease,
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s ease;
+}
+.tools-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-elev);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(10, 10, 10, 0.07);
+}
+.tools-card-name {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.tools-card-name em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent);
+}
+.tools-card-desc {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+/* The "Free · Runs in your browser · Nothing leaves the page" footer line.
+   margin-top:auto pins it to the bottom of an unevenly sized row. */
+.tools-card-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1.7;
+  margin-top: auto;
+  padding-top: 12px;
+  transition: color 0.3s;
+}
+.tools-card:hover .tools-card-meta { color: var(--accent); }
+
+/* === RESPONSIVE =========================================================
+   Breakpoints match the ones styles.css already uses: 1000 / 760 / 600,
+   plus one at 420 for the 360px-wide phones.
+   ------------------------------------------------------------------- */
+@media (max-width: 1000px) {
+  .ca-groups { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .ca-grid { grid-template-columns: 1fr; }
+  .ca-form { padding: 26px 22px; border-radius: 16px; }
+  .ca-score {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 28px 24px;
+    justify-items: start;
+  }
+  .ca-textarea { min-height: 260px; }
+}
+
+@media (max-width: 600px) {
+  .ca-actions { flex-direction: column; align-items: stretch; }
+  .ca-actions .btn-primary,
+  .ca-btn-ghost { justify-content: center; }
+  .ca-group,
+  .ca-freq { padding: 24px 20px; }
+}
+
+/* At 360px the status pill drops onto its own line so a long check label is
+   never squeezed into a 90px column. */
+@media (max-width: 420px) {
+  .ca-form { padding: 22px 16px; }
+  .ca-ring-svg { width: 108px; height: 108px; }
+  .ca-check { grid-template-columns: 1fr; }
+  .ca-status { justify-self: start; }
+}
+
+/* === REDUCED MOTION ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .ca-input,
+  .ca-btn-ghost,
+  .ca-tab,
+  .ca-ring-value,
+  .tools-card,
+  .tools-card-meta {
+    transition: none;
+  }
+  .ca-btn-ghost:hover,
+  .tools-card:hover { transform: none; }
+}
+
+/* === PRINT ==============================================================
+   One clean page of report. The one bare selector below is deliberate and
+   exists ONLY inside this block: print has to reach the site chrome (nav,
+   footer, the cursor nodes) to remove it.
+
+   The :has() guard is load-bearing. This sheet also loads on /tools, which
+   has NO .tool-app on it — an unguarded `body > *:not(.tool-app)` hid every
+   element on that page and printed one blank sheet of paper.
+   ------------------------------------------------------------------- */
+@media print {
+  /* The analyzer section is nested inside <main>, NOT a direct child of <body>.
+     A `body > *:not(.tool-app)` rule therefore hides <main> — and with it the whole
+     report it was meant to print. Hide only the body/main children that do not
+     CONTAIN the tool, which leaves the chain body > main > .tool-app intact and
+     drops the nav, footer, cursor nodes and the surrounding marketing copy. */
+  body:has(.tool-app) > *:not(:has(.tool-app)):not(.tool-app) { display: none !important; }
+  main:has(.tool-app) > *:not(:has(.tool-app)):not(.tool-app) { display: none !important; }
+  main:has(.tool-app) { padding: 0 !important; margin: 0 !important; max-width: none !important; }
+
+  .tool-app {
+    display: block !important;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+  /* The section may carry .reveal, which parks it at opacity:0 until
+     script.js runs. Print must not depend on that having happened. */
+  .tool-app.reveal,
+  .tool-app .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .ca-form,
+  .ca-empty,
+  .ca-actions,
+  .ca-privacy,
+  .ca-tabs { display: none !important; }
+
+  .ca-results[hidden] { display: block !important; }
+  .ca-results { gap: 12px; }
+
+  .ca-score,
+  .ca-group,
+  .ca-freq {
+    border: none;
+    border-bottom: 1px solid #999;
+    border-radius: 0;
+    padding: 14px 0;
+    break-inside: avoid;
+  }
+  .ca-groups { display: block; }
+  .ca-group { margin-bottom: 8px; }
+  .ca-check { break-inside: avoid; padding: 8px 0; }
+
+  .ca-ring-svg { width: 88px; height: 88px; }
+  .ca-score-grade { font-size: 19px; }
+
+  /* Pill fills drop out on most printers — keep the border and the word. */
+  .ca-status {
+    background: transparent !important;
+    border: 1px solid #666;
+    color: #000 !important;
+  }
+
+  /* The tab strip is hidden, so only the panel show() last rendered prints. */
+  .ca-freq-panel { overflow: visible; border-color: #999; }
+  .ca-freq-table { min-width: 0; font-size: 11px; }
+  .ca-freq-table th { background: transparent; }
+}

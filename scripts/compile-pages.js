@@ -98,6 +98,11 @@ export const PAGE_FILES = [
   'website-maintenance-plans.html',
   'marketing-automation-cro.html',
   'quebec-law-25-compliance-guide.html',
+  // The free-tools cluster added 2026-09-09: a /tools hub and its first tool. The
+  // tool page is a TOOLS_PAGES member (lib/templates.js) and is served at
+  // /tools/content-analyzer; the hub is flat at /tools, like /services and /ads.
+  'tools.html',
+  'content-analyzer.html',
 ];
 
 /* The French counterparts, compiled from pages/fr/ and keyed "fr/<file>" in

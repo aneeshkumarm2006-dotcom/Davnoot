@@ -107,6 +107,9 @@
     { "source": "/training-wordpress", "destination": "/free-training/wordpress", "permanent": true },
     { "source": "/training-analytics.html", "destination": "/free-training/analytics", "permanent": true },
     { "source": "/training-analytics", "destination": "/free-training/analytics", "permanent": true },
+    { "source": "/tools.html", "destination": "/tools", "permanent": true },
+    { "source": "/content-analyzer.html", "destination": "/tools/content-analyzer", "permanent": true },
+    { "source": "/content-analyzer", "destination": "/tools/content-analyzer", "permanent": true },
     { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
     { "source": "/services.html", "destination": "/services", "permanent": true },
     { "source": "/ads.html", "destination": "/ads", "permanent": true },
@@ -224,6 +227,8 @@
     { "source": "/free-training/google-ads", "destination": "/training-google-ads.html" },
     { "source": "/free-training/wordpress", "destination": "/training-wordpress.html" },
     { "source": "/free-training/analytics", "destination": "/training-analytics.html" },
+    { "source": "/tools", "destination": "/tools.html" },
+    { "source": "/tools/content-analyzer", "destination": "/content-analyzer.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/services", "destination": "/services.html" },
     { "source": "/ads", "destination": "/ads.html" },
@@ -299,6 +304,8 @@
     { "source": "/fr/free-training/google-ads", "destination": "/api/page?p=fr/training-google-ads.html" },
     { "source": "/fr/free-training/wordpress", "destination": "/api/page?p=fr/training-wordpress.html" },
     { "source": "/fr/free-training/analytics", "destination": "/api/page?p=fr/training-analytics.html" },
+    { "source": "/fr/tools", "destination": "/api/page?p=fr/tools.html" },
+    { "source": "/fr/tools/content-analyzer", "destination": "/api/page?p=fr/content-analyzer.html" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/:slug", "destination": "/api/page?p=:slug" }
   ]

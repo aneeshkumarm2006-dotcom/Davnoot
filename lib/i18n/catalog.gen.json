@@ -53,19 +53,22 @@
     "training-analytics.html",
     "website-maintenance-plans.html",
     "marketing-automation-cro.html",
-    "quebec-law-25-compliance-guide.html"
+    "quebec-law-25-compliance-guide.html",
+    "tools.html",
+    "content-analyzer.html"
   ],
-  "total": 4381,
+  "total": 4515,
   "entries": [
     {
       "en": "Explore →",
       "kind": "text",
       "tag": "div",
-      "count": 102,
+      "count": 108,
       "pages": [
         "ai-seo.html",
         "b2b-google-ads-agency.html",
         "chatgpt-ads.html",
+        "content-analyzer.html",
         "email.html",
         "google-ads-for-dentists.html",
         "google-ads-for-law-firms.html",
@@ -86,7 +89,8 @@
         "sem-agency-montreal.html",
         "seo.html",
         "software.html",
-        "startup-seo.html"
+        "startup-seo.html",
+        "tools.html"
       ]
     },
     {
@@ -140,12 +144,13 @@
       "en": "FAQ",
       "kind": "text",
       "tag": "div",
-      "count": 25,
+      "count": 27,
       "pages": [
         "ai-seo.html",
         "b2b-google-ads-agency.html",
         "book-call.html",
         "chatgpt-ads.html",
+        "content-analyzer.html",
         "email.html",
         "google-ads-for-dentists.html",
         "google-ads-for-law-firms.html",
@@ -166,15 +171,17 @@
         "sem-agency-montreal.html",
         "seo.html",
         "software.html",
-        "startup-seo.html"
+        "startup-seo.html",
+        "tools.html"
       ]
     },
     {
       "en": "<a href=\"/book-call\" class=\"btn-primary\" data-cursor>\n        Book a free strategy call\n        <span class=\"arrow\">→</span>\n      </a>",
       "kind": "text",
       "tag": "div",
-      "count": 22,
+      "count": 24,
       "pages": [
+        "content-analyzer.html",
         "digital-marketing-agency-blainville.html",
         "digital-marketing-agency-boisbriand.html",
         "digital-marketing-agency-brossard.html",
@@ -193,6 +200,7 @@
         "index.html",
         "locations.html",
         "pricing.html",
+        "tools.html",
         "training-analytics.html",
         "training-google-ads.html",
         "training-seo.html",
@@ -1892,6 +1900,17 @@
         "email.html",
         "locations.html",
         "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "Services",
+      "kind": "text",
+      "tag": "div",
+      "count": 3,
+      "pages": [
+        "chatgpt-ads.html",
+        "index.html",
+        "tools.html"
       ]
     },
     {
@@ -3812,16 +3831,6 @@
       ]
     },
     {
-      "en": "Services",
-      "kind": "text",
-      "tag": "div",
-      "count": 2,
-      "pages": [
-        "chatgpt-ads.html",
-        "index.html"
-      ]
-    },
-    {
       "en": "Shop now",
       "kind": "text",
       "tag": "span",
@@ -4584,6 +4593,15 @@
       ]
     },
     {
+      "en": "If you want the reasoning behind the checks rather than the checks themselves, the <a href=\"/free-training\" class=\"text-link\" data-cursor>free training</a> and the <a href=\"/blog\" class=\"text-link\" data-cursor>blog</a> go considerably deeper. If you would rather hand the whole thing over, our <a href=\"/services\" class=\"text-link\" data-cursor>services</a> and our <a href=\"/pricing\" class=\"text-link\" data-cursor>pricing</a> are both public.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Vaudreuil-Dorion sits at the crossroads of Highways 20 and 40, making it one of the fastest-growing commuter and logistics hubs west of Montreal. If you run a business in Vaudreuil, you already know the Vaudreuil-Soulanges corridor market rewards the companies that show up first — on Google, on Maps, and increasingly in AI answers. Davnoot is a Montreal-based growth agency that builds and runs the marketing systems that make that happen.",
       "kind": "text",
       "tag": "p",
@@ -4635,6 +4653,15 @@
       "count": 1,
       "pages": [
         "digital-marketing-agency-brossard.html"
+      ]
+    },
+    {
+      "en": "The second is that this is how a lot of people find us. Someone searching for free SEO tools usually has the same problem our clients have, only earlier and with a smaller budget. We would rather be useful at that point than pay to interrupt the same person six months later. If a tool helps and you never speak to us, that is a fine outcome. If it helps and you eventually want the work done for you, you already know how we think.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -4737,12 +4764,30 @@
       ]
     },
     {
+      "en": "The tool is yours to use as often as you like, and it stays free whether we ever speak or not. If you run it across a dozen pages and the same problems keep coming back, that is usually a structure problem rather than a writing one, and a 30-minute call is the fastest way to find out. Our <a href=\"/pricing\" class=\"text-link\" data-cursor>pricing</a> is public if you would rather read before you talk.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "For Montreal businesses we handle the Meta Ads strategy, the\n      campaign setup, the audience targeting, the creative testing, the retargeting, the conversion tracking, and the\n      optimization after launch. What we build depends on your audience, your location, your budget, your products, and\n      what you are trying to hit. Book a call and we will tell you what we would run first and why.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "The third is the one that matters most to us. A tool that actually works is a better sample of our judgment than a case study. A case study is our account of something you cannot verify. A tool you can break in thirty seconds, and if the scoring is soft or the advice is generic, you will know immediately. Publishing one is a standing invitation to check whether we know what we are talking about.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -4854,6 +4899,24 @@
       ]
     },
     {
+      "en": "There is no server behind this page. The analysis is a few hundred lines of JavaScript that load with the page and run on your own machine, which is why the result appears the moment you press the button. Your draft is never sent anywhere, never written to a database, never logged, and never seen by us. Disconnect from the internet once the page has loaded and the tool still works.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
+      "en": "Paste a draft, set a focus keyword, and get a weighted score out of 100 with the specific changes that would raise it: word count, heading structure, where the keyword actually appears, sentence and paragraph length, internal and external link balance, and how much of your imagery is missing alt text. It reads HTML and Markdown, so a pasted CMS export works as well as plain prose.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "The mix is a strategy decision, not a platform\n        preference. If your question is narrower and about how paid search campaigns get structured, bid, and\n        reported, that detail sits on the\n        <a href=\"/sem-agency-montreal\" class=\"text-link\" data-cursor>SEM agency Montreal</a> page. This page stays a\n        level above it, comparing the channels against each other.",
       "kind": "text",
       "tag": "p",
@@ -4926,6 +4989,15 @@
       ]
     },
     {
+      "en": "The tool reads what you paste instead of fetching a URL, so it works on a draft that is not published yet. Paste plain text and it treats blank lines as paragraph breaks. Paste Markdown and it reads the hashes as headings, the bracket syntax as links and the image syntax as images. Paste raw HTML and it parses the tags. Mix all three in one draft and it still holds together.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "A performance marketing strategy draws on paid search, paid\n        social advertising, remarketing, conversion tracking, landing page optimization, audience targeting, and\n        campaign testing. Which of them you need comes down to your customers and how they buy. What holds in every\n        case is the test: each part has to connect back to an action someone can count.",
       "kind": "text",
       "tag": "p",
@@ -4989,6 +5061,15 @@
       ]
     },
     {
+      "en": "Below 50 usually means something structural is missing: the keyword is nowhere near the title, there is no clear H1, or the draft is too thin to compete for anything. Between 50 and 79 the piece is sound and the remaining items are worth an hour of your time. At 80 and up you are into diminishing returns, and the honest advice is to publish it and go write the next one.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Laval is Quebec's third-largest city and one of the most competitive suburban markets in the province. If you run a business in Laval, you already know the Laval market rewards the companies that show up first — on Google, on Maps, and increasingly in AI answers. Davnoot is a Montreal-based growth agency that builds and runs the marketing systems that make that happen.",
       "kind": "text",
       "tag": "p",
@@ -5049,6 +5130,15 @@
       "count": 1,
       "pages": [
         "digital-marketing-agency-rimouski.html"
+      ]
+    },
+    {
+      "en": "It should not be. Your keyword and your draft are normalised the same way before they are compared, so hyphens, curly apostrophes, accents and casing all match across. Punctuation and symbols in a keyword are treated as literal characters too, so a phrase like c++ is matched rather than read as a pattern. If you find a phrase that fails, tell us and we will fix it.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -5322,6 +5412,15 @@
       ]
     },
     {
+      "en": "The first is that they cost us almost nothing to run. A tool with no server, no database, and no accounts is just a file. Once it is written, serving it to ten thousand people a month costs the same as serving it to nobody, and there is no support queue attached to it. Charging for something that cheap would be more work than giving it away.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "We judge a real estate campaign on more than clicks. Clicks are the easiest number in the account to move and\n          the least useful one to manage against, especially in a category where curiosity traffic never runs out. A\n          property listing can collect a lot of interested-looking traffic and produce nothing a brokerage can call.",
       "kind": "text",
       "tag": "p",
@@ -5385,6 +5484,15 @@
       ]
     },
     {
+      "en": "No, and be suspicious of any tool that suggests otherwise. A perfect score means the page is technically clean and says clearly what it is about. Ranking also depends on how useful the piece is next to what already ranks, how much your site is trusted, and how strong the competition is. The score removes excuses; it does not create demand.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Separating the stages also changes what a lead is worth. A\n        consultation request sits close to the transaction. A neighbourhood comparison sits a long way from it, costs\n        less to reach, and only earns its place in the account if the page it lands on gives that person a reason to\n        come back with a real property enquiry.",
       "kind": "text",
       "tag": "p",
@@ -5409,6 +5517,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "It is a weighted average across six groups: keyword placement, keyword density, title and meta description, structure and readability, links, and images with alt text. Heavier checks such as the title and the opening paragraph move the number more than light ones, and checks that do not apply to your draft are excluded instead of failed.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -5466,6 +5583,15 @@
       ]
     },
     {
+      "en": "Fix things in the order the report gives you. Failures come first because they are cheap and decisive, warnings second, and passes stay on screen so you can see what not to break in the next edit. Anything touching the title, the meta description or the opening paragraph is a ten-minute job with an outsized effect, so start there.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Yes. Healthcare businesses can use Google Ads to\n          advertise eligible services, subject to Google's advertising policies and applicable\n          regulations. Which services qualify, and how they can be described, is worth confirming\n          before the campaign is built rather than after an advertisement is disapproved.",
       "kind": "text",
       "tag": "div",
@@ -5517,6 +5643,15 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Roughly half a percent to two and a half percent of your total word count, and the top of that range is a ceiling rather than a goal. Density here is calculated against every word in the draft, so a longer piece needs more mentions to reach the same figure. If you have to force the phrase in to raise the number, leave it low.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -5727,6 +5862,15 @@
       ]
     },
     {
+      "en": "The tools will tell you what is wrong with a page. They will not write the next forty, fix the technical debt underneath them, or decide which channel deserves the budget. If you would rather hand that to someone who does it every day, book a free 30-minute strategy call and we will tell you where the opportunity is.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "They are industry awards recognizing campaigns and marketers across\n          Canada, including the awards run by the Canadian Marketing Association. Reading the winners is a fast way to\n          see which creative strategies, channels, and technologies the industry is rewarding, whether or not you\n          attend.",
       "kind": "text",
       "tag": "div",
@@ -5760,6 +5904,24 @@
       "count": 1,
       "pages": [
         "marketing-automation-cro.html"
+      ]
+    },
+    {
+      "en": "Paste a draft, name the phrase you want it to rank for, and get a real score out of 100 with the specific fixes behind it. This SEO content analyzer reads your keyword placement, headings, sentence length, links, images and alt text, and it runs entirely inside your browser. Nothing you paste ever leaves this page.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
+      "en": "If you want the same thinking applied to a whole site rather than one page, that is what <a href=\"/services/seo\" class=\"text-link\" data-cursor>our search work</a> is. The <a href=\"/free-training\" class=\"text-link\" data-cursor>free training</a> covers the fundamentals if you would rather learn it than hand it over.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -5967,6 +6129,15 @@
       "count": 1,
       "pages": [
         "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "One thing the score cannot see is whether your page is better than the ten already ranking. No tool can, this one included. Treat 100 as a clean draft rather than a promise, and read the <a href=\"/blog\" class=\"text-link\" data-cursor>writing on our blog</a> for the strategy that sits above the checklist.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -6273,6 +6444,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "All three work, including a mix of them. Markdown headings, links and images are parsed, HTML tags are parsed, and plain text is read with blank lines as paragraph breaks. Images count whether they are written as an image tag or as Markdown image syntax, and the alt text is read either way.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -6636,6 +6816,24 @@
       ]
     },
     {
+      "en": "A tool tells you what is wrong on one page. The rest of it — <a href=\"/services/seo\" class=\"text-link\" data-cursor>organic search</a>, <a href=\"/services/ai-seo\" class=\"text-link\" data-cursor>visibility inside AI answers</a>, paid channels and email — is covered properly elsewhere.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
+      "en": "No, and we would not claim otherwise. Anything that needs live search data, crawl history, or competitor indexes needs a paid platform behind it. These tools cover the parts that can be worked out from the page in front of you, which is a surprisingly large share of the day-to-day.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "People use the terms interchangeably. SEM is the broader term\n          for search engine marketing, while PPC refers specifically to pay-per-click advertising. In\n          day-to-day work the label matters less than whether the campaign was built around a business\n          goal.",
       "kind": "text",
       "tag": "div",
@@ -6714,6 +6912,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "The score is a weighted average of every check that applies to what you pasted. A check with nothing to judge is dropped rather than failed, so leaving the slug blank costs you nothing. A short note with no images is read as a short note with no images, not punished for being one.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -6933,6 +7140,24 @@
       ]
     },
     {
+      "en": "Every tool here runs entirely inside your own browser. Nothing you type or paste is uploaded to a server, stored in a database, or logged anywhere, because there is no server behind these pages to send it to. None of them ask for an email address before showing you a result.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
+      "en": "No. The analysis runs in your own browser and your text never leaves it. Nothing is sent to a server, written to a database or logged. You can disconnect from the internet once the page has loaded and the tool still works, which is the easiest way to confirm it for yourself.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Property searches run from idle curiosity to a buyer with a\n          deposit. We build the keyword list around the properties, services, and locations the business serves, then\n          use negative keywords to keep research traffic and out-of-area searches off the budget.",
       "kind": "text",
       "tag": "p",
@@ -7065,6 +7290,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "It covers the same on-page ground without needing a site, a plugin or a login, which makes it useful while you are still drafting and useful if you write somewhere other than WordPress. It never touches your site, so it cannot generate sitemaps or write your tags for you.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -7968,6 +8202,15 @@
       ]
     },
     {
+      "en": "These are the ones being worked on. They are listed as plain text on purpose — nothing gets a link until it is finished, because a page that loads and does nothing is worse than a page that does not exist yet. No dates, either. They ship when they are good.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "This page covers the nonprofit version of that account.\n        The platform detail underneath it (bidding, match types, ad formats, reporting) lives on our\n        <a href=\"/services/google-ads\" class=\"text-link\" data-cursor>Google Ads management</a> page.",
       "kind": "text",
       "tag": "p",
@@ -8292,6 +8535,15 @@
       ]
     },
     {
+      "en": "<span class=\"call-hero-direct-label\">Or skip the wait</span>\n        <a href=\"tel:+14382237131\" class=\"call-hero-direct-link\" data-cursor>+1 438 223 7131</a>\n        <span class=\"call-hero-direct-note\">Mon to Fri, 9am–6pm ET. A person picks up.</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "Most of the real estate businesses we talk to are already spending. Our first job is working out which\n          property searches that budget is buying, because the searches an account matches are almost never the keywords\n          somebody planned.",
       "kind": "text",
       "tag": "p",
@@ -8460,15 +8712,6 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
-      ]
-    },
-    {
-      "en": "<span class=\"reply-direct-label\">Or skip the wait</span>\n            <a href=\"tel:+14382237131\" class=\"reply-direct-link\" data-cursor>+1 438 223 7131</a>\n            <span class=\"reply-direct-note\">Mon to Fri, 9am–6pm ET. A person picks up.</span>",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -9237,6 +9480,15 @@
       ]
     },
     {
+      "en": "Whenever something we built for our own work is worth handing over. We deliberately do not commit to a schedule, because a release date is the fastest way to ship a tool that is not ready. The in-progress list above is the real roadmap.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Businesses with strong AI-ready campaigns, optimized landing pages and trusted brand signals are better\n            positioned to reach customers through conversational AI experiences.<br />\n            <strong>→ davnoot.com →</strong>",
       "kind": "text",
       "tag": "div",
@@ -9387,6 +9639,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "There is no signup, no email gate, no trial and no daily limit. Run it a hundred times on a hundred drafts and nothing changes. We did not build this as a way to collect addresses, so there is nothing to collect and no list to leave.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -10092,6 +10353,15 @@
       ]
     },
     {
+      "en": "<a href=\"/\" data-cursor>Davnoot</a>\n      <span class=\"crumb-sep\">/</span>\n      <a href=\"/tools\" data-cursor>Free tools</a>\n      <span class=\"crumb-sep\">/</span>\n      <span class=\"crumb-current\">Content Analyzer</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "<span class=\"serp-fav\"></span><span class=\"serp-org-id\"><span\n                      class=\"serp-org-name\">Client Home</span><span class=\"serp-org-url\">client.com › collections ›\n                      storage</span></span>",
       "kind": "text",
       "tag": "div",
@@ -10233,6 +10503,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "No, and not as a policy promise — as a technical fact. All the analysis happens in JavaScript inside your own browser. Your text is never sent anywhere, so there is nowhere for us to store it and nothing for us to read.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -10650,6 +10929,15 @@
       ]
     },
     {
+      "en": "Right now there is one: the <a href=\"/tools/content-analyzer\" class=\"text-link\" data-cursor>Content Analyzer</a>. Paste a draft you are about to publish and see what it flags before it goes live rather than after.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Slow pages, broken links, indexing problems, poor redirects, and other technical\n            issues quietly cost you traffic every day. We fix those problems before putting more content on top of\n            them.",
       "kind": "text",
       "tag": "p",
@@ -10719,6 +11007,15 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Yes, with no conditions attached. There is no account, no email gate, no trial period and no cap on how many drafts you can run. The tool is part of the page you are already on, so there is nothing to sign up for.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -10881,6 +11178,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "We build them because we needed them on client work first. When an internal script turns out to be useful enough to deserve a real interface, it ends up on this page instead of in a folder on somebody's laptop.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -11289,6 +11595,15 @@
       ]
     },
     {
+      "en": "Whether your phrase appears in the title, the slug, the meta description, the opening paragraph and at least one subheading. Those five positions carry the most weight, and they are the cheapest to fix.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Work through the material at your own pace. If you would rather someone else owned the day-to-day optimization, book a free 30-minute strategy call and we will show you exactly where the opportunity is.",
       "kind": "text",
       "tag": "p",
@@ -11484,6 +11799,15 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "The store-specific checks a general page audit misses: duplicate variant URLs, thin descriptions repeated across a catalogue, missing product markup, and collection pages competing with each other.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -11820,6 +12144,15 @@
       ]
     },
     {
+      "en": "Yes. No account, no trial, no credit card, no usage limit, and no paid tier waiting behind a locked result. There is nothing to upgrade to, because there is no billing attached to any of it.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Reputation damage does not arrive on a schedule. It\n        arrives on a Friday, in a form nobody predicted, and the first hour of response usually decides how long the\n        story lasts.",
       "kind": "text",
       "tag": "p",
@@ -12051,6 +12384,15 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Fill in a short form, get valid JSON-LD for an article, a product, a local business, or an FAQ block, with the fields Google actually reads flagged separately from the ones it ignores.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -12288,6 +12630,15 @@
       ]
     },
     {
+      "en": "Internal links, external links, and the anchor text on each. A page with no supporting sources and no route deeper into your own site is a dead end for readers and crawlers alike.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Not exactly. PPC means paid advertising billed on clicks. Paid social\n          means advertising through social media platforms. The two overlap, but they are not the same thing.",
       "kind": "text",
       "tag": "div",
@@ -12429,6 +12780,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-small-business.html"
+      ]
+    },
+    {
+      "en": "Images written as HTML tags and images written in Markdown, counted together, with the share that actually carry alt text and whether any of that alt text describes your topic.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -12627,6 +12987,15 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "No. There is no gate, no unlock step, and no results-by-email screen. Open the page, use the tool, close the tab. We would rather you remember the tool than resent the form.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -12864,6 +13233,15 @@
       ]
     },
     {
+      "en": "Headlines and descriptions measured against the real character limits, with a live preview of how the ad truncates on a phone rather than on a desktop mockup nobody sees.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Ongoing optimization is how a business makes informed\n        decisions instead of relying on assumptions. It also means accepting that some of the assumptions were ours.",
       "kind": "text",
       "tag": "p",
@@ -12909,21 +13287,21 @@
       ]
     },
     {
+      "en": "Free marketing tools that run entirely in your browser — no signup, no upload, no stored data. Free SEO tools and free digital marketing tools built by the Davnoot team.",
+      "kind": "description",
+      "tag": "meta",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "It can work, but it depends on what you are selling,\n        where you operate, how competitive your market is, and how much each new customer is worth to your business.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "google-ads-for-small-business.html"
-      ]
-    },
-    {
-      "en": "Tell us what you're working on. We'll review your current setup, find the three biggest opportunities,\n      and tell you what we'd do first, whether you hire us or not.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -12951,6 +13329,15 @@
       "count": 1,
       "pages": [
         "digital-marketing-agency-brossard.html"
+      ]
+    },
+    {
+      "en": "Character counts measured against the lengths that survive truncation, where the keyword sits in the title, and whether the description gives someone a reason to click.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -13566,6 +13953,24 @@
       ]
     },
     {
+      "en": "Subject line and preheader checked for length, clipping in the major inboxes, emoji rendering, and the spam-trigger phrasing that quietly costs you deliverability.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
+      "en": "Tell us what you're working on. We'll review your current setup, find the three biggest opportunities, and tell you what we'd do first, whether you hire us or not.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "<span class=\"pc-bar-l\">Broad prospecting</span><span class=\"pc-bar-track\"><i\n                    style=\"width:64%\"></i></span><span class=\"pc-bar-v\">Narrow</span>",
       "kind": "text",
       "tag": "div",
@@ -13707,6 +14112,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Word count, one H1 and no skipped heading levels, how much text sits between subheadings, and the share of sentences and paragraphs long enough to lose a reader.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -13914,6 +14328,15 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "How many times the phrase occurs, divided by your total word count, plus the words you lean on most. Density is a smell test for stuffing, not a target to hit.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -14211,6 +14634,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "A free SEO content analyzer that scores your draft out of 100 and checks keyword use, headings, links, images and alt text. Runs in your browser. No signup.",
+      "kind": "description",
+      "tag": "meta",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -14772,6 +15204,15 @@
       ]
     },
     {
+      "en": "A correctly formatted llms.txt file for your site, so assistants that read one can find the pages you want quoted instead of guessing from a sitemap.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "As conversational AI continues to reshape online discovery, businesses that prepare early\n        will be better positioned to capture future demand.",
       "kind": "text",
       "tag": "p",
@@ -14994,6 +15435,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Each group runs its own set of checks, and each check carries a weight. The number at the top is the weighted result, not a count of green ticks.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -15348,6 +15798,15 @@
       ]
     },
     {
+      "en": "One tool is live at the moment. The list grows as we finish the next ones, and everything that lands here stays free and stays account-free.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "<a href=\"/book-call\" class=\"btn-primary\" data-cursor>\n        Discuss your dental campaigns\n        <span class=\"arrow\">→</span>\n      </a>",
       "kind": "text",
       "tag": "div",
@@ -15408,6 +15867,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "Primary text, headline, and description shown at the point where the feed cuts them off, across the placements where the crop is different.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -15519,15 +15987,6 @@
       ]
     },
     {
-      "en": "You get a clear answer either way. If another team is better suited to\n                the work, we'll say so and recommend where to look.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "<a href=\"/book-call\" class=\"btn-primary\" data-cursor>\n        Request an SEM consultation\n        <span class=\"arrow\">→</span>\n      </a>",
       "kind": "text",
       "tag": "div",
@@ -15552,15 +16011,6 @@
       "count": 1,
       "pages": [
         "software.html"
-      ]
-    },
-    {
-      "en": "The three highest-leverage things we'd do first, with rough impact and\n                effort on each. Yours to keep, with or without us.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -15987,6 +16437,24 @@
       ]
     },
     {
+      "en": "You get a clear answer either way. If another team is better suited to\n          the work, we'll say so and recommend where to look.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
+      "en": "<a href=\"/\" data-cursor>Davnoot</a>\n        <span class=\"crumb-sep\">/</span>\n        <span class=\"crumb-current\">Book a call</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "<a href=\"/book-call\" class=\"btn-primary\" data-cursor>\n        Book a free SEO audit\n        <span class=\"arrow\">→</span>\n      </a>",
       "kind": "text",
       "tag": "div",
@@ -16011,15 +16479,6 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
-      ]
-    },
-    {
-      "en": "One form, one reply, one business day. A real person reads it and comes\n        back with times that work. No scheduling ping-pong.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -16374,15 +16833,6 @@
       ]
     },
     {
-      "en": "<a href=\"/\" data-cursor>Davnoot</a>\n      <span class=\"crumb-sep\">/</span>\n      <span class=\"crumb-current\">Book a call</span>",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "<a href=\"/\" data-cursor>Davnoot</a>\n      <span class=\"crumb-sep\">/</span>\n      <span class=\"crumb-current\">Startup SEO</span>",
       "kind": "text",
       "tag": "div",
@@ -16470,6 +16920,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "<a href=\"/\" data-cursor>Davnoot</a>\n      <span class=\"crumb-sep\">/</span>\n      <span class=\"crumb-current\">Free tools</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -16569,6 +17028,15 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Every tool we build is free and stays free. When the checklist stops being the bottleneck, these are the next places to look.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -16794,6 +17262,15 @@
       "count": 1,
       "pages": [
         "locations.html"
+      ]
+    },
+    {
+      "en": "One form, one reply, one business day. A real person reads it and comes back with times that work. No scheduling ping-pong.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -19182,15 +19659,6 @@
       ]
     },
     {
-      "en": "We use this to prep before we reply, so the first conversation starts at insight instead of intros.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "Security fundamentals: updates, backups, and the most common ways WordPress sites get compromised.",
       "kind": "text",
       "tag": "div",
@@ -19440,6 +19908,15 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Everything is analyzed in your browser. Nothing you paste is uploaded, stored, or logged.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -19764,6 +20241,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Paste plain text, Markdown, or HTML. Headings, links, and images are all detected.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -20217,6 +20703,15 @@
       ]
     },
     {
+      "en": "No slides. We open your ad accounts and analytics, and tell you what we see.",
+      "kind": "text",
+      "tag": "li",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "Should a small business send Google Ads traffic to its\n            homepage?",
       "kind": "text",
       "tag": "span",
@@ -20493,15 +20988,6 @@
       "count": 1,
       "pages": [
         "seo.html"
-      ]
-    },
-    {
-      "en": "30+ minutes before we reply: site audit, channel review, competitor scan.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -21144,6 +21630,15 @@
       ]
     },
     {
+      "en": "You keep the three recommendations. Hiring us is a separate decision.",
+      "kind": "text",
+      "tag": "li",
+      "count": 1,
+      "pages": [
+        "book-call.html"
+      ]
+    },
+    {
       "en": "<span>home storage systems</span><span class=\"rank-kw-pos\">#3</span>",
       "kind": "text",
       "tag": "div",
@@ -21600,6 +22095,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "My keyword is in the text, so why would it be reported as missing?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -22224,6 +22728,15 @@
       ]
     },
     {
+      "en": "Open the Content Analyzer\n        <span class=\"arrow\">→</span>",
+      "kind": "text",
+      "tag": "a",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Paid search is one part<br />of the\n        <em>pipeline</em>.",
       "kind": "text",
       "tag": "h2",
@@ -22410,6 +22923,15 @@
       "count": 1,
       "pages": [
         "social-media-advertising-pricing.html"
+      ]
+    },
+    {
+      "en": "Paste your draft here. Plain text, Markdown or HTML all work.",
+      "kind": "attr:placeholder",
+      "tag": "textarea",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -22953,6 +23475,15 @@
       ]
     },
     {
+      "en": "Free SEO Content Analyzer | Content Checker Tool | Davnoot",
+      "kind": "title",
+      "tag": "title",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "From occasional emails<br />to a <em>revenue channel</em>.",
       "kind": "text",
       "tag": "h2",
@@ -23238,15 +23769,6 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
-      ]
-    },
-    {
-      "en": "Not a ticket queue. Every submission is read by a person.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -23628,6 +24150,15 @@
       ]
     },
     {
+      "en": "Add a focus keyword and some content, then hit Analyze.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Content scaled once the pages that convert already rank",
       "kind": "text",
       "tag": "div",
@@ -23841,6 +24372,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-dentists.html"
+      ]
+    },
+    {
+      "en": "The person who replies is the person who'd do the work.",
+      "kind": "text",
+      "tag": "li",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -24429,6 +24969,15 @@
       ]
     },
     {
+      "en": "Free · Runs in your browser · Nothing leaves the page",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Furnace repair ads pointed at a general HVAC homepage",
       "kind": "text",
       "tag": "div",
@@ -24462,6 +25011,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Jump to the tool\n        <span class=\"arrow\">→</span>",
+      "kind": "text",
+      "tag": "a",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -24924,6 +25482,15 @@
       ]
     },
     {
+      "en": "The short summary under your title in search results",
+      "kind": "attr:placeholder",
+      "tag": "textarea",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Thin pages published in bulk to crowd out one result",
       "kind": "text",
       "tag": "div",
@@ -24966,6 +25533,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Can I paste Markdown or HTML instead of plain text?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -25869,6 +26445,15 @@
       ]
     },
     {
+      "en": "Does my content get uploaded or stored anywhere?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Fourteen markets,<br />one <em>senior team</em>.",
       "kind": "text",
       "tag": "h2",
@@ -26445,6 +27030,15 @@
       ]
     },
     {
+      "en": "Is this a replacement for a plugin like Yoast?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Let's tie the spend<br />to a <em>result</em>.",
       "kind": "text",
       "tag": "h2",
@@ -26841,21 +27435,21 @@
       ]
     },
     {
-      "en": "Tell us what<br />you're <em>working on</em>.",
-      "kind": "text",
-      "tag": "h2",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "The ad should match<br />the <em>search</em>.",
       "kind": "text",
       "tag": "h2",
       "count": 1,
       "pages": [
         "sem-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Three reasons, and none of them are generous.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -26946,6 +27540,15 @@
       "count": 1,
       "pages": [
         "pricing.html"
+      ]
+    },
+    {
+      "en": "Analyze content <span class=\"arrow\">→</span>",
+      "kind": "text",
+      "tag": "button",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -27084,6 +27687,15 @@
       ]
     },
     {
+      "en": "Or point it at<br />the <em>whole site</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Property lead actions tracked as conversions",
       "kind": "text",
       "tag": "div",
@@ -27180,6 +27792,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Are these free marketing tools really free?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -27405,6 +28026,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "When you would rather <em>hand it over</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -27714,6 +28344,15 @@
       ]
     },
     {
+      "en": "Free tools · No signup · Nothing uploaded",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Generate real estate<br /><em>leads</em>.",
       "kind": "text",
       "tag": "h2",
@@ -28020,6 +28659,24 @@
       ]
     },
     {
+      "en": "Free tool · No signup · Nothing uploaded",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
+      "en": "Get cited by <em>the answer engines</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Get started with Google Ads for dentists",
       "kind": "text",
       "tag": "div",
@@ -28143,6 +28800,15 @@
       "count": 1,
       "pages": [
         "ppc-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Tell us what you're <em>working on</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "book-call.html"
       ]
     },
     {
@@ -28281,6 +28947,15 @@
       ]
     },
     {
+      "en": "Do I need to give you an email address?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Founders, in<br /><em>their words</em>.",
       "kind": "text",
       "tag": "h2",
@@ -28359,6 +29034,15 @@
       "count": 1,
       "pages": [
         "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "Or stop doing it<br /><em>by hand</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -28623,6 +29307,15 @@
       ]
     },
     {
+      "en": "Is the content analyzer actually free?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Is this really free? What's the catch?",
       "kind": "text",
       "tag": "span",
@@ -28767,6 +29460,15 @@
       ]
     },
     {
+      "en": "What keyword density should I aim for?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "What SEO<br />actually <em>costs</em>.",
       "kind": "text",
       "tag": "h1",
@@ -28908,6 +29610,24 @@
       "count": 1,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "Do you store or read what I paste in?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
+      "en": "Does a score of 100 mean I will rank?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -29100,6 +29820,15 @@
       ]
     },
     {
+      "en": "What does the 0 to 100 score measure?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "What is online reputation management?",
       "kind": "text",
       "tag": "span",
@@ -29178,6 +29907,15 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Content analyzer<br /><em>FAQs</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -29406,6 +30144,15 @@
       ]
     },
     {
+      "en": "Search ad preview and length checker",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Smaller rooms, better conversations.",
       "kind": "text",
       "tag": "h3",
@@ -29421,6 +30168,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "The headline shown in search results",
+      "kind": "attr:placeholder",
+      "tag": "input",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -29808,6 +30564,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "What we are <em>building next</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -30342,6 +31107,15 @@
       ]
     },
     {
+      "en": "It runs in <em>your browser</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Measuring paid social performance",
       "kind": "text",
       "tag": "div",
@@ -30474,6 +31248,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "Will these replace paid software?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -30774,6 +31557,15 @@
       ]
     },
     {
+      "en": "The rest of the <em>toolbox</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Volunteer <em>opportunities</em>",
       "kind": "text",
       "tag": "h3",
@@ -30798,6 +31590,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Why we <em>give these away</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -30888,6 +31689,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Free content <em>analyzer</em>.",
+      "kind": "text",
+      "tag": "h1",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -31089,6 +31899,15 @@
       ]
     },
     {
+      "en": "Six groups, <em>one score</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Strategy & <em>copywriting</em>",
       "kind": "text",
       "tag": "h3",
@@ -31104,6 +31923,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "The phrase you want to rank for",
+      "kind": "attr:placeholder",
+      "tag": "input",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -31149,6 +31977,15 @@
       "count": 1,
       "pages": [
         "social-media-advertising-pricing.html"
+      ]
+    },
+    {
+      "en": "What the <em>number</em> means.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -31341,6 +32178,33 @@
       ]
     },
     {
+      "en": "Free marketing <em>tools</em>.",
+      "kind": "text",
+      "tag": "h1",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
+      "en": "Free Marketing Tools | Davnoot",
+      "kind": "title",
+      "tag": "title",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
+      "en": "Free tools<br /><em>FAQs</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "How do you handle scope creep?",
       "kind": "text",
       "tag": "span",
@@ -31350,12 +32214,30 @@
       ]
     },
     {
+      "en": "How often do you add new ones?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "HVAC keyword <em>research</em>",
       "kind": "text",
       "tag": "h3",
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Keyword density and repetition",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -31617,6 +32499,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-real-estate.html"
+      ]
+    },
+    {
+      "en": "Which one should I start with?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -32151,6 +33042,15 @@
       ]
     },
     {
+      "en": "Free digital marketing tools",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Fundraising <em>appeals</em>",
       "kind": "text",
       "tag": "h3",
@@ -32304,6 +33204,15 @@
       ]
     },
     {
+      "en": "Notes from <em>the work</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Performance and optimization",
       "kind": "text",
       "tag": "div",
@@ -32418,6 +33327,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "What we <em>actually do</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -32808,15 +33726,6 @@
       ]
     },
     {
-      "en": "Tell us <em>about you</em>.",
-      "kind": "text",
-      "tag": "h3",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "Topics a full agenda covers",
       "kind": "text",
       "tag": "div",
@@ -32850,15 +33759,6 @@
       "count": 1,
       "pages": [
         "sem-agency-montreal.html"
-      ]
-    },
-    {
-      "en": "What happens <em>next</em>.",
-      "kind": "text",
-      "tag": "h3",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -33114,6 +34014,15 @@
       ]
     },
     {
+      "en": "Learn it <em>yourself</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "List <em>segmentation</em>",
       "kind": "text",
       "tag": "h3",
@@ -33330,6 +34239,15 @@
       ]
     },
     {
+      "en": "Title and meta description",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "What do I need to prepare?",
       "kind": "text",
       "tag": "span",
@@ -33345,6 +34263,15 @@
       "count": 1,
       "pages": [
         "website-maintenance-plans.html"
+      ]
+    },
+    {
+      "en": "Where to go <em>next</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -33759,6 +34686,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Structure and readability",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -34221,6 +35157,15 @@
       ]
     },
     {
+      "en": "Past the <em>tools</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Pre-seed through scaling",
       "kind": "text",
       "tag": "div",
@@ -34272,6 +35217,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Social ad copy previewer",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -34500,6 +35454,15 @@
       ]
     },
     {
+      "en": "Focus keyword placement",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "For B2B <em>teams</em>.",
       "kind": "text",
       "tag": "h2",
@@ -34632,6 +35595,15 @@
       "count": 1,
       "pages": [
         "locations.html"
+      ]
+    },
+    {
+      "en": "Schema markup generator",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -35055,6 +36027,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "Use it <em>today</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -35769,6 +36750,15 @@
       ]
     },
     {
+      "en": "Product page checker",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Revenue / subscriber",
       "kind": "text",
       "tag": "div",
@@ -36057,6 +37047,15 @@
       ]
     },
     {
+      "en": "Images and alt text",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Interrupts browsing",
       "kind": "text",
       "tag": "div",
@@ -36219,6 +37218,15 @@
       ]
     },
     {
+      "en": "Subject line tester",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "The usual B2B setup",
       "kind": "text",
       "tag": "div",
@@ -36234,15 +37242,6 @@
       "count": 1,
       "pages": [
         "locations.html"
-      ]
-    },
-    {
-      "en": "We read it properly",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -36279,15 +37278,6 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
-      ]
-    },
-    {
-      "en": "You get three moves",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -36480,6 +37470,15 @@
       ]
     },
     {
+      "en": "llms.txt generator",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Local <em>SEO</em>",
       "kind": "text",
       "tag": "h3",
@@ -36522,6 +37521,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "One page at a time",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -36639,15 +37647,6 @@
       "count": 1,
       "pages": [
         "google-ads-for-real-estate.html"
-      ]
-    },
-    {
-      "en": "We do the homework",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -37011,6 +38010,15 @@
       ]
     },
     {
+      "en": "The honest answer",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Weekly newsletter",
       "kind": "text",
       "tag": "li",
@@ -37044,6 +38052,15 @@
       "count": 1,
       "pages": [
         "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "your-page-address",
+      "kind": "attr:placeholder",
+      "tag": "input",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -37146,6 +38163,15 @@
       ]
     },
     {
+      "en": "Content Analyzer",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Day 90+ · Defend",
       "kind": "text",
       "tag": "div",
@@ -37224,6 +38250,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Meta description",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -37404,6 +38439,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "01 · Free tools",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -37713,6 +38757,15 @@
       ]
     },
     {
+      "en": "03 · AI search",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "03 · Ecommerce",
       "kind": "text",
       "tag": "div",
@@ -37818,6 +38871,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "How to read it",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -37962,6 +39024,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "What it checks",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -38169,6 +39240,24 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Focus keyword",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
+      "en": "Free training",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -38388,6 +39477,24 @@
       ]
     },
     {
+      "en": "How it works",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
+      "en": "Keep reading",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Lead quality",
       "kind": "text",
       "tag": "div",
@@ -38487,6 +39594,15 @@
       ]
     },
     {
+      "en": "Your content",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "01 · Dental",
       "kind": "text",
       "tag": "div",
@@ -38502,6 +39618,15 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "02 · Search",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -38622,6 +39747,15 @@
       ]
     },
     {
+      "en": "Copy report",
+      "kind": "text",
+      "tag": "button",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Evaluations",
       "kind": "text",
       "tag": "div",
@@ -38658,12 +39792,30 @@
       ]
     },
     {
+      "en": "In progress",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "L. Krishnan",
       "kind": "text",
       "tag": "span",
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Load sample",
+      "kind": "text",
+      "tag": "button",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -38880,6 +40032,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Keep going",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -39153,6 +40314,15 @@
       ]
     },
     {
+      "en": "SEO title",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Technical",
       "kind": "text",
       "tag": "div",
@@ -39369,6 +40539,15 @@
       ]
     },
     {
+      "en": "Live now",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Location",
       "kind": "text",
       "tag": "div",
@@ -39510,6 +40689,15 @@
       "count": 1,
       "pages": [
         "ai-seo.html"
+      ]
+    },
+    {
+      "en": "URL slug",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -39846,6 +41034,15 @@
       ]
     },
     {
+      "en": "Clear",
+      "kind": "text",
+      "tag": "button",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "db.ts",
       "kind": "text",
       "tag": "div",
@@ -39906,6 +41103,15 @@
       "count": 1,
       "pages": [
         "locations.html"
+      ]
+    },
+    {
+      "en": "Links",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -40005,6 +41211,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "Blog",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {

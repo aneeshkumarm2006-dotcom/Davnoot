@@ -37,6 +37,7 @@ import {
   ORG_DESC,
   SERVICE_PAGES,
   ADS_PAGES,
+  TOOLS_PAGES,
   SERVICE_TYPE,
   canonicalFor,
 } from '../lib/templates.js';
@@ -69,6 +70,8 @@ const PAGE = {
   'ads.html': ['Ad platforms', 'The paid-advertising platforms we buy on, and when each makes sense'],
   'ecommerce.html': ['Ecommerce', 'Ecommerce agency work — store development, SEO, ads, and retention as one engine'],
   'book-call.html': ['Book a strategy call', 'The only conversion path on the site — a 30-minute call'],
+  'tools.html': ['Free tools', 'Free, no-signup marketing tools that run entirely in the visitor’s browser'],
+  'content-analyzer.html': ['Content Analyzer', 'Free client-side SEO content analyzer — keyword placement and density, title and meta length, heading structure, Flesch readability, link and image alt auditing, and answer-engine citability, scored 0-100'],
   'seo.html': [null, 'Technical SEO, content, and link acquisition for organic revenue'],
   'google-ads.html': [null, 'Search, Performance Max, and Shopping campaign management'],
   'meta-ads.html': [null, 'Facebook and Instagram paid social, creative testing, Advantage+'],
@@ -178,6 +181,12 @@ export default async function handler(req, res) {
   const services = SERVICE_PAGES.map(page);
   const adPlatforms = ADS_PAGES.map(page);
 
+  /* Derived from TOOLS_PAGES + the hub, so shipping a second tool adds itself to
+   * llms.txt automatically. These are listed as a first-class section rather than
+   * under Optional because a free, no-signup tool is the single most useful thing on
+   * this site for an assistant answering "is there a tool that does X". */
+  const tools = ['tools.html', ...TOOLS_PAGES].map(page);
+
   /* The city pages and any other non-CMS root page come from the SAME generated
    * manifest the sitemap uses, so a page that exists on disk can never be missing
    * from exactly one of the two files. */
@@ -221,6 +230,7 @@ ${page('book-call.html')}
 
 ${section('Services', services)}
 ${section('Ad platforms', adPlatforms)}
+${section('Free tools', tools)}
 ${section('Blog', [
   link('Davnoot blog', BLOG_INDEX, 'Practical writing on SEO, paid media, email, and AI search'),
   ...blogLines,
