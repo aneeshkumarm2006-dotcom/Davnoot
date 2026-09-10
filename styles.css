@@ -157,18 +157,45 @@ body > nav {
   font-size: 14px;
   font-weight: 500;
 }
-/* French runs ~20% longer than English word for word, and the French nav carries
- * one EXTRA item (the language switcher). Measured at the tightest desktop width
- * — 1001px, one pixel above the 1000px burger breakpoint — the English nav has
- * ~100px of slack while the French nav is packed flush against both the logo and
- * the CTA with 0px to spare. It does not overlap today, but nothing may ever grow.
+/* THE HORIZONTAL NAV'S WIDTH BUDGET. All of this is scoped to `min-width: 1001px`
+ * because below 1000px .nav-links becomes the stacked burger panel, where the gap
+ * is a vertical rhythm and every number here would be wrong.
  *
- * Tightening the gap for French only buys back ~48px across the six gaps, which
- * restores the breathing room without touching the English layout at all. Scoped
- * to the horizontal nav: below 1000px .nav-links becomes the stacked burger panel,
- * where the gap is a vertical rhythm and this would be wrong. */
+ * The bar is `space-between` over three items — logo, links, CTA — so the slack is
+ * whatever the three do not consume, split evenly into the two visible gutters.
+ * Measured in a browser at exactly 1001px, one pixel above the burger breakpoint:
+ *
+ *   items                     EN            FR
+ *   logo                     189           187
+ *   links (6 items + FR)     483           552
+ *   CTA                      123           167   ("Réserver un appel →")
+ *   ---------------------------------------------
+ *   gutter, each side         56             0
+ *
+ * French runs ~20% longer word for word AND its CTA is 44px wider, which is why
+ * the two columns diverge so hard. Adding "Free Tools" / "Outils gratuits" as the
+ * SEVENTH item cost ~106px in English and ~123px in French — more than either
+ * language had at the old uniform 36px gap.
+ *
+ * So the tightest desktop band (1001–1180px, where the 1181px block below has not
+ * taken over yet) buys the room back:
+ *   EN — gap 36→24px across six gaps: +72px, landing at 56px per gutter.
+ *   FR — gap 36→14px (+154px), nav font 14→13px (+27px) and 6px off each side of
+ *        the CTA (+12px), landing at 25px per gutter. All three levers are needed;
+ *        the gap alone cannot close a 123px deficit from a 0px start.
+ * Above 1181px French has 86px per gutter untouched, so the roomier values return.
+ *
+ * RE-MEASURE AT 1001px BEFORE ADDING AN EIGHTH ITEM. French has 25px of gutter and
+ * no lever left short of raising its burger breakpoint above 1000px. */
 @media (min-width: 1001px) {
-  :root:lang(fr) .nav-links { gap: 28px; }
+  .nav-links { gap: 24px; }
+  :root:lang(fr) .nav-links { gap: 14px; font-size: 13px; }
+  :root:lang(fr) .nav-cta { padding: 11px 14px; }
+}
+@media (min-width: 1181px) {
+  .nav-links { gap: 36px; }
+  :root:lang(fr) .nav-links { gap: 28px; font-size: 14px; }
+  :root:lang(fr) .nav-cta { padding: 11px 20px; }
 }
 .nav-links a {
   color: var(--text-muted);
