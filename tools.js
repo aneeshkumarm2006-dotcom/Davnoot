@@ -4,9 +4,18 @@
  * every other page: init() bails immediately unless #ca-form exists, so the same
  * file can be added to future tool pages without guarding each one by hand.
  *
- * NOTHING LEAVES THE BROWSER. No fetch, no beacon, no analytics event. The privacy
- * line on the page is a promise this file has to keep, so the only I/O here is the
- * DOM, the clipboard, and localStorage.
+ * NOTHING LEAVES THE BROWSER FROM THIS FILE. No fetch, no beacon, no analytics
+ * event. The privacy line on the page is a promise this file has to keep, so the
+ * only I/O here is the DOM, the clipboard, and localStorage. Keep it that way: if
+ * the engine ever needs to talk to a server, that is a different file and a
+ * different claim on the page.
+ *
+ * There IS one upload on this page, and it is not here. Under the report sits an
+ * optional card offering a human read of the draft; pressing its button POSTs to
+ * /api/content-review. That form is wired in script.js (see TOOL LEAD FORMS),
+ * which is where the shared Turnstile loader lives and where a fetch belongs. All
+ * this file does is unhide the card once a score exists and hand it the three
+ * numbers only the engine knows — see publishToReviewCard().
  *
  * ---------------------------------------------------------------------------
  * WHY THIS EXISTS AT ALL (the five defects of the tool we benchmarked against)
@@ -2623,6 +2632,50 @@
     var lastResult = null;
     var lastInput = null;
 
+    /* ── THE REVIEW CARD ────────────────────────────────────────────────────
+     * The "have a person read this draft" offer under the report. It is hidden in
+     * the markup and revealed here the first time a score renders, which is the
+     * whole of this file's involvement with it: THE POST LIVES IN script.js, and
+     * deliberately — see the note at the top of this file. Nothing below fetches,
+     * beacons or stores anything.
+     *
+     * What has to cross the boundary is only what the engine knows and the DOM does
+     * not: the score, the word count, and which checks came back short. script.js
+     * reads the five input fields itself, straight from the page, so no copy of the
+     * visitor's draft is made here.
+     *
+     * If the markup is absent (an older cached page, or this file loaded on some
+     * future tool page) every one of these is a no-op. */
+    var leadCard = $('ca-lead');
+    var leadScore = $('ca-lead-score');
+    var leadWords = $('ca-lead-words');
+    var leadFailed = $('ca-lead-failed');
+    var leadT0 = $('ca-lead-t0');
+
+    function publishToReviewCard(result) {
+      if (leadScore) leadScore.value = String(result.score);
+      if (leadWords) leadWords.value = String(result.model.words.length);
+      if (leadFailed) {
+        /* Ids, not labels. The labels are per-locale strings from STRINGS above, and
+         * storing a French visitor's findings under English wording (or the reverse)
+         * would put a claim in the record that nobody made. Warnings ride along with
+         * failures because "what is wrong with this draft" is the question the
+         * reviewer is answering, and a warning is part of the answer. */
+        leadFailed.value = result.checks
+          .filter(function (c) { return c.status === 'fail' || c.status === 'warn'; })
+          .map(function (c) { return c.id; })
+          .join(',');
+      }
+      if (!leadCard || !leadCard.hidden) return;
+      leadCard.hidden = false;
+      /* Stamped on REVEAL, not at page load. Someone can spend twenty minutes in
+       * the analyzer before this card exists, and the server scores an implausibly
+       * short gap between "the form appeared" and "it was submitted". Measuring from
+       * load would make every real submission look like a twenty-minute dwell and
+       * throw the signal away. */
+      if (leadT0) leadT0.value = String(Date.now());
+    }
+
     function readInput() {
       return {
         keyword: fields.keyword ? fields.keyword.value : '',
@@ -2638,6 +2691,10 @@
       results.textContent = '';
       empty.hidden = false;
       if (copyBtn) copyBtn.hidden = true;
+      // The offer goes with the report. Leaving it up after Clear would invite
+      // somebody to send a draft that is no longer on screen, carrying the score of
+      // one they have already replaced.
+      if (leadCard) leadCard.hidden = true;
       lastResult = null;
     }
 
@@ -2655,6 +2712,8 @@
         results.hidden = false;
         empty.hidden = true;
         if (copyBtn) copyBtn.hidden = false;
+        // Offer the human read only now that there is a result to improve on.
+        publishToReviewCard(lastResult);
       } catch (err) {
         results.textContent = '';
         results.appendChild(el('p', 'ca-error-title', UI().errorTitle));
@@ -2662,6 +2721,8 @@
         results.hidden = false;
         empty.hidden = true;
         if (copyBtn) copyBtn.hidden = true;
+        // No score, so nothing to offer a second opinion on.
+        if (leadCard) leadCard.hidden = true;
         lastResult = null;
       }
     }

@@ -7,26 +7,46 @@ import { withErrors, methods, readJson, validationError, ApiError } from '../../
 import { requireRole } from '../../../lib/auth.js';
 import { leads, blockedSubmissions } from '../../../lib/db.js';
 import { audit } from '../../../lib/audit.js';
-import { SPAM_CATEGORIES, SPAM_CATEGORY_KEYS } from '../../../lib/spam.js';
+import { SPAM_CATEGORIES, SPAM_CATEGORY_KEYS, AUDIT_SCOPES } from '../../../lib/spam.js';
 
 const STATUSES = new Set(['new', 'contacted', 'won', 'lost']);
 const CATEGORIES = new Set(SPAM_CATEGORY_KEYS);
 
-/* Where a lead came in. Two intakes write to this collection now — the strategy-
- * call form (api/book-call.js) and the funnel-teardown modal on the blog
- * (api/funnel-teardown.js) — and they carry different fields, so the inbox has to
- * know which shape it is rendering.
+/* Where a lead came in. FOUR intakes write to this collection now — the strategy-call
+ * form (api/book-call.js), the funnel-teardown modal on the blog
+ * (api/funnel-teardown.js), the free site-audit request (api/site-audit.js) and the
+ * content-analyzer's optional review card (api/content-review.js) — and they carry
+ * different fields, so the inbox has to know which shape it is rendering.
  *
  * Documents written before the teardown existed have no `source` at all, and are
  * treated as 'book-call' on READ rather than being backfilled: the inference is
  * exact (nothing else could have written them), and a migration that rewrites
  * every historical lead to add a field the code can derive is a risk taken for
- * nothing. Keep in sync with the labels in src/admin/views/leads.js. */
+ * nothing. Keep in sync with the labels in src/admin/views/leads.js.
+ *
+ * ORDER IS THE UI ORDER — the client renders the source filter chips straight from
+ * this array, so the two doors that oblige somebody to do work sit first. */
 export const LEAD_SOURCES = [
   { key: 'book-call', label: 'Booking form' },
+  { key: 'site-audit', label: 'Site audit' },
   { key: 'funnel-teardown', label: 'Blog teardown' },
+  { key: 'content-review', label: 'Content review' },
 ];
 const SOURCE_KEYS = new Set(LEAD_SOURCES.map((s) => s.key));
+
+/* Which intakes never attempt a notification email, by design.
+ *
+ * This set is the whole basis of the tri-state `emailSent` resolution below, and it
+ * has to be a LIST rather than the old `source === 'funnel-teardown'` check now that
+ * two sources are admin-only. Getting it wrong is not cosmetic in either direction:
+ * a source missing from here paints a red "failed" pill on every one of its leads and
+ * has the operator chasing an outage that does not exist, while a source wrongly
+ * listed here would quietly excuse a booking lead that genuinely never got emailed.
+ *
+ * Each entry is justified at its endpoint — see the NO NOTIFICATION EMAIL notes in
+ * api/funnel-teardown.js and api/content-review.js. If one of them is ever switched
+ * to notify, remove it here in the same commit. */
+const NON_NOTIFYING = new Set(['funnel-teardown', 'content-review']);
 
 /* `promo` was the original hand-set "this is junk" flag, from before the
  * classifier existed. Documents written under it are still in the collection and
@@ -46,18 +66,28 @@ function normalise(doc) {
     source,
     website: doc.website || '',
     sourceUrl: doc.sourceUrl || '',
+    // Site-audit fields. Absent on every other intake, so they default rather than
+    // being conditioned on `source` — the client drops empty values anyway, and a
+    // shape that depends on the source is a shape that breaks when a source changes.
+    phone: doc.phone || '',
+    auditScope: doc.auditScope || '',
+    /* Content-review payload: what they pasted into the analyzer and what it scored.
+     * Passed through whole. It is the reason that intake exists — "someone wants
+     * content help" is not actionable, the draft is — and the only consumer is the
+     * detail dialog, which reads it defensively. */
+    analysis: doc.analysis || null,
     /* Tri-state, and the resolution happens HERE so the client never has to guess.
      *   true/false  a notification was attempted, and this is how it went
      *   null        none was ever attempted — the intake does not notify
      *
-     * Teardowns don't notify at all (api/funnel-teardown.js), so a missing flag on
-     * one means null. A missing flag on a booking lead means the opposite — those
-     * always attempt, so absence is an old document from before the flag existed,
-     * and `false` is the truthful reading. Collapsing the two would either paint a
-     * red "failed" on every teardown or quietly excuse a booking lead that never
-     * got emailed. */
+     * The NON_NOTIFYING sources don't notify at all, so a missing flag on one of
+     * those means null. A missing flag on a booking or audit lead means the opposite —
+     * those always attempt, so absence is an old document from before the flag
+     * existed, and `false` is the truthful reading. Collapsing the two would either
+     * paint a red "failed" on every teardown or quietly excuse a booking lead that
+     * never got emailed. */
     emailSent: doc.emailSent == null
-      ? (source === 'funnel-teardown' ? null : false)
+      ? (NON_NOTIFYING.has(source) ? null : false)
       : doc.emailSent,
   };
 }
@@ -90,6 +120,10 @@ async function list(req, res) {
     categories: SPAM_CATEGORIES,
     // Same contract for the intake labels: shipped, never restated in the client.
     sources: LEAD_SOURCES,
+    // And for the audit form's scope codes, which lib/spam.js owns. The client has
+    // no way to read lib/ (scripts/imports.test.js guards that boundary), so a
+    // hand-copied map there would render "undefined" the first time a code changes.
+    auditScopes: AUDIT_SCOPES,
     // Per-intake breakdown of the real inbox, so "the blog modal is working" is
     // answerable at a glance without exporting the CSV.
     bySource: Object.fromEntries(

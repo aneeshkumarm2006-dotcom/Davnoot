@@ -279,6 +279,39 @@
   border-radius: 10px;
   padding: 12px 14px;
 }
+/* A second heading level inside one block — used by the content-review record,
+   where the analyzer's field list and the draft itself are two different things
+   under one "What they analyzed" heading. */
+.ld-sub {
+  margin-top: 14px;
+  margin-bottom: 7px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+/* The draft the visitor pasted into the content analyzer.
+   Capped at 340px and scrolled INSIDE itself, not left to grow: .modal-body
+   already scrolls, and a 4,000-word draft inside it would bury Save notes and the
+   status control under a page of someone else's copy. Monospace and pre-wrap
+   because the analyzer accepts Markdown and HTML, where the indentation and the
+   line breaks are part of what is being reviewed. */
+.ld-draft {
+  max-height: 340px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
 .ld-notes { font-size: 13px; }
 .ld-notes-foot { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
 

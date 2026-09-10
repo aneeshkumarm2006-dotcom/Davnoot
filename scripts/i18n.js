@@ -123,6 +123,10 @@ export const PAGE_FILES = [
   // /tools/content-analyzer; the hub is flat at /tools, like /services and /ads.
   'tools.html',
   'content-analyzer.html',
+  // The free site audit, added 2026-09-10. A second TOOLS_PAGES member, served at
+  // /tools/site-audit. Unlike the analyzer it computes nothing: it is a request form
+  // for an audit a person writes, posting to api/site-audit.js.
+  'site-audit.html',
 ];
 
 /* Inline elements may appear INSIDE a translation unit; the French keeps them.

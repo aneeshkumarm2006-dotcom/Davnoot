@@ -477,6 +477,209 @@
   color: var(--text-muted);
 }
 
+/* === LEAD FORMS =========================================================
+   Two forms share this block: the site-audit request on /tools/site-audit and
+   the optional "have a person read this draft" card under the analyzer's
+   report. They are the only things on /tools/* that send anything anywhere,
+   so they are styled as one family — a visitor who learns what the submit
+   affordance looks like on one page reads it correctly on the other.
+
+   Everything reuses .ca-form / .ca-field / .ca-input / .ca-actions above.
+   What is new here is only what those did not need: an optional-field hint,
+   a <select>, the error strip, and the two success panels.
+   ------------------------------------------------------------------- */
+
+/* [hidden] has to be stated EXPLICITLY on every one of these.
+   The UA sheet's `[hidden] { display: none }` is a type selector at
+   specificity 0,1,0, and .ca-form/.sa-done/.ca-lead-panel all set display in
+   a class rule at 0,1,0 that comes later — so the UA rule loses and a form
+   "hidden" by JS stays fully visible. That is not a cosmetic bug: on submit
+   the audit form would sit there, complete and re-submittable, directly above
+   its own confirmation. Matches .ca-results[hidden] / .ca-empty[hidden]. */
+.ca-form[hidden],
+.sa-done[hidden],
+.ca-lead[hidden],
+.ca-lead-panel[hidden] { display: none !important; }
+
+/* "optional" beside a label. Quiet enough to read as an annotation rather
+   than part of the field name, which is what keeps the required fields
+   scannable — on a seven-field form the useful signal is which ones can be
+   skipped. */
+.ca-opt {
+  margin-left: 6px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* The <select> is left NATIVE on purpose. styles.css has a custom dropdown,
+   but it is wired to `.book-form select` in script.js, and reaching for it
+   here would mean either widening that selector or duplicating the widget —
+   for a six-option field where the native control is already better on a
+   phone and free of a11y risk. Only the chrome is restyled to match
+   .ca-input; appearance:none drops the platform arrow, so one is drawn as a
+   background chevron. */
+.sa-select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 44px;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 21px) calc(50% + 1px), calc(100% - 16px) calc(50% + 1px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+/* The chevron is drawn in currentColor, and `color` on a <select> also paints
+   the closed value. Dimming it would dim the answer, so the two are kept
+   apart: full-strength text, and the arrow inherits it at the size above. */
+.sa-select option { color: var(--text); background: var(--bg-card); }
+
+/* The honeypot. Positioned off-canvas rather than display:none because some
+   bots skip hidden fields and fill visible ones — same trick, same reasoning
+   and same dimensions as .teardown-hp in blog.css. */
+.sa-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Turnstile mounts here, and for most visitors renders nothing visible
+   (appearance: interaction-only). The holder must therefore leave NO trace when
+   it is empty — measured in a real browser, an empty holder plus an empty error
+   strip cost 48px of dead space above the submit button, because a zero-height
+   child of a `gap: 24px` flex column still consumes its gap.
+
+   `:has(iframe)` rather than `:not(:empty)` because Cloudflare injects an iframe
+   into the holder whether or not it paints a challenge, and script.js only
+   attaches the holder at all once a site key comes back. If the widget is blocked
+   or fails, there is no iframe and this collapses — which is right: a visitor
+   whose Turnstile never loaded should not see a hole where it would have been. */
+.sa-turnstile:not(:has(iframe)) { display: none; }
+
+/* --- The error strip -------------------------------------------------
+   Every message is AUTHORED in the markup and merely unhidden by script.js,
+   so all of them are translated and coverage-gated like any other copy. The
+   container keeps role="alert" at all times — adding the role at the moment
+   the text appears is unreliable in several screen readers, whereas a live
+   region that is empty until it is not announces properly. */
+/* Collapsed entirely while every message inside it is hidden — which is almost
+   always. `:empty` is not enough: the strip ships five authored paragraphs and is
+   never childless, so without this it is a zero-height flex item still charging a
+   full 24px gap. The container itself stays in the DOM at all times so its
+   role="alert" is registered as a live region before anything is announced. */
+.sa-errors:not(:has(> :not([hidden]))) { display: none; }
+.sa-error {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ca-fail);
+  background: var(--ca-fail-soft);
+  border-left: 2px solid var(--ca-fail);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+}
+.sa-error[hidden] { display: none; }
+
+/* The field the message is about. A red border alone would be colour-only
+   signalling, which is why the message above names the field in words too. */
+.ca-input[aria-invalid="true"] {
+  border-color: var(--ca-fail);
+  background: var(--ca-fail-soft);
+}
+
+/* In flight. The label is never swapped for "Sending…" — that string would be
+   built in JavaScript, where scripts/i18n.js cannot see it and the French twin
+   would silently show English. The arrow carries the state instead. */
+.btn-primary.is-sending { opacity: 0.65; cursor: default; }
+.btn-primary.is-sending .arrow { animation: sa-nudge 0.9s ease-in-out infinite; }
+@keyframes sa-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+/* --- Confirmation panels --------------------------------------------- */
+.sa-done,
+.ca-lead-done {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  padding: 40px 36px;
+  outline: none;
+}
+.sa-done-mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ca-pass-soft);
+  color: var(--ca-pass);
+  font-size: 18px;
+}
+.sa-done-title,
+.ca-lead-title {
+  font-family: var(--font-sans);
+  font-size: clamp(24px, 3.2vw, 32px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.sa-done-title em,
+.ca-lead-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+}
+.sa-done-sub,
+.ca-lead-sub {
+  max-width: 62ch;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+/* --- The review card under the report --------------------------------
+   Visually a sibling of .ca-group rather than of .ca-form: it is part of the
+   report the reader is already looking at, not a second thing to fill in. The
+   accent left border is the one piece of emphasis, because this is the only
+   element in the tool that sends anything. */
+.ca-lead { display: block; }
+.ca-lead-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 16px;
+  padding: 34px 32px;
+}
+.ca-lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 6px;
+}
+.ca-lead-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+@media (max-width: 760px) {
+  .ca-lead-row { grid-template-columns: 1fr; }
+  .ca-lead-panel { padding: 26px 22px; }
+  .sa-done,
+  .ca-lead-done { padding: 28px 24px; }
+}
+
 /* === /tools HUB LISTING =================================================
    Reads as a .related-card, but holds a name, a description and a status
    line. NOT .tools-grid — styles.css already defines that as the .tool-chip
@@ -603,6 +806,9 @@
   }
   .ca-btn-ghost:hover,
   .tools-card:hover { transform: none; }
+  /* The in-flight arrow is the only feedback the button gives, so it is not
+     removed outright — it is stilled, and the dimmed opacity still reads. */
+  .btn-primary.is-sending .arrow { animation: none; }
 }
 
 /* === PRINT ==============================================================
@@ -619,10 +825,17 @@
      A `body > *:not(.tool-app)` rule therefore hides <main> — and with it the whole
      report it was meant to print. Hide only the body/main children that do not
      CONTAIN the tool, which leaves the chain body > main > .tool-app intact and
-     drops the nav, footer, cursor nodes and the surrounding marketing copy. */
-  body:has(.tool-app) > *:not(:has(.tool-app)):not(.tool-app) { display: none !important; }
-  main:has(.tool-app) > *:not(:has(.tool-app)):not(.tool-app) { display: none !important; }
-  main:has(.tool-app) { padding: 0 !important; margin: 0 !important; max-width: none !important; }
+     drops the nav, footer, cursor nodes and the surrounding marketing copy.
+
+     THE GUARD IS #ca-results, NOT .tool-app, and the difference is a page.
+     /tools/site-audit also has a .tool-app — but its contents are a form (hidden
+     in print, below) and a confirmation panel, so guarding on .tool-app would strip
+     that page down to nothing and print one blank sheet. #ca-results exists only on
+     the analyzer, which is the only page here with a report worth printing; the
+     audit page falls through and prints normally. */
+  body:has(#ca-results) > *:not(:has(.tool-app)):not(.tool-app) { display: none !important; }
+  main:has(#ca-results) > *:not(:has(.tool-app)):not(.tool-app) { display: none !important; }
+  main:has(#ca-results) { padding: 0 !important; margin: 0 !important; max-width: none !important; }
 
   .tool-app {
     display: block !important;
@@ -642,6 +855,11 @@
   .ca-empty,
   .ca-actions,
   .ca-privacy,
+  /* A lead-capture card on a printed report is a form nobody can fill in. The
+     audit page's whole content IS a form, so it prints nothing useful either —
+     but it has no .tool-app report to print, so the guards above already
+     exclude it and only the analyzer's card needs naming here. */
+  .ca-lead,
   .ca-tabs { display: none !important; }
 
   .ca-results[hidden] { display: block !important; }

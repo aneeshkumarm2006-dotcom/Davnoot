@@ -1512,6 +1512,249 @@ function mountTurnstile(holder, attach) {
 })();
 
 // ========================================================================
+//  TOOL LEAD FORMS — the site-audit request and the content-review card
+// ========================================================================
+//
+// Two forms, one wiring function, living HERE rather than in tools.js for three
+// reasons that are all load-bearing:
+//
+//   1. mountTurnstile() is in this file. Both forms have to mount the same widget
+//      from the same env-var-driven key as the booking form, or switching
+//      TURNSTILE_SITE_KEY on would protect three doors out of four.
+//   2. tools.js opens with "NOTHING LEAVES THE BROWSER. No fetch, no beacon." That
+//      claim is the content analyzer's entire trust pitch and the page says it in
+//      two languages. A fetch() added to that file would make its own header a lie
+//      and would be the first thing a future reader trusts and then disproves.
+//   3. The CSP has no 'unsafe-inline', so page-specific JS cannot live in the page.
+//
+// Both guard on their own id, so this whole section is inert everywhere else.
+//
+// EVERY VISIBLE STRING IS AUTHORED IN THE HTML, never built here. scripts/i18n.js
+// does not read <script> contents, so a message constructed in JavaScript has no
+// French twin and no coverage gate to catch that. The error paragraphs are shipped
+// hidden in the markup with a data-err key and this code only unhides the right
+// one — which is also why the server's own `error` text is deliberately NOT
+// rendered: it is English-only, and the French visitor is the one most likely to
+// hit a validation failure.
+(function () {
+  const form = (id) => document.getElementById(id);
+  const auditForm = form('sa-form');
+  const reviewForm = form('ca-lead-form');
+  if (!auditForm && !reviewForm) return;
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // A hostname with a dot and a plausible TLD, after any scheme is stripped.
+  // Deliberately looser than lib/lead-intake.js's normalizeWebsite(): this exists
+  // to catch a typo in place, and the server remains the actual boundary.
+  const HOST_RE = /^[^\s/]+\.[a-z]{2,}/i;
+
+  /**
+   * Wire one tool lead form.
+   *
+   * @param {HTMLFormElement} el
+   * @param {object} cfg
+   *   endpoint   where to POST
+   *   validate   () => field-name string for the first local failure, or ''
+   *   payload    () => the JSON body, minus t0 and the Turnstile token
+   *   openedAt   () => the ms timestamp the dwell is measured from
+   *   done       () => reveal the success state
+   */
+  function wire(el, cfg) {
+    const btn = el.querySelector('button[type="submit"]');
+    const errs = Array.from(el.querySelectorAll('.sa-error'));
+
+    /* The widget is injected rather than authored for the same reason it is on the
+     * booking form: these pages are golden-tested byte-for-byte and mirrored into
+     * French, so their markup is expensive to change while an env var is free.
+     * `attach` runs only once a key has come back, so no empty row is ever left in
+     * the layout of a visitor who will never see a challenge. */
+    const holder = document.createElement('div');
+    holder.className = 'sa-turnstile';
+    const captcha = mountTurnstile(holder, (h) => {
+      const actions = el.querySelector('.ca-actions');
+      if (actions) el.insertBefore(h, actions);
+      else el.appendChild(h);
+    });
+
+    const clear = () => {
+      errs.forEach((p) => { p.hidden = true; });
+      el.querySelectorAll('[aria-invalid]').forEach((f) => f.removeAttribute('aria-invalid'));
+    };
+
+    /* Reveal the authored message for `kind`, and point at the field it is about.
+     * Falls back to the generic paragraph: a server that grows a new `field` value
+     * must never produce a silent failure with no message on screen at all. */
+    const fail = (kind, field) => {
+      clear();
+      const p = errs.find((x) => x.dataset.err === kind) || errs.find((x) => x.dataset.err === 'generic');
+      if (p) p.hidden = false;
+      const input = field ? el.querySelector(`[name="${field}"]`) : null;
+      if (input) {
+        input.setAttribute('aria-invalid', 'true');
+        input.focus();
+      } else if (p) {
+        // Nothing to focus, so make sure the message itself is not off-screen
+        // below a long report.
+        p.scrollIntoView({ block: 'nearest' });
+      }
+    };
+
+    // Typing is the reader answering the message, so retract it rather than making
+    // them re-read a complaint they are already fixing.
+    el.addEventListener('input', clear);
+
+    el.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const bad = cfg.validate();
+      if (bad) { fail(bad, bad); return; }
+
+      /* The button is disabled and CSS-dimmed rather than relabelled "Sending…".
+       * A label written here would be an English string injected into a page that
+       * exists in French too — the exact failure the note at the top of this
+       * section is about — and the booking form gets away with it only because
+       * /book-call's handler predates the French twin. `is-sending` animates the
+       * arrow instead, which needs no words. */
+      if (btn) { btn.disabled = true; btn.classList.add('is-sending'); }
+      el.setAttribute('aria-busy', 'true');
+      clear();
+
+      try {
+        await captcha.ready();
+        const body = cfg.payload();
+        body.t0 = cfg.openedAt();
+        body.sourceUrl = location.pathname;
+        if (captcha.token()) body['cf-turnstile-response'] = captcha.token();
+
+        const res = await fetch(cfg.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          const err = new Error('send failed');
+          // 429 has no `field`; everything else 4xx names the box that is wrong.
+          err.kind = res.status === 429 ? 'rate' : (data.field || 'generic');
+          err.field = data.field;
+          throw err;
+        }
+        cfg.done();
+      } catch (err) {
+        if (btn) { btn.disabled = false; btn.classList.remove('is-sending'); }
+        el.removeAttribute('aria-busy');
+        // Turnstile tokens are single-use, so a retry after a failed send needs a
+        // fresh one or it fails again for a completely different reason.
+        captcha.reset();
+        fail(err.kind || 'generic', err.field);
+      }
+    });
+  }
+
+  /* ── The free site-audit request (/tools/site-audit) ───────────────────── */
+  if (auditForm) {
+    // Measured from wire-up, which is page load: this is a seven-field form on a
+    // page somebody arrived at in order to fill it in, so the honest dwell is how
+    // long they have been on the page.
+    const openedAt = Date.now();
+    const val = (name) => {
+      const f = auditForm.querySelector(`[name="${name}"]`);
+      return f ? f.value.trim() : '';
+    };
+
+    wire(auditForm, {
+      endpoint: '/api/site-audit',
+      openedAt: () => openedAt,
+      validate() {
+        if (!HOST_RE.test(val('website').replace(/^[a-z][a-z0-9+.-]*:\/\//i, ''))) return 'website';
+        if (!EMAIL_RE.test(val('email'))) return 'email';
+        if (!val('name')) return 'name';
+        return '';
+      },
+      payload: () => ({
+        website: val('website'),
+        email: val('email'),
+        name: val('name'),
+        company: val('company'),
+        phone: val('phone'),
+        scope: val('scope'),
+        brief: val('brief'),
+        'bot-field': val('bot-field'),
+      }),
+      done() {
+        const panel = document.getElementById('sa-done');
+        auditForm.hidden = true;
+        if (!panel) return;
+        panel.hidden = false;
+        // Focus moves to the confirmation because the thing the visitor was
+        // interacting with has just been removed from the page; without this, a
+        // keyboard or screen-reader user is left on a detached button.
+        panel.focus({ preventScroll: true });
+        panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      },
+    });
+  }
+
+  /* ── "Have a person read this draft" (/tools/content-analyzer) ──────────────
+   * The five analyzer inputs are read straight out of the live DOM here rather
+   * than copied into this card, so the draft that gets sent is always exactly what
+   * is on screen at the moment the button is pressed — not a snapshot taken when
+   * the card appeared, which would quietly send a stale version to anyone who kept
+   * editing. The three hidden inputs carry what only tools.js knows. */
+  if (reviewForm) {
+    const wiredAt = Date.now();
+    const field = (id) => document.getElementById(id);
+    const value = (id) => { const f = field(id); return f ? f.value : ''; };
+
+    wire(reviewForm, {
+      endpoint: '/api/content-review',
+      /* t0 is stamped by tools.js when it first REVEALS this card, because the card
+       * does not exist at page load and someone can spend twenty minutes in the
+       * analyzer before it appears. Measuring from load would read every genuine
+       * submission as a twenty-minute dwell and make the transport signal useless.
+       * The fallback matters: if that stamp is ever missing, sending our own
+       * wire-up time is honest-ish and harmless, whereas sending nothing scores the
+       * lead 35 points for "no browser form stamp" and could quarantine it. */
+      openedAt: () => Number(value('ca-lead-t0')) || wiredAt,
+      validate() {
+        if (!EMAIL_RE.test(value('ca-lead-email').trim())) return 'email';
+        if (!value('ca-content').trim()) return 'content';
+        return '';
+      },
+      payload() {
+        const failed = value('ca-lead-failed');
+        return {
+          email: value('ca-lead-email').trim(),
+          website: value('ca-lead-site').trim(),
+          // What they were analyzing, read live from the analyzer's own fields.
+          keyword: value('ca-keyword'),
+          title: value('ca-title'),
+          slug: value('ca-slug'),
+          meta: value('ca-meta'),
+          content: value('ca-content'),
+          // What the engine made of it, handed over by tools.js.
+          score: value('ca-lead-score'),
+          wordCount: value('ca-lead-words'),
+          failed: failed ? failed.split(',') : [],
+          // So the reviewer knows which language the person was working in before
+          // replying to a French writer in English.
+          locale: (document.documentElement.getAttribute('lang') || 'en').slice(0, 2),
+          'bot-field': (reviewForm.querySelector('[name="bot-field"]') || {}).value || '',
+        };
+      },
+      done() {
+        const offer = document.getElementById('ca-lead-offer');
+        const panel = document.getElementById('ca-lead-done');
+        if (offer) offer.hidden = true;
+        if (!panel) return;
+        panel.hidden = false;
+        panel.focus({ preventScroll: true });
+      },
+    });
+  }
+})();
+
+// ========================================================================
 //  HERO METRICS — count up on load
 // ========================================================================
 (function () {

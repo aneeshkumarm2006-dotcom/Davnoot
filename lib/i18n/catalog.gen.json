@@ -55,15 +55,16 @@
     "marketing-automation-cro.html",
     "quebec-law-25-compliance-guide.html",
     "tools.html",
-    "content-analyzer.html"
+    "content-analyzer.html",
+    "site-audit.html"
   ],
-  "total": 4515,
+  "total": 4627,
   "entries": [
     {
       "en": "Explore →",
       "kind": "text",
       "tag": "div",
-      "count": 108,
+      "count": 112,
       "pages": [
         "ai-seo.html",
         "b2b-google-ads-agency.html",
@@ -88,6 +89,7 @@
         "saas-google-ads-agency.html",
         "sem-agency-montreal.html",
         "seo.html",
+        "site-audit.html",
         "software.html",
         "startup-seo.html",
         "tools.html"
@@ -144,7 +146,7 @@
       "en": "FAQ",
       "kind": "text",
       "tag": "div",
-      "count": 27,
+      "count": 28,
       "pages": [
         "ai-seo.html",
         "b2b-google-ads-agency.html",
@@ -170,6 +172,7 @@
         "saas-google-ads-agency.html",
         "sem-agency-montreal.html",
         "seo.html",
+        "site-audit.html",
         "software.html",
         "startup-seo.html",
         "tools.html"
@@ -179,7 +182,7 @@
       "en": "<a href=\"/book-call\" class=\"btn-primary\" data-cursor>\n        Book a free strategy call\n        <span class=\"arrow\">→</span>\n      </a>",
       "kind": "text",
       "tag": "div",
-      "count": 24,
+      "count": 25,
       "pages": [
         "content-analyzer.html",
         "digital-marketing-agency-blainville.html",
@@ -200,6 +203,7 @@
         "index.html",
         "locations.html",
         "pricing.html",
+        "site-audit.html",
         "tools.html",
         "training-analytics.html",
         "training-google-ads.html",
@@ -1787,6 +1791,17 @@
       ]
     },
     {
+      "en": "you@company.com",
+      "kind": "attr:placeholder",
+      "tag": "input",
+      "count": 3,
+      "pages": [
+        "book-call.html",
+        "content-analyzer.html",
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Serving Canada",
       "kind": "text",
       "tag": "div",
@@ -2496,6 +2511,16 @@
       ]
     },
     {
+      "en": "That is a few requests in a short time. Give it a couple of minutes and try again.",
+      "kind": "text",
+      "tag": "p",
+      "count": 2,
+      "pages": [
+        "content-analyzer.html",
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "<span class=\"num\">$0</span><span class=\"lbl\">SaaS bloat removed · Year one</span>",
       "kind": "text",
       "tag": "div",
@@ -2991,6 +3016,16 @@
       ]
     },
     {
+      "en": "When you would rather <em>hand it over</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "content-analyzer.html",
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Google Ads for <em>software companies</em>",
       "kind": "text",
       "tag": "div",
@@ -3416,6 +3451,16 @@
       ]
     },
     {
+      "en": "The honest answer",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "site-audit.html",
+        "tools.html"
+      ]
+    },
+    {
       "en": "04 · Performance",
       "kind": "text",
       "tag": "div",
@@ -3509,6 +3554,16 @@
       "pages": [
         "google-ads-for-nonprofits.html",
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "What we look at",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "ppc-agency-montreal.html",
+        "site-audit.html"
       ]
     },
     {
@@ -3726,6 +3781,16 @@
       ]
     },
     {
+      "en": "Keep going",
+      "kind": "text",
+      "tag": "div",
+      "count": 2,
+      "pages": [
+        "content-analyzer.html",
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Months 1–2",
       "kind": "text",
       "tag": "div",
@@ -3801,6 +3866,16 @@
       ]
     },
     {
+      "en": "Your name",
+      "kind": "text",
+      "tag": "label",
+      "count": 2,
+      "pages": [
+        "book-call.html",
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "02 · SEO",
       "kind": "text",
       "tag": "div",
@@ -3808,6 +3883,16 @@
       "pages": [
         "online-reputation-management-canada.html",
         "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "acme.com",
+      "kind": "attr:placeholder",
+      "tag": "input",
+      "count": 2,
+      "pages": [
+        "content-analyzer.html",
+        "site-audit.html"
       ]
     },
     {
@@ -4386,6 +4471,15 @@
       ]
     },
     {
+      "en": "It reaches someone here with the score the tool gave it, and you get one reply within two business days saying what we would change — the judgment calls the checklist cannot make, like whether the angle is right or whether the phrase is worth targeting at all. It is free, it is not a sales sequence, and your address is not added to a list. If you would rather we looked at the whole site instead of one page, that is the <a href=\"/tools/site-audit\" class=\"text-link\" data-cursor>free site audit</a>.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Sometimes, and only where there are grounds. A review that breaks a\n          platform's policy or comes from someone who was never a customer can be reported and is often taken down. A\n          factual error can be corrected by the publisher. Most negative content is neither, and the reliable answer\n          there is to answer it publicly and rank stronger pages above it. Any agency guaranteeing removal of content\n          it does not control is guaranteeing something it cannot deliver.",
       "kind": "text",
       "tag": "div",
@@ -4476,6 +4570,15 @@
       ]
     },
     {
+      "en": "Because it is the best sales pitch we have, and we would rather use it than an ad. A few hours of our time on your site produces something you can judge directly: either the findings are sharp and specific, in which case you now know how we think, or they are generic, in which case you have lost nothing and learned something useful about us. A case study asks you to trust our account of work you cannot verify. An audit of your own site you can check line by line.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Quebec City is a French-first market anchored by government, insurance, and tourism — three industries where trust and visibility are built long before someone picks up the phone. If you run a business in Quebec City, you already know the Quebec City region market rewards the companies that show up first — on Google, on Maps, and increasingly in AI answers. Davnoot is a Montreal-based growth agency that builds and runs the marketing systems that make that happen.",
       "kind": "text",
       "tag": "p",
@@ -4521,6 +4624,15 @@
       ]
     },
     {
+      "en": "The first is that the software costs us almost nothing to run. A tool with no server, no database and no accounts is just a file: once it is written, serving it to ten thousand people a month costs the same as serving it to nobody, and there is no support queue attached. Charging for something that cheap would be more work than giving it away. The audit is the exception — that one costs us hours of a real person, and we give it away for the reason below.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Yes. Campaigns target searches from people looking to buy, sell, rent, or\n          learn more about real estate services, and send them to a relevant property page, service page, or contact\n          option. Whether it produces leads comes down to two things: how closely the keywords, locations, and landing\n          pages match what the agent sells, and whether the enquiry itself is tracked as a conversion instead of guessed\n          at from traffic.",
       "kind": "text",
       "tag": "div",
@@ -4530,12 +4642,30 @@
       ]
     },
     {
+      "en": "It also filters both ways, which is the part most agencies will not say out loud. Reading a site for a few hours tells us whether the problem is one we are any good at. Roughly a third of the audits we send end with us saying the work is not a fit — the budget is too small for the market, the real bottleneck is sales rather than marketing, or somebody already has it in hand. We would rather find that out before an engagement than three months into one.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "<span class=\"tool-chip\"><span class=\"dot\"></span>Free trials</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Signups</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>New subscriptions</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Activated users</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Trial-to-paid rate</span>\n      <span class=\"tool-chip\"><span class=\"dot\"></span>Customer revenue</span>",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "saas-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Not by the analysis. It runs in your own browser, so your text is not sent to a server, written to a database or logged, and you can disconnect from the internet once the page has loaded and still use the tool. There is exactly one exception and it is opt-in: if you use the button under your score to ask us to read the draft, that draft and your address are sent to us and stored with the request so we can reply. Nothing is sent if you do not press it.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -4692,6 +4822,15 @@
       ]
     },
     {
+      "en": "We publish both kinds of thing, and they are not substitutes. The <a href=\"/tools/content-analyzer\" class=\"text-link\" data-cursor>content analyzer</a> is a real tool: paste a draft, get a weighted score out of 100 and the specific changes behind it, instantly, in your own browser, with nothing sent anywhere. It is the right choice when you have one page in front of you and a question that has a checkable answer.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "We run SEO as a monthly retainer, not a one-time project — rankings compound, and so should the work. Most engagements start with a paid audit and 90-day roadmap, then move into ongoing execution: technical fixes, content, link building, and increasingly, <a href=\"/services/ai-seo\" class=\"text-link\" data-cursor>AI search optimization</a> so you show up in ChatGPT and Gemini answers, not just Google's blue links.",
       "kind": "text",
       "tag": "p",
@@ -4800,6 +4939,15 @@
       ]
     },
     {
+      "en": "There is no signup, no email gate, no trial and no daily limit. Run it a hundred times on a hundred drafts and nothing changes. The one thing that does leave your browser is the draft you explicitly send us for a human read, using the button that appears under your score — and that is a choice you make after the result, not a toll you pay before it. Never press it and we never receive anything.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "We build sales-led accounts around demo\n        requests, pricing enquiries, and talking to sales. Conversions are fewer there, so the data takes\n        longer to say anything useful and the campaigns need more patience before we judge them. We build\n        self-serve accounts around trials and subscriptions, with more volume and more opportunity to be\n        fooled by a cheap registration.",
       "kind": "text",
       "tag": "p",
@@ -4815,6 +4963,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "There is no server behind the analysis. It is a few hundred lines of JavaScript that load with the page and run on your own machine, which is why the result appears the moment you press the button. Your draft is not sent anywhere, written to a database, or logged. Disconnect from the internet once the page has loaded and the tool still works, which is the easiest way to prove it to yourself.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -4881,6 +5038,42 @@
       ]
     },
     {
+      "en": "If you have a page in front of you, the <a href=\"/tools/content-analyzer\" class=\"text-link\" data-cursor>Content Analyzer</a> — paste a draft you are about to publish and see what it flags before it goes live rather than after. If you do not know where the problem is, ask for the <a href=\"/tools/site-audit\" class=\"text-link\" data-cursor>free site audit</a> and let somebody else find it.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
+      "en": "Tell us the site and someone here goes through it by hand: what you rank for against what you should, whether Google can read the whole thing, whether the key pages answer the question a buyer arrived with, where ad budget is leaking, whether your tracking is telling the truth, and whether AI answers mention you at all. You get the findings in an email, in the order we would fix them.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
+      "en": "No. We use tools while we work, the same ones everybody uses, but the audit is written by the person who read your site and every finding is one they decided was worth your time. If you want an instant automated result, our <a href=\"/tools/content-analyzer\" class=\"text-link\" data-cursor>content analyzer</a> gives you one for a single page in your browser, with nothing sent anywhere.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
+      "en": "Not to use the analyzer. There is no gate, no unlock step and no results-by-email screen — open the page, use the tool, close the tab. The audit obviously needs one, because the whole deliverable is an email from a person. And if you want a human to read a draft after the tool has scored it, there is an optional field for that under the result. None of it is required to see a score.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "The earlier you build the SEO foundation, the easier it is to grow organic visibility over\n          time. Starting early lets search engines understand your website while you build authority, before\n          competitors dominate the niche. It is also far cheaper than retrofitting structure and technical fixes onto a\n          site that already has hundreds of pages on top of them.",
       "kind": "text",
       "tag": "div",
@@ -4899,18 +5092,18 @@
       ]
     },
     {
-      "en": "There is no server behind this page. The analysis is a few hundred lines of JavaScript that load with the page and run on your own machine, which is why the result appears the moment you press the button. Your draft is never sent anywhere, never written to a database, never logged, and never seen by us. Disconnect from the internet once the page has loaded and the tool still works.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "content-analyzer.html"
-      ]
-    },
-    {
       "en": "Paste a draft, set a focus keyword, and get a weighted score out of 100 with the specific changes that would raise it: word count, heading structure, where the keyword actually appears, sentence and paragraph length, internal and external link balance, and how much of your imagery is missing alt text. It reads HTML and Markdown, so a pasted CMS export works as well as plain prose.",
       "kind": "text",
       "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
+      "en": "Two things live here, and they are deliberately different. The analyzer is software: it runs entirely inside your own browser, nothing you paste is uploaded, and no address is asked for before you see the result. The site audit is the opposite — a person on our team reads your site by hand and emails you what they find, so it needs a way to reach you and a few days to do properly.",
+      "kind": "text",
+      "tag": "p",
       "count": 1,
       "pages": [
         "tools.html"
@@ -4932,6 +5125,15 @@
       "count": 1,
       "pages": [
         "digital-marketing-agency-gatineau.html"
+      ]
+    },
+    {
+      "en": "There is no call you have to sit through to receive it. The audit arrives as an email whether you ever reply or not. If you do want to talk it through afterwards, <a href=\"/book-call\" class=\"text-link\" data-cursor>book a call</a> and we will; if you want to know what working with us costs before you do, <a href=\"/pricing\" class=\"text-link\" data-cursor>the pricing is public</a>.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -4998,12 +5200,30 @@
       ]
     },
     {
+      "en": "This audit is the opposite shape. It is slower, it is a person, and it answers the questions a checklist cannot: which page deserves the effort, why the traffic you have is not converting, whether the thing you asked about is even your real problem. No tool can tell you that your best page is the one you are about to delete, and no tool will argue with the brief you gave it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "A performance marketing strategy draws on paid search, paid\n        social advertising, remarketing, conversion tracking, landing page optimization, audience targeting, and\n        campaign testing. Which of them you need comes down to your customers and how they buy. What holds in every\n        case is the test: each part has to connect back to an action someone can count.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Not in the analyzer, and not as a policy promise — as a technical fact. All of that analysis happens in JavaScript inside your own browser, so there is nowhere for us to store your text and nothing for us to read. The site audit is the other way round by necessity: you are asking a person to read your site, so we keep your request and your address until we have answered it.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -5067,6 +5287,15 @@
       "count": 1,
       "pages": [
         "content-analyzer.html"
+      ]
+    },
+    {
+      "en": "Each item is specific enough to act on without us. That means the URL, what is wrong with it, and what to change — written so you can forward the whole thing to a developer or a writer and have them get on with it. If the fix is genuinely beyond a quick change, we say so and tell you roughly what it involves, because a recommendation with no sense of cost is not advice.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -5178,6 +5407,15 @@
       ]
     },
     {
+      "en": "Paste a draft, name the phrase you want it to rank for, and get a real score out of 100 with the specific fixes behind it. This SEO content analyzer reads your keyword placement, headings, sentence length, links, images and alt text, and it runs entirely inside your browser. Nothing you paste is uploaded, and no address is asked for before you see the result.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "We will also say when the answer is not a reputation\n        engagement. If four reviews in a row describe the same operational problem, no amount of publishing fixes\n        that, and the honest recommendation is to spend the budget elsewhere. We work with businesses across Canada,\n        in English and in French, and we tell you what we would change first.",
       "kind": "text",
       "tag": "p",
@@ -5265,6 +5503,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "We also tell you what is already working. Partly because it is true, and partly because the fastest way to lose ground after an audit is to redesign something that was quietly converting. If the honest answer is that your site is in good shape and the problem is elsewhere — pricing, offer, sales follow-up — you will get that answer too, and it is free.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -5394,6 +5641,15 @@
       ]
     },
     {
+      "en": "If you are running Google or Meta, we look at what the money is actually buying: search terms you are paying for that you would never choose, campaigns optimising to a conversion that is not a sale, and the landing pages taking that traffic. We cannot see inside your account from here, so this part gets sharper if you mention it in the notes.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "A search is a short window. Someone types a\n        query, scans the results, and picks. Search engine marketing puts a business inside that window, in\n        front of people already looking for what it offers, which is why a search campaign produces enquiries\n        in its first weeks while other channels are still assembling an audience.",
       "kind": "text",
       "tag": "p",
@@ -5409,15 +5665,6 @@
       "count": 1,
       "pages": [
         "website-design-pricing.html"
-      ]
-    },
-    {
-      "en": "The first is that they cost us almost nothing to run. A tool with no server, no database, and no accounts is just a file. Once it is written, serving it to ten thousand people a month costs the same as serving it to nobody, and there is no support queue attached to it. Charging for something that cheap would be more work than giving it away.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "tools.html"
       ]
     },
     {
@@ -5565,6 +5812,15 @@
       ]
     },
     {
+      "en": "This is not a scanner. A crawler can tell you an image is missing alt text; it cannot tell you that your highest-intent service page is buried four clicks deep and ranking behind a blog post you wrote in 2022. That second kind of finding is the reason this form exists and the reason it takes us a few days rather than a few seconds.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Before anything gets promised, the page itself is worth\n      reading. We will record what your brand search returns today, classify every result on it, and tell you which\n      problems are solvable, which are only outrankable, and which are not worth chasing. Book a free 30-minute call\n      and we will walk through it with you.",
       "kind": "text",
       "tag": "p",
@@ -5589,6 +5845,15 @@
       "count": 1,
       "pages": [
         "content-analyzer.html"
+      ]
+    },
+    {
+      "en": "Often the opposite. A fair share of these end with us saying the work is not a fit, or that the first fix is something your own developer should do in an afternoon rather than something to pay an agency for. An audit that recommends us regardless of what it found would be worthless to you and, within a few months, worthless to us.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -5637,12 +5902,30 @@
       ]
     },
     {
+      "en": "For this, yes — we are reading the real thing, including how it is indexed and what it currently ranks for, and a staging URL behind a password gives us none of that. If you are pre-launch, send the staging link in the notes anyway and say so; we will look at structure and messaging, which is most of what matters before launch.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Davnoot handles keyword research, campaign setup, local\n      targeting, negative keywords, conversion tracking, ad testing and ongoing optimization for HVAC companies, and\n      judges the work on calls and enquiries rather than clicks. Book a free 30-minute call and we will tell you what\n      we would change first and why.",
       "kind": "text",
       "tag": "p",
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Not a 40-page branded PDF. Those exist to look like value, and everybody who has received one knows they are mostly an automated crawl with a logo on the cover. What arrives instead is an email of the findings that matter, in the order we would fix them, with the reason each one matters to your revenue rather than to a score.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -5907,15 +6190,6 @@
       ]
     },
     {
-      "en": "Paste a draft, name the phrase you want it to rank for, and get a real score out of 100 with the specific fixes behind it. This SEO content analyzer reads your keyword placement, headings, sentence length, links, images and alt text, and it runs entirely inside your browser. Nothing you paste ever leaves this page.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "content-analyzer.html"
-      ]
-    },
-    {
       "en": "If you want the same thinking applied to a whole site rather than one page, that is what <a href=\"/services/seo\" class=\"text-link\" data-cursor>our search work</a> is. The <a href=\"/free-training\" class=\"text-link\" data-cursor>free training</a> covers the fundamentals if you would rather learn it than hand it over.",
       "kind": "text",
       "tag": "p",
@@ -6150,6 +6424,24 @@
       ]
     },
     {
+      "en": "The score above is arithmetic. It cannot tell you whether this page is better than the ten already ranking, whether you are chasing the right phrase, or whether the piece answers what the searcher actually wanted. Leave an address and someone here will read the draft and reply with what we would change.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
+      "en": "We send you the audit, and we reply if you write back. It is stored with your request so whoever picks it up knows who asked and what they asked for. It does not go onto a mailing list, it is never sold or shared, and you can ask us to delete the whole record at any time by replying to the confirmation.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Davnoot helps healthcare businesses\n        with Google Ads strategy, keyword research, campaign setup, location targeting, conversion\n        tracking, and ongoing optimization. Those are one engagement rather than six line items,\n        because changing any of them changes what the others are worth.",
       "kind": "text",
       "tag": "p",
@@ -6192,6 +6484,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-dentists.html"
+      ]
+    },
+    {
+      "en": "Tell us the site and someone here will actually go through it — the pages that should be ranking and are not, the tracking that is quietly broken, the ad money going to terms you would never buy on purpose. You get what we find in an email within three business days, written by the person who looked.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -6255,6 +6556,15 @@
       "count": 1,
       "pages": [
         "saas-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "We read your key pages the way a buyer does. Does the page say what you do in the first screen, does it answer the objection the searcher arrived with, and is there one obvious next step — or three competing ones. A page can be technically perfect and still lose every visitor in the first sentence.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -6393,6 +6703,15 @@
       ]
     },
     {
+      "en": "While you wait: the <a href=\"/tools/content-analyzer\" class=\"text-link\" data-cursor>content analyzer</a> scores a single page in your browser right now, and the <a href=\"/free-training\" class=\"text-link\" data-cursor>free training</a> covers most of what we are about to tell you, in more depth.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Yes. Google Ads puts an HVAC company in front of people already\n          searching for repair, installation, maintenance, replacement and other heating and cooling services. Whether\n          those clicks turn into leads depends on the targeting, the landing page and the tracking behind them.",
       "kind": "text",
       "tag": "div",
@@ -6474,6 +6793,15 @@
       ]
     },
     {
+      "en": "Yes, with no conditions attached. There is no account, no email gate, no trial period and no cap on how many drafts you can run. The tool is part of the page you are already on, so there is nothing to sign up for. Asking a person to read your draft afterwards is free as well, and optional.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "A firm might separate personal injury, family law, criminal\n        defense, and immigration into their own campaigns. Each one then uses relevant keywords, advertisements, and\n        landing pages, which gives the person searching a direct path from their query to the service they need.",
       "kind": "text",
       "tag": "p",
@@ -6525,6 +6853,15 @@
       "count": 1,
       "pages": [
         "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "What it is not is a lead-qualification trap. There is no call required to receive it, no follow-up sequence, and no artificial scarcity about how many we have left this month. You will hear from us once with the audit. If you do not reply, that is the end of it, and you keep the findings.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -7050,6 +7387,15 @@
       ]
     },
     {
+      "en": "The limit is real capacity, not marketing. A person does these between client work, so they go out in the order they arrive and the three-day figure is what we can actually hold. If something is urgent, say so in the notes and we will tell you honestly whether we can get to it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "The page should match the search that brought\n        the visitor there. Someone searching for a specific feature and someone searching for pricing want\n        different things, and sending both to the same page asks them to go looking for the answer they\n        arrived with.",
       "kind": "text",
       "tag": "p",
@@ -7140,24 +7486,6 @@
       ]
     },
     {
-      "en": "Every tool here runs entirely inside your own browser. Nothing you type or paste is uploaded to a server, stored in a database, or logged anywhere, because there is no server behind these pages to send it to. None of them ask for an email address before showing you a result.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "tools.html"
-      ]
-    },
-    {
-      "en": "No. The analysis runs in your own browser and your text never leaves it. Nothing is sent to a server, written to a database or logged. You can disconnect from the internet once the page has loaded and the tool still works, which is the easiest way to confirm it for yourself.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "content-analyzer.html"
-      ]
-    },
-    {
       "en": "Property searches run from idle curiosity to a buyer with a\n          deposit. We build the keyword list around the properties, services, and locations the business serves, then\n          use negative keywords to keep research traffic and out-of-area searches off the budget.",
       "kind": "text",
       "tag": "p",
@@ -7173,6 +7501,15 @@
       "count": 1,
       "pages": [
         "sem-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "A growing share of buying research now happens inside ChatGPT, Perplexity and Google's AI answers, which cite some sources and ignore others. We check what they currently say about your category, whether you appear, and which of your pages is even structured to be quotable.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -7338,6 +7675,15 @@
       ]
     },
     {
+      "en": "Three business days in almost every case. A person does these between client work, so requests go out in the order they arrive. If it is going to take longer than that we tell you rather than leaving you waiting, and if something is genuinely urgent, say so in the notes.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Tracking those actions properly is what tells you which\n        campaigns generate useful leads rather than useful-looking traffic. Without it there is nothing to judge the\n        account on but clicks, and clicks in real estate are cheap to produce and easy to misread.",
       "kind": "text",
       "tag": "p",
@@ -7461,6 +7807,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "The terms bringing you traffic today against the terms your buyers actually type. The common finding is not that a site ranks badly — it is that it ranks well for questions nobody pays to have answered, and is invisible on the four phrases that would fill the calendar.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -8625,6 +8980,15 @@
       ]
     },
     {
+      "en": "Broken or double-counted conversions, a form that fires an event but never sends the email, analytics recording every visit as direct. This is the one that invalidates everything else: a site measured wrongly gets optimised wrongly, and confidently.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Someone searching for a specific service should\n        land on a page that addresses that service, not a generic homepage. Asking a visitor to go hunting for\n        the thing they just typed into a search box is where most of the drop-off happens.",
       "kind": "text",
       "tag": "p",
@@ -8868,6 +9232,15 @@
       ]
     },
     {
+      "en": "This is the one button on the page that sends anything. Pressing it uploads the draft above and your address, so a person can read it and write back. The analysis itself stays in your browser either way, and nothing is sent if you never press it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "We count contact forms, phone calls, quote\n        requests, bookings, purchases, and lead forms, each as its own action rather than one total. A booking\n        and a newsletter signup are not the same event and should not carry the same weight.",
       "kind": "text",
       "tag": "p",
@@ -8964,6 +9337,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "Indexing, redirects, duplicate URLs, pages blocked by a robots rule somebody added years ago, and anything important sitting behind JavaScript that never runs for a crawler. This part is mechanical and it is where the quickest wins usually are.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -9126,6 +9508,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "No, and that is deliberate. The audit arrives as an email you can read, forward and act on without speaking to us. A call is offered, never required — if the findings are useful and you want to talk about who does the work, you will tell us.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -9417,6 +9808,15 @@
       ]
     },
     {
+      "en": "Yes. Most of the work is market-agnostic, and we run accounts in English and French. If your market is one we do not know well we will say which findings are confident and which are guesses, rather than presenting both in the same voice.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Each of the six below can be improved on its own and\n        still leave the campaign where it started. Better keywords pointed at the wrong page, or a better page\n        with nothing tracking what happens on it, both end the same way.",
       "kind": "text",
       "tag": "p",
@@ -9642,15 +10042,6 @@
       ]
     },
     {
-      "en": "There is no signup, no email gate, no trial and no daily limit. Run it a hundred times on a hundred drafts and nothing changes. We did not build this as a way to collect addresses, so there is nothing to collect and no list to leave.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "content-analyzer.html"
-      ]
-    },
-    {
       "en": "<a href=\"/\" data-cursor>Davnoot</a>\n      <span class=\"crumb-sep\">/</span>\n      <a href=\"/ads\" data-cursor>Ad platforms</a>\n      <span class=\"crumb-sep\">/</span>\n      <span class=\"crumb-current\">Paid Social Agency Montreal</span>",
       "kind": "text",
       "tag": "div",
@@ -9855,6 +10246,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Yes. No card, no trial, no call you have to attend to unlock it, and no paid version of the same document. You get the findings by email whether you ever reply or not. The only thing we ask for is a working address to send it to.",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -10245,6 +10645,15 @@
       ]
     },
     {
+      "en": "If you already know what is wrong and you want it fixed, the audit is a three-day detour. Book a 30-minute call instead and we will tell you what the work involves, what it costs, and whether we are the right people for it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Montreal has no shortage of email marketing agencies,\n        from boutique studios to full-service shops covering web, brand, and paid media on the same retainer. What sets\n        our approach apart is depth over breadth.",
       "kind": "text",
       "tag": "p",
@@ -10503,15 +10912,6 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
-      ]
-    },
-    {
-      "en": "No, and not as a policy promise — as a technical fact. All the analysis happens in JavaScript inside your own browser. Your text is never sent anywhere, so there is nowhere for us to store it and nothing for us to read.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "tools.html"
       ]
     },
     {
@@ -10776,6 +11176,24 @@
       ]
     },
     {
+      "en": "We build the software because we needed it on client work first. When an internal script turns out to be useful enough to deserve a real interface, it ends up on this page instead of in a folder on somebody's laptop.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
+      "en": "<a href=\"/\" data-cursor>Davnoot</a>\n      <span class=\"crumb-sep\">/</span>\n      <a href=\"/tools\" data-cursor>Free tools</a>\n      <span class=\"crumb-sep\">/</span>\n      <span class=\"crumb-current\">Site audit</span>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "At Davnoot, we don't send generic blasts. Every email is built around customer intent,\n        helping you nurture leads, recover abandoned carts, encourage repeat purchases, and strengthen customer\n        loyalty.",
       "kind": "text",
       "tag": "p",
@@ -10929,15 +11347,6 @@
       ]
     },
     {
-      "en": "Right now there is one: the <a href=\"/tools/content-analyzer\" class=\"text-link\" data-cursor>Content Analyzer</a>. Paste a draft you are about to publish and see what it flags before it goes live rather than after.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "tools.html"
-      ]
-    },
-    {
       "en": "Slow pages, broken links, indexing problems, poor redirects, and other technical\n            issues quietly cost you traffic every day. We fix those problems before putting more content on top of\n            them.",
       "kind": "text",
       "tag": "p",
@@ -10983,6 +11392,15 @@
       ]
     },
     {
+      "en": "Two are live. One answers in a second because your own machine does the work; the other takes three days because a person does. The list grows as we finish the next ones, and everything that lands here stays free.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "We build the campaigns around the services you sell and the\n          areas you cover. Structure, match types, ad groups, bids, budgets and tracking get decided together rather\n          than bolted on afterwards.",
       "kind": "text",
       "tag": "p",
@@ -11007,15 +11425,6 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
-      ]
-    },
-    {
-      "en": "Yes, with no conditions attached. There is no account, no email gate, no trial period and no cap on how many drafts you can run. The tool is part of the page you are already on, so there is nothing to sign up for.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "content-analyzer.html"
       ]
     },
     {
@@ -11178,15 +11587,6 @@
       "count": 1,
       "pages": [
         "index.html"
-      ]
-    },
-    {
-      "en": "We build them because we needed them on client work first. When an internal script turns out to be useful enough to deserve a real interface, it ends up on this page instead of in a folder on somebody's laptop.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "tools.html"
       ]
     },
     {
@@ -12162,6 +12562,24 @@
       ]
     },
     {
+      "en": "Someone here will go through it and email you what we find within three business days. If you want to add anything in the meantime, reply to the confirmation and it reaches the same person.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
+      "en": "Whatever you pick in the form, we start here. These are the six areas that, across the accounts we have taken over, account for nearly every gap between what a site earns and what it could.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Whether the wording points at a buying decision. Pricing,\n          suppliers, vendors, quotes, demos and comparisons behave very differently from definitions and how-to\n          phrasing.",
       "kind": "text",
       "tag": "p",
@@ -12990,15 +13408,6 @@
       ]
     },
     {
-      "en": "No. There is no gate, no unlock step, and no results-by-email screen. Open the page, use the tool, close the tab. We would rather you remember the tool than resent the form.",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "tools.html"
-      ]
-    },
-    {
       "en": "Yes. Davnoot provides AI SEO services in Montreal and works with businesses across Canada and\n          internationally to improve visibility in AI-powered search platforms.",
       "kind": "text",
       "tag": "div",
@@ -13059,6 +13468,15 @@
       "count": 1,
       "pages": [
         "ppc-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Use the tool while you write and ask for the audit when you want judgment. Both are free, neither requires an account, and asking for one does not sign you up for anything.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -13287,15 +13705,6 @@
       ]
     },
     {
-      "en": "Free marketing tools that run entirely in your browser — no signup, no upload, no stored data. Free SEO tools and free digital marketing tools built by the Davnoot team.",
-      "kind": "description",
-      "tag": "meta",
-      "count": 1,
-      "pages": [
-        "tools.html"
-      ]
-    },
-    {
       "en": "It can work, but it depends on what you are selling,\n        where you operate, how competitive your market is, and how much each new customer is worth to your business.",
       "kind": "text",
       "tag": "p",
@@ -13419,6 +13828,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Free marketing tools from the Davnoot team: a content analyzer that runs entirely in your browser, and a free site audit a real person writes. No signup, no paid tier.",
+      "kind": "description",
+      "tag": "meta",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -14103,6 +14521,15 @@
       "count": 1,
       "pages": [
         "digital-marketing-agency-saguenay.html"
+      ]
+    },
+    {
+      "en": "Request a free website audit. Someone on our team goes through your site by hand and emails you what we find within three business days. No scanner, no PDF dump.",
+      "kind": "description",
+      "tag": "meta",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -15798,15 +16225,6 @@
       ]
     },
     {
-      "en": "One tool is live at the moment. The list grows as we finish the next ones, and everything that lands here stays free and stays account-free.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "tools.html"
-      ]
-    },
-    {
       "en": "<a href=\"/book-call\" class=\"btn-primary\" data-cursor>\n        Discuss your dental campaigns\n        <span class=\"arrow\">→</span>\n      </a>",
       "kind": "text",
       "tag": "div",
@@ -15969,6 +16387,15 @@
       ]
     },
     {
+      "en": "The audit tells you what is wrong with your site. These cover the thinking behind the fixes, and what it looks like to hand the work over.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "The messaging and landing page work was the unglamorous\n          part, and it turned out to be the part that <em>moved the pipeline</em>.",
       "kind": "text",
       "tag": "p",
@@ -16002,6 +16429,15 @@
       "count": 1,
       "pages": [
         "sem-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Analyzed in your browser. Nothing is uploaded, stored or logged unless you ask us to read it, and that is a separate button further down.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -17112,6 +17548,15 @@
       ]
     },
     {
+      "en": "Your address is used to send the audit and to reply to you. It does not go on a mailing list, and we do not sell or share it.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "<span class=\"kw\">const</span> <span class=\"prompt\">pipeline</span> = <span\n                class=\"kw\">await</span> db.query(",
       "kind": "text",
       "tag": "div",
@@ -17181,6 +17626,15 @@
       "count": 1,
       "pages": [
         "chatgpt-ads.html"
+      ]
+    },
+    {
+      "en": "Someone here will read it and reply within two business days, from a real address you can answer. One email, not a sequence.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -18192,12 +18646,30 @@
       ]
     },
     {
+      "en": "Something went wrong sending that. Please try again, or email info@davnoot.com and we will pick it up from there.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "What people actually typed, which is rarely the same\n              as the keyword list the campaign was built on.",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "What you already suspect is wrong, a page you want us to start with, what you are spending, who you compete with.",
+      "kind": "attr:placeholder",
+      "tag": "textarea",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -18261,6 +18733,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Carry on using the tool in the meantime — it still works offline, and nothing else you paste gets sent anywhere.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -19353,6 +19834,15 @@
       ]
     },
     {
+      "en": "Something went wrong sending that. Please try again, or email info@davnoot.com with the draft attached.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "The conversions that matter, counted back to\n              the campaign and keyword that produced them.",
       "kind": "text",
       "tag": "div",
@@ -19821,6 +20311,15 @@
       ]
     },
     {
+      "en": "Skip it if you would rather we come in cold. A sentence here usually makes the audit sharper.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "We reply to every message. No newsletter signup, no drip sequence, no reselling your details.",
       "kind": "text",
       "tag": "p",
@@ -19908,15 +20407,6 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
-      ]
-    },
-    {
-      "en": "Everything is analyzed in your browser. Nothing you paste is uploaded, stored, or logged.",
-      "kind": "text",
-      "tag": "p",
-      "count": 1,
-      "pages": [
-        "content-analyzer.html"
       ]
     },
     {
@@ -20394,6 +20884,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "That email address looks incomplete. We need a working one to send the audit to.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -21294,6 +21793,15 @@
       "count": 1,
       "pages": [
         "saas-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "That email address looks incomplete. We need a working one to reply to.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -22728,15 +23236,6 @@
       ]
     },
     {
-      "en": "Open the Content Analyzer\n        <span class=\"arrow\">→</span>",
-      "kind": "text",
-      "tag": "a",
-      "count": 1,
-      "pages": [
-        "tools.html"
-      ]
-    },
-    {
       "en": "Paid search is one part<br />of the\n        <em>pipeline</em>.",
       "kind": "text",
       "tag": "h2",
@@ -22815,6 +23314,15 @@
       "count": 1,
       "pages": [
         "performance-marketing-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "Anything we should know? <span class=\"ca-opt\">optional</span>",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -23493,6 +24001,15 @@
       ]
     },
     {
+      "en": "Get a free site audit\n        <span class=\"arrow\">→</span>",
+      "kind": "text",
+      "tag": "a",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Keywords with no tracked outcome get less budget, not more",
       "kind": "text",
       "tag": "div",
@@ -23976,6 +24493,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "Free Website Audit | Site Audit by Real People | Davnoot",
+      "kind": "title",
+      "tag": "title",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -24672,6 +25198,15 @@
       ]
     },
     {
+      "en": "Request the audit\n        <span class=\"arrow\">→</span>",
+      "kind": "text",
+      "tag": "a",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Same playbook as 2020, with \"AI\" added to slide titles",
       "kind": "text",
       "tag": "div",
@@ -24969,15 +25504,6 @@
       ]
     },
     {
-      "en": "Free · Runs in your browser · Nothing leaves the page",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "tools.html"
-      ]
-    },
-    {
       "en": "Furnace repair ads pointed at a general HVAC homepage",
       "kind": "text",
       "tag": "div",
@@ -25227,6 +25753,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Analyze a draft first, then send it over for a read.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -25635,6 +26170,15 @@
       ]
     },
     {
+      "en": "Free audit · Done by a person · Three business days",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "From losing money<br />to <em>scalable growth</em>.",
       "kind": "text",
       "tag": "h2",
@@ -25731,6 +26275,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-law-firms.html"
+      ]
+    },
+    {
+      "en": "Tell us your name so we know who we are writing to.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -25959,6 +26512,15 @@
       ]
     },
     {
+      "en": "Request my free audit <span class=\"arrow\">→</span>",
+      "kind": "text",
+      "tag": "button",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Revenue attribution tied to your actual order data",
       "kind": "text",
       "tag": "div",
@@ -26055,6 +26617,15 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "What happens if I send the draft for a human read?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -26343,6 +26914,15 @@
       "count": 1,
       "pages": [
         "digital-marketing-agency-trois-rivieres.html"
+      ]
+    },
+    {
+      "en": "Your website <span class=\"ca-opt\">optional</span>",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -26868,6 +27448,15 @@
       ]
     },
     {
+      "en": "Send it for a read <span class=\"arrow\">→</span>",
+      "kind": "text",
+      "tag": "button",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Start advertising<br />for the <em>AI era</em>.",
       "kind": "text",
       "tag": "h2",
@@ -27075,6 +27664,15 @@
       ]
     },
     {
+      "en": "Or skip the audit<br />and just <em>talk</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Same code.<br /><em>Different incentives</em>.",
       "kind": "text",
       "tag": "h2",
@@ -27153,6 +27751,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Add the site you want audited, e.g. acme.com.",
+      "kind": "text",
+      "tag": "p",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -27252,6 +27859,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "Free · Three business days · Done by a person",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -27558,6 +28174,15 @@
       "count": 1,
       "pages": [
         "marketing-conference.html"
+      ]
+    },
+    {
+      "en": "Company <span class=\"ca-opt\">optional</span>",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -28029,15 +28654,6 @@
       ]
     },
     {
-      "en": "When you would rather <em>hand it over</em>",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "content-analyzer.html"
-      ]
-    },
-    {
       "en": "Who we work with<br />in <em>Brossard</em>.",
       "kind": "text",
       "tag": "h2",
@@ -28227,6 +28843,15 @@
       ]
     },
     {
+      "en": "Phone <span class=\"ca-opt\">optional</span>",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Rank for the treatments <em>you offer</em>",
       "kind": "text",
       "tag": "div",
@@ -28260,6 +28885,33 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Whether your tracking is telling the truth",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
+      "en": "While the audit <em>is being written</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
+      "en": "A score now, or <em>an answer later</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -28326,6 +28978,15 @@
       ]
     },
     {
+      "en": "Do I have to get on a call to receive it?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Engineering<br />that <em>compounds</em>.",
       "kind": "text",
       "tag": "h2",
@@ -28341,15 +29002,6 @@
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
-      ]
-    },
-    {
-      "en": "Free tools · No signup · Nothing uploaded",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "tools.html"
       ]
     },
     {
@@ -28569,6 +29221,15 @@
       ]
     },
     {
+      "en": "The whole site, read <em>by a person</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Turn the notes into<br />a <em>plan</em>.",
       "kind": "text",
       "tag": "h2",
@@ -28656,15 +29317,6 @@
       "count": 1,
       "pages": [
         "quebec-law-25-compliance-guide.html"
-      ]
-    },
-    {
-      "en": "Free tool · No signup · Nothing uploaded",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "content-analyzer.html"
       ]
     },
     {
@@ -28965,6 +29617,15 @@
       ]
     },
     {
+      "en": "Free tool · No signup · No email needed",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Google Ads · Small and local businesses",
       "kind": "text",
       "tag": "div",
@@ -29088,6 +29749,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "That is in. <em>We have your site.</em>",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -29250,6 +29920,15 @@
       "count": 1,
       "pages": [
         "index.html"
+      ]
+    },
+    {
+      "en": "Free website audit<br /><em>FAQs</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -29487,6 +30166,24 @@
       ]
     },
     {
+      "en": "What you rank for, and what you should",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
+      "en": "Whether Google can read the whole site",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "<em>Match the page to the search</em>",
       "kind": "text",
       "tag": "div",
@@ -29631,12 +30328,30 @@
       ]
     },
     {
+      "en": "Free · Instant · Runs in your browser",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "Free Marketing Training Hub | Davnoot",
       "kind": "title",
       "tag": "title",
       "count": 1,
       "pages": [
         "free-training.html"
+      ]
+    },
+    {
+      "en": "Free tools · No signup · No paid tier",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
       ]
     },
     {
@@ -29820,6 +30535,15 @@
       ]
     },
     {
+      "en": "What do you do with my email address?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "What does the 0 to 100 score measure?",
       "kind": "text",
       "tag": "span",
@@ -29835,6 +30559,24 @@
       "count": 1,
       "pages": [
         "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Whether AI answers mention you at all",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
+      "en": "Whether the pages answer the question",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -30150,6 +30892,15 @@
       "count": 1,
       "pages": [
         "tools.html"
+      ]
+    },
+    {
+      "en": "Six places the <em>money leaks</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -30630,6 +31381,15 @@
       ]
     },
     {
+      "en": "Do you audit sites outside Canada?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Emergency and seasonal HVAC demand",
       "kind": "text",
       "tag": "div",
@@ -30882,6 +31642,15 @@
       ]
     },
     {
+      "en": "Sent. <em>We have your draft.</em>",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
+      ]
+    },
+    {
       "en": "Stop renting <em>your traffic</em>",
       "kind": "text",
       "tag": "div",
@@ -30924,6 +31693,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Want a <em>person</em> to read it?",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -30972,12 +31750,30 @@
       ]
     },
     {
+      "en": "Will you just tell me to hire you?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "<em>Run like a sales process</em>",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "An email a <em>person wrote</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -31104,6 +31900,15 @@
       "count": 1,
       "pages": [
         "hvac-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Is the website audit really free?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -31239,6 +32044,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Why we do this <em>for free</em>.",
+      "kind": "text",
+      "tag": "h2",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -31887,6 +32701,15 @@
       "count": 1,
       "pages": [
         "b2b-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "Run something <em>yourself</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -32691,6 +33514,15 @@
       ]
     },
     {
+      "en": "Does my site need to be live?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Everything in Retainer, plus:",
       "kind": "text",
       "tag": "li",
@@ -32760,6 +33592,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "Only if you would rather talk",
+      "kind": "attr:placeholder",
+      "tag": "input",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -32880,12 +33721,30 @@
       ]
     },
     {
+      "en": "What should we look at first?",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "What we help startups improve",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Whether AI answers mention us",
+      "kind": "text",
+      "tag": "option",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -33051,6 +33910,15 @@
       ]
     },
     {
+      "en": "Free website <em>audit</em>.",
+      "kind": "text",
+      "tag": "h1",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Fundraising <em>appeals</em>",
       "kind": "text",
       "tag": "h3",
@@ -33114,6 +33982,15 @@
       ]
     },
     {
+      "en": "Is this an automated report?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "Key features or capabilities",
       "kind": "text",
       "tag": "div",
@@ -33147,6 +34024,15 @@
       "count": 1,
       "pages": [
         "meta-ads.html"
+      ]
+    },
+    {
+      "en": "Learn the <em>reasoning</em>",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -33336,6 +34222,15 @@
       "count": 1,
       "pages": [
         "tools.html"
+      ]
+    },
+    {
+      "en": "Where the ad budget is going",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -34218,6 +35113,15 @@
       "count": 1,
       "pages": [
         "social-media-advertising-pricing.html"
+      ]
+    },
+    {
+      "en": "Speed and technical health",
+      "kind": "text",
+      "tag": "option",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -35841,6 +36745,15 @@
       ]
     },
     {
+      "en": "How long does it take?",
+      "kind": "text",
+      "tag": "span",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "How the account is run",
       "kind": "text",
       "tag": "div",
@@ -35982,6 +36895,15 @@
       "count": 1,
       "pages": [
         "seo.html"
+      ]
+    },
+    {
+      "en": "SEO and organic search",
+      "kind": "text",
+      "tag": "option",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -36162,6 +37084,15 @@
       "count": 1,
       "pages": [
         "startup-seo.html"
+      ]
+    },
+    {
+      "en": "Content and messaging",
+      "kind": "text",
+      "tag": "option",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -36369,6 +37300,15 @@
       "count": 1,
       "pages": [
         "google-ads-for-nonprofits.html"
+      ]
+    },
+    {
+      "en": "Who we are writing to",
+      "kind": "attr:placeholder",
+      "tag": "input",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -37281,6 +38221,15 @@
       ]
     },
     {
+      "en": "03 · Free training",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "2-hour walkthrough",
       "kind": "text",
       "tag": "li",
@@ -37413,6 +38362,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Free website audit",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -37683,6 +38641,15 @@
       "count": 1,
       "pages": [
         "online-reputation-management-canada.html"
+      ]
+    },
+    {
+      "en": "Which one you want",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -38010,21 +38977,21 @@
       ]
     },
     {
-      "en": "The honest answer",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "tools.html"
-      ]
-    },
-    {
       "en": "Weekly newsletter",
       "kind": "text",
       "tag": "li",
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "What you get back",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -38442,12 +39409,21 @@
       ]
     },
     {
-      "en": "01 · Free tools",
+      "en": "01 · Free audit",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "content-analyzer.html"
+      ]
+    },
+    {
+      "en": "01 · Free tools",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -38457,6 +39433,15 @@
       "count": 1,
       "pages": [
         "online-reputation-management-montreal.html"
+      ]
+    },
+    {
+      "en": "02 · Free tools",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -38604,6 +39589,15 @@
       ]
     },
     {
+      "en": "Free Site Audit",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "tools.html"
+      ]
+    },
+    {
       "en": "In the trenches",
       "kind": "text",
       "tag": "div",
@@ -38721,30 +39715,12 @@
       ]
     },
     {
-      "en": "What we look at",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "ppc-agency-montreal.html"
-      ]
-    },
-    {
       "en": "Why they matter",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "marketing-conference.html"
-      ]
-    },
-    {
-      "en": "you@company.com",
-      "kind": "attr:placeholder",
-      "tag": "input",
-      "count": 1,
-      "pages": [
-        "book-call.html"
       ]
     },
     {
@@ -38757,21 +39733,21 @@
       ]
     },
     {
-      "en": "03 · AI search",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "content-analyzer.html"
-      ]
-    },
-    {
       "en": "03 · Ecommerce",
       "kind": "text",
       "tag": "div",
       "count": 1,
       "pages": [
         "paid-social-agency-montreal.html"
+      ]
+    },
+    {
+      "en": "04 · AI search",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -38997,6 +39973,15 @@
       "count": 1,
       "pages": [
         "pricing.html"
+      ]
+    },
+    {
+      "en": "The whole site",
+      "kind": "text",
+      "tag": "option",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -39360,6 +40345,15 @@
       ]
     },
     {
+      "en": "Site to audit",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
+      ]
+    },
+    {
       "en": "What we cover",
       "kind": "text",
       "tag": "div",
@@ -39626,7 +40620,7 @@
       "tag": "div",
       "count": 1,
       "pages": [
-        "content-analyzer.html"
+        "site-audit.html"
       ]
     },
     {
@@ -39645,6 +40639,15 @@
       "count": 1,
       "pages": [
         "healthcare-google-ads-agency.html"
+      ]
+    },
+    {
+      "en": "03 · Search",
+      "kind": "text",
+      "tag": "div",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -39690,6 +40693,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Acme Supply",
+      "kind": "attr:placeholder",
+      "tag": "input",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -40035,15 +41047,6 @@
       ]
     },
     {
-      "en": "Keep going",
-      "kind": "text",
-      "tag": "div",
-      "count": 1,
-      "pages": [
-        "content-analyzer.html"
-      ]
-    },
-    {
       "en": "Learn more",
       "kind": "text",
       "tag": "span",
@@ -40158,6 +41161,15 @@
       "count": 1,
       "pages": [
         "book-call.html"
+      ]
+    },
+    {
+      "en": "Your email",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "content-analyzer.html"
       ]
     },
     {
@@ -40395,15 +41407,6 @@
       ]
     },
     {
-      "en": "Your name",
-      "kind": "text",
-      "tag": "label",
-      "count": 1,
-      "pages": [
-        "book-call.html"
-      ]
-    },
-    {
       "en": "Your role",
       "kind": "text",
       "tag": "label",
@@ -40590,6 +41593,15 @@
       "count": 1,
       "pages": [
         "email.html"
+      ]
+    },
+    {
+      "en": "Paid ads",
+      "kind": "text",
+      "tag": "option",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {
@@ -41049,6 +42061,15 @@
       "count": 1,
       "pages": [
         "software.html"
+      ]
+    },
+    {
+      "en": "Email",
+      "kind": "text",
+      "tag": "label",
+      "count": 1,
+      "pages": [
+        "site-audit.html"
       ]
     },
     {

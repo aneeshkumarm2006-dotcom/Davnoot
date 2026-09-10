@@ -152,7 +152,7 @@
           "name": "L’analyseur de contenu est-il vraiment gratuit?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Oui, sans aucune condition. Il n’y a pas de compte, pas de mur de courriel, pas de période d’essai et pas de plafond sur le nombre de textes que vous pouvez analyser. L’outil fait partie de la page où vous êtes déjà : il n’y a rien à quoi s’inscrire."
+            "text": "Oui, sans condition. Il n’y a pas de compte, pas de mur de courriel, pas de période d’essai et aucune limite au nombre de textes que vous pouvez analyser. L’outil fait partie de la page où vous êtes déjà : il n’y a donc rien à quoi s’inscrire. Demander à une personne de lire votre texte ensuite est gratuit aussi, et facultatif."
           }
         },
         {
@@ -160,7 +160,7 @@
           "name": "Est-ce que mon contenu est téléversé ou conservé quelque part?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Non. L’analyse s’exécute dans votre propre navigateur et votre texte n’en sort jamais. Rien n’est envoyé à un serveur, écrit dans une base de données ou journalisé. Vous pouvez vous déconnecter d’Internet une fois la page chargée et l’outil fonctionne encore : c’est la façon la plus simple de le vérifier vous-même."
+            "text": "Pas par l’analyse. Elle fonctionne dans votre propre navigateur : votre texte n’est donc pas envoyé à un serveur, ni écrit dans une base de données, ni journalisé, et vous pouvez vous déconnecter d’Internet une fois la page chargée et continuer à utiliser l’outil. Il y a exactement une exception, et elle est volontaire : si vous utilisez le bouton sous votre note pour nous demander de lire le texte, ce texte et votre adresse nous sont envoyés et conservés avec la demande afin que nous puissions vous répondre. Rien n’est envoyé si vous n’appuyez pas dessus."
           }
         },
         {
@@ -210,6 +210,14 @@
             "@type": "Answer",
             "text": "Il couvre le même terrain on-page sans exiger de site, d’extension ni de connexion, ce qui le rend utile pendant que vous rédigez encore et utile si vous écrivez ailleurs que dans WordPress. Il ne touche jamais à votre site : il ne peut donc pas générer de plans de site ni écrire vos balises à votre place."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Qu’arrive-t-il si j’envoie mon texte pour une lecture humaine ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Elle arrive chez quelqu’un ici avec la note que l’outil lui a donnée, et vous recevez une seule réponse dans les deux jours ouvrables qui vous dit ce que nous changerions — les jugements qu’une liste de vérification ne peut pas faire, comme savoir si l’angle est le bon ou si la phrase vaut la peine d’être visée. C’est gratuit, ce n’est pas une séquence de vente, et votre adresse n’est ajoutée à aucune liste. Si vous préférez que nous regardions tout le site plutôt qu’une seule page, c’est l’audit de site web gratuit."
+          }
         }
       ]
     }
@@ -257,9 +265,9 @@
     </div>
 
     <div class="reveal">
-      <div class="service-num-badge" data-cms="hero.badge">Outil gratuit · Sans inscription · Aucun téléversement</div>
+      <div class="service-num-badge" data-cms="hero.badge">Outil gratuit · Sans inscription · Sans courriel</div>
       <h1 class="service-hero-title" data-cms="hero.title">Analyseur de contenu <em>gratuit</em>.</h1>
-      <p class="service-hero-sub" data-cms="hero.sub">Collez un texte, nommez l’expression sur laquelle vous voulez qu’il se positionne et obtenez une vraie note sur 100 avec les correctifs précis derrière elle. Cet analyseur de contenu SEO lit le placement de votre mot-clé, les titres, la longueur des phrases, les liens, les images et les textes alternatifs, et il fonctionne entièrement dans votre navigateur. Rien de ce que vous collez ne quitte cette page.</p>
+      <p class="service-hero-sub" data-cms="hero.sub">Collez un texte, nommez la phrase pour laquelle vous voulez vous classer et obtenez une vraie note sur 100 avec les correctifs précis qui la sous-tendent. Cet analyseur de contenu SEO examine le placement de votre mot-clé, vos titres, la longueur de vos phrases, vos liens, vos images et vos textes alternatifs, et il fonctionne entièrement dans votre navigateur. Rien de ce que vous collez n’est téléversé, et aucune adresse n’est demandée avant que vous voyiez le résultat.</p>
       <a href="#analyzer" class="btn-primary" data-cursor>
         Aller à l’outil
         <span class="arrow">→</span>
@@ -299,11 +307,58 @@
         <button type="button" class="ca-btn-ghost" id="ca-clear" data-cursor>Effacer</button>
         <button type="button" class="ca-btn-ghost" id="ca-sample" data-cursor>Charger un exemple</button>
       </div>
-      <p class="ca-privacy">Tout est analysé dans votre navigateur. Rien de ce que vous collez n’est téléversé, stocké ni journalisé.</p>
+      <p class="ca-privacy">Analysé dans votre navigateur. Rien n’est téléversé, stocké ni journalisé à moins que vous nous demandiez de le lire, et c’est un bouton distinct plus bas.</p>
     </form>
 
     <p class="ca-empty" id="ca-empty">Ajoutez un mot-clé cible et du contenu, puis lancez l’analyse.</p>
     <div class="ca-results" id="ca-results" aria-live="polite" hidden></div>
+
+    <!-- OPTIONAL: ask a person to read the draft. Hidden until a score exists and
+         revealed by tools.js; the POST lives in script.js (TOOL LEAD FORMS), not in
+         the analyzer engine. Every string is authored here because scripts/i18n.js
+         cannot see inside <script>. Rationale in both of those files. -->
+    <section class="ca-lead" id="ca-lead" hidden>
+      <div class="ca-lead-panel" id="ca-lead-offer">
+        <h2 class="ca-lead-title">Vous voulez qu’une <em>personne</em> le lise ?</h2>
+        <p class="ca-lead-sub">La note ci-dessus est de l’arithmétique. Elle ne peut pas vous dire si cette page est meilleure que les dix qui se classent déjà, si vous visez la bonne phrase, ni si le texte répond à ce que la personne cherchait vraiment. Laissez une adresse et quelqu’un ici lira le texte et vous répondra avec ce que nous changerions.</p>
+        <form class="ca-lead-form" id="ca-lead-form" novalidate>
+          <div class="ca-lead-row">
+            <div class="ca-field">
+              <label class="ca-label" for="ca-lead-email">Votre courriel</label>
+              <input class="ca-input" type="email" id="ca-lead-email" name="email" placeholder="vous@entreprise.com" autocomplete="email" spellcheck="false" required />
+            </div>
+            <div class="ca-field">
+              <label class="ca-label" for="ca-lead-site">Votre site web <span class="ca-opt">facultatif</span></label>
+              <input class="ca-input" type="text" id="ca-lead-site" name="website" placeholder="acme.com" autocomplete="url" inputmode="url" spellcheck="false" />
+            </div>
+          </div>
+
+          <input type="text" name="bot-field" class="sa-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="hidden" id="ca-lead-score" name="score" />
+          <input type="hidden" id="ca-lead-words" name="wordCount" />
+          <input type="hidden" id="ca-lead-failed" name="failed" />
+          <input type="hidden" id="ca-lead-t0" name="t0" />
+
+          <div class="sa-errors" id="ca-lead-errors" role="alert">
+            <p class="sa-error" data-err="email" hidden>Cette adresse courriel semble incomplète. Il nous en faut une qui fonctionne pour vous répondre.</p>
+            <p class="sa-error" data-err="content" hidden>Analysez d’abord un texte, puis envoyez-le-nous pour une lecture.</p>
+            <p class="sa-error" data-err="rate" hidden>Cela fait quelques demandes en peu de temps. Accordez-nous deux minutes et réessayez.</p>
+            <p class="sa-error" data-err="generic" hidden>Quelque chose a mal tourné à l’envoi. Réessayez, ou écrivez à info@davnoot.com avec le texte en pièce jointe.</p>
+          </div>
+
+          <div class="ca-actions">
+            <button type="submit" class="btn-primary" id="ca-lead-send" data-cursor>L’envoyer pour lecture <span class="arrow">→</span></button>
+          </div>
+          <p class="ca-privacy">C’est le seul bouton de la page qui envoie quoi que ce soit. Appuyer dessus téléverse le texte ci-dessus et votre adresse, pour qu’une personne puisse le lire et vous répondre. L’analyse, elle, reste dans votre navigateur dans les deux cas, et rien n’est envoyé si vous n’appuyez jamais.</p>
+        </form>
+      </div>
+
+      <div class="ca-lead-panel ca-lead-done" id="ca-lead-done" role="status" tabindex="-1" hidden>
+        <h2 class="ca-lead-title">Envoyé. <em>Nous avons votre texte.</em></h2>
+        <p class="ca-lead-sub">Quelqu’un ici va le lire et vous répondre dans les deux jours ouvrables, depuis une vraie adresse à laquelle vous pouvez répondre. Un courriel, pas une séquence.</p>
+        <p class="ca-lead-sub">Continuez à utiliser l’outil entre-temps — il fonctionne encore hors ligne, et rien d’autre que vous collez n’est envoyé où que ce soit.</p>
+      </div>
+    </section>
   </section>
 
   <!-- WHAT IT CHECKS -->
@@ -379,8 +434,8 @@
     <div class="reveal">
       <div class="section-eyebrow" data-cms="section3.eyebrow">Comment ça fonctionne</div>
       <h2 class="section-title" data-cms="section3.title">Tout se passe dans <em>votre navigateur</em>.</h2>
-      <p class="section-sub sub-tight" data-cms="section3.p0">Il n’y a aucun serveur derrière cette page. L’analyse tient dans quelques centaines de lignes de JavaScript qui se chargent avec la page et s’exécutent sur votre propre appareil : c’est pourquoi le résultat apparaît dès que vous appuyez sur le bouton. Votre texte n’est jamais envoyé nulle part, jamais écrit dans une base de données, jamais journalisé, et nous ne le voyons jamais. Déconnectez-vous d’Internet une fois la page chargée : l’outil fonctionne encore.</p>
-      <p class="section-sub sub-tight" data-cms="section3.p1">Il n’y a pas d’inscription, pas de mur de courriel, pas d’essai et pas de limite quotidienne. Lancez-le cent fois sur cent textes et rien ne change. Nous n’avons pas bâti ça pour récolter des adresses : il n’y a donc rien à récolter et aucune liste à quitter.</p>
+      <p class="section-sub sub-tight" data-cms="section3.p0">Il n’y a aucun serveur derrière l’analyse. C’est quelques centaines de lignes de JavaScript qui se chargent avec la page et s’exécutent sur votre propre machine, et c’est pourquoi le résultat apparaît au moment où vous appuyez sur le bouton. Votre texte n’est pas envoyé ailleurs, ni écrit dans une base de données, ni journalisé. Déconnectez-vous d’Internet une fois la page chargée et l’outil fonctionne toujours : c’est la façon la plus simple de vous en convaincre.</p>
+      <p class="section-sub sub-tight" data-cms="section3.p1">Il n’y a ni inscription, ni mur de courriel, ni essai, ni limite quotidienne. Utilisez-le cent fois sur cent textes et rien ne change. La seule chose qui quitte votre navigateur, c’est le texte que vous nous envoyez volontairement pour une lecture humaine, avec le bouton qui apparaît sous votre note — et c’est un choix que vous faites après le résultat, pas un péage que vous payez avant. N’appuyez jamais dessus et nous ne recevons jamais rien.</p>
       <p class="section-sub sub-tight" data-cms="section3.p2">L’outil lit ce que vous collez au lieu d’aller chercher une URL : il fonctionne donc sur un texte qui n’est pas encore publié. Collez du texte brut et les lignes vides deviennent des sauts de paragraphe. Collez du Markdown et les dièses sont lus comme des titres, la syntaxe à crochets comme des liens et la syntaxe d’image comme des images. Collez du HTML brut et les balises sont analysées. Mélangez les trois dans le même texte et ça tient encore la route.</p>
       <p class="section-sub" data-cms="section3.p3">Si vous voulez la même réflexion appliquée à un site complet plutôt qu’à une seule page, c’est exactement le rôle de <a href="/fr/services/seo" class="text-link" data-cursor>notre travail en référencement</a>. La <a href="/fr/free-training" class="text-link" data-cursor>formation gratuite</a> couvre les bases si vous préférez l’apprendre plutôt que de le déléguer.</p>
     </div>
@@ -394,19 +449,24 @@
       <p class="section-sub" data-cms="section4.sub">Chaque outil que nous bâtissons est gratuit et le reste. Quand la liste de vérification n’est plus ce qui vous bloque, voici où regarder ensuite.</p>
     </div>
 
-    <div class="related-grid reveal">
+    <div class="related-grid related-grid-4 reveal">
+      <a href="/fr/tools/site-audit" class="related-card" data-cursor>
+        <div class="related-num">01 · Audit gratuit</div>
+        <div class="related-title">Tout le site, lu <em>par une personne</em></div>
+        <div class="related-arrow">Explorer →</div>
+      </a>
       <a href="/fr/tools" class="related-card" data-cursor>
-        <div class="related-num">01 · Outils gratuits</div>
+        <div class="related-num">02 · Outils gratuits</div>
         <div class="related-title">Le reste de la <em>boîte à outils</em></div>
         <div class="related-arrow">Explorer →</div>
       </a>
       <a href="/fr/services/seo" class="related-card" data-cursor>
-        <div class="related-num">02 · Recherche</div>
+        <div class="related-num">03 · Référencement</div>
         <div class="related-title">Quand vous préférez <em>nous le confier</em></div>
         <div class="related-arrow">Explorer →</div>
       </a>
       <a href="/fr/services/ai-seo" class="related-card" data-cursor>
-        <div class="related-num">03 · Recherche IA</div>
+        <div class="related-num">04 · Recherche IA</div>
         <div class="related-title">Faites-vous citer par <em>les moteurs de réponse</em></div>
         <div class="related-arrow">Explorer →</div>
       </a>
@@ -424,12 +484,12 @@
       <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.0.q">L’analyseur de contenu est-il vraiment gratuit?</span><span class="faq-toggle">+</span>
         </div>
-        <div class="faq-a" data-cms="faq.0.a">Oui, sans aucune condition. Il n’y a pas de compte, pas de mur de courriel, pas de période d’essai et pas de plafond sur le nombre de textes que vous pouvez analyser. L’outil fait partie de la page où vous êtes déjà : il n’y a rien à quoi s’inscrire.</div>
+        <div class="faq-a" data-cms="faq.0.a">Oui, sans condition. Il n’y a pas de compte, pas de mur de courriel, pas de période d’essai et aucune limite au nombre de textes que vous pouvez analyser. L’outil fait partie de la page où vous êtes déjà : il n’y a donc rien à quoi s’inscrire. Demander à une personne de lire votre texte ensuite est gratuit aussi, et facultatif.</div>
       </article>
       <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.1.q">Est-ce que mon contenu est téléversé ou conservé quelque part?</span><span class="faq-toggle">+</span>
         </div>
-        <div class="faq-a" data-cms="faq.1.a">Non. L’analyse s’exécute dans votre propre navigateur et votre texte n’en sort jamais. Rien n’est envoyé à un serveur, écrit dans une base de données ou journalisé. Vous pouvez vous déconnecter d’Internet une fois la page chargée et l’outil fonctionne encore : c’est la façon la plus simple de le vérifier vous-même.</div>
+        <div class="faq-a" data-cms="faq.1.a">Pas par l’analyse. Elle fonctionne dans votre propre navigateur : votre texte n’est donc pas envoyé à un serveur, ni écrit dans une base de données, ni journalisé, et vous pouvez vous déconnecter d’Internet une fois la page chargée et continuer à utiliser l’outil. Il y a exactement une exception, et elle est volontaire : si vous utilisez le bouton sous votre note pour nous demander de lire le texte, ce texte et votre adresse nous sont envoyés et conservés avec la demande afin que nous puissions vous répondre. Rien n’est envoyé si vous n’appuyez pas dessus.</div>
       </article>
       <article class="faq-item">
         <div class="faq-q"><span data-cms="faq.2.q">Que mesure la note de 0 à 100?</span><span class="faq-toggle">+</span>
@@ -460,6 +520,11 @@
         <div class="faq-q"><span data-cms="faq.7.q">Est-ce que ça remplace une extension comme Yoast?</span><span class="faq-toggle">+</span>
         </div>
         <div class="faq-a" data-cms="faq.7.a">Il couvre le même terrain on-page sans exiger de site, d’extension ni de connexion, ce qui le rend utile pendant que vous rédigez encore et utile si vous écrivez ailleurs que dans WordPress. Il ne touche jamais à votre site : il ne peut donc pas générer de plans de site ni écrire vos balises à votre place.</div>
+      </article>
+      <article class="faq-item">
+        <div class="faq-q"><span data-cms="faq.8.q">Qu’arrive-t-il si j’envoie mon texte pour une lecture humaine ?</span><span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a" data-cms="faq.8.a">Elle arrive chez quelqu’un ici avec la note que l’outil lui a donnée, et vous recevez une seule réponse dans les deux jours ouvrables qui vous dit ce que nous changerions — les jugements qu’une liste de vérification ne peut pas faire, comme savoir si l’angle est le bon ou si la phrase vaut la peine d’être visée. C’est gratuit, ce n’est pas une séquence de vente, et votre adresse n’est ajoutée à aucune liste. Si vous préférez que nous regardions tout le site plutôt qu’une seule page, c’est l’<a href="/fr/tools/site-audit" class="text-link" data-cursor>audit de site web gratuit</a>.</div>
       </article>
     </div>
   </section>

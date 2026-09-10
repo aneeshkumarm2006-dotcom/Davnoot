@@ -19,8 +19,10 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  classifyLead, classifyTeardown, contentHash, ipPrefix,
-  SERVICE_CODES, SPAM_CATEGORY_KEYS, QUARANTINE_AT, REJECT_AT, TEARDOWN_HASH_FIELDS,
+  classifyLead, classifyTeardown, classifyAudit, classifyContentReview,
+  contentHash, ipPrefix,
+  SERVICE_CODES, SPAM_CATEGORY_KEYS, QUARANTINE_AT, REJECT_AT,
+  TEARDOWN_HASH_FIELDS, AUDIT_HASH_FIELDS, REVIEW_HASH_FIELDS, AUDIT_SCOPES,
 } from '../lib/spam.js';
 import { normalizeWebsite } from '../lib/lead-intake.js';
 import fs from 'node:fs';
@@ -424,5 +426,302 @@ describe('normalizeWebsite', () => {
 
   test('a subdomain is preserved — app.acme.com is not acme.com', () => {
     assert.equal(normalizeWebsite('app.acme.com').host, 'app.acme.com');
+  });
+});
+
+/* ===========================================================================
+ * THE SITE-AUDIT FORM (api/site-audit.js)
+ * ===========================================================================
+ * The GENUINE block is the one that matters. Every case in it is a shape the page
+ * explicitly invites — and reusing classifyLead here would have REJECTED most of
+ * them outright: `isFiller('')` is true, so an empty company plus an empty note
+ * trips "placeholder name/company/message" on a form where both of those fields
+ * are optional and usually left blank.
+ */
+describe('classifyAudit — the free site-audit request', () => {
+  const HUMAN = { hasJsStamp: true, dwellMs: 45000, duplicateCount: 0 };
+
+  const GENUINE_AUDITS = [
+    {
+      what: 'the normal shape: three required fields, nothing else — the one classifyLead would reject',
+      lead: { email: 'sam@northpeak.io', websiteHost: 'northpeak.io', name: 'Sam Reyes', company: '', brief: '' },
+    },
+    {
+      what: 'a free-mail address with a real company site',
+      lead: { email: 'danafox88@gmail.com', websiteHost: 'foxdental.ca', name: 'Dana Fox', company: 'Fox Dental', brief: '' },
+    },
+    {
+      what: 'a note quoting a real budget in dollars',
+      lead: {
+        email: 'marc@boulangerie-tr.ca', websiteHost: 'boulangerie-tr.ca', name: 'Marc Tremblay', company: 'Boulangerie TR',
+        brief: "We're spending $12,000/month on Google Ads and the phone has stopped ringing. Start with the ads if you can.",
+      },
+    },
+    {
+      what: 'a note naming their own site, which is what a prospect does',
+      lead: {
+        email: 'bob@acmesupply.com', websiteHost: 'acmesupply.com', name: 'Bob Chen', company: 'Acme Supply',
+        brief: 'Our store is acmesupply.com and we rank nowhere for our main product terms.',
+      },
+    },
+    {
+      what: 'a one-word note',
+      lead: { email: 'owner@clinique-rive.ca', websiteHost: 'clinique-rive.ca', name: 'Josée Lambert', company: '', brief: 'Urgent.' },
+    },
+    {
+      what: 'an agency asking for an audit of a client site, white-label style',
+      lead: {
+        email: 'ria@studio-kind.com', websiteHost: 'studio-kind.com', name: 'Ria Johnston', company: 'Studio Kind',
+        brief: 'I run a small agency and would like your eyes on one of our client sites before we quote them.',
+      },
+    },
+    {
+      what: 'a subdomain, which is a perfectly normal thing to audit',
+      lead: { email: 'eng@acme.com', websiteHost: 'shop.acme.com', name: 'Priya N', company: 'Acme', brief: '' },
+    },
+  ];
+
+  for (const c of GENUINE_AUDITS) {
+    test(`allowed: ${c.what}`, () => {
+      const v = classifyAudit(c.lead, HUMAN);
+      assert.equal(
+        v.verdict, 'allow',
+        `scored ${v.score} (${v.reasons.join('; ')}) — this rule would cost the business a customer`,
+      );
+    });
+  }
+
+  test('an agency pitch pasted into the note is caught, because a free-audit form attracts them', () => {
+    const v = classifyAudit({
+      email: 'outreach@growthmail.xyz', websiteHost: 'growthmail.xyz', name: 'Terrysup', company: '',
+      brief: 'I came across your website and we help businesses get more visitors. Let me know if you are interested. t.me/growthmail',
+    }, HUMAN);
+    assert.notEqual(v.verdict, 'allow', `scored only ${v.score}: ${v.reasons.join('; ')}`);
+  });
+
+  test('the prose rules are the SAME ones the booking form applies', () => {
+    // Not an implementation detail: two copies of a tuned number means the next
+    // tuning pass fixes one door and leaves the other standing open.
+    const brief = 'Please unsubscribe me, reply with subject UNSUBSCRIBE to stop these emails.';
+    const asLead = classifyLead({ email: 'x@y.com', name: 'A Name', company: 'Co', brief, service: '' }, HUMAN);
+    const asAudit = classifyAudit({ email: 'x@y.com', websiteHost: 'y.com', name: 'A Name', company: 'Co', brief }, HUMAN);
+    assert.equal(asLead.verdict, 'reject');
+    assert.equal(asAudit.verdict, 'reject');
+  });
+
+  test('test@test.com asking to audit test.com is rejected', () => {
+    const v = classifyAudit({ email: 'test@test.com', websiteHost: 'test.com', name: 'Test', company: '', brief: '' }, HUMAN);
+    assert.equal(v.verdict, 'reject');
+  });
+
+  test('a request with no website is rejected — there is nothing to audit', () => {
+    assert.equal(classifyAudit({ email: 'real@person.com', websiteHost: '', name: 'Real Person' }, HUMAN).verdict, 'reject');
+  });
+
+  test('our own domain is HELD, not rejected — it is usually one of us testing the form', () => {
+    const v = classifyAudit({ email: 'someone@gmail.com', websiteHost: 'davnoot.com', name: 'Curious Person' }, HUMAN);
+    assert.equal(v.verdict, 'quarantine');
+  });
+
+  test('an @davnoot.com sender is never filtered, whatever they send', () => {
+    const v = classifyAudit({
+      email: 'prem@davnoot.com', websiteHost: 'davnoot.com', name: 'test', company: 'test',
+      brief: 'test test unsubscribe newsletter https://example.com t.me/x',
+    }, { hasJsStamp: false, dwellMs: 10, duplicateCount: 9 });
+    assert.equal(v.verdict, 'allow');
+  });
+
+  test('a filler NAME is scored, but an empty company and note never are', () => {
+    const filler = classifyAudit({ email: 'a@real-company.com', websiteHost: 'real-company.com', name: 'asdf' }, HUMAN);
+    assert.ok(filler.score > 0, 'a placeholder in a REQUIRED field is evidence');
+    const bare = classifyAudit({ email: 'a@real-company.com', websiteHost: 'real-company.com', name: 'Alex Roy' }, HUMAN);
+    assert.equal(bare.score, 0, 'optional fields left blank must score exactly nothing');
+  });
+
+  test('the whole form filled in under three seconds, with no form stamp, is refused', () => {
+    const v = classifyAudit(
+      { email: 'a@b.com', websiteHost: 'b.com', name: 'Fast Bot' },
+      { hasJsStamp: false, dwellMs: 400, duplicateCount: 0 },
+    );
+    assert.equal(v.verdict, 'quarantine');
+  });
+
+  test('one repeat of the same site is below the line — two people at one company both ask', () => {
+    const once = classifyAudit({ email: 'a@acme.com', websiteHost: 'acme.com', name: 'A' }, { ...HUMAN, duplicateCount: 1 });
+    assert.equal(once.verdict, 'allow', `a second colleague must still get through: ${once.reasons.join('; ')}`);
+    const many = classifyAudit({ email: 'a@acme.com', websiteHost: 'acme.com', name: 'A' }, { ...HUMAN, duplicateCount: 3 });
+    assert.equal(many.verdict, 'reject');
+  });
+
+  test('every flagged audit carries a category the admin can label', () => {
+    for (const shape of [
+      { lead: { email: 'bad', websiteHost: 'x.com', name: 'A' }, ctx: HUMAN },
+      { lead: { email: 'a@b.com', websiteHost: '', name: 'A' }, ctx: HUMAN },
+      { lead: { email: 'a@b.com', websiteHost: 't.me', name: 'A' }, ctx: HUMAN },
+      { lead: { email: 'a@b.com', websiteHost: 'b.com', name: 'A' }, ctx: { hasJsStamp: false, dwellMs: 200, duplicateCount: 0 } },
+    ]) {
+      const v = classifyAudit(shape.lead, shape.ctx);
+      assert.ok(SPAM_CATEGORY_KEYS.includes(v.category), `unlabelled category: ${v.category}`);
+    }
+  });
+
+  test('the audit fingerprint keys on the website, like the teardown', () => {
+    const a = contentHash({ websiteHost: 'acme.com' }, AUDIT_HASH_FIELDS);
+    assert.equal(a, contentHash({ websiteHost: 'acme.com', name: 'Somebody Else' }, AUDIT_HASH_FIELDS));
+    assert.notEqual(a, contentHash({ websiteHost: 'other.com' }, AUDIT_HASH_FIELDS));
+  });
+
+  test('the scope codes are shipped with labels, and the form offers exactly those', () => {
+    assert.ok(AUDIT_SCOPES.length >= 2);
+    for (const s of AUDIT_SCOPES) {
+      assert.match(s.key, /^[a-z][a-z-]*$/, `scope key is not a slug: ${s.key}`);
+      assert.ok(s.label && s.label.length > 2, `scope ${s.key} has no label`);
+    }
+    /* The page's <select> and this list must agree, or the endpoint silently drops
+     * the answer a visitor actually gave — it validates against AUDIT_SCOPES and
+     * replaces anything else with '' (see the note at its validation site). */
+    const page = fs.readFileSync(path.join(ROOT, 'pages', 'site-audit.html'), 'utf8');
+    for (const s of AUDIT_SCOPES) {
+      assert.ok(page.includes(`value="${s.key}"`), `no <option value="${s.key}"> on /tools/site-audit`);
+    }
+    const offered = [...page.matchAll(/<option value="([a-z-]+)"/g)].map((m) => m[1]);
+    for (const key of offered) {
+      assert.ok(AUDIT_SCOPES.some((s) => s.key === key), `the form offers "${key}", which lib/spam.js does not know`);
+    }
+  });
+});
+
+/* ===========================================================================
+ * THE CONTENT-REVIEW CARD (api/content-review.js)
+ * ===========================================================================
+ * The first case below is the most important in this file. The payload here is a
+ * piece of MARKETING COPY the visitor is about to publish, so it legitimately
+ * contains every phrase the promo and pitch rules exist to catch. Running those
+ * rules over it would quietly destroy ordinary ecommerce and newsletter drafts —
+ * the exact class of lead this tool exists to attract.
+ */
+describe('classifyContentReview — the analyzer review card', () => {
+  const HUMAN = { hasJsStamp: true, dwellMs: 30000, duplicateCount: 0 };
+  const draft = (s) => ({ email: 'writer@shopco.ca', content: s });
+
+  test('a DRAFT full of promo language is allowed — it is product copy, not a message to us', () => {
+    const v = classifyContentReview(draft(
+      'Subscribe to our newsletter and get free shipping today only, best prices on the web. '
+      + 'Reply YES to join the mailing list. Visit supplier-site.com and partner-brand.com for more. '
+      + 'To unsubscribe, reply with subject UNSUBSCRIBE. Order yours now, lifetime warranty included. '
+      + 'Message us on WhatsApp or t.me/shopco.',
+    ), HUMAN);
+    assert.equal(
+      v.verdict, 'allow',
+      `scored ${v.score} (${v.reasons.join('; ')}) — the prose rules must never touch the analyzed draft`,
+    );
+  });
+
+  test('a long ordinary draft is allowed', () => {
+    const v = classifyContentReview(draft('How to choose a dentist in Laval. '.repeat(40)), HUMAN);
+    assert.equal(v.verdict, 'allow', v.reasons.join('; '));
+  });
+
+  test('a review request with no draft attached is rejected', () => {
+    assert.equal(classifyContentReview({ email: 'a@b.com', content: '' }, HUMAN).verdict, 'reject');
+    assert.equal(classifyContentReview({ email: 'a@b.com', content: 'too short' }, HUMAN).verdict, 'reject');
+  });
+
+  test('an unusable address is rejected, however good the draft', () => {
+    const v = classifyContentReview({ email: 'not-an-email', content: 'A perfectly good draft. '.repeat(10) }, HUMAN);
+    assert.equal(v.verdict, 'reject');
+  });
+
+  test('placeholder address plus placeholder draft is rejected', () => {
+    const v = classifyContentReview({ email: 'test@gmail.com', content: 'test test test test test test test test' }, HUMAN);
+    assert.equal(v.verdict, 'reject');
+  });
+
+  test('an @davnoot.com sender is never filtered', () => {
+    const v = classifyContentReview({ email: 'prem@davnoot.com', content: 'test' }, { hasJsStamp: false, dwellMs: 1, duplicateCount: 9 });
+    assert.equal(v.verdict, 'allow');
+  });
+
+  test('a double-click (one repeat) still gets through; a replayed draft does not', () => {
+    const d = draft('A real draft about choosing an HVAC contractor. '.repeat(8));
+    assert.equal(classifyContentReview(d, { ...HUMAN, duplicateCount: 1 }).verdict, 'allow');
+    assert.equal(classifyContentReview(d, { ...HUMAN, duplicateCount: 4 }).verdict, 'reject');
+  });
+
+  test('a writer submitting several DIFFERENT drafts never trips the duplicate rule', () => {
+    // The expected good behaviour on this tool, and the reason the fingerprint is
+    // the draft rather than the address.
+    const a = contentHash({ content: 'First draft about roofing.' }, REVIEW_HASH_FIELDS);
+    const b = contentHash({ content: 'Second draft about siding.' }, REVIEW_HASH_FIELDS);
+    assert.notEqual(a, b);
+    assert.equal(a, contentHash({ content: 'First draft about roofing.', email: 'other@x.com' }, REVIEW_HASH_FIELDS));
+  });
+
+  test('submitted with no browser form stamp and instantly is held', () => {
+    const v = classifyContentReview(
+      draft('A real enough draft to pass the length floor. '.repeat(4)),
+      { hasJsStamp: false, dwellMs: 300, duplicateCount: 0 },
+    );
+    assert.equal(v.verdict, 'quarantine');
+  });
+
+  test('every flagged review carries a category the admin can label', () => {
+    for (const shape of [
+      { lead: { email: 'nope', content: 'x'.repeat(100) }, ctx: HUMAN },
+      { lead: { email: 'a@b.com', content: '' }, ctx: HUMAN },
+      { lead: draft('x'.repeat(100)), ctx: { hasJsStamp: false, dwellMs: 100, duplicateCount: 0 } },
+    ]) {
+      const v = classifyContentReview(shape.lead, shape.ctx);
+      assert.ok(SPAM_CATEGORY_KEYS.includes(v.category), `unlabelled category: ${v.category}`);
+    }
+  });
+});
+
+describe('the four front doors stay in step', () => {
+  const INTAKES = ['book-call', 'site-audit', 'funnel-teardown', 'content-review'];
+
+  test('every intake the admin lists has an endpoint, and vice versa', () => {
+    const api = fs.readFileSync(path.join(ROOT, 'api', 'admin', 'leads', 'index.js'), 'utf8');
+    for (const source of INTAKES) {
+      assert.ok(api.includes(`'${source}'`), `the leads inbox does not know about ${source}`);
+      assert.ok(
+        fs.existsSync(path.join(ROOT, 'api', `${source}.js`)),
+        `${source} is listed as an intake but api/${source}.js does not exist`,
+      );
+    }
+  });
+
+  test('the non-notifying intakes are declared as such, so their leads read "admin only"', () => {
+    const api = fs.readFileSync(path.join(ROOT, 'api', 'admin', 'leads', 'index.js'), 'utf8');
+    const m = /const NON_NOTIFYING = new Set\(\[([^\]]*)\]\)/.exec(api);
+    assert.ok(m, 'NON_NOTIFYING is gone — the tri-state emailSent resolution has no basis');
+    for (const source of ['funnel-teardown', 'content-review']) {
+      assert.ok(m[1].includes(source), `${source} does not notify but is not declared non-notifying`);
+    }
+    /* And the ones that DO notify must not be in it: a genuinely failed
+     * notification would otherwise render as a calm grey "admin only" pill, and
+     * nobody would ever chase the lead that never got emailed. */
+    for (const source of ['book-call', 'site-audit']) {
+      assert.ok(!m[1].includes(source), `${source} notifies, so it must not be declared non-notifying`);
+    }
+  });
+
+  test('each intake either notifies us or documents why it does not', () => {
+    for (const [file, notifies] of [['book-call', true], ['site-audit', true], ['funnel-teardown', false], ['content-review', false]]) {
+      const src = fs.readFileSync(path.join(ROOT, 'api', `${file}.js`), 'utf8');
+      if (notifies) assert.match(src, /to: mailTo\(\)/, `api/${file}.js no longer notifies anybody`);
+      else assert.match(src, /NO NOTIFICATION EMAIL/, `api/${file}.js is silent with no explanation`);
+    }
+  });
+
+  test('every intake persists to the leads collection BEFORE it tries to send anything', () => {
+    // The rule the whole subsystem exists for: a mail outage must never lose a lead.
+    for (const file of INTAKES) {
+      const src = fs.readFileSync(path.join(ROOT, 'api', `${file}.js`), 'utf8');
+      const insert = src.indexOf('insertOne({\n      ...lead,\n      status:');
+      const send = src.indexOf('sendMail');
+      assert.ok(insert > 0, `api/${file}.js does not persist the lead at all`);
+      assert.ok(send === -1 || insert < send, `api/${file}.js emails before it stores — a send failure would lose the lead`);
+    }
   });
 });

@@ -152,7 +152,7 @@
           "name": "Is the content analyzer actually free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, with no conditions attached. There is no account, no email gate, no trial period and no cap on how many drafts you can run. The tool is part of the page you are already on, so there is nothing to sign up for."
+            "text": "Yes, with no conditions attached. There is no account, no email gate, no trial period and no cap on how many drafts you can run. The tool is part of the page you are already on, so there is nothing to sign up for. Asking a person to read your draft afterwards is free as well, and optional."
           }
         },
         {
@@ -160,7 +160,7 @@
           "name": "Does my content get uploaded or stored anywhere?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. The analysis runs in your own browser and your text never leaves it. Nothing is sent to a server, written to a database or logged. You can disconnect from the internet once the page has loaded and the tool still works, which is the easiest way to confirm it for yourself."
+            "text": "Not by the analysis. It runs in your own browser, so your text is not sent to a server, written to a database or logged, and you can disconnect from the internet once the page has loaded and still use the tool. There is exactly one exception and it is opt-in: if you use the button under your score to ask us to read the draft, that draft and your address are sent to us and stored with the request so we can reply. Nothing is sent if you do not press it."
           }
         },
         {
@@ -210,6 +210,14 @@
             "@type": "Answer",
             "text": "It covers the same on-page ground without needing a site, a plugin or a login, which makes it useful while you are still drafting and useful if you write somewhere other than WordPress. It never touches your site, so it cannot generate sitemaps or write your tags for you."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I send the draft for a human read?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It reaches someone here with the score the tool gave it, and you get one reply within two business days saying what we would change — the judgment calls the checklist cannot make, like whether the angle is right or whether the phrase is worth targeting at all. It is free, it is not a sales sequence, and your address is not added to a list. If you would rather we looked at the whole site instead of one page, that is the free site audit."
+          }
         }
       ]
     }
@@ -257,9 +265,9 @@
     </div>
 
     <div class="reveal">
-      <div class="service-num-badge">Free tool · No signup · Nothing uploaded</div>
+      <div class="service-num-badge">Free tool · No signup · No email needed</div>
       <h1 class="service-hero-title">Free content <em>analyzer</em>.</h1>
-      <p class="service-hero-sub">Paste a draft, name the phrase you want it to rank for, and get a real score out of 100 with the specific fixes behind it. This SEO content analyzer reads your keyword placement, headings, sentence length, links, images and alt text, and it runs entirely inside your browser. Nothing you paste ever leaves this page.</p>
+      <p class="service-hero-sub">Paste a draft, name the phrase you want it to rank for, and get a real score out of 100 with the specific fixes behind it. This SEO content analyzer reads your keyword placement, headings, sentence length, links, images and alt text, and it runs entirely inside your browser. Nothing you paste is uploaded, and no address is asked for before you see the result.</p>
       <a href="#analyzer" class="btn-primary" data-cursor>
         Jump to the tool
         <span class="arrow">→</span>
@@ -299,11 +307,58 @@
         <button type="button" class="ca-btn-ghost" id="ca-clear" data-cursor>Clear</button>
         <button type="button" class="ca-btn-ghost" id="ca-sample" data-cursor>Load sample</button>
       </div>
-      <p class="ca-privacy">Everything is analyzed in your browser. Nothing you paste is uploaded, stored, or logged.</p>
+      <p class="ca-privacy">Analyzed in your browser. Nothing is uploaded, stored or logged unless you ask us to read it, and that is a separate button further down.</p>
     </form>
 
     <p class="ca-empty" id="ca-empty">Add a focus keyword and some content, then hit Analyze.</p>
     <div class="ca-results" id="ca-results" aria-live="polite" hidden></div>
+
+    <!-- OPTIONAL: ask a person to read the draft. Hidden until a score exists and
+         revealed by tools.js; the POST lives in script.js (TOOL LEAD FORMS), not in
+         the analyzer engine. Every string is authored here because scripts/i18n.js
+         cannot see inside <script>. Rationale in both of those files. -->
+    <section class="ca-lead" id="ca-lead" hidden>
+      <div class="ca-lead-panel" id="ca-lead-offer">
+        <h2 class="ca-lead-title">Want a <em>person</em> to read it?</h2>
+        <p class="ca-lead-sub">The score above is arithmetic. It cannot tell you whether this page is better than the ten already ranking, whether you are chasing the right phrase, or whether the piece answers what the searcher actually wanted. Leave an address and someone here will read the draft and reply with what we would change.</p>
+        <form class="ca-lead-form" id="ca-lead-form" novalidate>
+          <div class="ca-lead-row">
+            <div class="ca-field">
+              <label class="ca-label" for="ca-lead-email">Your email</label>
+              <input class="ca-input" type="email" id="ca-lead-email" name="email" placeholder="you@company.com" autocomplete="email" spellcheck="false" required />
+            </div>
+            <div class="ca-field">
+              <label class="ca-label" for="ca-lead-site">Your website <span class="ca-opt">optional</span></label>
+              <input class="ca-input" type="text" id="ca-lead-site" name="website" placeholder="acme.com" autocomplete="url" inputmode="url" spellcheck="false" />
+            </div>
+          </div>
+
+          <input type="text" name="bot-field" class="sa-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="hidden" id="ca-lead-score" name="score" />
+          <input type="hidden" id="ca-lead-words" name="wordCount" />
+          <input type="hidden" id="ca-lead-failed" name="failed" />
+          <input type="hidden" id="ca-lead-t0" name="t0" />
+
+          <div class="sa-errors" id="ca-lead-errors" role="alert">
+            <p class="sa-error" data-err="email" hidden>That email address looks incomplete. We need a working one to reply to.</p>
+            <p class="sa-error" data-err="content" hidden>Analyze a draft first, then send it over for a read.</p>
+            <p class="sa-error" data-err="rate" hidden>That is a few requests in a short time. Give it a couple of minutes and try again.</p>
+            <p class="sa-error" data-err="generic" hidden>Something went wrong sending that. Please try again, or email info@davnoot.com with the draft attached.</p>
+          </div>
+
+          <div class="ca-actions">
+            <button type="submit" class="btn-primary" id="ca-lead-send" data-cursor>Send it for a read <span class="arrow">→</span></button>
+          </div>
+          <p class="ca-privacy">This is the one button on the page that sends anything. Pressing it uploads the draft above and your address, so a person can read it and write back. The analysis itself stays in your browser either way, and nothing is sent if you never press it.</p>
+        </form>
+      </div>
+
+      <div class="ca-lead-panel ca-lead-done" id="ca-lead-done" role="status" tabindex="-1" hidden>
+        <h2 class="ca-lead-title">Sent. <em>We have your draft.</em></h2>
+        <p class="ca-lead-sub">Someone here will read it and reply within two business days, from a real address you can answer. One email, not a sequence.</p>
+        <p class="ca-lead-sub">Carry on using the tool in the meantime — it still works offline, and nothing else you paste gets sent anywhere.</p>
+      </div>
+    </section>
   </section>
 
   <!-- WHAT IT CHECKS -->
@@ -379,8 +434,8 @@
     <div class="reveal">
       <div class="section-eyebrow">How it works</div>
       <h2 class="section-title">It runs in <em>your browser</em>.</h2>
-      <p class="section-sub sub-tight">There is no server behind this page. The analysis is a few hundred lines of JavaScript that load with the page and run on your own machine, which is why the result appears the moment you press the button. Your draft is never sent anywhere, never written to a database, never logged, and never seen by us. Disconnect from the internet once the page has loaded and the tool still works.</p>
-      <p class="section-sub sub-tight">There is no signup, no email gate, no trial and no daily limit. Run it a hundred times on a hundred drafts and nothing changes. We did not build this as a way to collect addresses, so there is nothing to collect and no list to leave.</p>
+      <p class="section-sub sub-tight">There is no server behind the analysis. It is a few hundred lines of JavaScript that load with the page and run on your own machine, which is why the result appears the moment you press the button. Your draft is not sent anywhere, written to a database, or logged. Disconnect from the internet once the page has loaded and the tool still works, which is the easiest way to prove it to yourself.</p>
+      <p class="section-sub sub-tight">There is no signup, no email gate, no trial and no daily limit. Run it a hundred times on a hundred drafts and nothing changes. The one thing that does leave your browser is the draft you explicitly send us for a human read, using the button that appears under your score — and that is a choice you make after the result, not a toll you pay before it. Never press it and we never receive anything.</p>
       <p class="section-sub sub-tight">The tool reads what you paste instead of fetching a URL, so it works on a draft that is not published yet. Paste plain text and it treats blank lines as paragraph breaks. Paste Markdown and it reads the hashes as headings, the bracket syntax as links and the image syntax as images. Paste raw HTML and it parses the tags. Mix all three in one draft and it still holds together.</p>
       <p class="section-sub">If you want the same thinking applied to a whole site rather than one page, that is what <a href="/services/seo" class="text-link" data-cursor>our search work</a> is. The <a href="/free-training" class="text-link" data-cursor>free training</a> covers the fundamentals if you would rather learn it than hand it over.</p>
     </div>
@@ -394,19 +449,24 @@
       <p class="section-sub">Every tool we build is free and stays free. When the checklist stops being the bottleneck, these are the next places to look.</p>
     </div>
 
-    <div class="related-grid reveal">
+    <div class="related-grid related-grid-4 reveal">
+      <a href="/tools/site-audit" class="related-card" data-cursor>
+        <div class="related-num">01 · Free audit</div>
+        <div class="related-title">The whole site, read <em>by a person</em></div>
+        <div class="related-arrow">Explore →</div>
+      </a>
       <a href="/tools" class="related-card" data-cursor>
-        <div class="related-num">01 · Free tools</div>
+        <div class="related-num">02 · Free tools</div>
         <div class="related-title">The rest of the <em>toolbox</em></div>
         <div class="related-arrow">Explore →</div>
       </a>
       <a href="/services/seo" class="related-card" data-cursor>
-        <div class="related-num">02 · Search</div>
+        <div class="related-num">03 · Search</div>
         <div class="related-title">When you would rather <em>hand it over</em></div>
         <div class="related-arrow">Explore →</div>
       </a>
       <a href="/services/ai-seo" class="related-card" data-cursor>
-        <div class="related-num">03 · AI search</div>
+        <div class="related-num">04 · AI search</div>
         <div class="related-title">Get cited by <em>the answer engines</em></div>
         <div class="related-arrow">Explore →</div>
       </a>
@@ -424,12 +484,12 @@
       <article class="faq-item">
         <div class="faq-q"><span>Is the content analyzer actually free?</span><span class="faq-toggle">+</span>
         </div>
-        <div class="faq-a">Yes, with no conditions attached. There is no account, no email gate, no trial period and no cap on how many drafts you can run. The tool is part of the page you are already on, so there is nothing to sign up for.</div>
+        <div class="faq-a">Yes, with no conditions attached. There is no account, no email gate, no trial period and no cap on how many drafts you can run. The tool is part of the page you are already on, so there is nothing to sign up for. Asking a person to read your draft afterwards is free as well, and optional.</div>
       </article>
       <article class="faq-item">
         <div class="faq-q"><span>Does my content get uploaded or stored anywhere?</span><span class="faq-toggle">+</span>
         </div>
-        <div class="faq-a">No. The analysis runs in your own browser and your text never leaves it. Nothing is sent to a server, written to a database or logged. You can disconnect from the internet once the page has loaded and the tool still works, which is the easiest way to confirm it for yourself.</div>
+        <div class="faq-a">Not by the analysis. It runs in your own browser, so your text is not sent to a server, written to a database or logged, and you can disconnect from the internet once the page has loaded and still use the tool. There is exactly one exception and it is opt-in: if you use the button under your score to ask us to read the draft, that draft and your address are sent to us and stored with the request so we can reply. Nothing is sent if you do not press it.</div>
       </article>
       <article class="faq-item">
         <div class="faq-q"><span>What does the 0 to 100 score measure?</span><span class="faq-toggle">+</span>
@@ -460,6 +520,11 @@
         <div class="faq-q"><span>Is this a replacement for a plugin like Yoast?</span><span class="faq-toggle">+</span>
         </div>
         <div class="faq-a">It covers the same on-page ground without needing a site, a plugin or a login, which makes it useful while you are still drafting and useful if you write somewhere other than WordPress. It never touches your site, so it cannot generate sitemaps or write your tags for you.</div>
+      </article>
+      <article class="faq-item">
+        <div class="faq-q"><span>What happens if I send the draft for a human read?</span><span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a">It reaches someone here with the score the tool gave it, and you get one reply within two business days saying what we would change — the judgment calls the checklist cannot make, like whether the angle is right or whether the phrase is worth targeting at all. It is free, it is not a sales sequence, and your address is not added to a list. If you would rather we looked at the whole site instead of one page, that is the <a href="/tools/site-audit" class="text-link" data-cursor>free site audit</a>.</div>
       </article>
     </div>
   </section>

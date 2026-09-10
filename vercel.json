@@ -110,6 +110,8 @@
     { "source": "/tools.html", "destination": "/tools", "permanent": true },
     { "source": "/content-analyzer.html", "destination": "/tools/content-analyzer", "permanent": true },
     { "source": "/content-analyzer", "destination": "/tools/content-analyzer", "permanent": true },
+    { "source": "/site-audit.html", "destination": "/tools/site-audit", "permanent": true },
+    { "source": "/site-audit", "destination": "/tools/site-audit", "permanent": true },
     { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
     { "source": "/services.html", "destination": "/services", "permanent": true },
     { "source": "/ads.html", "destination": "/ads", "permanent": true },
@@ -229,6 +231,7 @@
     { "source": "/free-training/analytics", "destination": "/training-analytics.html" },
     { "source": "/tools", "destination": "/tools.html" },
     { "source": "/tools/content-analyzer", "destination": "/content-analyzer.html" },
+    { "source": "/tools/site-audit", "destination": "/site-audit.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/services", "destination": "/services.html" },
     { "source": "/ads", "destination": "/ads.html" },
@@ -306,6 +309,7 @@
     { "source": "/fr/free-training/analytics", "destination": "/api/page?p=fr/training-analytics.html" },
     { "source": "/fr/tools", "destination": "/api/page?p=fr/tools.html" },
     { "source": "/fr/tools/content-analyzer", "destination": "/api/page?p=fr/content-analyzer.html" },
+    { "source": "/fr/tools/site-audit", "destination": "/api/page?p=fr/site-audit.html" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/:slug", "destination": "/api/page?p=:slug" }
   ]

@@ -24,6 +24,8 @@ const SERVICE_LABELS = {
 let CATEGORY_LABELS = {};
 // Same deal for the intake labels — the leads endpoint owns LEAD_SOURCES.
 let SOURCE_LABELS = {};
+// And the site-audit scope codes, owned by lib/spam.js and shipped in the payload.
+let SCOPE_LABELS = {};
 
 /* Three tabs, three very different things:
  *
@@ -54,6 +56,7 @@ export class Leads {
     this._sources = data.sources || [];
     CATEGORY_LABELS = Object.fromEntries((data.categories || []).map((c) => [c.key, c.label]));
     SOURCE_LABELS = Object.fromEntries(this._sources.map((s) => [s.key, s.label]));
+    SCOPE_LABELS = Object.fromEntries((data.auditScopes || []).map((s) => [s.key, s.label]));
     this.render();
     this.wire();
   }
@@ -122,7 +125,7 @@ export class Leads {
       return `<div class="empty"><h2>Nothing from ${esc(label)}</h2><p class="muted">Other sources may still have submissions — switch back to All sources.</p></div>`;
     }
     const copy = {
-      inbox: ['No leads yet', 'Booking form and blog teardown submissions will appear here.'],
+      inbox: ['No leads yet', 'Booking calls, site-audit requests, blog teardowns and content reviews all land here.'],
       spam: ['Nothing in spam', 'Submissions the filter catches will collect here instead of your inbox.'],
       blocked: ['Nothing blocked', 'Rejected submissions appear here for 30 days.'],
     }[this.tab];
@@ -183,6 +186,12 @@ export class Leads {
       const host = l.website.replace(/^https?:\/\//i, '').replace(/^www\./i, '');
       return `<strong>${esc(host.split('/')[0])}</strong>`;
     }
+    /* A content review asks for one field, and it is the address. With no name and
+     * no website there is nothing else this record IS, and a dialog headed "—" is
+     * a record that looks broken rather than one that is simply anonymous. The
+     * address is shown as typed — still not inventing anything, which is the rule
+     * this ladder exists to keep. */
+    if (l.email) return `<strong>${esc(l.email)}</strong>`;
     return '<span class="muted">—</span>';
   }
 
@@ -190,8 +199,24 @@ export class Leads {
     return l.company ? `<div class="muted small">${esc(l.company)}</div>` : '';
   }
 
-  /* The detail row: the booking form's brief, or the teardown's website and the
-   * article it was requested from. Whatever the filter thought, always shown. */
+  /* What this person wants from us, for the one narrow column that asks.
+   *
+   * The booking form answers it with a `service` code and the audit form with an
+   * `auditScope` code — two vocabularies, one question, so they share the column
+   * rather than getting one each. An audit row showing "—" under Service would read
+   * as missing data on a lead that in fact told us exactly what it wanted. */
+  static wants(l) {
+    return SERVICE_LABELS[l.service] || SCOPE_LABELS[l.auditScope] || l.service || '—';
+  }
+
+  /* The detail row: the booking form's brief or the audit's note, the website and
+   * the page it was requested from, and — for a content review — what the analyzer
+   * scored. Whatever the filter thought, always shown.
+   *
+   * This row is the difference between an inbox you scan and an inbox you click
+   * through. A content-review lead whose row shows only an address tells the
+   * operator nothing they can act on; the keyword and the score tell them whether
+   * to open it. */
   static detail(l) {
     const bits = [];
     if (l.brief) bits.push(`<p class="lead-msg" title="${esc(l.brief)}">${esc(l.brief)}</p>`);
@@ -199,6 +224,14 @@ export class Leads {
       bits.push(`<p class="lead-detail"><span class="lead-detail-k">Site</span> <a class="url" href="${esc(l.website)}" target="_blank" rel="noopener noreferrer">${esc(l.website)}</a>${
         l.sourceUrl ? ` <span class="lead-detail-k">Read on</span> <a class="url" href="${esc(l.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(l.sourceUrl)}</a>` : ''
       }</p>`);
+    }
+    const a = l.analysis;
+    if (a) {
+      const parts = [];
+      if (a.keyword) parts.push(`<span class="lead-detail-k">Keyword</span> ${esc(a.keyword)}`);
+      if (a.score != null) parts.push(`<span class="lead-detail-k">Scored</span> ${esc(String(a.score))}/100`);
+      if (a.wordCount != null) parts.push(`<span class="lead-detail-k">Words</span> ${esc(String(a.wordCount))}`);
+      if (parts.length) bits.push(`<p class="lead-detail">${parts.join(' ')}</p>`);
     }
     bits.push(Leads.why(l));
     const html = bits.join('');
@@ -221,7 +254,7 @@ export class Leads {
           <td><button type="button" class="lead-open" data-open="${esc(l._id)}">${Leads.whoLabel(l)}</button>${Leads.sub(l)}${Leads.categoryPill(l)}</td>
           <td><a class="url" href="mailto:${esc(l.email)}">${esc(l.email)}</a></td>
           <td>${Leads.sourcePill(l)}</td>
-          <td>${esc(SERVICE_LABELS[l.service] || l.service || '—')}</td>
+          <td>${esc(Leads.wants(l))}</td>
           <td class="small nowrap">${esc(l.timeSlot || '—')}</td>
           <td>${Leads.emailPill(l)}</td>
           <td>
@@ -287,6 +320,7 @@ export class Leads {
         <div class="modal-body">
           ${Leads.detailList(lead, blocked)}
           ${Leads.messageBlock(lead)}
+          ${Leads.analysisBlock(lead)}
           ${blocked ? '' : Leads.notesBlock()}
         </div>
         <footer class="modal-foot">${Leads.detailActions(lead, blocked)}</footer>
@@ -393,7 +427,9 @@ export class Leads {
       ${row('Name', esc(l.name || ''))}
       ${row('Company', esc(l.company || ''))}
       ${row('Role', esc(l.role || ''))}
+      ${row('Phone', l.phone ? `<a class="url" href="tel:${esc(l.phone.replace(/[^+\d]/g, ''))}">${esc(l.phone)}</a>` : '')}
       ${row('Service', l.service ? esc(SERVICE_LABELS[l.service] || l.service) : '')}
+      ${row('Wants audited', l.auditScope ? esc(SCOPE_LABELS[l.auditScope] || l.auditScope) : '')}
       ${row('Preferred slot', esc(l.timeSlot || ''))}
       ${row('Website', l.website ? link(l.website) : '')}
       ${row('Requested from', l.sourceUrl ? link(l.sourceUrl) : '')}
@@ -411,6 +447,54 @@ export class Leads {
   static messageBlock(l) {
     if (!l.brief) return '';
     return `<section class="ld-block"><h3>Message</h3><p class="ld-full">${esc(l.brief)}</p></section>`;
+  }
+
+  /* ── WHAT THEY TRIED TO ANALYZE ────────────────────────────────────────────
+   *
+   * The content-review intake's reason for existing. Everything the visitor typed
+   * into /tools/content-analyzer, plus the two numbers it gave back, plus the draft
+   * in full — which is what makes a reply possible: "your H2s never mention the
+   * keyword" is a useful first email, and it cannot be written from an address alone.
+   *
+   * The draft is printed inside a <pre> via textContent-safe escaping and sits in its
+   * own scroll box. A 4,000-word paste would otherwise push every control in this
+   * dialog — including Save notes — below the fold of a modal that does not scroll as
+   * a whole. Nothing here truncates: the table is the scanning surface, this is the
+   * record, and a reviewer who cannot see the end of the draft cannot review it.
+   *
+   * `contentTruncated` is surfaced rather than hidden. The reviewer is about to read
+   * something that stops mid-sentence, and "we cut this at 25,000 characters" is the
+   * difference between that being our cap and the visitor's draft being unfinished. */
+  static analysisBlock(l) {
+    const a = l.analysis;
+    if (!a) return '';
+
+    const field = (k, v) => (v ? `<div class="ld-row"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>` : '');
+    const num = (k, v, suffix) => (v == null ? '' : `<div class="ld-row"><dt>${esc(k)}</dt><dd>${esc(String(v))}${esc(suffix || '')}</dd></div>`);
+
+    /* Check IDs, not labels, because the labels are locale-dependent and live in
+     * tools.js — see the note in api/content-review.js. They read as slugs here on
+     * purpose: an operator who needs the wording can open the tool, and inventing an
+     * English gloss for a check a French visitor failed would be a different claim. */
+    const failed = (a.failed || []).length
+      ? `<div class="ld-row"><dt>Failing checks</dt><dd><span class="ld-mono">${esc(a.failed.join(', '))}</span></dd></div>`
+      : '';
+
+    return `<section class="ld-block">
+      <h3>What they analyzed</h3>
+      <dl class="ld">
+        ${field('Focus keyword', a.keyword)}
+        ${field('SEO title', a.seoTitle)}
+        ${field('URL slug', a.slug)}
+        ${field('Meta description', a.metaDescription)}
+        ${num('Score', a.score, '/100')}
+        ${num('Word count', a.wordCount)}
+        ${failed}
+        ${field('Tool language', a.locale === 'fr' ? 'French' : a.locale === 'en' ? 'English' : a.locale)}
+      </dl>
+      ${a.content ? `<h4 class="ld-sub">Their draft${a.contentTruncated ? ' <span class="muted small">(truncated at 25,000 characters)</span>' : ''}</h4>
+      <pre class="ld-draft">${esc(a.content)}</pre>` : ''}
+    </section>`;
   }
 
   static notesBlock() {
@@ -537,18 +621,28 @@ export class Leads {
     this.root.querySelector('#csv')?.addEventListener('click', () => this.exportCsv());
   }
 
-  // CSV always exports EVERY lead (real + spam) so nothing is hidden from an
-  // export — the on-screen tab and source filters deliberately do NOT narrow it.
-  // The category and score ride along so the noise can be filtered, or the filter
-  // itself audited, in a spreadsheet.
+  /* CSV always exports EVERY lead (real + spam) so nothing is hidden from an export —
+   * the on-screen tab and source filters deliberately do NOT narrow it. The category
+   * and score ride along so the noise can be filtered, or the filter itself audited,
+   * in a spreadsheet.
+   *
+   * The analyzer's keyword and score are flattened into their own columns because a
+   * spreadsheet cannot usefully hold a nested object, and those two are the fields
+   * anybody sorting this file actually wants. The DRAFT is deliberately NOT exported:
+   * it is up to 25,000 characters of someone else's unpublished copy, and a column
+   * like that turns a lead export into a document nobody should be mailing around.
+   * It stays in the detail dialog, where reading it is a deliberate act. */
   exportCsv() {
     const rows = this._all || [];
-    const head = ['createdAt', 'source', 'name', 'email', 'website', 'sourceUrl', 'company', 'role', 'service', 'timeSlot', 'status', 'emailSent', 'spam', 'spamCategory', 'spamScore', 'brief'];
+    const head = ['createdAt', 'source', 'name', 'email', 'phone', 'website', 'sourceUrl', 'company', 'role', 'service', 'auditScope', 'keyword', 'contentScore', 'timeSlot', 'status', 'emailSent', 'spam', 'spamCategory', 'spamScore', 'brief'];
+    const cell = (l, k) => {
+      if (k === 'spam') return l.spam ? 'yes' : 'no';
+      if (k === 'keyword') return l.analysis?.keyword ?? '';
+      if (k === 'contentScore') return l.analysis?.score ?? '';
+      return l[k];
+    };
     const csv = [head.join(',')].concat(
-      rows.map((l) => head.map((k) => {
-        const v = k === 'spam' ? (l.spam ? 'yes' : 'no') : l[k];
-        return `"${String(v ?? '').replace(/"/g, '""')}"`;
-      }).join(',')),
+      rows.map((l) => head.map((k) => `"${String(cell(l, k) ?? '').replace(/"/g, '""')}"`).join(',')),
     ).join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
     const a = document.createElement('a');
