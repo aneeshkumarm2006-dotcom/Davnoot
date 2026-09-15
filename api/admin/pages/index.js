@@ -77,6 +77,9 @@ async function create(req, res) {
   const doc = buildPageInsert(meta, { title: meta.title || meta.slug, sections: [] }, { updatedBy: session.role });
   const { insertedId } = await col.insertOne(doc); // unique index on path -> 409 on a race
   audit(session, 'page.create', path, `created composed page ${meta.slug}`);
+  // No IndexNow ping: a composed page is created as a DRAFT with no sections, so
+  // this URL still 404s. It is announced when it is published, from
+  // api/admin/pages/[id]/publish.js.
   res.status(201).json({ key: meta.slug, id: String(insertedId), path });
 }
 

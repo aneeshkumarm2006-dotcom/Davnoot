@@ -30,6 +30,7 @@
     "watch": "node scripts/bundle.js --watch",
     "test": "node --test \"scripts/*.test.js\"",
     "db:indexes": "node scripts/ensure-indexes.js",
+    "indexnow:ping": "node scripts/indexnow-ping.js",
     "check": "npm run test && npm run site && npm run bundle"
   },
   "dependencies": {

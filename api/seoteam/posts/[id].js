@@ -19,6 +19,38 @@ import { readJson, withErrors, methods, validationError, ApiError } from '../../
 import { updatePostSchema, patchPostSchema, fieldErrors } from '../../../lib/validators.js';
 import { buildPostUpdate, resolvePublishedAt } from '../../../lib/post-write.js';
 import { resolveUniqueSlug, slugify } from '../../../lib/slug.js';
+import { isPostLive } from '../../../lib/blog-query.js';
+import { pingIndexNow } from '../../../lib/indexnow.js';
+
+/**
+ * Tell IndexNow what this write changed on the PUBLIC blog. Fire-and-forget —
+ * never awaited, never able to fail the save (see lib/indexnow.js).
+ *
+ * Derived from the before/after pair rather than from the request, because the
+ * same three events reach here through three different methods:
+ *
+ *   published / unpublished   -> the post URL appeared or disappeared, and the
+ *                                /blog listing gained or lost a card
+ *   slug changed on a live post -> TWO URLs changed: the old one now 404s and
+ *                                must be recrawled to be dropped, the new one
+ *                                must be discovered
+ *   body edited on a live post  -> one URL, and /blog is untouched
+ *
+ * /blog is pinged only when a post enters or leaves the listing. Pinging it on
+ * every body edit would submit the same unchanged URL dozens of times a day,
+ * which is how a host gets rate limited into being ignored.
+ */
+function pingPostChange(before, after) {
+  const wasLive = isPostLive(before);
+  const nowLive = isPostLive(after);
+
+  const urls = [];
+  if (wasLive) urls.push('/blog/' + before.slug); // deduped when the slug is unchanged
+  if (nowLive) urls.push('/blog/' + after.slug);
+  if (wasLive !== nowLive) urls.push('/blog');
+
+  if (urls.length) pingIndexNow(urls);
+}
 
 function objectId(id) {
   if (!id || !ObjectId.isValid(String(id))) throw new ApiError(404, 'Post not found.');
@@ -70,6 +102,8 @@ async function replace(req, res) {
   await col.updateOne({ _id: id }, ops);
   const doc = await col.findOne({ _id: id });
 
+  pingPostChange(existing, doc);
+
   return res.status(200).json({ post: doc, slugChanged: slug !== existing.slug, previousSlug: existing.slug });
 }
 
@@ -114,6 +148,8 @@ async function patch(req, res) {
   await col.updateOne({ _id: id }, ops);
   const doc = await col.findOne({ _id: id });
 
+  pingPostChange(existing, doc);
+
   return res.status(200).json({ post: doc });
 }
 
@@ -124,9 +160,18 @@ async function remove(req, res) {
 
   const col = await posts();
   const id = objectId(req.query.id);
+  // Read before deleting: once the document is gone there is no slug left to
+  // tell the engines about, and a deleted URL is exactly the case where a ping
+  // is most valuable — it is how a dead page leaves the index in hours instead
+  // of waiting for the next organic recrawl of a 404.
+  const existing = await loadOr404(col, id);
 
   const result = await col.deleteOne({ _id: id });
   if (!result.deletedCount) throw new ApiError(404, 'Post not found.');
+
+  // Ping regardless of whether it was live: a post can have been published,
+  // indexed, unpublished and then deleted, and that URL is still in the index.
+  pingIndexNow(isPostLive(existing) ? ['/blog/' + existing.slug, '/blog'] : ['/blog/' + existing.slug]);
 
   return res.status(200).json({ ok: true });
 }

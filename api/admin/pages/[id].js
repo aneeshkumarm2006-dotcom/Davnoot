@@ -4,6 +4,12 @@
  *
  * `key` is the file for an overlay page ('seo.html') or the slug for a composed
  * page ('pricing'). Middleware is not the boundary — every method re-checks role.
+ *
+ * NOTE ON INDEXNOW: PUT deliberately does NOT ping. It writes `draft`, which no
+ * crawler can see, and the editor calls it on a 900ms autosave timer — a ping here
+ * would submit the same unchanged URL hundreds of times per editing session and
+ * get the host throttled. The publish route is the one that pings. DELETE pings
+ * because the URL genuinely stops existing.
  */
 import { withErrors, methods, readJson, validationError, ApiError } from '../../../lib/api.js';
 import { requireRole } from '../../../lib/auth.js';
@@ -14,6 +20,8 @@ import {
   buildDraftUpdate,
   sanitizeContentFields,
 } from '../../../lib/page-model.js';
+import { publicUrlFor } from '../../../lib/page-url.js';
+import { pingIndexNow } from '../../../lib/indexnow.js';
 import { fieldErrors } from '../../../lib/validators.js';
 import { audit, snapshotRevision } from '../../../lib/audit.js';
 
@@ -126,6 +134,11 @@ async function del(req, res) {
   await snapshotRevision(existing, session);
   await col.deleteOne({ path });
   audit(session, 'page.delete', path, `deleted ${path}`);
+
+  // The URL now 404s. Ping it so the engines recrawl and drop it, rather than
+  // leaving a dead page in the index until they happen to look again.
+  pingIndexNow(publicUrlFor(req.query.id));
+
   res.status(200).json({ ok: true });
 }
 

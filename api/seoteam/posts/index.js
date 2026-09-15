@@ -13,6 +13,8 @@ import { createPostSchema, fieldErrors } from '../../../lib/validators.js';
 import { buildPostInsert } from '../../../lib/post-write.js';
 import { resolveUniqueSlug } from '../../../lib/slug.js';
 import { scorePost } from '../../../lib/seo-score.js';
+import { isPostLive } from '../../../lib/blog-query.js';
+import { pingIndexNow } from '../../../lib/indexnow.js';
 
 /* -------------------------------------------------------------------- GET -- */
 
@@ -102,6 +104,11 @@ async function create(req, res) {
   const doc = buildPostInsert({ ...parsed.data, slug });
 
   const result = await col.insertOne(doc);
+
+  // A brand-new LIVE post is a new URL, and /blog gained a card. A draft or a
+  // scheduled post is neither yet — publishing it later pings from PUT/PATCH.
+  // Never awaited: see lib/indexnow.js on why this must not touch the response.
+  if (isPostLive(doc)) pingIndexNow(['/blog/' + doc.slug, '/blog']);
 
   return res.status(201).json({ post: { _id: result.insertedId, ...doc } });
 }

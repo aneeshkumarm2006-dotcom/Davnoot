@@ -1,0 +1,180 @@
+# Ping IndexNow with whatever a deploy to main actually changed.
+#
+# WHY THIS EXISTS ALONGSIDE THE API HOOKS
+# ---------------------------------------
+# lib/indexnow.js pings from the CMS write paths, so a blog post or a composed
+# page announces itself the moment it is published. That covers everything stored
+# in Mongo — and nothing stored in git. The root .html marketing pages are edited
+# in code and shipped by a deploy, with no request handler anywhere in the loop.
+# Without this workflow they would only ever be discovered on an organic recrawl,
+# which is the exact latency IndexNow exists to remove.
+#
+# HOW IT KNOWS WHAT CHANGED
+# -------------------------
+# It diffs the LIVE /sitemap.xml against the previous run's snapshot, on
+# `<loc> + <lastmod>` pairs, and submits only the lines that are new or whose
+# lastmod moved. The sitemap is the right source: api/sitemap.js already merges
+# three sources and applies the archived / noindex / sitemap.include exclusions,
+# so anything it omits is something we do not want indexed. Re-deriving that list
+# here would guarantee the two drift.
+#
+# HOW IT KNOWS THE DEPLOY IS LIVE
+# -------------------------------
+# It waits for the production sitemap to stop matching the snapshot. That is not
+# a proxy for "deployed" — it is the actual condition this job cares about, so
+# there is no Vercel token, no deployment webhook and no guessed sleep. A commit
+# that changes nothing in the sitemap (a README edit, a test fix) simply waits out
+# the timeout and exits clean, having correctly found nothing to submit.
+#
+# SETUP: add INDEXNOW_KEY as a repository secret, matching the <key>.txt committed
+# at the repo root and the Vercel env var. See README.md.
+
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      all:
+        description: 'Submit EVERY URL in the sitemap, ignoring the diff'
+        type: boolean
+        default: false
+
+# One run at a time. Two concurrent runs would race on the shared snapshot cache
+# and the loser's changes would be recorded as already-submitted.
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      # --omit=dev on purpose: scripts/indexnow-ping.js only needs lib/templates.js
+      # and its transitive runtime deps. The devDependencies include
+      # mongodb-memory-server, which downloads a MongoDB binary on install and
+      # would dominate this job's runtime for nothing.
+      - name: Install runtime deps
+        run: npm ci --omit=dev --ignore-scripts
+
+      - name: Restore the previous sitemap snapshot
+        id: snapshot
+        uses: actions/cache@v4
+        with:
+          path: .indexnow-cache
+          # Cache entries are immutable, so the key must be unique per run and the
+          # restore-key prefix is what walks back to the most recent snapshot.
+          key: indexnow-sitemap-${{ github.run_id }}
+          restore-keys: |
+            indexnow-sitemap-
+
+      - name: Wait for the deploy, and diff the sitemap
+        id: diff
+        env:
+          SITEMAP_URL: https://www.davnoot.com/sitemap.xml
+        run: |
+          set -euo pipefail
+          mkdir -p .indexnow-cache
+          PREV=.indexnow-cache/sitemap-keys.txt
+          CURR="$RUNNER_TEMP/sitemap-keys.txt"
+
+          # One "<loc>\t<lastmod>" line per <url> entry, sorted so `comm` can diff
+          # them. A changed lastmod is a changed page; a new loc is a new page.
+          #
+          # Flattening to one line per <url> BEFORE extracting is what makes the
+          # greedy `.*` safe: with the whole document on one line, `.*<loc>` would
+          # skip to the LAST loc in the file. Only <url><loc> is taken — never the
+          # href of an <xhtml:link> alternate, since every alternate is already its
+          # own <url> entry and taking both would submit each bilingual page twice.
+          extract() {
+            tr -d '\n' < "$1" \
+              | sed -e 's#<url>#\n#g' \
+              | grep '<loc>' \
+              | while IFS= read -r entry; do
+                  loc=$(printf '%s' "$entry" | sed -n 's#.*<loc>\([^<]*\)</loc>.*#\1#p')
+                  mod=$(printf '%s' "$entry" | sed -n 's#.*<lastmod>\([^<]*\)</lastmod>.*#\1#p')
+                  printf '%s\t%s\n' "$loc" "$mod"
+                done \
+              | sort -u
+          }
+
+          fetch_sitemap() {
+            curl -sSfL --max-time 30 -H 'Cache-Control: no-cache' "$SITEMAP_URL" -o "$RUNNER_TEMP/sitemap.xml"
+          }
+
+          # No snapshot yet (first run, or the cache expired): there is nothing to
+          # diff against. Take a baseline and submit nothing — a first-run
+          # "everything changed" would fire the whole sitemap at IndexNow on an
+          # unrelated commit. Use `npm run indexnow:ping -- --all` to backfill.
+          if [ ! -f "$PREV" ]; then
+            fetch_sitemap
+            extract "$RUNNER_TEMP/sitemap.xml" > "$PREV"
+            echo "no previous snapshot — baselined $(wc -l < "$PREV") URL(s), submitting nothing"
+            echo "count=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Poll until the live sitemap differs from the snapshot, i.e. until THIS
+          # deploy is serving. Bounded: a commit that touches nothing indexable
+          # never differs, and exiting with no changes is the correct outcome.
+          for attempt in $(seq 1 18); do
+            fetch_sitemap
+            extract "$RUNNER_TEMP/sitemap.xml" > "$CURR"
+            if ! cmp -s "$PREV" "$CURR"; then
+              echo "sitemap changed on attempt $attempt"
+              break
+            fi
+            echo "attempt $attempt/18: sitemap unchanged, waiting for the deploy..."
+            sleep 20
+          done
+
+          # comm -13 = lines only in CURR: added URLs and bumped lastmods.
+          comm -13 "$PREV" "$CURR" | cut -f1 > "$RUNNER_TEMP/added.txt"
+
+          # REMOVED URLs matter just as much: a page deleted or noindexed in code
+          # leaves the sitemap silently and would otherwise sit in the index until
+          # an organic recrawl found the 404/410. Compared on the LOC ALONE — on the
+          # full line, every bumped lastmod would look like a removal plus an add.
+          cut -f1 "$PREV" | sort -u > "$RUNNER_TEMP/prev-locs.txt"
+          cut -f1 "$CURR" | sort -u > "$RUNNER_TEMP/curr-locs.txt"
+          comm -23 "$RUNNER_TEMP/prev-locs.txt" "$RUNNER_TEMP/curr-locs.txt" > "$RUNNER_TEMP/removed.txt"
+
+          cat "$RUNNER_TEMP/added.txt" "$RUNNER_TEMP/removed.txt" | sort -u > "$RUNNER_TEMP/changed.txt"
+          COUNT=$(wc -l < "$RUNNER_TEMP/changed.txt" | tr -d ' ')
+
+          # Record the new baseline even when nothing changed, so the cache key
+          # rolls forward and the next run compares against today.
+          cp "$CURR" "$PREV"
+
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "$COUNT changed URL(s) ($(wc -l < "$RUNNER_TEMP/added.txt" | tr -d ' ') added/updated, $(wc -l < "$RUNNER_TEMP/removed.txt" | tr -d ' ') removed)"
+          head -50 "$RUNNER_TEMP/changed.txt"
+
+      - name: Submit the changed URLs
+        if: steps.diff.outputs.count != '0' || inputs.all
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${INDEXNOW_KEY:-}" ]; then
+            echo "::error::INDEXNOW_KEY repository secret is not set — nothing was submitted."
+            exit 1
+          fi
+          if [ "${{ inputs.all }}" = "true" ]; then
+            node scripts/indexnow-ping.js --all
+          else
+            # -d '\n' so only newlines split the list — never a character inside a
+            # URL. xargs may still split a very long list across several calls,
+            # which is fine: each call is a complete, valid submission.
+            xargs -a "$RUNNER_TEMP/changed.txt" -d '\n' -r node scripts/indexnow-ping.js
+          fi
